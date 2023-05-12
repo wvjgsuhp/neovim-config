@@ -108,3 +108,10 @@ vmap <silent> k kzz
 cmap <expr> <cr> getcmdtype() =~ '^[/?]$' ? '<cr>zz' : '<cr>'
 
 nnoremap <Leader>zr <cmd>res 13<cr>
+
+" Print messages to buffer
+nnoremap <Leader>mb <cmd>put =execute('messages')<cr>
+nmap <Leader>ml <cmd>vs<bar>execute 'edit'
+  \ strftime('vim-messages-%Y-%m-%d.%H-%M-%S.log')<cr> mb
+nmap <Leader>mj <cmd>sp<bar>execute 'edit'
+  \ strftime('vim-messages-%Y-%m-%d.%H-%M-%S.log')<cr> mb

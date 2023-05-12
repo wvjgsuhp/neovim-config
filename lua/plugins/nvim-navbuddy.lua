@@ -1,7 +1,7 @@
 return {
-'SmiteshP/nvim-navbuddy',
-config = function()
-    vim.cmd([[
-  nnoremap <Leader>fn <cmd>Navbuddy<cr>
-    ]])
-  end}
+  "SmiteshP/nvim-navbuddy",
+  config = function()
+    local utils = require("utils")
+    utils.noremap("n", "<Leader>fn", "<cmd>Navbuddy<cr>")
+  end,
+}

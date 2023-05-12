@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 return {
   "lewis6991/gitsigns.nvim",
   config = function()
@@ -47,5 +49,7 @@ return {
         ["x ih"] = ":<C-U>Gitsigns select_hunk<CR>",
       },
     })
+
+    utils.noremap("n", "<Leader>gh", "<cmd>Gitsigns next_hunk<CR>")
   end,
 }

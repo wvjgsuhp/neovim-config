@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 return {
   "folke/lsp-colors.nvim",
   "nvim-lua/plenary.nvim",
@@ -8,8 +10,11 @@ return {
   --   on_map: { i: "<C-r>", nx: '"' }
   --   hook_source: let g:registers_window_border = 'rounded'
 
-'tpope/vim-repeat',
-'tpope/vim-surround',
+  "tpope/vim-repeat",
+  "tpope/vim-surround",
+  "nullchilly/fsread.nvim",
+  "tpope/vim-fugitive",
+
   {
     "mzlogin/vim-markdown-toc",
     config = function()
@@ -17,34 +22,19 @@ return {
     end,
   },
 
-  "nullchilly/fsread.nvim",
-  "tpope/vim-fugitive",
-
   -- interface
-  "MunifTanjim/nui.nvim",
-
+  -- "MunifTanjim/nui.nvim",
 
   -- - { repo: romainl/vim-cool, on_event: [CursorMoved, InsertEnter] }
   -- - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> } }
-  "rhysd/accelerated-jk",
+  {
+    "rhysd/accelerated-jk",
+    config = function()
+      utils.noremap("n", "j", "<Plug>(accelerated_jk_gj)zz")
+      utils.noremap("n", "k", "<Plug>(accelerated_jk_gk)zz")
+    end,
+  },
   -- - { repo: t9md/vim-quickhl, on_map: { nx: <Plug> } }
-
-  -- - repo: itchyny/vim-cursorword
-  --   on_event: FileType
-  --   hook_add: let g:cursorword = 0
-  --   hook_source: |-
-  --     augroup user_plugin_cursorword
-  --       autocmd!
-  --       autocmd FileType json,yaml,markdown,nginx,dosini,conf,text
-  --         \ let b:cursorword = 1
-  --       autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif
-  --       autocmd InsertEnter * if get(b:, 'cursorword', 0) == 1
-  --         \| let b:cursorword = 0
-  --         \| endif
-  --       autocmd InsertLeave * if get(b:, 'cursorword', 1) == 0
-  --         \| let b:cursorword = 1
-  --         \| endif
-  --     augroup END
 
   -- - repo: nathanaelkane/vim-indent-guides
   --   on_event: FileType
@@ -80,23 +70,9 @@ return {
   --   on_event: FileType
   --   hook_post_source: lua require('plugins.colorizer')
 
-  -- - repo: rhysd/committia.vim
-  --   on_event: BufReadPost
-  --   depends: nvim-treesitter
-  --   hook_source: |-
-  --     let g:committia_min_window_width = 30
-  --     let g:committia_edit_window_width = 75
-  --     let g:committia#git#status_cmd = '-c color.status=false status -sb'
-
   -- - repo: deris/vim-shot-f
   --   on_map: { nxo: <Plug> }
   --   hook_add: let g:shot_f_no_default_key_mappings = 1
-
-  -- - repo: VonHeikemen/fine-cmdline.nvim
-  --   on_event: VimEnter
-  --   on_cmd: [FineCmdline]
-  --   depends: [nui.nvim]
-  --   hook_post_source: lua require('plugins.fine-cmdline')
 
   -- - repo: vim-airline/vim-airline
   --   depends: [vim-fugitive]
@@ -108,46 +84,24 @@ return {
   --   depends: [promise-async, nvim-treesitter]
   --   hook_post_source: lua require('plugins.nvim-ufo')
 
-  -- - repo: rcarriga/nvim-notify
-  --   on_event: VimEnter
-  --   hook_post_source: lua require('plugins.nvim-notify')
+  {
+    "rcarriga/nvim-notify",
+    config = function()
+      local notify = require("notify")
+      notify.setup({ stages = "static" })
+      vim.notify = notify
+    end,
+  },
 
   -- completion and code analysis
-  {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-  },
 
-  'hrsh7th/cmp-nvim-lsp',
-  'kosayoda/nvim-lightbulb',
-  -- - { repo: folke/lua-dev.nvim, on_source: nvim-lspconfig }
+  "folke/neodev.nvim",
+  -- "hrsh7th/cmp-nvim-lsp",
+  -- "kosayoda/nvim-lightbulb",
 
   -- - repo: ray-x/lsp_signature.nvim
   --   if: has('nvim-0.6.1')
   --   on_source: nvim-lspconfig
-
-  -- - repo: jose-elias-alvarez/null-ls.nvim
-  --   if: has('nvim-0.7')
-  --   on_event: VimEnter
-  --   depends: nvim-lspconfig
-  --   hook_post_source: lua require('plugins.null-ls')
-
-  -- - repo: hrsh7th/nvim-cmp
-  --   if: has('nvim-0.5')
-  --   on_event: VimEnter
-  --   depends: [nvim-autopairs, vim-vsnip]
-  --   hook_post_source: lua require('plugins.cmp')
-
-  'hrsh7th/cmp-nvim-lua',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-vsnip',
-  'hrsh7th/cmp-path',
-  -- 'hrsh7th/cmp-emoji',
-  -- - { repo: andersevenrud/cmp-tmux, on_source: nvim-cmp }
 
   -- - repo: hrsh7th/vim-vsnip
   --   on_event: InsertEnter
@@ -162,18 +116,19 @@ return {
   -- - { repo: hrsh7th/vim-vsnip-integ, on_source: vim-vsnip }
   -- - { repo: rafamadriz/friendly-snippets, merged: 0, on_source: vim-vsnip }
 
-  -- - repo: windwp/nvim-autopairs
-  --   if: has('nvim-0.5')
-  --   hook_post_source: lua require('nvim-autopairs').setup()
+  {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup()
+    end,
+  },
 
   -- - repo: folke/todo-comments.nvim
   --   if: has('nvim-0.5')
   --   on_source: [telescope.nvim, neovim/nvim-lspconfig]
   --   hook_post_source: lua require('plugins.todo-comments')
 
-  -- - repo: folke/trouble.nvim
-  --   if: has('nvim-0.5')
-  --   on_cmd: [Trouble, TroubleToggle]
+  "folke/trouble.nvim",
 
   -- - repo: sindrets/diffview.nvim
   --   if: has('nvim-0.5')
@@ -198,8 +153,6 @@ return {
   --   hook_source: lua require('plugins.auto-session')
   --   hook_add: |-
   --     autocmd user_events StdinReadPre * let g:auto_session_enabled = v:false
-
-  "sbdchd/neoformat",
 
   -- - repo: mattn/emmet-vim
   --   on_event: InsertEnter
@@ -265,11 +218,19 @@ return {
   --     let g:splitjoin_split_mapping = ''
   --     autocmd user_events FileType go let b:splitjoin_trailing_comma = 1
 
-  -- - repo: phaazon/hop.nvim
-  --   on_cmd: [HopWord, HopAnywhere, HopLine, HopChar1, HopChar2]
-  --   hook_post_source: lua require('hop').setup()
+  {
+    "phaazon/hop.nvim",
+    config = function()
+      require("hop").setup()
+
+      utils.noremap("n", "<Leader>fw", "<cmd>HopWord<cr>")
+      utils.noremap("n", "<Leader>fa", "<cmd>HopAnywhere<cr>")
+      utils.noremap("n", "<Leader>fl", "<cmd>HopLine<cr>")
+      utils.noremap("n", "<Leader>fc", "<cmd>HopChar1<cr>")
+    end,
+  },
 
   -- buffer
 
-  "chrisgrieser/nvim-early-retirement",
+  { "chrisgrieser/nvim-early-retirement", config = true },
 }

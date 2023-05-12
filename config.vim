@@ -1,4 +1,4 @@
-" Save sessions
+" save sessions
 fu! SaveSess()
   execute 'mksession! ' . getcwd() . '/.session.vim'
 endfunction
@@ -18,3 +18,7 @@ endfunction
 
 autocmd VimLeave * call SaveSess()
 autocmd VimEnter * nested call RestoreSess()
+
+" highlight on yank
+autocmd TextYankPost *
+  \ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}

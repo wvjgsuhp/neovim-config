@@ -3,17 +3,17 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-  'hrsh7th/cmp-nvim-lsp',
-  'kosayoda/nvim-lightbulb',
+    "hrsh7th/cmp-nvim-lsp",
+    "kosayoda/nvim-lightbulb",
     -- "jose-elias-alvarez/nvim-lsp-ts-utils",
-    -- "jose-elias-alvarez/null-ls.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
     --'jayp0521/mason-null-ls.nvim',
     -- "nvim-lua/plenary.nvim",
     -- "b0o/schemastore.nvim",
     -- "folke/neodev.nvim",
     {
       "SmiteshP/nvim-navbuddy",
-      requires = {
+      dependencies = {
         "SmiteshP/nvim-navic",
         "MunifTanjim/nui.nvim",
       },
@@ -45,49 +45,19 @@ return {
       map_buf("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
       map_buf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
       map_buf("n", ",s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-      map_buf(
-        "n",
-        ",wa",
-        "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
-        opts
-      )
-      map_buf(
-        "n",
-        ",wr",
-        "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
-        opts
-      )
-      map_buf(
-        "n",
-        ",wl",
-        "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-        opts
-      )
+      map_buf("n", ",wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+      map_buf("n", ",wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+      map_buf("n", ",wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
       map_buf("n", ",rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       map_buf("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-      map_buf(
-        "n",
-        "<Leader>ce",
-        "<cmd>lua vim.diagnostic.open_float()<CR>",
-        opts
-      )
+      map_buf("n", "<Leader>ce", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 
       -- Set some keybinds conditional on server capabilities
       if client.supports_method("textDocument/formatting") then
         if vim.fn.has("nvim-0.8") == 1 then
-          map_buf(
-            "n",
-            ",f",
-            "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>",
-            opts
-          )
+          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>", opts)
         else
-          map_buf(
-            "n",
-            ",f",
-            "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>",
-            opts
-          )
+          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>", opts)
         end
       end
       if client.supports_method("textDocument/rangeFormatting") then
@@ -190,18 +160,16 @@ return {
       -- Configure LSP Handlers
       -- ---
 
-      vim.lsp.handlers["textDocument/publishDiagnostics"] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = {
-            -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-source-in-diagnostics-neovim-06-only
-            source = "if_many",
-            prefix = "●",
-          },
-        })
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = {
+          -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-source-in-diagnostics-neovim-06-only
+          source = "if_many",
+          prefix = "●",
+        },
+      })
 
       -- Configure help hover (normal K) handler
-      vim.lsp.handlers["textDocument/hover"] =
-        vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
       -- Configure signature help (,s) handler
       vim.lsp.handlers["textDocument/signatureHelp"] =
@@ -209,19 +177,19 @@ return {
 
       -- Setup language servers using nvim-lspconfig
       local lspconfig = require("lspconfig")
-local servers = {
-        'lua_ls',
-      --"omnisharp",
-      -- "gopls",
-      --"graphql",
-      -- "yamlls",
-      -- "html",
-      -- "pylsp",
-      -- "terraformls",
-      -- "vimls",
-      -- "bashls",
-      --"angularls",
-    }
+      local servers = {
+        "lua_ls",
+        --"omnisharp",
+        -- "gopls",
+        --"graphql",
+        -- "yamlls",
+        -- "html",
+        -- "pylsp",
+        -- "terraformls",
+        -- "vimls",
+        -- "bashls",
+        --"angularls",
+      }
       for _, servers in ipairs(servers) do
         local opts = make_config(servers)
         lspconfig[servers].setup(opts)
@@ -234,10 +202,7 @@ local servers = {
       local function nmap(lhs, rhs)
         vim.api.nvim_set_keymap("n", lhs, rhs, args)
       end
-      nmap(
-        "<Leader>a",
-        '<cmd>lua require("user").diagnostic.publish_loclist(true)<CR>'
-      )
+      nmap("<Leader>a", '<cmd>lua require("user").diagnostic.publish_loclist(true)<CR>')
       nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
       nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 

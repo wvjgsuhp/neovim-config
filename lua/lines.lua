@@ -206,8 +206,7 @@ M.get_icon = function(filename, extension)
     if not extension then
       extension = vim.fn.fnamemodify(filename, ":e")
     end
-    local file_icon, hl_group =
-      require("nvim-web-devicons").get_icon(filename, extension)
+    local file_icon, hl_group = require("nvim-web-devicons").get_icon(filename, extension)
     cached = " " .. "%#" .. hl_group .. "#" .. file_icon .. " %*"
     icon_cache[filename] = cached
   end
@@ -308,32 +307,16 @@ M.get_diag_counts = function()
   local result = ""
   local S = vim.diagnostic.severity
   if grouped[S.ERROR] then
-    result = result
-      .. "%#StatusLineError#"
-      .. grouped[S.ERROR]
-      .. get_sign("Error", true)
-      .. "%* "
+    result = result .. "%#StatusLineError#" .. grouped[S.ERROR] .. get_sign("Error", true) .. "%* "
   end
   if grouped[S.WARN] then
-    result = result
-      .. "%#StatusLineWarn#"
-      .. grouped[S.WARN]
-      .. get_sign("Warn", true)
-      .. "%* "
+    result = result .. "%#StatusLineWarn#" .. grouped[S.WARN] .. get_sign("Warn", true) .. "%* "
   end
   if grouped[S.INFO] then
-    result = result
-      .. "%#StatusLineInfo#"
-      .. grouped[S.INFO]
-      .. get_sign("Info", true)
-      .. "%* "
+    result = result .. "%#StatusLineInfo#" .. grouped[S.INFO] .. get_sign("Info", true) .. "%* "
   end
   if grouped[S.HINT] then
-    result = result
-      .. "%#StatusLineHint#"
-      .. grouped[S.HINT]
-      .. get_sign("Hint", true)
-      .. "%* "
+    result = result .. "%#StatusLineHint#" .. grouped[S.HINT] .. get_sign("Hint", true) .. "%* "
   end
   return result
 end

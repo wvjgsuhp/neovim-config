@@ -1,12 +1,11 @@
 return {
   "t9md/vim-choosewin",
   config = function()
-    vim.cmd([[
-      let g:choosewin_label = 'ADFGHJKLUIOPQWERT'
-      let g:choosewin_label_padding = 5
+    vim.g.choosewin_label = "ADFGHJKLUIOPQWERT"
+    vim.g.choosewin_label_padding = 5
 
-      nmap -         <Plug>(choosewin)
-      nmap <Leader>- <cmd>ChooseWinSwapStay<CR>
-    ]])
+    local utils = require("utils")
+    utils.noremap("n", "-", "<Plug>(choosewin)")
+    utils.noremap("n", "<Leader>-", "<cmd>ChooseWinSwapStay<CR>")
   end,
 }
