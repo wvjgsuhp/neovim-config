@@ -64,26 +64,6 @@ return {
         map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
       end
 
-      -- lspsaga.nvim
-      -- See https://github.com/glepnir/lspsaga.nvim
-      -- buf_set_keymap('n', '<Leader>f', '<cmd>lua require("lspsaga.provider").lsp_finder()<CR>', opts)
-      -- buf_set_keymap('n', 'K', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>', opts)
-      -- buf_set_keymap('n', ',s', '<cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>', opts)
-      -- buf_set_keymap('n', ',rn', '<cmd>lua require("lspsaga.rename").rename()<CR>', opts)
-      -- buf_set_keymap('n', '<Leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>', opts)
-      -- buf_set_keymap('v', '<Leader>ca', ':<C-u>lua require("lspsaga.codeaction").range_code_action()<CR>', opts)
-
-      -- lsp_signature.nvim
-      -- See https://github.com/ray-x/lsp_signature.nvim
-      -- require('lsp_signature').on_attach({
-      --    bind = true,
-      --    check_pumvisible = true,
-      --    hint_enable = false,
-      --    hint_prefix = ' ',  --  
-      --    handler_opts = { border = 'rounded' },
-      --    zindex = 50,
-      -- }, bufnr)
-
       if client.config.flags then
         client.config.flags.allow_incremental_sync = true
         -- client.config.flags.debounce_text_changes  = vim.opt.updatetime:get()
@@ -102,8 +82,7 @@ return {
       end
 
       if client.server_capabilities.documentSymbolProvider then
-        -- require("nvim-navic").attach(client, bufnr)
-        require("nvim-navbuddy").attach(client, bufnr)
+        require("nvim-navic").attach(client, bufnr)
       end
     end
 
@@ -126,6 +105,16 @@ return {
         for k, v in pairs(user_config) do
           c[k] = v
         end
+      end
+
+      if server_name == "lua_ls" then
+        c["settings"] = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+          },
+        }
       end
 
       return c
@@ -190,9 +179,9 @@ return {
         -- "bashls",
         --"angularls",
       }
-      for _, servers in ipairs(servers) do
-        local opts = make_config(servers)
-        lspconfig[servers].setup(opts)
+      for _, server in ipairs(servers) do
+        local opts = make_config(server)
+        lspconfig[server].setup(opts)
       end
 
       lspconfig.r_language_server.setup({})

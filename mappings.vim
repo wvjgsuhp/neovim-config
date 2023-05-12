@@ -1,5 +1,8 @@
 let mapleader=' '
 
+" Folding
+nnoremap <Leader><Leader> za
+
 " Fast saving from all modes
 nnoremap <Leader>w <cmd>silent write<CR>
 nnoremap <C-s> <cmd>silent write<CR>
@@ -18,6 +21,8 @@ nmap <silent> <c-l> <cmd>wincmd l<CR>
 " Paste
 nnoremap <Leader>piw viwpyiw
 nnoremap <Leader>pa ggVGp
+" xnoremap p :call <SID>visual_paste('p')<CR>
+" xnoremap P :call <SID>visual_paste('P')<CR>
 
 " Go to tab by number
 noremap <Leader>1 1gt
@@ -55,27 +60,15 @@ noremap <Leader>q <cmd>e!<cr>
 noremap <Leader>bb <c-^>
 
 " Yank
-" if dein#tap('nvim-notify')
-"   nnoremap <Leader>yfn <cmd>let @+=expand("%:t")<CR>
-"     \ :lua vim.notify('Yanked filename: <c-r>+', 'info')<CR>
-"   nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR>
-"     \ :lua vim.notify('Yanked relative path: <c-r>+', 'info')<CR>
-"   nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR>
-"     \ :lua vim.notify('Yanked absolute path: <c-r>+', 'info')<CR>
-" else
-  nnoremap <Leader>yfn <cmd>let @+=expand("%:t")<CR>
-    \ <cmd>echo 'Yanked filename: <c-r>+'<CR>
-  nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR>
-    \ <cmd>echo 'Yanked relative path: <c-r>+'<CR>
-  nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR>
-    \ <cmd>echo 'Yanked absolute path: <c-r>+'<CR>
-" endif
+nnoremap <Leader>yfn <cmd>let @+=expand("%:t")<CR>
+  \ <cmd>echo 'Yanked filename: <c-r>+'<CR>
+nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR>
+  \ <cmd>echo 'Yanked relative path: <c-r>+'<CR>
+nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR>
+  \ <cmd>echo 'Yanked absolute path: <c-r>+'<CR>
 
 nnoremap <Leader>yaa ggyG''
 nnoremap <Leader>ypG VGyGp
-
-" Delete
-nnoremap <Leader>dif j<cmd>foldclose<cr>kd1j
 
 " Delete current file
 nnoremap <Leader>rm <cmd>call delete(expand('%'))<bar>b#<bar>bd#<cr>

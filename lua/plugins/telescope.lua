@@ -21,15 +21,15 @@ return {
 
     local myactions = {}
 
-    function myactions.send_to_qflist(prompt_bufnr)
-      require("telescope.actions").send_to_qflist(prompt_bufnr)
-      require("user").qflist.open()
-    end
-
-    function myactions.smart_send_to_qflist(prompt_bufnr)
-      require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
-      require("user").qflist.open()
-    end
+    -- function myactions.send_to_qflist(prompt_bufnr)
+    --   require("telescope.actions").send_to_qflist(prompt_bufnr)
+    --   require("user").qflist.open()
+    -- end
+    --
+    -- function myactions.smart_send_to_qflist(prompt_bufnr)
+    --   require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
+    --   require("user").qflist.open()
+    -- end
 
     function myactions.page_up(prompt_bufnr)
       require("telescope.actions.set").shift_selection(prompt_bufnr, -5)

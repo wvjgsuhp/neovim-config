@@ -30,6 +30,6 @@ return {
 
     local utils = require("utils")
     utils.noremap("n", ":", "<cmd>FineCmdline<CR>")
-    utils.noremap("n", ":", "<cmd>FineCmdline '<,'><CR>")
+    utils.noremap("x", ":", "<cmd>FineCmdline '<,'><CR>")
   end,
 }

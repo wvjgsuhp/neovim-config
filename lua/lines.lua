@@ -1,8 +1,18 @@
+local utils = require("utils")
 -- https://www.reddit.com/r/neovim/comments/vpxexc/pde_custom_winbar_and_statusline_without_plugins/
 local M = {}
 
 local isempty = function(s)
   return s == nil or s == ""
+end
+
+local is_current = function()
+  local winid = vim.g.actual_curwin
+  if isempty(winid) then
+    return false
+  else
+    return winid == tostring(vim.api.nvim_get_current_win())
+  end
 end
 
 vim.cmd([[
@@ -18,23 +28,8 @@ vim.cmd([[
   highlight ModeI guibg=#ffff5f guifg=#353535 gui=bold " INSERT  
   highlight ModeT guibg=#95e454 guifg=#353535 gui=bold " TERMINAL
   highlight ModeN guibg=#87d7ff guifg=#353535 gui=bold " NORMAL  
-  highlight ModeN guibg=#5fafd7 guifg=#262626 gui=bold " NORMAL  
   highlight ModeV guibg=#c586c0 guifg=#353535 gui=bold " VISUAL  
   highlight ModeR guibg=#f44747 guifg=#353535 gui=bold " REPLACE 
-
-  highlight StatusLine              guibg=#303030 guifg=#999999
-  highlight StatusLineGit  gui=bold guibg=#3a3a3a guifg=#c586c0
-  highlight StatusLineCwd  gui=bold guibg=#3a3a3a guifg=#999999
-  highlight StatusLineFile gui=bold guibg=#303030 guifg=#bbbbbb
-  highlight StatusLineMod           guibg=#303030 guifg=#d7d787
-  highlight StatusLineError         guibg=#303030 guifg=#ff0000
-  highlight StatusLineInfo          guibg=#303030 guifg=#87d7ff
-  highlight StatusLineHint          guibg=#303030 guifg=#ffffd7
-  highlight StatusLineWarn          guibg=#303030 guifg=#d7d700
-  highlight StatusLineChanges       guibg=#303030 guifg=#c586c0
-  highlight StatusLineOutside       guibg=#3a3a3a guifg=#999999
-  highlight StatusLineTransition1   guibg=#303030 guifg=#1c1c1c
-  highlight StatusLineTransition2   guibg=#3a3a3a guifg=#1c1c1c
 ]])
 
 local winbar_filetype_exclude = {
@@ -53,23 +48,6 @@ local winbar_filetype_exclude = {
   ["toggleterm"] = true,
 }
 
-M.get_neo_tree_context = function()
-  local context = require("neo-tree.ui.selector").get_scrolled_off_node_text()
-  if isempty(context) then
-    return M.active_indicator()
-  else
-    return context
-  end
-  --local source = vim.b.neo_tree_source
-  --if not isempty(source) then
-  --  local label = require("neo-tree").config.source_selector.tab_labels[source]
-  --  if not isempty(label) then
-  --    return label
-  --  end
-  --end
-  --return ""
-end
-
 M.get_winbar = function()
   -- floating window
   local cfg = vim.api.nvim_win_get_config(0)
@@ -77,54 +55,71 @@ M.get_winbar = function()
     return ""
   end
 
-  if vim.bo.filetype == "neo-tree" then
-    return "%{%v:lua.status.get_neo_tree_context()%}"
-  end
-
   if winbar_filetype_exclude[vim.bo.filetype] then
     return "%{%v:lua.status.active_indicator()%}"
   end
 
+  local mode_part = M.get_mode_part()
+
   if vim.bo.buftype == "terminal" then
-    return "%{%v:lua.status.get_mode()%}%{%v:lua.status.get_icon()%} TERMINAL #%n %#WinBarLocation# %{b:term_title}%*"
+    return mode_part .. M.get_icon() .. "TERMINAL #%n %#WinBarLocation# %{b:term_title}%*"
   else
-    local buftype = vim.bo.buftype
     -- real files do not have buftypes
-    if isempty(buftype) then
+    if isempty(vim.bo.buftype) then
       return table.concat({
-        "%{%v:lua.status.get_mode()%}",
-        "%{%v:lua.status.get_filename()%}",
+        mode_part,
+        M.get_filename(),
         "%<",
-        "%{%v:lua.status.get_location()%}",
+        M.get_location(),
         "%=",
-        "%{%v:lua.status.get_diag()%}",
-        "%{%v:lua.status.get_git_dirty()%}",
+        M.get_diag(),
+        M.get_git_dirty(),
       })
     else
       -- Meant for quickfix, help, etc
-      return "%{%v:lua.status.get_mode()%}%( %h%) %f"
+      return mode_part .. "%( %h%) %f"
     end
   end
 end
 
 M.get_statusline = function()
-  local parts = {
-    --"%{%v:lua.status.get_mode()%}",
-    '%#StatusLineCwd#  %{fnamemodify(getcwd(), ":~")}/%*',
-    "%#StatusLineTransition2#▕%*",
-    "%#StatusLineTransition1#▏%*",
-    "%<",
-    "%#StatusLineFile#%f %*",
-    "%#StatusLineMod#%{IsBuffersModified()}%*",
-    "%=",
-    "%{%v:lua.status.get_diag_counts()%}",
-    "%{%v:lua.status.get_git_changes()%}",
-    "%#StatusLineTransition1#▕%*",
-    "%#StatusLineTransition2#▏%*",
-    "%{%v:lua.status.get_git_branch()%}",
-    "%#StatusLineOutside# %3l/%L祈%3c %*",
-  }
-  return table.concat(parts)
+  local mode = M.get_mode()
+  local mode_color = M.get_mode_colors(mode)
+  if is_current() then
+    local parts = {
+      -- left
+      mode_color["a"],
+      M.get_git_branch(),
+      mode_color["b"],
+      M.get_recording(),
+
+      -- middle
+      mode_color["c"],
+      "%<",
+      " %f ",
+      "%{IsBuffersModified()}",
+
+      -- right
+      "%=",
+      M.get_diag_counts(),
+      M.get_git_changes(),
+      mode_color["b"],
+      os.date(" %H:%M "),
+      mode_color["a"],
+      " %3l/%L祈%3c %*",
+    }
+    return table.concat(parts)
+  else
+    local parts = {
+      mode_color["inactive"],
+      "%<",
+      " %f ",
+      "%{IsBuffersModified()}",
+      "%=",
+      " %3l/%L祈%3c %*",
+    }
+    return table.concat(parts)
+  end
 end
 
 -- mode_map copied from:
@@ -132,51 +127,42 @@ end
 -- Copyright (c) 2020-2021 hoob3rt
 -- MIT license, see LICENSE for more details.
 local mode_map = {
-  ["n"] = "NORMAL",
-  ["no"] = "O-PENDING",
-  ["nov"] = "O-PENDING",
-  ["noV"] = "O-PENDING",
-  ["no\22"] = "O-PENDING",
-  ["niI"] = "NORMAL",
-  ["niR"] = "NORMAL",
-  ["niV"] = "NORMAL",
-  ["nt"] = "NORMAL",
-  ["v"] = "VISUAL",
-  ["vs"] = "VISUAL",
-  ["V"] = "V-LINE",
-  ["Vs"] = "V-LINE",
-  ["\22"] = "V-BLOCK",
-  ["\22s"] = "V-BLOCK",
-  ["s"] = "SELECT",
-  ["S"] = "S-LINE",
-  ["\19"] = "S-BLOCK",
-  ["i"] = "INSERT",
-  ["ic"] = "INSERT",
-  ["ix"] = "INSERT",
+  ["n"] = "N",
+  ["no"] = "N",
+  ["nov"] = "N",
+  ["noV"] = "N",
+  ["no\22"] = "N",
+  ["niI"] = "N",
+  ["niR"] = "N",
+  ["niV"] = "N",
+  ["nt"] = "N",
+  ["v"] = "V",
+  ["vs"] = "V",
+  ["V"] = "V",
+  ["Vs"] = "V",
+  ["\22"] = "V",
+  ["\22s"] = "V",
+  ["s"] = "S",
+  ["S"] = "S",
+  ["\19"] = "S",
+  ["i"] = "I",
+  ["ic"] = "I",
+  ["ix"] = "I",
   ["R"] = "REPLACE",
   ["Rc"] = "REPLACE",
   ["Rx"] = "REPLACE",
   ["Rv"] = "V-REPLACE",
   ["Rvc"] = "V-REPLACE",
   ["Rvx"] = "V-REPLACE",
-  ["c"] = "COMMAND",
-  ["cv"] = "EX",
-  ["ce"] = "EX",
+  ["c"] = "C",
+  ["cv"] = "C",
+  ["ce"] = "C",
   ["r"] = "REPLACE",
   ["rm"] = "MORE",
   ["r?"] = "CONFIRM",
   ["!"] = "SHELL",
-  ["t"] = "TERMINAL",
+  ["t"] = "T",
 }
-
-local is_current = function()
-  local winid = vim.g.actual_curwin
-  if isempty(winid) then
-    return false
-  else
-    return winid == tostring(vim.api.nvim_get_current_win())
-  end
-end
 
 M.active_indicator = function()
   if is_current() then
@@ -193,7 +179,8 @@ M.get_icon = function(filename, extension)
       return " %#WinBarModified# %*"
     end
 
-    if vim.bo.filetype == "terminal" then
+    -- if vim.bo.filetype == "terminal" then
+    if vim.bo.buftype == "terminal" then
       filename = "terminal"
       extension = "terminal"
     else
@@ -307,16 +294,16 @@ M.get_diag_counts = function()
   local result = ""
   local S = vim.diagnostic.severity
   if grouped[S.ERROR] then
-    result = result .. "%#StatusLineError#" .. grouped[S.ERROR] .. get_sign("Error", true) .. "%* "
+    result = result .. "%#StatusLineError#" .. grouped[S.ERROR] .. get_sign("Error", true)
   end
   if grouped[S.WARN] then
-    result = result .. "%#StatusLineWarn#" .. grouped[S.WARN] .. get_sign("Warn", true) .. "%* "
+    result = result .. "%#StatusLineWarn#" .. grouped[S.WARN] .. get_sign("Warn", true)
   end
   if grouped[S.INFO] then
-    result = result .. "%#StatusLineInfo#" .. grouped[S.INFO] .. get_sign("Info", true) .. "%* "
+    result = result .. "%#StatusLineInfo#" .. grouped[S.INFO] .. get_sign("Info", true)
   end
   if grouped[S.HINT] then
-    result = result .. "%#StatusLineHint#" .. grouped[S.HINT] .. get_sign("Hint", true) .. "%* "
+    result = result .. "%#StatusLineHint#" .. grouped[S.HINT] .. get_sign("Hint", true)
   end
   return result
 end
@@ -326,7 +313,7 @@ M.get_git_branch = function()
   if isempty(branch) then
     return ""
   else
-    return "%#StatusLineGit#   " .. branch .. "  %*"
+    return "  " .. branch .. " "
   end
 end
 
@@ -335,7 +322,7 @@ M.get_git_changes = function()
   if isempty(changes) then
     return ""
   else
-    return "%#StatusLineChanges#" .. changes .. "  %*"
+    return "%#StatusLineChanges#" .. changes .. " %*"
   end
 end
 
@@ -372,14 +359,50 @@ M.get_location = function()
   return result
 end
 
+M.get_recording = function()
+  local recording_register = vim.fn.reg_recording()
+  if recording_register == "" then
+    return ""
+  else
+    return " recording @" .. recording_register .. " "
+  end
+end
+
 M.get_mode = function()
   if not is_current() then
     --return "%#WinBarInactive# win #" .. vim.fn.winnr() .. " %*"
-    return "%#WinBarInactive#  #" .. vim.fn.winnr() .. "  %*"
+    return "%#WinBarInactive# " .. vim.fn.winnr() .. " %*"
   end
   local mode_code = vim.api.nvim_get_mode().mode
   local mode = mode_map[mode_code] or string.upper(mode_code)
-  return "%#Mode" .. mode:sub(1, 1) .. "# " .. mode .. " %*"
+  return mode
+end
+
+M.get_mode_colors = function(mode)
+  return {
+    a = "%#StatusLine" .. mode:sub(1, 1) .. "1#",
+    b = "%#StatusLine" .. mode:sub(1, 1) .. "2#",
+    c = "%#StatusLineN3#",
+    inactive = "%#StatusLineInactive#",
+  }
+end
+
+M.get_mode_part = function()
+  local mode = M.get_mode()
+  if string.len(mode) > 1 then
+    return mode
+  end
+
+  local mode_colors = M.get_mode_colors(mode)
+  return M.paint(" " .. mode .. " ", mode_colors["a"])
+end
+
+M.paint = function(text, color)
+  if text == "" then
+    return ""
+  end
+
+  return color .. text .. "%*"
 end
 
 vim.cmd([[
@@ -403,5 +426,10 @@ vim.cmd([[
 _G.status = M
 vim.o.winbar = "%{%v:lua.status.get_winbar()%}"
 vim.o.statusline = "%{%v:lua.status.get_statusline()%}"
+
+-- fix statusline diappears when enter insert mode
+vim.cmd([[
+  autocmd InsertEnter * execute(':let &stl=&stl')
+]])
 
 return M

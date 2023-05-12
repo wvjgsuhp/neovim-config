@@ -42,6 +42,7 @@ set completeopt=menu,menuone,preview    " Always show menu, even for one item
 set diffopt+=iwhite             " Diff mode: ignore whitespace
 
 " Interface
+set termguicolors
 set noshowmode          " Don't show mode in cmd window
 set shortmess=aoOTI     " Shorten messages and don't show intro
 set sidescrolloff=5     " Keep at least 5 lines left/right
@@ -54,11 +55,24 @@ set winminwidth=1       " Minimum width for inactive windows
 set winheight=1         " Minimum height for active window
 set winminheight=1      " Minimum height for inactive window
 
+set signcolumn=yes
 set cmdheight=0
 set showtabline=0
-" set noshowcmd           " Don't show command in status line
+set noshowcmd           " Don't show command in status line
 set cmdwinheight=5      " Command-line lines
-" set equalalways         " Resize windows on split or close
 set laststatus=2        " Always show a status line
 set colorcolumn=+0      " Column highlight at textwidth's max character-limit
 set display=lastline
+
+set sessionoptions=blank,curdir,help,terminal,tabpages
+
+" undo
+set undofile
+if ! has('nvim')
+  set swapfile nobackup
+  set directory=$VIM_DATA_PATH/swap//
+  set undodir=$VIM_DATA_PATH/undo//
+  set backupdir=$VIM_DATA_PATH/backup/
+  set viewdir=$VIM_DATA_PATH/view/
+  set spellfile=$VIM_DATA_PATH/spell/en.utf-8.add
+endif

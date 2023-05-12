@@ -13,8 +13,15 @@ return {
   "tpope/vim-repeat",
   "tpope/vim-surround",
   "nullchilly/fsread.nvim",
-  "tpope/vim-fugitive",
-
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      utils.noremap("n", "<Leader>gs", "<cmd>G status<CR>")
+      utils.noremap("n", "<Leader>gp", "<cmd>G push<CR>")
+      utils.map("n", "<Leader>gac", ":G commit -am ''<Left>")
+      utils.noremap("n", "<Leader>gaa", "<cmd>G add .<CR>")
+    end,
+  },
   {
     "mzlogin/vim-markdown-toc",
     config = function()
@@ -23,8 +30,8 @@ return {
   },
 
   -- interface
-  -- "MunifTanjim/nui.nvim",
-
+  "MunifTanjim/nui.nvim",
+  "lilydjwg/colorizer",
   -- - { repo: romainl/vim-cool, on_event: [CursorMoved, InsertEnter] }
   -- - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> } }
   {
@@ -36,68 +43,13 @@ return {
   },
   -- - { repo: t9md/vim-quickhl, on_map: { nx: <Plug> } }
 
-  -- - repo: nathanaelkane/vim-indent-guides
-  --   on_event: FileType
-  --   hook_post_source: IndentGuidesEnable
-  --   hook_source: |-
-  --     let g:indent_guides_enable_on_vim_startup = 0
-  --     let g:indent_guides_default_mapping = 0
-  --     let g:indent_guides_tab_guides = 0
-  --     let g:indent_guides_color_change_percent = 3
-  --     let g:indent_guides_guide_size = 1
-  --     let g:indent_guides_exclude_filetypes = [
-  --       \ 'help', 'man', 'fern', 'defx', 'denite', 'denite-filter', 'startify',
-  --       \ 'vista', 'vista_kind', 'tagbar', 'lsp-hover', 'clap_input', 'fzf',
-  --       \ 'any-jump', 'gina-status', 'gina-commit', 'gina-log', 'minimap',
-  --       \ 'quickpick-filter', 'lsp-quickpick-filter', 'lspinfo'
-  --       \ ]
-  --     augroup user_plugin_indentguides
-  --       autocmd!
-  --       autocmd BufEnter *
-  --         \ if ! empty(&l:filetype) && empty(&buftype) && ! &previewwindow
-  --         \|   if g:indent_guides_autocmds_enabled == 0 && &l:expandtab
-  --         \|     IndentGuidesEnable
-  --         \|   elseif g:indent_guides_autocmds_enabled == 1 && ! &l:expandtab
-  --         \|     IndentGuidesDisable
-  --         \|   endif
-  --         \| elseif g:indent_guides_autocmds_enabled == 1
-  --         \|   IndentGuidesDisable
-  --         \| endif
-  --     augroup END
-
-  -- - repo: norcalli/nvim-colorizer.lua
-  --   if: has('nvim-0.4')
-  --   on_event: FileType
-  --   hook_post_source: lua require('plugins.colorizer')
-
   -- - repo: deris/vim-shot-f
   --   on_map: { nxo: <Plug> }
   --   hook_add: let g:shot_f_no_default_key_mappings = 1
 
-  -- - repo: vim-airline/vim-airline
-  --   depends: [vim-fugitive]
-  --   on_event: VimEnter
-
-  -- - repo: kevinhwang91/promise-async
-  -- - repo: kevinhwang91/nvim-ufo
-  --   on_event: VimEnter
-  --   depends: [promise-async, nvim-treesitter]
-  --   hook_post_source: lua require('plugins.nvim-ufo')
-
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      local notify = require("notify")
-      notify.setup({ stages = "static" })
-      vim.notify = notify
-    end,
-  },
-
   -- completion and code analysis
 
   "folke/neodev.nvim",
-  -- "hrsh7th/cmp-nvim-lsp",
-  -- "kosayoda/nvim-lightbulb",
 
   -- - repo: ray-x/lsp_signature.nvim
   --   if: has('nvim-0.6.1')
@@ -130,7 +82,13 @@ return {
 
   "folke/trouble.nvim",
 
-  -- - repo: sindrets/diffview.nvim
+  {
+    "sindrets/diffview.nvim",
+    config = function()
+      utils.noremap("n", "<Leader>gdo", "<cmd>DiffviewOpen<cr>")
+      utils.noremap("n", "<Leader>gds", "<cmd>Gvdiffsplit!<cr>")
+    end,
+  },
   --   if: has('nvim-0.5')
   --   on_cmd: [DiffviewOpen, DiffviewFileHistory]
   --   hook_post_source: lua require('plugins.diffview').setup()
@@ -146,13 +104,6 @@ return {
   --   build: cmake
   --   on_source: telescope.nvim
   --   hook_post_source: lua require('telescope').load_extension('fzf')
-
-  -- - repo: rmagatti/auto-session
-  --   if: has('nvim-0.5')
-  --   on_event: VimEnter
-  --   hook_source: lua require('plugins.auto-session')
-  --   hook_add: |-
-  --     autocmd user_events StdinReadPre * let g:auto_session_enabled = v:false
 
   -- - repo: mattn/emmet-vim
   --   on_event: InsertEnter
@@ -210,14 +161,6 @@ return {
   "tpope/vim-sleuth",
 
   -- operators and text objects
-
-  -- - repo: AndrewRadev/splitjoin.vim
-  --   on_cmd: [SplitjoinJoin, SplitjoinSplit]
-  --   hook_add: |-
-  --     let g:splitjoin_join_mapping = ''
-  --     let g:splitjoin_split_mapping = ''
-  --     autocmd user_events FileType go let b:splitjoin_trailing_comma = 1
-
   {
     "phaazon/hop.nvim",
     config = function()

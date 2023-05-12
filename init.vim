@@ -1,6 +1,8 @@
 let g:owd = getcwd()
 cd ~/.config/nvim
 
+let $VIM_DATA_PATH = exists('*stdpath') ? stdpath('data') :
+  \ expand(($XDG_DATA_HOME ? $XDG_DATA_HOME : '~/.local/share') . '/nvim', 1)
 let g:indent_guides_enable_on_vim_startup = 1
 " let $VIM_PATH = expand('<sfile>:p:h')
 
