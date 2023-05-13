@@ -67,13 +67,6 @@ return {
 
   "folke/trouble.nvim",
 
-  {
-    "sindrets/diffview.nvim",
-    config = function()
-      utils.noremap("n", "<Leader>gdo", "<cmd>DiffviewOpen<cr>")
-      utils.noremap("n", "<Leader>gds", "<cmd>Gvdiffsplit!<cr>")
-    end,
-  },
   --   if: has('nvim-0.5')
   --   on_cmd: [DiffviewOpen, DiffviewFileHistory]
   --   hook_post_source: lua require('plugins.diffview').setup()

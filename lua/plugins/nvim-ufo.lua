@@ -2,7 +2,6 @@ return {
   "kevinhwang91/nvim-ufo",
   dependencies = {
     "kevinhwang91/promise-async",
-    "MunifTanjim/nui.nvim",
   },
   event = { "BufEnter", "BufNew" },
   config = function()
@@ -41,5 +40,15 @@ return {
         return { "treesitter", "indent" }
       end,
     })
+    vim.cmd([[
+      " function! AttachUfo()
+      "   execute(':UfoAttach')
+      "   " execute(':FineCmdline')
+      "   " execute('\e')
+      " endfunction
+      " autocmd BufEnter * call AttachUfo()
+      autocmd BufEnter * execute(':UfoAttach')
+      " autocmd BufEnter * execute(': <esc>')
+    ]])
   end,
 }

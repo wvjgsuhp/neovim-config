@@ -117,5 +117,5 @@ nmap <Leader>mj <cmd>sp<bar>execute 'edit'
 
 " quit
 nnoremap <Leader>cc <cmd>cclose<cr>
-autocmd FileType lazy,help,NvimTree nnoremap <buffer> <esc> <cmd>q<cr>
-autocmd FileType lazy,help,NvimTree nmap <buffer> q <esc>
+autocmd FileType lazy,help,NvimTree,checkhealth nnoremap <buffer> <esc> <cmd>q<cr>
+autocmd FileType lazy,help,NvimTree,checkhealth nmap <buffer> q <esc>
