@@ -23,7 +23,7 @@ return {
           style = "rounded",
         },
         win_options = {
-          winhighlight = "Normal:Normal,FloatBorder:SpecialChar",
+          winhighlight = "Normal:Normal,FloatBorder:Normal",
         },
       },
     })

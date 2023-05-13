@@ -3,6 +3,7 @@ return {
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "JoosepAlviste/nvim-ts-context-commentstring",
+    "kevinhwang91/nvim-ufo",
   },
   build = ":TSUpdate",
   config = function()

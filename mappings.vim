@@ -4,10 +4,11 @@ let mapleader=' '
 nnoremap <Leader><Leader> za
 
 " Fast saving from all modes
-nnoremap <Leader>w <cmd>silent write<CR>
-nnoremap <C-s> <cmd>silent write<CR>
-xnoremap <C-s> <cmd>silent write<CR>
-cnoremap <C-s> <cmd>silent write<CR>
+nnoremap <Leader>w <cmd>silent! w<CR>
+nnoremap <Leader>nw <cmd>noautocmd w<CR>
+nmap <C-s> <space>w
+xmap <C-s> <space>w
+cmap <C-s> <space>w
 
 " Go from terminal to normal mode
 tnoremap <Esc> <C-\><C-n>zz
@@ -18,11 +19,24 @@ nmap <silent> <c-j> <cmd>wincmd j<CR>
 nmap <silent> <c-h> <cmd>wincmd h<CR>
 nmap <silent> <c-l> <cmd>wincmd l<CR>
 
+" Yank
+nnoremap <Leader>yfn <cmd>let @+=expand("%:t")<CR>
+  \ <cmd>echo 'Yanked filename: <c-r>+'<CR>
+nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR>
+  \ <cmd>echo 'Yanked relative path: <c-r>+'<CR>
+nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR>
+  \ <cmd>echo 'Yanked absolute path: <c-r>+'<CR>
+nnoremap <leader>yy "+y
+vnoremap <leader>yy "+y
+
 " Paste
 nnoremap <Leader>piw viwpyiw
 nnoremap <Leader>pa ggVGp
-" xnoremap p :call <SID>visual_paste('p')<CR>
-" xnoremap P :call <SID>visual_paste('P')<CR>
+command! -range -nargs=1 VisualPaste call utils#visualPaste(<args>)
+xnoremap p :VisualPaste 'p'<CR>
+xnoremap P :VisualPaste 'P'<CR>
+nnoremap <leader>pp "+p
+vnoremap <leader>pp "+p
 
 " Go to tab by number
 noremap <Leader>1 1gt
@@ -58,14 +72,6 @@ noremap <Leader>q <cmd>e!<cr>
 
 " Open previous buffer
 noremap <Leader>bb <c-^>
-
-" Yank
-nnoremap <Leader>yfn <cmd>let @+=expand("%:t")<CR>
-  \ <cmd>echo 'Yanked filename: <c-r>+'<CR>
-nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR>
-  \ <cmd>echo 'Yanked relative path: <c-r>+'<CR>
-nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR>
-  \ <cmd>echo 'Yanked absolute path: <c-r>+'<CR>
 
 nnoremap <Leader>yaa ggyG''
 nnoremap <Leader>ypG VGyGp
@@ -108,3 +114,8 @@ nmap <Leader>ml <cmd>vs<bar>execute 'edit'
   \ strftime('vim-messages-%Y-%m-%d.%H-%M-%S.log')<cr> mb
 nmap <Leader>mj <cmd>sp<bar>execute 'edit'
   \ strftime('vim-messages-%Y-%m-%d.%H-%M-%S.log')<cr> mb
+
+" quit
+nnoremap <Leader>cc <cmd>cclose<cr>
+autocmd FileType lazy,help,NvimTree nnoremap <buffer> <esc> <cmd>q<cr>
+autocmd FileType lazy,help,NvimTree nmap <buffer> q <esc>

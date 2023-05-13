@@ -32,7 +32,7 @@ return {
   -- interface
   "MunifTanjim/nui.nvim",
   "lilydjwg/colorizer",
-  -- - { repo: romainl/vim-cool, on_event: [CursorMoved, InsertEnter] }
+  "romainl/vim-cool",
   -- - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> } }
   {
     "rhysd/accelerated-jk",
@@ -51,21 +51,6 @@ return {
 
   "folke/neodev.nvim",
 
-  -- - repo: ray-x/lsp_signature.nvim
-  --   if: has('nvim-0.6.1')
-  --   on_source: nvim-lspconfig
-
-  -- - repo: hrsh7th/vim-vsnip
-  --   on_event: InsertEnter
-  --   merged: 0
-  --   hook_add: |-
-  --     let g:vsnip_snippet_dir = expand('$VIM_DATA_PATH/vsnip')
-  --     let g:vsnip_snippet_dirs = [ expand('$VIM_PATH/snippets') ]
-  --     let g:vsnip_filetypes = {}
-  --     let g:vsnip_filetypes.javascriptreact = ['javascript']
-  --     let g:vsnip_filetypes.typescriptreact = ['typescript']
-
-  -- - { repo: hrsh7th/vim-vsnip-integ, on_source: vim-vsnip }
   -- - { repo: rafamadriz/friendly-snippets, merged: 0, on_source: vim-vsnip }
 
   {
@@ -100,10 +85,13 @@ return {
     end,
   },
 
-  -- - repo: nvim-telescope/telescope-fzf-native.nvim
-  --   build: cmake
-  --   on_source: telescope.nvim
-  --   hook_post_source: lua require('telescope').load_extension('fzf')
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    config = function()
+      require("telescope").load_extension("fzf")
+    end,
+  },
 
   -- - repo: mattn/emmet-vim
   --   on_event: InsertEnter
@@ -169,7 +157,7 @@ return {
       utils.noremap("n", "<Leader>fw", "<cmd>HopWord<cr>")
       utils.noremap("n", "<Leader>fa", "<cmd>HopAnywhere<cr>")
       utils.noremap("n", "<Leader>fl", "<cmd>HopLine<cr>")
-      utils.noremap("n", "<Leader>fc", "<cmd>HopChar1<cr>")
+      utils.noremap("", "<Leader>fc", "<cmd>HopChar1<cr>")
     end,
   },
 

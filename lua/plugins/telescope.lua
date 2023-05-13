@@ -1,6 +1,9 @@
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
+  dependencies = {
+    "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-fzf-native.nvim",
+  },
   config = function()
     -- plugin: telescope.nvim
     -- see: https://github.com/nvim-telescope/telescope.nvim

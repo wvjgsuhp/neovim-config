@@ -19,7 +19,6 @@ endif
 
 let colors_name = "github"
 
-" {{{ General colors
 hi Normal       ctermfg=0   ctermbg=255   guifg=#000000 guibg=#F8F8FF
 hi Cursor       ctermfg=239 ctermbg=15    guifg=#F8F8FF guibg=#444454
 hi Visual       ctermfg=15  ctermbg=61    guifg=#FFFFFF guibg=#3465a3
@@ -35,9 +34,7 @@ hi SpecialKey   ctermfg=6   guifg=#177F80 gui=italic    cterm=italic
 hi WarningMsg   ctermfg=167 guifg=#ef5939
 hi ErrorMsg     ctermbg=15  ctermfg=196   guibg=#f8f8ff guifg=#ff1100 gui=undercurl cterm=undercurl
 hi ColorColumn  ctermbg=254 guibg=#e4e4e4
-" }}}
 
-" {{{ Vim => 7.0 specific colors
 if version >= 700
   hi CursorLine ctermbg=253 guibg=#D8D8DD
   hi MatchParen ctermfg=0 ctermbg=252 guifg=#000000 guibg=#cdcdfd
@@ -46,16 +43,12 @@ if version >= 700
   hi PmenuSbar    ctermfg=238 ctermbg=0 guifg=#444444 guibg=#000000
   hi PmenuThumb   ctermfg=248 ctermbg=248 guifg=#aaaaaa guibg=#aaaaaa
 endif
-" }}}
 
-" {{{ Diff highlighting
 hi DiffAdd    ctermfg=233 ctermbg=194 guifg=#003300 guibg=#DDFFDD gui=none cterm=none
 hi DiffChange ctermbg=255  guibg=#ececec gui=none   cterm=none
 hi DiffText   ctermfg=233  ctermbg=189  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
 hi DiffDelete ctermfg=252 ctermbg=224   guifg=#DDCCCC guibg=#FFDDDD gui=none    cterm=none
-" }}}
 
-" {{{ Syntax highlighting
 hi Ignore   ctermfg=8 guifg=#808080
 hi Identifier   ctermfg=31 guifg=#0086B3
 hi PreProc  ctermfg=247 guifg=#A0A0A0 gui=bold cterm=bold
@@ -74,13 +67,10 @@ hi StorageClass ctermfg=0 guifg=#000000 gui=bold    cterm=bold
 hi Structure    ctermfg=0 guifg=#000000 gui=bold    cterm=bold
 hi TypeDef      ctermfg=0 guifg=#000000 gui=bold    cterm=bold
 
-" {{{ Links
 hi! link FoldColumn Folded
 hi! link CursorColumn   CursorLine
 hi! link NonText    LineNr
-" }}}
 
-" {{{ Aliases
 hi link cppSTL          Function
 hi link cppSTLType      Type
 hi link Character       Number
@@ -97,24 +87,18 @@ hi link shVariable      Function
 hi link rubySharpBang   Special
 hi link perlSharpBang   Special
 hi link schemeFunc      Statement
-" }}}
 
-" {{{ Tabs
 hi TabLine      ctermfg=238 ctermbg=188   guifg=#404040 guibg=#dddddd gui=none
 hi TabLineFill  ctermfg=238 ctermbg=188   guifg=#404040 guibg=#dddddd gui=none
 hi TabLineSel   ctermfg=238 guifg=#404040 gui=bold
-" }}}
 
-" {{{ Spelling
 if has("spell")
-    hi spellBad     guisp=#fcaf3e
-    hi spellCap     guisp=#73d216
-    hi spellRare    guisp=#fcaf3e
-    hi spellLocal   guisp=#729fcf
+  hi spellBad     guisp=#fcaf3e
+  hi spellCap     guisp=#73d216
+  hi spellRare    guisp=#fcaf3e
+  hi spellLocal   guisp=#729fcf
 endif
-" }}}
 
-" {{{ Statusline
 hi StatusLineN1         ctermfg=188   ctermbg=0   guifg=#dddddd guibg=#000000 gui=none cterm=none
 hi StatusLineN2         ctermfg=188   ctermbg=238 guifg=#dddddd guibg=#404040 gui=none cterm=none
 hi StatusLineN3         ctermfg=0     ctermbg=188 guifg=#000000 guibg=#dddddd gui=none cterm=none
@@ -130,4 +114,13 @@ hi StatusLineHint       guibg=#dddddd guifg=#ffffd7
 hi StatusLineWarn       guibg=#dddddd guifg=#fcaf3e
 hi StatusLineChanges    guibg=#dddddd guifg=#6f42c1
 hi StatusLineInactive   guifg=#404040 guibg=#d4d4d4
-" }}}
+
+hi WinBar           guifg=#959595 gui=bold
+hi WinBarNC         guifg=#d4d4d4 gui=bold
+hi WinBarLocation   guifg=#888888 gui=bold
+hi WinBarModified   guifg=#d7d787 gui=bold
+hi WinBarGitDirty   guifg=#d7afd7 gui=bold
+hi WinBarIndicator  guifg=#5fafd7 gui=bold
+
+hi link FloatBorder Normal
+hi link NormalFloat Normal

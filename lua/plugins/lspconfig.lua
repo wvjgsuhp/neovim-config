@@ -94,27 +94,19 @@ return {
       local cap = vim.lsp.protocol.make_client_capabilities()
       c.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
 
-      -- Merge user-defined lsp settings.
-      -- These can be overridden locally by lua/lsp-local/<server_name>.lua
-      local exists, module = pcall(require, "lsp-local." .. server_name)
-      if not exists then
-        exists, module = pcall(require, "lsp." .. server_name)
-      end
+      -- ufo
+      -- c.capabilities.textDocument.foldingRange = {
+      --   dynamicRegistration = false,
+      --   lineFoldingOnly = true,
+      -- }
+
+      -- user-defined lsp settings
+      local exists, user_config = pcall(require, "lsp." .. server_name)
       if exists then
-        local user_config = module.config(c)
+        -- local user_config = module.config(c)
         for k, v in pairs(user_config) do
           c[k] = v
         end
-      end
-
-      if server_name == "lua_ls" then
-        c["settings"] = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-          },
-        }
       end
 
       return c
@@ -166,8 +158,10 @@ return {
 
       -- Setup language servers using nvim-lspconfig
       local lspconfig = require("lspconfig")
+      -- local servers = lspconfig.util.available_servers()
       local servers = {
         "lua_ls",
+        "tsserver",
         --"omnisharp",
         -- "gopls",
         --"graphql",
@@ -208,6 +202,8 @@ return {
         augroup END]],
         false
       )
+
+      require("lspconfig.ui.windows").default_options.border = "rounded"
     end
 
     setup()

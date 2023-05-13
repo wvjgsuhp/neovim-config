@@ -1,11 +1,11 @@
 colorscheme github
 
-set clipboard+=unnamedplus      " Yank without explicit registration
+" set clipboard+=unnamedplus      " Yank without explicit registration
 set number                      " Show current line number
 set relativenumber              " Show relative line numbers
 set foldmethod=expr
 set mouse=nv                    " Disable mouse in command-line mode
-set report=2                    " Report on line changes
+" set report=2                    " Report on line changes
 set errorbells                  " Trigger bell on error
 set visualbell                  " Use visual bell instead of beeping
 set hidden                      " hide buffers when abandoned instead of unload
@@ -65,6 +65,12 @@ set colorcolumn=+0      " Column highlight at textwidth's max character-limit
 set display=lastline
 
 set sessionoptions=blank,curdir,help,terminal,tabpages
+
+" time
+set timeout ttimeout
+set timeoutlen=300   " Time out on mappings
+set ttimeoutlen=10   " Time out on key codes
+set updatetime=200   " Idle time to write swap and trigger CursorHold
 
 " undo
 set undofile
