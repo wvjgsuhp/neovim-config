@@ -12,7 +12,12 @@ return {
 
   "tpope/vim-repeat",
   "tpope/vim-surround",
-  "nullchilly/fsread.nvim",
+  {
+    "nullchilly/fsread.nvim",
+    keys = {
+      { "<Leader>br", "<cmd>FSToggle<CR>" },
+    },
+  },
   {
     "tpope/vim-fugitive",
     config = function()
@@ -27,6 +32,7 @@ return {
     config = function()
       vim.g.vmt_auto_update_on_save = 0
     end,
+    ft = { "md" },
   },
   {
     "folke/which-key.nvim",

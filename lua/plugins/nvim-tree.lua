@@ -95,7 +95,11 @@ return {
     })
   end,
   keys = {
-    { "<Leader>e", "<cmd>NvimTreeToggle .<bar>NvimTreeResize 34<cr>" },
-    { "<Leader>fe", "<cmd>NvimTreeFindFile<bar>NvimTreeResize 34<bar>NvimTreeFocus<cr>" },
+    { "<Leader>e", "<cmd>NvimTreeToggle .<bar>NvimTreeResize 34<cr>", desc = "Toggle explorer" },
+    {
+      "<Leader>fe",
+      "<cmd>NvimTreeFindFile<bar>NvimTreeResize 34<bar>NvimTreeFocus<cr>",
+      desc = "Find the current buffer in explorer",
+    },
   },
 }

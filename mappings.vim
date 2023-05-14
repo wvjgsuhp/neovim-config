@@ -124,3 +124,6 @@ nmap <Leader>mj <cmd>sp<bar>execute 'edit'
 nnoremap <Leader>cc <cmd>cclose<cr>
 autocmd FileType lazy,help,NvimTree,checkhealth nnoremap <buffer> <esc> <cmd>q<cr>
 autocmd FileType lazy,help,NvimTree,checkhealth nmap <buffer> q <esc>
+
+" override defaults
+nnoremap s <Nop>

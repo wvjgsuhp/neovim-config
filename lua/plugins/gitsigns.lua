@@ -2,7 +2,6 @@ local utils = require("utils")
 
 return {
   "lewis6991/gitsigns.nvim",
-  events = { "BufEnter", "BufNew" },
   config = function()
     -- plugin: gitsigns.nvim
     -- see: https://github.com/lewis6991/gitsigns.nvim

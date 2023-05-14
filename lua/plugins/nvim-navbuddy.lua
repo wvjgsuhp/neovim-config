@@ -1,6 +1,6 @@
 return {
   "SmiteshP/nvim-navbuddy",
-  depedencies = { "MunifTanjim/nui.nvim" },
+  dependencies = { "MunifTanjim/nui.nvim" },
   config = function()
     require("nvim-navbuddy").setup({
       window = {

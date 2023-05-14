@@ -8,12 +8,12 @@ return {
     local cb = require("diffview.config").diffview_callback
 
     vim.cmd([[
-    augroup diffview_cursorline
-      autocmd!
-      autocmd WinEnter,BufEnter diffview://* setlocal cursorline
-      autocmd WinEnter,BufEnter diffview:///panels/* setlocal winhighlight=CursorLine:WildMenu
-    augroup END
-  ]])
+      augroup diffview_cursorline
+        autocmd!
+        autocmd WinEnter,BufEnter diffview://* setlocal cursorline
+        autocmd WinEnter,BufEnter diffview:///panels/* setlocal winhighlight=CursorLine:WildMenu
+      augroup END
+    ]])
 
     require("diffview").setup({
       enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'

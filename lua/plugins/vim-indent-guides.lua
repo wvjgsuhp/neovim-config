@@ -1,6 +1,5 @@
 return {
   "nathanaelkane/vim-indent-guides",
-  -- build = ":IndentGuidesEnable",
   config = function()
     vim.g.indent_guides_enable_on_vim_startup = 0
     vim.g.indent_guides_default_mapping = 0
@@ -11,12 +10,12 @@ return {
       "fzf",
       "help",
       "lazy",
-      "which-key",
       "lsp-hover",
       "lsp-quickpick-filter",
       "lspinfo",
       "man",
       "quickpick-filter",
+      "WhichKey",
     }
     vim.cmd([[
       augroup user_plugin_indentguides

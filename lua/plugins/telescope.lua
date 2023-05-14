@@ -308,11 +308,11 @@ return {
     -- Telescope extensions are loaded in each plugin.
   end,
   keys = {
-    { "<Leader>ff", "<cmd>Telescope find_files<cr>" },
-    { "<c-o>", "<cmd>Telescope find_files<cr>" },
-    { "<Leader>fg", "<cmd>Telescope live_grep<CR>" },
-    { "<c-f>", "<cmd>Telescope live_grep<CR>" },
-    { "<Leader>fz", "<cmd>Telescope grep_string<CR>" },
-    { "<Leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<CR>" },
+    { "<Leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+    { "<c-o>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+    { "<Leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Find words" },
+    { "<c-f>", "<cmd>Telescope live_grep<CR>", desc = "Find words" },
+    { "<Leader>fz", "<cmd>Telescope grep_string<CR>", desc = "Fuzzy find words" },
+    { "<Leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy find words" },
   },
 }
