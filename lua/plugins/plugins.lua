@@ -15,12 +15,12 @@ return {
   "nullchilly/fsread.nvim",
   {
     "tpope/vim-fugitive",
-    keys = {
-      { "<Leader>gs", "<cmd>G status<CR>" },
-      { "<Leader>gp", "<cmd>G push<CR>" },
-      { "<Leader>gac", ":G commit -am ''<Left>", remap = true },
-      { "<Leader>gaa", "<cmd>G add .<CR>" },
-    },
+    config = function()
+      utils.noremap("n", "<Leader>gs", "<cmd>G status<CR>")
+      utils.noremap("n", "<Leader>gp", "<cmd>G push<CR>")
+      utils.map("n", "<Leader>gac", ":G commit -am ''<Left>")
+      utils.noremap("n", "<Leader>gaa", "<cmd>G add .<CR>")
+    end,
   },
   {
     "mzlogin/vim-markdown-toc",
@@ -74,6 +74,13 @@ return {
   -- completion and code analysis
 
   "folke/neodev.nvim",
+  {
+    "folke/trouble.nvim",
+    keys = {
+      { "<Leader>dd", "<cmd>Trouble document_diagnostics<cr>", desc = "Diagnose the current buffer" },
+      { "<Leader>dw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Diagnose the current workspace" },
+    },
+  },
   {
     "williamboman/mason.nvim",
     config = function()
@@ -161,10 +168,10 @@ return {
       require("hop").setup()
     end,
     keys = {
-      { "<Leader>fw", "<cmd>HopWord<cr>" },
-      { "<Leader>fa", "<cmd>HopAnywhere<cr>" },
-      { "<Leader>fl", "<cmd>HopLine<cr>" },
-      { "<Leader>fc", "<cmd>HopChar1<cr>" },
+      { "<Leader>fw", "<cmd>HopWord<cr>", desc = "Jump to a word" },
+      { "<Leader>fa", "<cmd>HopAnywhere<cr>", desc = "Jump anywhere" },
+      { "<Leader>fl", "<cmd>HopLine<cr>", desc = "Jump to a line" },
+      { "<Leader>fc", "<cmd>HopChar1<cr>", desc = "Jump to a character" },
     },
   },
 
