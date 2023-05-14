@@ -54,7 +54,7 @@ M.get_winbar = function()
       vim.bo.filetype,
     })
   elseif winbar_filetype_exclude[vim.bo.filetype] then
-    return "%{%v:lua.status.active_indicator()%}"
+    return M.active_indicator()
   else
     -- real files do not have buftypes
     if isempty(vim.bo.buftype) then
@@ -78,6 +78,7 @@ M.get_statusline = function()
   local mode = M.get_mode()
   local mode_color = M.get_mode_colors(mode)
 
+  local relative_path_part = M.get_relative_path_part()
   local lines_columns = " %3l/%L󰉸 %3c󰤼 %*"
 
   if is_current() then
@@ -91,7 +92,7 @@ M.get_statusline = function()
       -- middle
       mode_color["c"],
       "%<",
-      " %f %{IsBuffersModified()}",
+      relative_path_part,
 
       -- right
       "%=",
@@ -107,7 +108,7 @@ M.get_statusline = function()
     local parts = {
       mode_color["inactive"],
       "%<",
-      " %f %{IsBuffersModified()}",
+      relative_path_part,
       "%=",
       lines_columns,
     }
@@ -302,7 +303,7 @@ M.get_diag_counts = function()
 end
 
 M.get_git_branch = function()
-  local branch = vim.b.git_branch
+  local branch = vim.fn.FugitiveStatusline():sub(6, -3)
   if isempty(branch) then
     return ""
   else
@@ -361,6 +362,10 @@ M.get_recording = function()
   end
 end
 
+M.get_relative_path_part = function()
+  return " %f %{IsBuffersModified()}"
+end
+
 M.get_mode = function()
   if not is_current() then
     --return "%#WinBarInactive# win #" .. vim.fn.winnr() .. " %*"
@@ -399,15 +404,6 @@ M.paint = function(text, color)
 end
 
 vim.cmd([[
-  function! GitBranch()
-    return trim(system("git -C " . getcwd() . " branch --show-current 2>/dev/null"))
-  endfunction
-
-  augroup lines_git_branch
-    autocmd!
-    autocmd BufEnter * let b:git_branch = GitBranch()
-  augroup END
-
   " [+] if only current modified, [+3] if 3 modified including current buffer.
   " [3] if 3 modified and current not, "" if none modified.
   function! IsBuffersModified()
