@@ -403,7 +403,7 @@ vim.cmd([[
     return trim(system("git -C " . getcwd() . " branch --show-current 2>/dev/null"))
   endfunction
 
-  augroup GitBranchGroup
+  augroup lines_git_branch
     autocmd!
     autocmd BufEnter * let b:git_branch = GitBranch()
   augroup END

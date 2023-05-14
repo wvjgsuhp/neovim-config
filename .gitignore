@@ -8,3 +8,4 @@
 /.stversions
 .session.vim
 NUL
+*.log

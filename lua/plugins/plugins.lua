@@ -15,12 +15,12 @@ return {
   "nullchilly/fsread.nvim",
   {
     "tpope/vim-fugitive",
-    config = function()
-      utils.noremap("n", "<Leader>gs", "<cmd>G status<CR>")
-      utils.noremap("n", "<Leader>gp", "<cmd>G push<CR>")
-      utils.map("n", "<Leader>gac", ":G commit -am ''<Left>")
-      utils.noremap("n", "<Leader>gaa", "<cmd>G add .<CR>")
-    end,
+    keys = {
+      { "<Leader>gs", "<cmd>G status<CR>" },
+      { "<Leader>gp", "<cmd>G push<CR>" },
+      { "<Leader>gac", ":G commit -am ''<Left>", remap = true },
+      { "<Leader>gaa", "<cmd>G add .<CR>" },
+    },
   },
   {
     "mzlogin/vim-markdown-toc",
@@ -28,19 +28,43 @@ return {
       vim.g.vmt_auto_update_on_save = 0
     end,
   },
+  {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup({ window = { border = "rounded" } })
+      utils.noremap("n", "<Leader>k", "<cmd>WhichKey<cr>")
+    end,
+  },
+  {
+    "nvim-telescope/telescope-ui-select.nvim",
+    config = function()
+      require("telescope").load_extension("ui-select")
+    end,
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    config = function()
+      require("telescope").load_extension("fzf")
+    end,
+  },
 
   -- interface
+
   "MunifTanjim/nui.nvim",
   "lilydjwg/colorizer",
   "romainl/vim-cool",
-  -- - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> } }
   {
     "rhysd/accelerated-jk",
-    config = function()
-      utils.noremap("n", "j", "<Plug>(accelerated_jk_gj)zz")
-      utils.noremap("n", "k", "<Plug>(accelerated_jk_gk)zz")
-    end,
+    keys = {
+      { "j", "<Plug>(accelerated_jk_gj)zz" },
+      { "k", "<Plug>(accelerated_jk_gk)zz" },
+    },
   },
+
+  -- - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> } }
   -- - { repo: t9md/vim-quickhl, on_map: { nx: <Plug> } }
 
   -- - repo: deris/vim-shot-f
@@ -50,9 +74,14 @@ return {
   -- completion and code analysis
 
   "folke/neodev.nvim",
-
-  -- - { repo: rafamadriz/friendly-snippets, merged: 0, on_source: vim-vsnip }
-
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup({
+        ui = { border = "rounded" },
+      })
+    end,
+  },
   {
     "windwp/nvim-autopairs",
     config = function()
@@ -60,31 +89,16 @@ return {
     end,
   },
 
+  -- - { repo: rafamadriz/friendly-snippets, merged: 0, on_source: vim-vsnip }
+
   -- - repo: folke/todo-comments.nvim
   --   if: has('nvim-0.5')
   --   on_source: [telescope.nvim, neovim/nvim-lspconfig]
   --   hook_post_source: lua require('plugins.todo-comments')
 
-  "folke/trouble.nvim",
-
   --   if: has('nvim-0.5')
   --   on_cmd: [DiffviewOpen, DiffviewFileHistory]
   --   hook_post_source: lua require('plugins.diffview').setup()
-
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    config = function()
-      require("telescope").load_extension("ui-select")
-    end,
-  },
-
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end,
-  },
 
   -- - repo: mattn/emmet-vim
   --   on_event: InsertEnter
@@ -96,7 +110,8 @@ return {
   --     let g:user_emmet_complete_tag = 0
 
   -- syntax
-  --
+
+  "tpope/vim-sleuth",
 
   -- - repo: windwp/nvim-ts-autotag
   --   on_source: nvim-treesitter
@@ -139,19 +154,18 @@ return {
   --       \ 'py=python'
   --       \ ]
 
-  "tpope/vim-sleuth",
-
   -- operators and text objects
   {
     "phaazon/hop.nvim",
     config = function()
       require("hop").setup()
-
-      utils.noremap("n", "<Leader>fw", "<cmd>HopWord<cr>")
-      utils.noremap("n", "<Leader>fa", "<cmd>HopAnywhere<cr>")
-      utils.noremap("n", "<Leader>fl", "<cmd>HopLine<cr>")
-      utils.noremap("", "<Leader>fc", "<cmd>HopChar1<cr>")
     end,
+    keys = {
+      { "<Leader>fw", "<cmd>HopWord<cr>" },
+      { "<Leader>fa", "<cmd>HopAnywhere<cr>" },
+      { "<Leader>fl", "<cmd>HopLine<cr>" },
+      { "<Leader>fc", "<cmd>HopChar1<cr>" },
+    },
   },
 
   -- buffer

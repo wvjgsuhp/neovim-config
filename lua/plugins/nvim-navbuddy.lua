@@ -33,8 +33,8 @@ return {
         preference = nil, -- list of lsp server names in order of preference
       },
     })
-
-    local utils = require("utils")
-    utils.noremap("n", "<Leader>fn", "<cmd>Navbuddy<cr>")
   end,
+  keys = {
+    { "<Leader>fn", "<cmd>Navbuddy<cr>" },
+  },
 }

@@ -5,7 +5,7 @@ local utils = {}
 ---@param shortcut string
 ---@param command string
 function utils.noremap(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+  vim.keymap.set(mode, shortcut, command, { remap = false, silent = true })
 end
 
 ---vim noremap
@@ -13,7 +13,7 @@ end
 ---@param shortcut string
 ---@param command string
 function utils.map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = false, silent = true })
+  vim.keymap.set(mode, shortcut, command, { remap = true, silent = true })
 end
 
 return utils

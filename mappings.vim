@@ -1,5 +1,10 @@
 let mapleader=' '
 
+" move between open and close brackets
+nnoremap <backspace> %
+vnoremap <backspace> %
+onoremap <backspace> %
+
 " Folding
 nnoremap <Leader><Leader> za
 

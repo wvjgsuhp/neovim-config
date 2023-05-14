@@ -1,11 +1,9 @@
 colorscheme github
 
-" set clipboard+=unnamedplus      " Yank without explicit registration
 set number                      " Show current line number
 set relativenumber              " Show relative line numbers
 set foldmethod=expr
 set mouse=nv                    " Disable mouse in command-line mode
-" set report=2                    " Report on line changes
 set errorbells                  " Trigger bell on error
 set visualbell                  " Use visual bell instead of beeping
 set hidden                      " hide buffers when abandoned instead of unload

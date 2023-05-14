@@ -27,9 +27,9 @@ return {
         },
       },
     })
-
-    local utils = require("utils")
-    utils.noremap("n", ":", "<cmd>FineCmdline<CR>")
-    utils.noremap("x", ":", "<cmd>FineCmdline '<,'><CR>")
   end,
+  keys = {
+    { ":", "<cmd>FineCmdline<CR>" },
+    { ":", "<cmd>FineCmdline '<,'><CR>", mode = "x" },
+  },
 }

@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -44,13 +46,12 @@ return {
       map_buf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
       map_buf("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
       map_buf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-      map_buf("n", ",s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
       map_buf("n", ",wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
       map_buf("n", ",wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
       map_buf("n", ",wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
       map_buf("n", ",rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-      map_buf("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-      map_buf("n", "<Leader>ce", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+      map_buf("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+      map_buf("n", "<Leader>dp", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 
       -- Set some keybinds conditional on server capabilities
       if client.supports_method("textDocument/formatting") then
@@ -73,10 +74,10 @@ return {
       if client.supports_method("textDocument/documentHighlight") then
         vim.api.nvim_exec(
           [[augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END]],
+            autocmd! * <buffer>
+            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+          augroup END]],
           false
         )
       end
@@ -93,12 +94,6 @@ return {
       c.on_attach = on_attach
       local cap = vim.lsp.protocol.make_client_capabilities()
       c.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
-
-      -- ufo
-      -- c.capabilities.textDocument.foldingRange = {
-      --   dynamicRegistration = false,
-      --   lineFoldingOnly = true,
-      -- }
 
       -- user-defined lsp settings
       local exists, user_config = pcall(require, "lsp." .. server_name)
@@ -181,13 +176,9 @@ return {
       lspconfig.r_language_server.setup({})
 
       -- global custom location-list diagnostics window toggle.
-      local args = { noremap = true, silent = true }
-      local function nmap(lhs, rhs)
-        vim.api.nvim_set_keymap("n", lhs, rhs, args)
-      end
-      nmap("<Leader>a", '<cmd>lua require("user").diagnostic.publish_loclist(true)<CR>')
-      nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-      nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
+      -- utils.noremap("n", "<Leader>a", '<cmd>lua require("user").diagnostic.publish_loclist(true)<CR>')
+      utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+      utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 
       require("nvim-lightbulb").setup({ ignore = { "null-ls" } })
 

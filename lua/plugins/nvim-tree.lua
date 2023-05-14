@@ -93,9 +93,9 @@ return {
         dotfiles = true,
       },
     })
-
-    local utils = require("utils")
-    utils.noremap("n", "<Leader>e", "<cmd>NvimTreeToggle .<bar>NvimTreeResize 34<cr>")
-    utils.noremap("n", "<Leader>fe", "<cmd>NvimTreeFindFile<bar>NvimTreeResize 34<bar>NvimTreeFocus<cr>")
   end,
+  keys = {
+    { "<Leader>e", "<cmd>NvimTreeToggle .<bar>NvimTreeResize 34<cr>" },
+    { "<Leader>fe", "<cmd>NvimTreeFindFile<bar>NvimTreeResize 34<bar>NvimTreeFocus<cr>" },
+  },
 }
