@@ -36,5 +36,4 @@ return {
       augroup END
     ]])
   end,
-  event = { "BufWritePre" },
 }

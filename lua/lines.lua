@@ -363,7 +363,28 @@ M.get_recording = function()
 end
 
 M.get_relative_path_part = function()
-  return " %f %{IsBuffersModified()}"
+  if vim.bo.buftype == "terminal" then
+    return " terminal"
+  elseif vim.bo.buftype == "nofile" then
+    return " " .. vim.bo.filetype
+  end
+
+  local file = " %f "
+
+  local is_modifiable = vim.api.nvim_buf_get_option(0, "modifiable")
+  if vim.bo.readonly or not is_modifiable then
+    local color = ""
+    if is_current() then
+      color = "%#StatusLineRO#"
+    end
+    return color .. file .. ""
+  end
+
+  local is_modified = vim.api.nvim_buf_get_option(0, "modified")
+  if is_modified then
+    return file .. "[+]"
+  end
+  return file:sub(1, -1)
 end
 
 M.get_mode = function()
@@ -402,15 +423,6 @@ M.paint = function(text, color)
 
   return color .. text .. "%*"
 end
-
-vim.cmd([[
-  " [+] if only current modified, [+3] if 3 modified including current buffer.
-  " [3] if 3 modified and current not, "" if none modified.
-  function! IsBuffersModified()
-    let cnt = len(filter(getbufinfo(), 'v:val.changed == 1'))
-    return cnt == 0 ? "" : ( &modified ? "[+". (cnt>1?cnt:"") ."]" : "[".cnt."]" )
-  endfunction
-]])
 
 _G.status = M
 vim.o.winbar = "%{%v:lua.status.get_winbar()%}"

@@ -108,6 +108,7 @@ hi StatusLineV1         ctermfg=188   ctermbg=91  guifg=#dddddd guibg=#6f42c1 gu
 hi StatusLineV2         ctermfg=188   ctermbg=237 guifg=#dddddd guibg=#45267d gui=none cterm=none
 hi StatusLineR1         ctermfg=188   ctermbg=167 guifg=#dddddd guibg=#d73a49 gui=none cterm=none
 hi StatusLineR2         ctermfg=188   ctermbg=124 guifg=#dddddd guibg=#b31d28 gui=none cterm=none
+hi StatusLineRO         ctermfg=167   ctermbg=188 guifg=#ff0000 guibg=#dddddd gui=none cterm=none
 hi StatusLineError      guibg=#dddddd guifg=#ff0000
 hi StatusLineInfo       guibg=#dddddd guifg=#87d7ff
 hi StatusLineHint       guibg=#dddddd guifg=#ffffd7
