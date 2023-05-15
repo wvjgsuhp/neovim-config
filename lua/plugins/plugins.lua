@@ -174,10 +174,10 @@ return {
       require("hop").setup()
     end,
     keys = {
-      { "<Leader>fw", "<cmd>HopWord<cr>", desc = "Jump to a word" },
-      { "<Leader>fa", "<cmd>HopAnywhere<cr>", desc = "Jump anywhere" },
-      { "<Leader>fl", "<cmd>HopLine<cr>", desc = "Jump to a line" },
-      { "<Leader>fc", "<cmd>HopChar1<cr>", desc = "Jump to a character" },
+      { "<Leader>fw", "<cmd>HopWord<cr>", mode = { "n", "v", "o" }, desc = "Jump to a word" },
+      { "<Leader>fa", "<cmd>HopAnywhere<cr>", mode = { "n", "v", "o" }, desc = "Jump anywhere" },
+      { "<Leader>fl", "<cmd>HopLine<cr>", mode = { "n", "v", "o" }, desc = "Jump to a line" },
+      { "<Leader>fc", "<cmd>HopChar1<cr>", mode = { "n", "v", "o" }, desc = "Jump to a character" },
     },
   },
 

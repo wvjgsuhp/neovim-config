@@ -112,7 +112,7 @@ hi StatusLineRO         ctermfg=167   ctermbg=188 guifg=#ff0000 guibg=#dddddd gu
 hi StatusLineError      guibg=#dddddd guifg=#ff0000
 hi StatusLineInfo       guibg=#dddddd guifg=#87d7ff
 hi StatusLineHint       guibg=#dddddd guifg=#ffffd7
-hi StatusLineWarn       guibg=#dddddd guifg=#fcaf3e
+hi StatusLineWarn       guibg=#dddddd guifg=#ef5939
 hi StatusLineChanges    guibg=#dddddd guifg=#6f42c1
 hi StatusLineInactive   guifg=#404040 guibg=#d4d4d4
 

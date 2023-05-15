@@ -157,6 +157,7 @@ return {
       local servers = {
         "lua_ls",
         "tsserver",
+        "r_language_server",
         --"omnisharp",
         -- "gopls",
         --"graphql",
@@ -173,7 +174,7 @@ return {
         lspconfig[server].setup(opts)
       end
 
-      lspconfig.r_language_server.setup({})
+      -- lspconfig.r_language_server.setup({})
 
       -- global custom location-list diagnostics window toggle.
       -- utils.noremap("n", "<Leader>a", '<cmd>lua require("user").diagnostic.publish_loclist(true)<CR>')

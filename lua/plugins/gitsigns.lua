@@ -42,6 +42,6 @@ return {
       },
     })
 
-    utils.noremap("n", "<Leader>gh", "<cmd>Gitsigns next_hunk<CR>zz")
+    utils.noremap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zz")
   end,
 }

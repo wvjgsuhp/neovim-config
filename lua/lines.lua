@@ -14,21 +14,8 @@ local is_current = function()
   end
 end
 
--- stylua: ignore
 local winbar_filetype_exclude = {
-  [""]              = true,
-  ["NvimTree"]      = true,
-  ["Outline"]       = true,
-  ["Trouble"]       = true,
-  ["alpha"]         = true,
-  ["dashboard"]     = true,
-  ["lir"]           = true,
-  ["neo-tree"]      = true,
-  ["neogitstatus"]  = true,
-  ["packer"]        = true,
-  ["spectre_panel"] = true,
-  ["startify"]      = true,
-  ["toggleterm"]    = true,
+  [""] = true,
 }
 
 M.get_winbar = function()
@@ -44,14 +31,13 @@ M.get_winbar = function()
     return table.concat({
       mode_part,
       M.get_icon(),
-      "TERMINAL #%n %#WinBarLocation# %{b:term_title}%*",
+      " TERMINAL #%n %#WinBarLocation# %{b:term_title}%*",
     })
   elseif vim.bo.buftype == "nofile" then
     return table.concat({
       mode_part,
-      -- M.get_icon(),
-      " ",
-      vim.bo.filetype,
+      M.get_icon(),
+      " " .. vim.bo.filetype,
     })
   elseif winbar_filetype_exclude[vim.bo.filetype] then
     return M.active_indicator()
@@ -78,7 +64,7 @@ M.get_statusline = function()
   local mode = M.get_mode()
   local mode_color = M.get_mode_colors(mode)
 
-  local relative_path_part = M.get_relative_path_part()
+  local relative_path = M.get_relative_path()
   local lines_columns = " %3l/%L󰉸 %3c󰤼 %*"
 
   if is_current() then
@@ -89,15 +75,20 @@ M.get_statusline = function()
       mode_color["b"],
       M.get_recording(),
 
-      -- middle
+      -- middle-left
       mode_color["c"],
       "%<",
-      relative_path_part,
+      relative_path,
 
-      -- right
+      -- middle-right
       "%=",
       M.get_diag_counts(),
       M.get_git_changes(),
+      mode_color["c"],
+      M.get_language_servers(),
+      " ",
+
+      -- right
       mode_color["b"],
       os.date(" %H:%M "),
       mode_color["a"],
@@ -108,7 +99,7 @@ M.get_statusline = function()
     local parts = {
       mode_color["inactive"],
       "%<",
-      relative_path_part,
+      relative_path,
       "%=",
       lines_columns,
     }
@@ -166,32 +157,46 @@ M.active_indicator = function()
     return ""
   end
 end
-local icon_cache = {}
 
-M.get_icon = function(filename, extension)
-  if not filename then
+-- stylua: ignore
+local cache_icons = {
+  -- custom icons here
+  NvimTree  = "󰙅 ",
+  terminal  = "",
+  Trouble   = "",
+  r         = "󰟔 ",
+}
+
+M.get_icon = function()
+  local buftype = vim.bo.buftype
+  local filetype = vim.bo.filetype
+
+  if isempty(buftype) then
     if vim.bo.modified then
       return " %#WinBarModified# %*"
     end
 
-    if vim.bo.buftype == "terminal" then
-      filename = "terminal"
-      extension = "terminal"
-    else
-      filename = vim.fn.expand("%:t")
+    local icon = cache_icons[filetype]
+    if not icon then
+      local filename = vim.fn.expand("%:t")
+      local extension = vim.fn.fnamemodify(filename, ":e")
+      local file_icon, hl_group = require("nvim-web-devicons").get_icon(filename, extension)
+      icon = " " .. "%#" .. hl_group .. "#" .. file_icon .. " %*"
+      cache_icons[filename] = icon
+
+      return icon
     end
   end
 
-  local cached = icon_cache[filename]
-  if not cached then
-    if not extension then
-      extension = vim.fn.fnamemodify(filename, ":e")
-    end
-    local file_icon, hl_group = require("nvim-web-devicons").get_icon(filename, extension)
-    cached = " " .. "%#" .. hl_group .. "#" .. file_icon .. " %*"
-    icon_cache[filename] = cached
+  if buftype == "terminal" then
+    return " " .. cache_icons.terminal
   end
-  return cached
+
+  local icon = cache_icons[filetype]
+  if not icon then
+    return ""
+  end
+  return " " .. icon
 end
 
 M.get_filename = function()
@@ -316,7 +321,7 @@ M.get_git_changes = function()
   if isempty(changes) then
     return ""
   else
-    return "%#StatusLineChanges#" .. changes .. " %*"
+    return "%#StatusLineChanges#" .. changes .. "%*"
   end
 end
 
@@ -362,7 +367,7 @@ M.get_recording = function()
   end
 end
 
-M.get_relative_path_part = function()
+M.get_relative_path = function()
   if vim.bo.buftype == "terminal" then
     return " terminal"
   elseif vim.bo.buftype == "nofile" then
@@ -387,6 +392,20 @@ M.get_relative_path_part = function()
   return file:sub(1, -1)
 end
 
+M.get_language_servers = function()
+  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local servers = {}
+  for _, client in ipairs(clients) do
+    table.insert(servers, client.name)
+  end
+
+  if #servers > 0 then
+    return "   " .. table.concat(servers, ", ")
+  end
+
+  return ""
+end
+
 M.get_mode = function()
   if not is_current() then
     --return "%#WinBarInactive# win #" .. vim.fn.winnr() .. " %*"
@@ -408,7 +427,7 @@ end
 
 M.get_mode_part = function()
   local mode = M.get_mode()
-  if string.len(mode) > 1 then
+  if mode:len() > 1 then
     return mode
   end
 
