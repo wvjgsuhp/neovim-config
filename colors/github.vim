@@ -114,6 +114,9 @@ hi StatusLineInfo       guibg=#dddddd guifg=#87d7ff
 hi StatusLineHint       guibg=#dddddd guifg=#ffffd7
 hi StatusLineWarn       guibg=#dddddd guifg=#ef5939
 hi StatusLineChanges    guibg=#dddddd guifg=#6f42c1
+hi StatusLineGitAdded   guibg=#dddddd guifg=#159828
+hi StatusLineGitRemoved guibg=#dddddd guifg=#ef5939
+hi StatusLineGitChanged guibg=#dddddd guifg=#6f42c1
 hi StatusLineInactive   guifg=#404040 guibg=#d4d4d4
 
 hi WinBar           guifg=#959595 gui=bold

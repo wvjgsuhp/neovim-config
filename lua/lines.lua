@@ -1,5 +1,6 @@
 -- https://www.reddit.com/r/neovim/comments/vpxexc/pde_custom_winbar_and_statusline_without_plugins/
 local M = {}
+local utils = require("utils")
 
 local isempty = function(s)
   return s == nil or s == ""
@@ -79,11 +80,12 @@ M.get_statusline = function()
       mode_color["c"],
       "%<",
       relative_path,
+      M.get_diag_counts(),
+      M.get_git_changes(),
+      mode_color["c"],
 
       -- middle-right
       "%=",
-      M.get_diag_counts(),
-      M.get_git_changes(),
       mode_color["c"],
       M.get_language_servers(),
       " ",
@@ -316,13 +318,22 @@ M.get_git_branch = function()
   end
 end
 
+local git_changes = { added = "+", removed = "-", changed = "~" }
+local use_git_changes = { "added", "removed", "changed" }
 M.get_git_changes = function()
-  local changes = vim.b.gitsigns_status
-  if isempty(changes) then
-    return ""
-  else
-    return "%#StatusLineChanges#" .. changes .. "%*"
+  local changes = ""
+  if not isempty(vim.b.gitsigns_status_dict) then
+    for _, change in pairs(use_git_changes) do
+      local sign = git_changes[change]
+      local change_count = vim.b.gitsigns_status_dict[change]
+      if change_count and change_count > 0 then
+        local hl = " %#StatusLineGit" .. utils.capitalize(change) .. "#"
+        changes = changes .. hl .. sign .. tostring(change_count)
+      end
+    end
   end
+
+  return changes
 end
 
 M.get_git_dirty = function()
@@ -374,7 +385,7 @@ M.get_relative_path = function()
     return " " .. vim.bo.filetype
   end
 
-  local file = " %f "
+  local file = " %f"
 
   local is_modifiable = vim.api.nvim_buf_get_option(0, "modifiable")
   if vim.bo.readonly or not is_modifiable then
@@ -382,12 +393,12 @@ M.get_relative_path = function()
     if is_current() then
       color = "%#StatusLineRO#"
     end
-    return color .. file .. ""
+    return color .. file .. " "
   end
 
   local is_modified = vim.api.nvim_buf_get_option(0, "modified")
   if is_modified then
-    return file .. "[+]"
+    return file .. " [+]"
   end
   return file:sub(1, -1)
 end
@@ -408,7 +419,6 @@ end
 
 M.get_mode = function()
   if not is_current() then
-    --return "%#WinBarInactive# win #" .. vim.fn.winnr() .. " %*"
     return "%#StatusLineInactive# " .. vim.fn.winnr() .. " %*"
   end
   local mode_code = vim.api.nvim_get_mode().mode
