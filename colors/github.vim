@@ -37,39 +37,39 @@ hi ColorColumn  ctermbg=254 guibg=#e4e4e4
 
 if version >= 700
   hi CursorLine ctermbg=253 guibg=#D8D8DD
-  hi MatchParen ctermfg=0 ctermbg=252 guifg=#000000 guibg=#cdcdfd
-  hi Pmenu        ctermfg=15 ctermbg=8 guifg=#ffffff guibg=#808080 gui=bold   cterm=bold
-  hi PmenuSel     ctermfg=0 ctermbg=252 guifg=#000000 guibg=#cdcdfd  gui=italic cterm=italic
-  hi PmenuSbar    ctermfg=238 ctermbg=0 guifg=#444444 guibg=#000000
-  hi PmenuThumb   ctermfg=248 ctermbg=248 guifg=#aaaaaa guibg=#aaaaaa
+  hi MatchParen ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
+  hi Pmenu      ctermfg=15  ctermbg=8   guifg=#ffffff guibg=#808080 gui=bold   cterm=bold
+  hi PmenuSel   ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd gui=italic cterm=italic
+  hi PmenuSbar  ctermfg=238 ctermbg=0   guifg=#444444 guibg=#000000
+  hi PmenuThumb ctermfg=248 ctermbg=248 guifg=#aaaaaa guibg=#aaaaaa
 endif
 
-hi DiffAdd    ctermfg=233 ctermbg=194 guifg=#003300 guibg=#DDFFDD gui=none cterm=none
-hi DiffChange ctermbg=255  guibg=#ececec gui=none   cterm=none
-hi DiffText   ctermfg=233  ctermbg=189  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
-hi DiffDelete ctermfg=252 ctermbg=224   guifg=#DDCCCC guibg=#FFDDDD gui=none    cterm=none
+hi DiffAdd    ctermfg=233 ctermbg=194   guifg=#003300 guibg=#DDFFDD gui=none  cterm=none
+hi DiffChange ctermbg=255 guibg=#ececec gui=none      cterm=none
+hi DiffText   ctermfg=233 ctermbg=189   guifg=#000033 guibg=#DDDDFF gui=none  cterm=none
+hi DiffDelete ctermfg=252 ctermbg=224   guifg=#DDCCCC guibg=#FFDDDD gui=none  cterm=none
 
-hi Ignore   ctermfg=8 guifg=#808080
-hi Identifier   ctermfg=31 guifg=#0086B3
-hi PreProc  ctermfg=247 guifg=#A0A0A0 gui=bold cterm=bold
-hi Comment  ctermfg=246 guifg=#999988
-hi Constant ctermfg=6 guifg=#177F80 gui=none cterm=none
-hi String   ctermfg=161 guifg=#D81745
-hi Function ctermfg=88 guifg=#990000 gui=bold cterm=bold
-hi Statement    ctermfg=0 guifg=#000000 gui=bold cterm=bold
-hi Type     ctermfg=60 guifg=#445588 gui=bold   cterm=bold
-hi Number   ctermfg=30 guifg=#1C9898
-hi Todo     ctermfg=15 ctermbg=88 guifg=#FFFFFF guibg=#990000 gui=bold cterm=bold
-hi Special  ctermfg=28 guifg=#159828 gui=bold   cterm=bold
-hi Todo         ctermbg=15 ctermfg=196 guibg=#f8f8ff guifg=#ff1100 gui=underline cterm=underline
-hi Label        ctermfg=0 guifg=#000000 gui=bold    cterm=bold
-hi StorageClass ctermfg=0 guifg=#000000 gui=bold    cterm=bold
-hi Structure    ctermfg=0 guifg=#000000 gui=bold    cterm=bold
-hi TypeDef      ctermfg=0 guifg=#000000 gui=bold    cterm=bold
+hi Ignore       ctermfg=8   guifg=#808080
+hi Identifier   ctermfg=31  guifg=#0086B3
+hi PreProc      ctermfg=247 guifg=#A0A0A0 gui=bold      cterm=bold
+hi Comment      ctermfg=246 guifg=#999988
+hi Constant     ctermfg=6   guifg=#177F80 gui=none      cterm=none
+hi String       ctermfg=161 guifg=#D81745
+hi Function     ctermfg=88  guifg=#990000 gui=bold      cterm=bold
+hi Statement    ctermfg=0   guifg=#000000 gui=bold      cterm=bold
+hi Type         ctermfg=60  guifg=#445588 gui=bold      cterm=bold
+hi Number       ctermfg=30  guifg=#1C9898
+hi Todo         ctermfg=15  ctermbg=88    guifg=#FFFFFF guibg=#990000 gui=bold      cterm=bold
+hi Special      ctermfg=28  guifg=#159828 gui=bold      cterm=bold
+hi Todo         ctermbg=15  ctermfg=196   guibg=#f8f8ff guifg=#ff1100 gui=underline cterm=underline
+hi Label        ctermfg=0   guifg=#000000 gui=bold      cterm=bold
+hi StorageClass ctermfg=0   guifg=#000000 gui=bold      cterm=bold
+hi Structure    ctermfg=0   guifg=#000000 gui=bold      cterm=bold
+hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 
-hi! link FoldColumn Folded
-hi! link CursorColumn   CursorLine
-hi! link NonText    LineNr
+hi! link FoldColumn   Folded
+hi! link CursorColumn CursorLine
+hi! link NonText      LineNr
 
 hi link cppSTL          Function
 hi link cppSTLType      Type
@@ -111,7 +111,7 @@ hi StatusLineR2         ctermfg=188   ctermbg=124 guifg=#dddddd guibg=#b31d28 gu
 hi StatusLineRO         ctermfg=167   ctermbg=188 guifg=#ff0000 guibg=#dddddd gui=none cterm=none
 hi StatusLineError      guibg=#dddddd guifg=#ff0000
 hi StatusLineInfo       guibg=#dddddd guifg=#87d7ff
-hi StatusLineHint       guibg=#dddddd guifg=#ffffd7
+hi StatusLineHint       guibg=#dddddd guifg=#888888
 hi StatusLineWarn       guibg=#dddddd guifg=#ef5939
 hi StatusLineChanges    guibg=#dddddd guifg=#6f42c1
 hi StatusLineGitAdded   guibg=#dddddd guifg=#159828
@@ -125,6 +125,7 @@ hi WinBarLocation   guifg=#888888 gui=bold
 hi WinBarModified   guifg=#d7d787 gui=bold
 hi WinBarGitDirty   guifg=#d7afd7 gui=bold
 hi WinBarIndicator  guifg=#5fafd7 gui=bold
+hi WinBarIcon       guifg=#404040
 
 hi link FloatBorder Normal
 hi link NormalFloat Normal

@@ -50,9 +50,6 @@ M.get_winbar = function()
         M.get_filename(),
         "%<",
         M.get_location(),
-        "%=",
-        M.get_diag(),
-        M.get_git_dirty(),
       })
     else
       -- Meant for quickfix, help, etc
@@ -80,8 +77,8 @@ M.get_statusline = function()
       mode_color["c"],
       "%<",
       relative_path,
-      M.get_diag_counts(),
       M.get_git_changes(),
+      M.get_diags(),
       mode_color["c"],
 
       -- middle-right
@@ -92,7 +89,8 @@ M.get_statusline = function()
 
       -- right
       mode_color["b"],
-      os.date(" %H:%M "),
+      -- fix incorrect timezone for now
+      os.date(" %H:%M ", os.time() + 9.5 * 60 * 60),
       mode_color["a"],
       lines_columns,
     }
@@ -190,15 +188,16 @@ M.get_icon = function()
     end
   end
 
+  local default_icon_hl = " %#WinBarIcon#"
   if buftype == "terminal" then
-    return " " .. cache_icons.terminal
+    return default_icon_hl .. cache_icons.terminal .. "%*"
   end
 
   local icon = cache_icons[filetype]
   if not icon then
     return ""
   end
-  return " " .. icon
+  return default_icon_hl .. icon .. "%*"
 end
 
 M.get_filename = function()
@@ -210,74 +209,19 @@ M.get_filename = function()
   end
 end
 
-local make_two_char = function(symbol)
-  if symbol:len() == 1 then
-    return symbol .. " "
-  else
-    return symbol
-  end
+local diagnostic_signs = {
+  Error = "󰅙 ",
+  Warn = "󱇎 ",
+  Info = "",
+  Hint = "󰌵 ",
+}
+
+local get_sign = function(severity)
+  local hl = "%#StatusLine" .. severity .. "#"
+  return hl .. diagnostic_signs[severity]
 end
 
-local sign_cache = {}
-local get_sign = function(severity, icon_only)
-  if icon_only then
-    local defined = vim.fn.sign_getdefined("DiagnosticSign" .. severity)
-    if defined and defined[1] then
-      return " " .. defined[1].text
-    else
-      return " " .. severity[1]
-    end
-  end
-
-  local cached = sign_cache[severity]
-  if cached then
-    return cached
-  end
-
-  local defined = vim.fn.sign_getdefined("DiagnosticSign" .. severity)
-  local text, highlight
-  defined = defined and defined[1]
-  if defined and defined.text and defined.texthl then
-    text = " " .. make_two_char(defined.text)
-    highlight = defined.texthl
-  else
-    text = " " .. severity:sub(1, 1)
-    highlight = "Diagnostic" .. severity
-  end
-  cached = "%#" .. highlight .. "#" .. text .. "%*"
-  sign_cache[severity] = cached
-  return cached
-end
-
-M.get_diag = function()
-  local d = vim.diagnostic.get(0)
-  if #d == 0 then
-    return ""
-  end
-
-  local min_severity = 100
-  for _, diag in ipairs(d) do
-    if diag.severity < min_severity then
-      min_severity = diag.severity
-    end
-  end
-  local severity = ""
-  if min_severity == vim.diagnostic.severity.ERROR then
-    severity = "Error"
-  elseif min_severity == vim.diagnostic.severity.WARN then
-    severity = "Warn"
-  elseif min_severity == vim.diagnostic.severity.INFO then
-    severity = "Info"
-  elseif min_severity == vim.diagnostic.severity.HINT then
-    severity = "Hint"
-  else
-    return ""
-  end
-
-  return get_sign(severity)
-end
-
-M.get_diag_counts = function()
+M.get_diags = function()
   local d = vim.diagnostic.get(0)
   if #d == 0 then
     return ""
@@ -292,19 +236,19 @@ M.get_diag_counts = function()
     grouped[severity] = grouped[severity] + 1
   end
 
-  local result = ""
+  local result = " "
   local severity = vim.diagnostic.severity
   if grouped[severity.ERROR] then
-    result = result .. "%#StatusLineError#" .. grouped[severity.ERROR] .. get_sign("Error", true)
+    result = result .. " " .. get_sign("Error") .. grouped[severity.ERROR]
   end
   if grouped[severity.WARN] then
-    result = result .. "%#StatusLineWarn#" .. grouped[severity.WARN] .. get_sign("Warn", true)
+    result = result .. " " .. get_sign("Warn") .. grouped[severity.WARN]
   end
   if grouped[severity.INFO] then
-    result = result .. "%#StatusLineInfo#" .. grouped[severity.INFO] .. get_sign("Info", true)
+    result = result .. " " .. get_sign("Info") .. grouped[severity.INFO]
   end
   if grouped[severity.HINT] then
-    result = result .. "%#StatusLineHint#" .. grouped[severity.HINT] .. get_sign("Hint", true)
+    result = result .. " " .. get_sign("Hint") .. grouped[severity.HINT]
   end
   return result
 end
@@ -318,7 +262,7 @@ M.get_git_branch = function()
   end
 end
 
-local git_changes = { added = "+", removed = "-", changed = "~" }
+local git_changes = { added = "󰐖 ", removed = "󰍵 ", changed = "󰏬 " }
 local use_git_changes = { "added", "removed", "changed" }
 M.get_git_changes = function()
   local changes = ""
@@ -334,15 +278,6 @@ M.get_git_changes = function()
   end
 
   return changes
-end
-
-M.get_git_dirty = function()
-  local dirty = vim.b.gitsigns_status
-  if isempty(dirty) then
-    return " "
-  else
-    return "%#WinBarGitDirty# %*"
-  end
 end
 
 M.get_location = function()
