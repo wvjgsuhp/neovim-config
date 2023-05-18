@@ -4,6 +4,7 @@ return {
     "SmiteshP/nvim-navic",
     "MunifTanjim/nui.nvim",
   },
+  enabled = false,
   config = function()
     require("fine-cmdline").setup({
       cmdline = {

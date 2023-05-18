@@ -19,7 +19,7 @@ end
 ---upper case first character
 ---@param str string
 function utils.capitalize(str)
-  return (str:gsub("^%l", string.upper))
+  return (str:lower():gsub("^%l", string.upper))
 end
 
 return utils

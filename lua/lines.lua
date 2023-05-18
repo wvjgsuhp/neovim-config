@@ -15,9 +15,9 @@ local is_current = function()
   end
 end
 
-local winbar_filetype_exclude = {
-  [""] = true,
-}
+-- local winbar_filetype_exclude = {
+--   [""] = true,
+-- }
 
 M.get_winbar = function()
   -- floating window
@@ -28,23 +28,24 @@ M.get_winbar = function()
 
   local mode_part = M.get_mode_part()
 
-  if vim.bo.buftype == "terminal" then
+  local buftype = vim.bo.buftype
+  if buftype == "terminal" then
     return table.concat({
       mode_part,
       M.get_icon(),
       " TERMINAL #%n %#WinBarLocation# %{b:term_title}%*",
     })
-  elseif vim.bo.buftype == "nofile" then
+  elseif buftype == "nofile" then
     return table.concat({
       mode_part,
       M.get_icon(),
       " " .. vim.bo.filetype,
     })
-  elseif winbar_filetype_exclude[vim.bo.filetype] then
-    return M.active_indicator()
+  -- elseif winbar_filetype_exclude[vim.bo.filetype] then
+  --   return M.active_indicator()
   else
     -- real files do not have buftypes
-    if isempty(vim.bo.buftype) then
+    if isempty(buftype) then
       return table.concat({
         mode_part,
         M.get_filename(),
@@ -74,12 +75,12 @@ M.get_statusline = function()
       M.get_recording(),
 
       -- middle-left
-      mode_color["c"],
       "%<",
+      mode_color["c"],
       relative_path,
       M.get_git_changes(),
       M.get_diags(),
-      mode_color["c"],
+      -- mode_color["c"],
 
       -- middle-right
       "%=",
@@ -97,8 +98,8 @@ M.get_statusline = function()
     return table.concat(parts)
   else
     local parts = {
-      mode_color["inactive"],
       "%<",
+      mode_color["inactive"],
       relative_path,
       "%=",
       lines_columns,
@@ -150,18 +151,18 @@ local mode_map = {
   ["t"]     = "T",
 }
 
-M.active_indicator = function()
-  if is_current() then
-    return "%#WinBarIndicator#▔▔▔▔▔▔▔▔%*"
-  else
-    return ""
-  end
-end
+-- M.active_indicator = function()
+--   if is_current() then
+--     return "%#WinBarIndicator#▔▔▔▔▔▔▔▔%*"
+--   else
+--     return ""
+--   end
+-- end
 
 -- stylua: ignore
 local cache_icons = {
   -- custom icons here
-  NvimTree  = "󰙅 ",
+  NvimTree  = "",
   terminal  = "",
   Trouble   = "",
   r         = "󰟔 ",
@@ -262,7 +263,11 @@ M.get_git_branch = function()
   end
 end
 
-local git_changes = { added = "󰐖 ", removed = "󰍵 ", changed = "󰏬 " }
+local git_changes = {
+  added = "󰐖 ",
+  removed = "󰍵 ",
+  changed = "󰏬 ",
+}
 local use_git_changes = { "added", "removed", "changed" }
 M.get_git_changes = function()
   local changes = ""
@@ -333,7 +338,8 @@ M.get_relative_path = function()
 
   local is_modified = vim.api.nvim_buf_get_option(0, "modified")
   if is_modified then
-    return file .. " [+]"
+    return file .. "  "
+    -- return file .. " [+]"
   end
   return file:sub(1, -1)
 end

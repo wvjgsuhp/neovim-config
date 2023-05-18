@@ -35,14 +35,12 @@ hi WarningMsg   ctermfg=167 guifg=#ef5939
 hi ErrorMsg     ctermbg=15  ctermfg=196   guibg=#f8f8ff guifg=#ff1100 gui=undercurl cterm=undercurl
 hi ColorColumn  ctermbg=254 guibg=#e4e4e4
 
-if version >= 700
-  hi CursorLine ctermbg=253 guibg=#D8D8DD
-  hi MatchParen ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
-  hi Pmenu      ctermfg=15  ctermbg=8   guifg=#ffffff guibg=#808080 gui=bold   cterm=bold
-  hi PmenuSel   ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd gui=italic cterm=italic
-  hi PmenuSbar  ctermfg=238 ctermbg=0   guifg=#444444 guibg=#000000
-  hi PmenuThumb ctermfg=248 ctermbg=248 guifg=#aaaaaa guibg=#aaaaaa
-endif
+hi CursorLine ctermbg=253 guibg=#D8D8DD
+hi MatchParen ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
+hi Pmenu      ctermfg=0   ctermbg=255 guifg=#000000 guibg=#F8F8FF
+hi PmenuSel   ctermfg=15  ctermbg=61  guifg=#FFFFFF guibg=#3465a3
+hi PmenuSbar  ctermfg=246 ctermbg=15  guifg=#959595 guibg=#ECECEC
+hi PmenuThumb ctermfg=250 ctermbg=250 guifg=#bbbbbb guibg=#bbbbbb
 
 hi DiffAdd    ctermfg=233 ctermbg=194   guifg=#003300 guibg=#DDFFDD gui=none  cterm=none
 hi DiffChange ctermbg=255 guibg=#ececec gui=none      cterm=none
