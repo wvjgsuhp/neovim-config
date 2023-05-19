@@ -22,12 +22,3 @@ autocmd VimEnter * nested call RestoreSess()
 " highlight on yank
 autocmd TextYankPost *
   \ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-
-" rounded border for popup menu
-" call wilder#set_option(
-"   \ 'renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
-"     \ 'highlights': {
-"     \   'border': 'Normal',
-"     \ },
-"     \ 'border': 'single',
-"     \ })))

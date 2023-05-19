@@ -58,7 +58,7 @@ set cmdheight=0
 set showtabline=0
 set noshowcmd           " Don't show command in status line
 set cmdwinheight=5      " Command-line lines
-set laststatus=2        " Always show a status line
+set laststatus=3        " Always show a status line
 set colorcolumn=+0      " Column highlight at textwidth's max character-limit
 set display=lastline
 

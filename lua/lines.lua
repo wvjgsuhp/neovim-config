@@ -90,8 +90,7 @@ M.get_statusline = function()
 
       -- right
       mode_color["b"],
-      -- fix incorrect timezone for now
-      os.date(" %H:%M ", os.time() + 9.5 * 60 * 60),
+      os.date(" %H:%M "),
       mode_color["a"],
       lines_columns,
     }
@@ -210,10 +209,11 @@ M.get_filename = function()
   end
 end
 
+local severity_levels = { "Error", "Warn", "Info", "Hint" }
 local diagnostic_signs = {
   Error = "󰅙 ",
   Warn = "󱇎 ",
-  Info = "",
+  Info = " ",
   Hint = "󰌵 ",
 }
 
@@ -239,17 +239,11 @@ M.get_diags = function()
 
   local result = " "
   local severity = vim.diagnostic.severity
-  if grouped[severity.ERROR] then
-    result = result .. " " .. get_sign("Error") .. grouped[severity.ERROR]
-  end
-  if grouped[severity.WARN] then
-    result = result .. " " .. get_sign("Warn") .. grouped[severity.WARN]
-  end
-  if grouped[severity.INFO] then
-    result = result .. " " .. get_sign("Info") .. grouped[severity.INFO]
-  end
-  if grouped[severity.HINT] then
-    result = result .. " " .. get_sign("Hint") .. grouped[severity.HINT]
+  for _, level in ipairs(severity_levels) do
+    local severity_count = grouped[severity[level:upper()]]
+    if severity_count then
+      result = result .. " " .. get_sign(level) .. severity_count
+    end
   end
   return result
 end
@@ -263,16 +257,17 @@ M.get_git_branch = function()
   end
 end
 
+local use_git_changes = { "added", "removed", "changed" }
 local git_changes = {
   added = "󰐖 ",
   removed = "󰍵 ",
   changed = "󰏬 ",
 }
-local use_git_changes = { "added", "removed", "changed" }
+
 M.get_git_changes = function()
   local changes = ""
   if not isempty(vim.b.gitsigns_status_dict) then
-    for _, change in pairs(use_git_changes) do
+    for _, change in ipairs(use_git_changes) do
       local sign = git_changes[change]
       local change_count = vim.b.gitsigns_status_dict[change]
       if change_count and change_count > 0 then
