@@ -6,9 +6,6 @@ return {
   "kyazdani42/nvim-web-devicons",
 
   -- commands
-  -- - repo: tversteeg/registers.nvim
-  --   on_map: { i: "<C-r>", nx: '"' }
-  --   hook_source: let g:registers_window_border = 'rounded'
 
   "tpope/vim-repeat",
   "tpope/vim-surround",
@@ -24,7 +21,6 @@ return {
       utils.noremap("n", "<Leader>gs", "<cmd>G status<CR>")
       utils.noremap("n", "<Leader>gp", "<cmd>G push<CR>")
       utils.noremap("n", "<Leader>gac", ":G commit -am ''<Left>")
-      -- utils.map("n", "<Leader>gac", ":G commit -am ''<Left>")
       utils.noremap("n", "<Leader>gaa", "<cmd>G add .<CR>")
     end,
   },
@@ -64,19 +60,18 @@ return {
   "lilydjwg/colorizer",
   "romainl/vim-cool",
   {
+    "rhysd/clever-f.vim",
+    config = function()
+      vim.g.clever_f_mark_direct = 1
+    end,
+  },
+  {
     "rhysd/accelerated-jk",
     keys = {
       { "j", "<Plug>(accelerated_jk_gj)zz" },
       { "k", "<Plug>(accelerated_jk_gk)zz" },
     },
   },
-
-  -- - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> } }
-  -- - { repo: t9md/vim-quickhl, on_map: { nx: <Plug> } }
-
-  -- - repo: deris/vim-shot-f
-  --   on_map: { nxo: <Plug> }
-  --   hook_add: let g:shot_f_no_default_key_mappings = 1
 
   -- completion and code analysis
 
@@ -109,10 +104,6 @@ return {
   --   if: has('nvim-0.5')
   --   on_source: [telescope.nvim, neovim/nvim-lspconfig]
   --   hook_post_source: lua require('plugins.todo-comments')
-
-  --   if: has('nvim-0.5')
-  --   on_cmd: [DiffviewOpen, DiffviewFileHistory]
-  --   hook_post_source: lua require('plugins.diffview').setup()
 
   -- - repo: mattn/emmet-vim
   --   on_event: InsertEnter

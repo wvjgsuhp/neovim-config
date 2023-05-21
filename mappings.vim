@@ -1,4 +1,5 @@
 let mapleader=' '
+let maplocalleader=';'
 
 " move between open and close brackets
 nnoremap <backspace> %
@@ -31,8 +32,8 @@ nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR>
   \ <cmd>echo 'Yanked relative path: <c-r>+'<CR>
 nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR>
   \ <cmd>echo 'Yanked absolute path: <c-r>+'<CR>
-nnoremap <leader>yy "+y
-vnoremap <leader>yy "+y
+nnoremap <localleader>y "+y
+vnoremap <localleader>y "+y
 
 " Paste
 nnoremap <Leader>piw viwpyiw
@@ -40,8 +41,8 @@ nnoremap <Leader>pa ggVGp
 command! -range -nargs=1 VisualPaste call utils#visualPaste(<args>)
 xnoremap p :VisualPaste 'p'<CR>
 xnoremap P :VisualPaste 'P'<CR>
-nnoremap <leader>pp "+p
-vnoremap <leader>pp "+p
+nnoremap <localleader>p "+p
+vnoremap <localleader>p "+p
 
 " Go to tab by number
 noremap <Leader>1 1gt
@@ -94,8 +95,8 @@ nnoremap <Leader>gpn 6kyyGpi
 
 " Find
 nmap <Leader>fp /<C-r>0<cr>
-nmap <Leader>fiw yiw/<C-r>0<cr>N
 nnoremap <Leader>fn <cmd>Navbuddy<cr>
+nnoremap * *zz
 
 " Edit file
 nnoremap <Leader>ze <cmd>e ~/.zshrc<cr>

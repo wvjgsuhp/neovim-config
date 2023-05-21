@@ -164,7 +164,7 @@ local cache_icons = {
   NvimTree  = "",
   terminal  = "",
   Trouble   = "",
-  r         = "󰟔 ",
+  r         = "󰟔",
 }
 
 M.get_icon = function()
