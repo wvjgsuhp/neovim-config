@@ -36,7 +36,7 @@ return {
     config = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
-      require("which-key").setup({ window = { border = "rounded" } })
+      require("which-key").setup({ window = { border = "single" } })
       utils.noremap("n", "<Leader>k", "<cmd>WhichKey<cr>")
     end,
   },
@@ -48,6 +48,7 @@ return {
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
+    cond = vim.g.is_unix == 1,
     build = "make",
     config = function()
       require("telescope").load_extension("fzf")
@@ -87,7 +88,7 @@ return {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup({
-        ui = { border = "rounded" },
+        ui = { border = "single" },
       })
     end,
   },

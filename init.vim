@@ -1,4 +1,5 @@
 let g:owd = getcwd()
+let g:is_unix = has('macunix') || has('unix')
 
 let $VIM_PATH = expand('<sfile>:p:h')
 cd $VIM_PATH

@@ -1,5 +1,9 @@
 colorscheme github
 
+if !g:is_unix
+  set shell=bash
+endif
+
 set number                      " Show current line number
 set relativenumber              " Show relative line numbers
 set foldmethod=expr

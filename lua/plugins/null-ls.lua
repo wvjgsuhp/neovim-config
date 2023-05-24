@@ -17,7 +17,7 @@ return {
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
     require("null-ls").setup({
       -- Ensure key maps are setup
-      border = "rounded",
+      border = "single",
       on_attach = on_attach,
 
       sources = {

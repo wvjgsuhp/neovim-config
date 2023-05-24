@@ -3,7 +3,7 @@ return {
   config = function()
     require("registers").setup({
       window = {
-        border = "rounded",
+        border = "single",
         transparency = 0,
       },
     })

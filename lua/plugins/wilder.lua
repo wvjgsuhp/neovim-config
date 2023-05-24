@@ -11,7 +11,7 @@ return {
           accent = wilder.make_hl("WilderAccent", "Pmenu", { { a = 1 }, { a = 1 }, { foreground = "#0086B3" } }),
           border = "Normal", -- highlight to use for the border
         },
-        border = "rounded",
+        border = "single",
         min_width = "68%",
         max_width = "68%",
 

@@ -4,7 +4,7 @@ return {
   config = function()
     require("nvim-navbuddy").setup({
       window = {
-        border = "rounded", -- "rounded", "double", "solid", "none"
+        border = "single", -- "rounded", "double", "solid", "none"
         -- or an array with eight chars building up the border in a clockwise fashion
         -- starting with the top-left corner. eg: { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" }.
         size = "62%", -- Or table format example: { height = "40%", width = "100%"}

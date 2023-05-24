@@ -51,7 +51,8 @@ return {
       map_buf("n", ",wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
       map_buf("n", ",rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       map_buf("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-      map_buf("n", "<Leader>dp", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+      map_buf("n", "<Leader>dp", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>", opts)
+      map_buf("n", "<Leader>dk", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>", opts)
 
       -- Set some keybinds conditional on server capabilities
       if client.supports_method("textDocument/formatting") then
@@ -84,6 +85,83 @@ return {
 
       if client.server_capabilities.documentSymbolProvider then
         require("nvim-navic").attach(client, bufnr)
+      end
+
+      if client.name == "omnisharp" then
+        client.server_capabilities.semanticTokensProvider = {
+          full = vim.empty_dict(),
+          legend = {
+            tokenModifiers = { "static_symbol" },
+            tokenTypes = {
+              "comment",
+              "excluded_code",
+              "identifier",
+              "keyword",
+              "keyword_control",
+              "number",
+              "operator",
+              "operator_overloaded",
+              "preprocessor_keyword",
+              "string",
+              "whitespace",
+              "text",
+              "static_symbol",
+              "preprocessor_text",
+              "punctuation",
+              "string_verbatim",
+              "string_escape_character",
+              "class_name",
+              "delegate_name",
+              "enum_name",
+              "interface_name",
+              "module_name",
+              "struct_name",
+              "type_parameter_name",
+              "field_name",
+              "enum_member_name",
+              "constant_name",
+              "local_name",
+              "parameter_name",
+              "method_name",
+              "extension_method_name",
+              "property_name",
+              "event_name",
+              "namespace_name",
+              "label_name",
+              "xml_doc_comment_attribute_name",
+              "xml_doc_comment_attribute_quotes",
+              "xml_doc_comment_attribute_value",
+              "xml_doc_comment_cdata_section",
+              "xml_doc_comment_comment",
+              "xml_doc_comment_delimiter",
+              "xml_doc_comment_entity_reference",
+              "xml_doc_comment_name",
+              "xml_doc_comment_processing_instruction",
+              "xml_doc_comment_text",
+              "xml_literal_attribute_name",
+              "xml_literal_attribute_quotes",
+              "xml_literal_attribute_value",
+              "xml_literal_cdata_section",
+              "xml_literal_comment",
+              "xml_literal_delimiter",
+              "xml_literal_embedded_expression",
+              "xml_literal_entity_reference",
+              "xml_literal_name",
+              "xml_literal_processing_instruction",
+              "xml_literal_text",
+              "regex_comment",
+              "regex_character_class",
+              "regex_anchor",
+              "regex_quantifier",
+              "regex_grouping",
+              "regex_alternation",
+              "regex_text",
+              "regex_self_escaped_character",
+              "regex_other_escape",
+            },
+          },
+          range = true,
+        }
       end
     end
 
@@ -145,36 +223,19 @@ return {
       })
 
       -- Configure help hover (normal K) handler
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
       -- Configure signature help (,s) handler
       vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 
       -- Setup language servers using nvim-lspconfig
       local lspconfig = require("lspconfig")
-      -- local servers = lspconfig.util.available_servers()
-      local servers = {
-        "lua_ls",
-        "tsserver",
-        "r_language_server",
-        --"omnisharp",
-        -- "gopls",
-        --"graphql",
-        -- "yamlls",
-        -- "html",
-        -- "pylsp",
-        -- "terraformls",
-        -- "vimls",
-        -- "bashls",
-        --"angularls",
-      }
-      for _, server in ipairs(servers) do
+      local get_servers = require('mason-lspconfig').get_installed_servers
+      for _, server in ipairs(get_servers()) do
         local opts = make_config(server)
         lspconfig[server].setup(opts)
       end
-
-      -- lspconfig.r_language_server.setup({})
 
       -- global custom location-list diagnostics window toggle.
       -- utils.noremap("n", "<Leader>a", '<cmd>lua require("user").diagnostic.publish_loclist(true)<CR>')
@@ -195,7 +256,7 @@ return {
         false
       )
 
-      require("lspconfig.ui.windows").default_options.border = "rounded"
+      require("lspconfig.ui.windows").default_options.border = "single"
     end
 
     setup()

@@ -69,6 +69,7 @@ return {
     -- See telescope.nvim/lua/telescope/config.lua for defaults.
     telescope.setup({
       defaults = {
+        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         sorting_strategy = "ascending",
         selection_strategy = "closest",
         scroll_strategy = "cycle",
