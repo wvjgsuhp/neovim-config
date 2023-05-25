@@ -3,6 +3,7 @@ colorscheme github
 " windows specific
 if !g:is_unix
   set shell=bash
+  set shellcmdflag=-c
   set shellslash
 endif
 

@@ -59,11 +59,41 @@ hi Type         ctermfg=60  guifg=#445588 gui=bold      cterm=bold
 hi Number       ctermfg=30  guifg=#1C9898
 hi Todo         ctermfg=15  ctermbg=88    guifg=#FFFFFF guibg=#990000 gui=bold      cterm=bold
 hi Special      ctermfg=28  guifg=#159828 gui=bold      cterm=bold
-hi Todo         ctermbg=15  ctermfg=196   guibg=#f8f8ff guifg=#ff1100 gui=underline cterm=underline
+" hi Todo         ctermbg=15  ctermfg=196   guibg=#f8f8ff guifg=#ff1100 gui=underline cterm=underline
 hi Label        ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi StorageClass ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi Structure    ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
+
+" nvim-navic
+" hi NavicIconsFile
+" hi NavicIconsModule
+hi link NavicIconsNamespace Identifier
+" hi NavicIconsPackage
+hi link NavicIconsClass     Type
+hi link NavicIconsMethod    Function
+" hi NavicIconsProperty
+hi link NavicIconsField     Identifier
+" hi NavicIconsConstructor
+hi link NavicIconsEnum      Type
+" hi NavicIconsInterface
+hi link NavicIconsFunction  Function
+hi link NavicIconsVariable  Identifier
+hi link NavicIconsConstant  Constant
+hi link NavicIconsString    String
+hi link NavicIconsNumber    Number
+" hi NavicIconsBoolean
+hi link NavicIconsArray     Identifier
+" hi NavicIconsObject
+" hi NavicIconsKey
+" hi NavicIconsNull
+" hi NavicIconsEnumMember
+" hi NavicIconsStruct
+" hi NavicIconsEvent
+" hi NavicIconsOperator
+" hi NavicIconsTypeParameter
+" hi NavicText
+" hi NavicSeparator
 
 hi! link FoldColumn   Folded
 hi! link CursorColumn CursorLine
