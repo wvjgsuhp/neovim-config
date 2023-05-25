@@ -12,6 +12,7 @@ nnoremap <Leader><Leader> za
 " Fast saving from all modes
 nnoremap <Leader>w <cmd>silent! w<CR>
 nnoremap <Leader>nw <cmd>noautocmd w<CR>
+nnoremap <Leader>W <cmd>noautocmd w<CR>
 nmap <C-s> <space>w
 xmap <C-s> <space>w
 cmap <C-s> <space>w

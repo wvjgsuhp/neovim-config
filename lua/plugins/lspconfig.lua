@@ -231,8 +231,12 @@ return {
 
       -- Setup language servers using nvim-lspconfig
       local lspconfig = require("lspconfig")
-      local get_servers = require('mason-lspconfig').get_installed_servers
-      for _, server in ipairs(get_servers()) do
+      local servers = require("mason-lspconfig").get_installed_servers()
+
+      -- add custom server
+      servers[#servers + 1] = "r_language_server"
+
+      for _, server in ipairs(servers) do
         local opts = make_config(server)
         lspconfig[server].setup(opts)
       end

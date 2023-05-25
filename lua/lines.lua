@@ -162,9 +162,9 @@ local mode_map = {
 local cache_icons = {
   -- custom icons here
   NvimTree  = "",
-  terminal  = "",
+  terminal  = " ",
   Trouble   = "",
-  r         = "󰟔",
+  r         = "󰟔 ",
 }
 
 M.get_icon = function()
