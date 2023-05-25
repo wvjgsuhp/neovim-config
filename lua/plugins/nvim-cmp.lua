@@ -12,6 +12,7 @@ return {
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "onsails/lspkind-nvim",
     "David-Kunz/cmp-npm",
+    "rafamadriz/friendly-snippets",
   },
   config = function()
     require("cmp-npm").setup()

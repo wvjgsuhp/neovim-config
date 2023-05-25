@@ -1,7 +1,9 @@
 colorscheme github
 
+" windows specific
 if !g:is_unix
   set shell=bash
+  set shellslash
 endif
 
 set number                      " Show current line number

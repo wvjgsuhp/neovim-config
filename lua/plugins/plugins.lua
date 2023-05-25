@@ -98,13 +98,7 @@ return {
       require("nvim-autopairs").setup()
     end,
   },
-
-  -- - { repo: rafamadriz/friendly-snippets, merged: 0, on_source: vim-vsnip }
-
-  -- - repo: folke/todo-comments.nvim
-  --   if: has('nvim-0.5')
-  --   on_source: [telescope.nvim, neovim/nvim-lspconfig]
-  --   hook_post_source: lua require('plugins.todo-comments')
+  {"folke/todo-comments.nvim",dependencies={"nvim-lua/plenary.nvim"}},
 
   -- - repo: mattn/emmet-vim
   --   on_event: InsertEnter
@@ -119,18 +113,9 @@ return {
 
   "tpope/vim-sleuth",
 
-  -- - repo: windwp/nvim-ts-autotag
-  --   on_source: nvim-treesitter
-
-  -- - repo: monkoose/matchparen.nvim
-  --   if: has('nvim-0.7')
-  --   on_event: FileType
-  --   hook_post_source: lua require('matchparen').setup()
-
   -- Vimscript syntax/indent plugins
 
   -- - { repo: chrisbra/csv.vim, on_ft: csv }
-  -- - { repo: vim-jp/syntax-vim-ex, on_ft: vim }
   -- - { repo: MTDL9/vim-log-highlighting, on_ft: log }
 
   -- - repo: preservim/vim-markdown
