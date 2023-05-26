@@ -16,6 +16,7 @@ return {
       "man",
       "quickpick-filter",
       "WhichKey",
+      "csv",
     }
     vim.cmd([[
       augroup user_plugin_indentguides

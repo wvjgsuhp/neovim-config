@@ -98,7 +98,7 @@ return {
       require("nvim-autopairs").setup()
     end,
   },
-  {"folke/todo-comments.nvim",dependencies={"nvim-lua/plenary.nvim"}},
+  { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
   -- - repo: mattn/emmet-vim
   --   on_event: InsertEnter
@@ -115,7 +115,7 @@ return {
 
   -- Vimscript syntax/indent plugins
 
-  -- - { repo: chrisbra/csv.vim, on_ft: csv }
+  { "chrisbra/csv.vim", ft = { "csv" } },
   -- - { repo: MTDL9/vim-log-highlighting, on_ft: log }
 
   -- - repo: preservim/vim-markdown
@@ -162,4 +162,8 @@ return {
   -- buffer
 
   { "chrisgrieser/nvim-early-retirement", config = true },
+
+  -- debug
+
+  { "nvim-treesitter/playground", cmd = { "TSHighlightCapturesUnderCursor" } },
 }

@@ -8,9 +8,9 @@ return {
     -- rafi settings
 
     require("gitsigns").setup({
-      signs = {
-        delete = { text = " " },
-      },
+      -- signs = {
+      --   delete = { text = " " },
+      -- },
       signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
       numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
       linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
