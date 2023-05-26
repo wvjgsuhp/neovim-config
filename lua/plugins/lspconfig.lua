@@ -12,7 +12,7 @@ return {
     --'jayp0521/mason-null-ls.nvim',
     -- "nvim-lua/plenary.nvim",
     -- "b0o/schemastore.nvim",
-    -- "folke/neodev.nvim",
+    "folke/neodev.nvim",
     {
       "SmiteshP/nvim-navbuddy",
       dependencies = {
@@ -212,15 +212,14 @@ return {
       -- require('lsp_kind').init()
 
       -- Configure LSP Handlers
-      -- ---
-
-      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = {
-          -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-source-in-diagnostics-neovim-06-only
-          source = "if_many",
-          prefix = "●",
-        },
-      })
+      vim.lsp.handlers["textDocument/publishDiagnostics"] =
+        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+          virtual_text = {
+            -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-source-in-diagnostics-neovim-06-only
+            source = "if_many",
+            prefix = "●",
+          },
+        })
 
       -- Configure help hover (normal K) handler
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
@@ -228,6 +227,8 @@ return {
       -- Configure signature help (,s) handler
       vim.lsp.handlers["textDocument/signatureHelp"] =
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+
+      require("neodev").setup()
 
       -- Setup language servers using nvim-lspconfig
       local lspconfig = require("lspconfig")

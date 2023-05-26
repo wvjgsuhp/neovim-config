@@ -68,7 +68,7 @@ hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 " treesitter
 hi link @operator  Normal
 call interface#PartialLink("@punctuation.delimiter", "Special", ["guifg", 'ctermfg'])
-call interface#PartialLink("@punctuation.bracket", "Special", ["guifg", 'ctermfg'])
+hi link @punctuation.bracket @punctuation.delimiter
 
 " gitsigns
 hi GitSignsAdd    guifg=#A0D3C1
@@ -127,8 +127,8 @@ hi link perlSharpBang   Special
 hi link schemeFunc      Statement
 
 hi TabLine      ctermfg=238 ctermbg=188   guifg=#404040 guibg=#dddddd gui=none
-hi TabLineFill  ctermfg=238 ctermbg=188   guifg=#404040 guibg=#dddddd gui=none
 hi TabLineSel   ctermfg=238 guifg=#404040 gui=bold
+hi link TabLineFill TabLine
 
 if has("spell")
   hi spellBad     guisp=#fcaf3e

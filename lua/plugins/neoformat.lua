@@ -13,7 +13,11 @@ return {
 
     vim.g.neoformat_lua_stylua = {
       exe = "stylua",
-      args = { "--indent-type='Spaces'", "--indent-width=2" },
+      args = {
+        "--indent-type='Spaces'",
+        "--indent-width=2",
+        "--column-width=112",
+      },
       replace = 1,
     }
 

@@ -5,6 +5,9 @@ return {
         -- suppress global vim warning
         globals = { "vim" },
       },
+      completion = {
+        callSnippet = "Replace",
+      },
     },
   },
 }

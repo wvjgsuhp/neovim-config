@@ -9,3 +9,4 @@
 .session.vim
 NUL
 *.log
+.luarc.json
