@@ -69,7 +69,7 @@ xnoremap <Leader>l $h
 noremap <Leader>zz <cmd>terminal<cr>i
 noremap <Leader>zj <cmd>split<cr><cmd>terminal<cr>13<c-w>_i
 nmap <Leader>zl <cmd>vsplit<cr> zz
-command! ToggleTerminal call interface#toggleTerminal()
+command! ToggleTerminal call interface#ToggleTerminal()
 nnoremap <Leader>` <cmd>ToggleTerminal<cr>
 nnoremap <Leader>z4 :term<cr>:vs<cr>:term<cr>:sp<cr>:term<cr>:wincmd h<cr>:sp<cr>:term<cr>
 
@@ -126,8 +126,8 @@ nmap <Leader>mj <cmd>sp<bar>execute 'edit'
 
 " quit
 nnoremap <Leader>cc <cmd>cclose<cr>
-autocmd FileType lazy,help,NvimTree,checkhealth nnoremap <buffer> <esc> <cmd>q<cr>
-autocmd FileType lazy,help,NvimTree,checkhealth nmap <buffer> q <esc>
+autocmd FileType lazy,help,NvimTree,checkhealth,Trouble nnoremap <buffer> <esc> <cmd>q<cr>
+autocmd FileType lazy,help,NvimTree,checkhealth,Trouble nmap <buffer> q <esc>
 
 " override defaults
 nnoremap s <Nop>

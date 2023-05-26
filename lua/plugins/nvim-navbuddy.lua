@@ -1,3 +1,5 @@
+local constants = require("constants")
+
 return {
   "SmiteshP/nvim-navbuddy",
   dependencies = { "MunifTanjim/nui.nvim" },
@@ -28,6 +30,7 @@ return {
           },
         },
       },
+      icons = constants.icons,
       lsp = {
         auto_attach = true, -- If set to true, you don't need to manually use attach function
         preference = nil, -- list of lsp server names in order of preference

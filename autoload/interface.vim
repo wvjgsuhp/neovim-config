@@ -1,4 +1,4 @@
-function! interface#toggleTerminal()
+function! interface#ToggleTerminal() abort
   wincmd k
   if utils#isTerminal()
     return
@@ -23,4 +23,16 @@ function! interface#toggleTerminal()
 
   term
   startinsert
+endfunction
+
+function! interface#PartialLink(hl, link_hl, link_attributes, attributes = '') abort
+  let l:hl_command = 'hi ' . a:hl . ' ' . a:attributes
+  for l:link_attr in a:link_attributes
+    let l:mode = l:link_attr[:-3]
+    let l:what = l:link_attr[-2:]
+    let l:hl_command = l:hl_command . ' ' . l:link_attr . '='
+      \. synIDattr(synIDtrans(hlID(a:link_hl)), l:what, l:mode)
+  endfor
+
+  exec l:hl_command
 endfunction

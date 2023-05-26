@@ -68,32 +68,32 @@ hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 " nvim-navic
 " hi NavicIconsFile
 " hi NavicIconsModule
-hi link NavicIconsNamespace Identifier
+hi link NavicIconsNamespace   Identifier
 " hi NavicIconsPackage
-hi link NavicIconsClass     Type
-hi link NavicIconsMethod    Function
-" hi NavicIconsProperty
-hi link NavicIconsField     Identifier
-" hi NavicIconsConstructor
-hi link NavicIconsEnum      Type
-" hi NavicIconsInterface
-hi link NavicIconsFunction  Function
-hi link NavicIconsVariable  Identifier
-hi link NavicIconsConstant  Constant
-hi link NavicIconsString    String
-hi link NavicIconsNumber    Number
-" hi NavicIconsBoolean
-hi link NavicIconsArray     Identifier
-" hi NavicIconsObject
+hi link NavicIconsClass       Type
+hi link NavicIconsMethod      Function
+hi link NavicIconsProperty    Identifier
+hi link NavicIconsField       Identifier
+hi link NavicIconsConstructor Special
+hi link NavicIconsEnum        Statement
+hi link NavicIconsInterface   Statement
+hi link NavicIconsFunction    Function
+hi link NavicIconsVariable    Identifier
+hi link NavicIconsConstant    Constant
+hi link NavicIconsString      String
+hi link NavicIconsNumber      Number
+hi link NavicIconsArray       Identifier
+hi link NavicIconsObject      Identifier
 " hi NavicIconsKey
 " hi NavicIconsNull
 " hi NavicIconsEnumMember
-" hi NavicIconsStruct
+hi link NavicIconsStruct    Type
 " hi NavicIconsEvent
 " hi NavicIconsOperator
-" hi NavicIconsTypeParameter
+" hi link NavicIconsTypeParameter Type
 " hi NavicText
-" hi NavicSeparator
+call interface#PartialLink("NavicIconsBoolean", "Normal", ["guifg"])
+call interface#PartialLink("NavicSeparator", "VertSplit", ["guifg"])
 
 hi! link FoldColumn   Folded
 hi! link CursorColumn CursorLine
@@ -137,14 +137,21 @@ hi StatusLineV2         ctermfg=188   ctermbg=237 guifg=#dddddd guibg=#45267d gu
 hi StatusLineR1         ctermfg=188   ctermbg=167 guifg=#dddddd guibg=#d73a49 gui=none cterm=none
 hi StatusLineR2         ctermfg=188   ctermbg=124 guifg=#dddddd guibg=#b31d28 gui=none cterm=none
 hi StatusLineRO         ctermfg=167   ctermbg=188 guifg=#ff0000 guibg=#dddddd gui=none cterm=none
-hi StatusLineError      guibg=#dddddd guifg=#ff0000
-hi StatusLineInfo       guibg=#dddddd guifg=#87d7ff
-hi StatusLineHint       guibg=#dddddd guifg=#888888
-hi StatusLineWarn       guibg=#dddddd guifg=#ef5939
-hi StatusLineChanges    guibg=#dddddd guifg=#6f42c1
-hi StatusLineGitAdded   guibg=#dddddd guifg=#159828
-hi StatusLineGitRemoved guibg=#dddddd guifg=#ef5939
-hi StatusLineGitChanged guibg=#dddddd guifg=#6f42c1
+
+let s:win_bar_glyph_hl = {
+  \"StatusLineError":       "guifg=#ff0000",
+  \"StatusLineInfo":        "guifg=#87d7ff",
+  \"StatusLineHint":        "guifg=#888888",
+  \"StatusLineWarn":        "guifg=#ef5939",
+  \"StatusLineChanges":     "guifg=#6f42c1",
+  \"StatusLineGitAdded":    "guifg=#159828",
+  \"StatusLineGitRemoved":  "guifg=#ef5939",
+  \"StatusLineGitChanged":  "guifg=#6f42c1"
+\}
+for [hl, attributes] in items(s:win_bar_glyph_hl)
+  call interface#PartialLink(hl, "StatusLineN3", ["guibg"], attributes)
+endfor
+
 hi StatusLineInactive   guifg=#404040 guibg=#d4d4d4
 
 hi WinBar           guifg=#959595 gui=bold

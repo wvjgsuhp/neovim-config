@@ -87,6 +87,3 @@ if ! has('nvim')
   set viewdir=$VIM_DATA_PATH/view/
   set spellfile=$VIM_DATA_PATH/spell/en.utf-8.add
 endif
-
-" language server
-let g:syntastic_r_lintr_linters = "with_defaults(assignment_linter=NULL)"
