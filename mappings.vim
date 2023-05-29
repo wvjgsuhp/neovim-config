@@ -43,8 +43,10 @@ command! -range -nargs=1 VisualPaste call utils#visualPaste(<args>)
 xnoremap p :VisualPaste 'p'<CR>
 xnoremap P :VisualPaste 'P'<CR>
 nnoremap <localleader>p "+p
+nnoremap <localleader>P "+P
 vnoremap <localleader>p :VisualPaste '"+p'<CR>
 nnoremap <localleader>v "+p
+nnoremap <localleader>V "+P
 vnoremap <localleader>v :VisualPaste '"+p'<CR>
 
 " Go to tab by number

@@ -33,7 +33,7 @@ M.get_winbar = function()
     return table.concat({
       mode_part,
       M.get_icon(),
-      " TERMINAL #%n %#WinBarLocation# %{b:term_title}%*",
+      " TERMINAL-%n %#WinBarLocation# %{b:term_title}%*",
     })
   elseif buftype == "nofile" then
     return table.concat({
@@ -80,7 +80,6 @@ M.get_statusline = function()
       relative_path,
       M.get_git_changes(),
       M.get_diags(),
-      -- mode_color["c"],
 
       -- middle-right
       "%=",
@@ -162,7 +161,7 @@ local mode_map = {
 local cache_icons = {
   -- custom icons here
   NvimTree  = "",
-  terminal  = " ",
+  terminal  = "",
   Trouble   = "",
   r         = "󰟔 ",
 }
@@ -292,7 +291,7 @@ M.get_location = function()
 
     local location = provider.get_location({})
     if not isempty(location) and location ~= "error" then
-      return "%#WinBarLocation#  " .. location .. "%*"
+      return "%#WinBarLocation# " .. location .. "%*"
     else
       return ""
     end
@@ -334,7 +333,6 @@ M.get_relative_path = function()
   local is_modified = vim.api.nvim_buf_get_option(0, "modified")
   if is_modified then
     return file .. "  "
-    -- return file .. " [+]"
   end
   return file:sub(1, -1)
 end
@@ -394,7 +392,6 @@ vim.o.winbar = "%{%v:lua.status.get_winbar()%}"
 vim.o.statusline = "%{%v:lua.status.get_statusline()%}"
 
 -- fix statusline diappears when enter insert mode
--- vim.cmd("autocmd InsertEnter * execute(':let &stl=&stl')")
 vim.api.nvim_create_autocmd("InsertEnter", { command = ":let &stl=&stl" })
 
 return M

@@ -9,25 +9,7 @@ return {
     -- see: https://github.com/nvim-telescope/telescope.nvim
     -- rafi settings
 
-    -- Custom actions
-    local myactions = {}
-
-    function myactions.page_up(prompt_bufnr)
-      require("telescope.actions.set").shift_selection(prompt_bufnr, -5)
-    end
-
-    function myactions.page_down(prompt_bufnr)
-      require("telescope.actions.set").shift_selection(prompt_bufnr, 5)
-    end
-
-    function myactions.change_directory(prompt_bufnr)
-      local entry = require("telescope.actions.state").get_selected_entry()
-      require("telescope.actions").close(prompt_bufnr)
-      vim.cmd("lcd " .. entry.path)
-    end
-
     -- Custom window-sizes
-
     local horizontal_preview_width = function(_, cols, _)
       if cols > 200 then
         return math.floor(cols * 0.7)
@@ -36,40 +18,59 @@ return {
       end
     end
 
-    local width_for_nopreview = function(_, cols, _)
-      if cols > 200 then
-        return math.floor(cols * 0.5)
-      elseif cols > 110 then
-        return math.floor(cols * 0.6)
-      else
-        return math.floor(cols * 0.75)
-      end
-    end
+    require("telescope.pickers.layout_strategies").horizontal_merged = function(
+      picker,
+      max_columns,
+      max_lines,
+      layout_config
+    )
+      local layout =
+        require("telescope.pickers.layout_strategies").horizontal(picker, max_columns, max_lines, layout_config)
 
-    local height_dropdown_nopreview = function(_, _, rows)
-      return math.floor(rows * 0.7)
+      -- layout.prompt.title = ""
+      layout.prompt.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
+      -- layout.prompt.borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+
+      layout.results.title = ""
+      -- layout.results.borderchars = { "─", "│", "─", "│", "│", "│", "┘", "└" }
+      -- layout.results.borderchars = { "─", "│", "─", "│", "├", "┤", "┘", "└" }
+      layout.results.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
+      layout.results.line = layout.results.line - 1
+      layout.results.height = layout.results.height + 1
+
+      -- layout.preview.title = ""
+      layout.preview.borderchars = { " ", " ", " ", "▏", " ", " ", " ", " " }
+      -- layout.preview.borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+
+      return layout
     end
 
     -- Enable indent-guides in telescope preview
     vim.cmd([[
       augroup telescope_events
         autocmd!
-        autocmd User TelescopePreviewerLoaded setlocal wrap list number
+        autocmd User TelescopePreviewerLoaded setlocal wrap list
       augroup END
     ]])
 
     local telescope = require("telescope")
-    local transform_mod = require("telescope.actions.mt").transform_mod
     local actions = require("telescope.actions")
-
-    -- Transform to Telescope proper actions.
-    myactions = transform_mod(myactions)
 
     -- Setup Telescope
     -- See telescope.nvim/lua/telescope/config.lua for defaults.
     telescope.setup({
       defaults = {
-        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        vimgrep_arguments = {
+          "rg",
+          "-L",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+        },
+        -- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         sorting_strategy = "ascending",
         selection_strategy = "closest",
         scroll_strategy = "cycle",
@@ -80,13 +81,14 @@ return {
 
         prompt_prefix = "❯ ",
         -- ♥ ❥ ➤ 🔭
-        selection_caret = "▍ ",
+        -- selection_caret = "▍ ",
+        selection_caret = "  ",
         multi_icon = "v",
         set_env = { COLORTERM = "truecolor" },
 
         -- Flex layout swaps between horizontal and vertical strategies
         -- based on the window width. See :h telescope.layout
-        layout_strategy = "flex",
+        layout_strategy = "horizontal_merged",
         layout_config = {
           width = 0.9,
           height = 0.85,
@@ -106,26 +108,23 @@ return {
             width = 0.75,
             height = 0.85,
             preview_height = 0.4,
-            mirror = true,
+            mirror = false,
           },
           flex = {
             -- change to horizontal after 120 cols
             flip_columns = 120,
           },
         },
+        path_display = { "truncate" },
+        winblend = 0,
+        color_devicons = true,
 
         mappings = {
-
           i = {
             ["jj"] = { "<Esc>", type = "command" },
 
             ["<Tab>"] = actions.move_selection_next,
             ["<S-Tab>"] = actions.move_selection_previous,
-            ["<C-u>"] = myactions.page_up,
-            ["<C-d>"] = myactions.page_down,
-
-            ["<C-q>"] = myactions.smart_send_to_qflist,
-            -- ['<C-l'] = actions.complete_tag,
 
             ["<Down>"] = actions.cycle_history_next,
             ["<Up>"] = actions.cycle_history_prev,
@@ -142,8 +141,6 @@ return {
 
             ["<Tab>"] = actions.move_selection_next,
             ["<S-Tab>"] = actions.move_selection_previous,
-            ["<C-u>"] = myactions.page_up,
-            ["<C-d>"] = myactions.page_down,
 
             ["<C-b>"] = actions.preview_scrolling_up,
             ["<C-f>"] = actions.preview_scrolling_down,
@@ -169,127 +166,11 @@ return {
             ["st"] = actions.select_tab,
             ["l"] = actions.select_default,
 
-            ["w"] = myactions.smart_send_to_qflist,
-            ["e"] = myactions.send_to_qflist,
-
             ["!"] = actions.edit_command_line,
           },
         },
       },
-      pickers = {
-        buffers = {
-          theme = "dropdown",
-          previewer = false,
-          sort_lastused = true,
-          sort_mru = true,
-          show_all_buffers = true,
-          ignore_current_buffer = true,
-          path_display = { shorten = 5 },
-          layout_config = {
-            width = width_for_nopreview,
-            height = height_dropdown_nopreview,
-          },
-          mappings = {
-            n = {
-              ["dd"] = actions.delete_buffer,
-            },
-          },
-        },
-        find_files = {
-          find_command = {
-            "rg",
-            "--smart-case",
-            "--hidden",
-            "--no-ignore-vcs",
-            "--glob",
-            "!.git",
-            "--files",
-          },
-        },
-        live_grep = {
-          dynamic_preview_title = true,
-        },
-        colorscheme = {
-          enable_preview = true,
-          -- previewer = false,
-          -- theme = 'dropdown',
-          layout_config = { width = 0.45, height = 0.8 },
-        },
-        highlights = {
-          layout_strategy = "horizontal",
-          layout_config = { preview_width = 0.80 },
-        },
-        -- jumplist = {
-        --  layout_strategy = 'horizontal',
-        --  layout_config = { preview_width = 0.60 },
-        -- },
-        vim_options = {
-          theme = "dropdown",
-          previewer = false,
-          layout_config = { width = 0.6, height = 0.7 },
-        },
-        command_history = {
-          theme = "dropdown",
-          previewer = false,
-          layout_config = { width = 0.5, height = 0.7 },
-        },
-        search_history = {
-          theme = "dropdown",
-          layout_config = { width = 0.4, height = 0.6 },
-        },
-        spell_suggest = {
-          theme = "cursor",
-          layout_config = { width = 0.27, height = 0.45 },
-        },
-        registers = {
-          theme = "cursor",
-          previewer = false,
-          layout_config = { width = 0.45, height = 0.6 },
-        },
-        oldfiles = {
-          theme = "dropdown",
-          previewer = false,
-          path_display = { shorten = 5 },
-          layout_config = {
-            width = width_for_nopreview,
-            height = height_dropdown_nopreview,
-          },
-        },
-        lsp_definitions = {
-          layout_strategy = "horizontal",
-          layout_config = {
-            width = 0.95,
-            height = 0.85,
-            preview_width = 0.45,
-          },
-        },
-        lsp_implementations = {
-          layout_strategy = "horizontal",
-          layout_config = {
-            width = 0.95,
-            height = 0.85,
-            preview_width = 0.45,
-          },
-        },
-        lsp_references = {
-          layout_strategy = "horizontal",
-          layout_config = {
-            width = 0.95,
-            height = 0.85,
-            preview_width = 0.45,
-          },
-        },
-        lsp_code_actions = {
-          theme = "cursor",
-          previewer = false,
-          layout_config = { width = 0.3, height = 0.4 },
-        },
-        lsp_range_code_actions = {
-          theme = "cursor",
-          previewer = false,
-          layout_config = { width = 0.3, height = 0.4 },
-        },
-      },
+
       extensions = {
         ["ui-select"] = {
           require("telescope.themes").get_cursor({

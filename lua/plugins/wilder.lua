@@ -8,10 +8,18 @@ return {
       "renderer",
       wilder.popupmenu_renderer(wilder.popupmenu_palette_theme({
         highlights = {
-          accent = wilder.make_hl("WilderAccent", "Pmenu", { { a = 1 }, { a = 1 }, { foreground = "#0086B3" } }),
-          border = "Normal", -- highlight to use for the border
+          accent = wilder.make_hl(
+            "WilderAccent",
+            "Pmenu",
+            { { a = 1 }, { a = 1 }, { foreground = "#0086B3" } }
+          ),
+          default = "WilderNormal",
+          prompt = "WilderPrompt",
+          border = "WilderBorder", -- highlight to use for the border
         },
-        border = "single",
+        -- border = "single",
+        border = { " ", " ", " ", " ", " ", " ", " ", " " },
+        prompt_border = { " ", " ", " " },
         min_width = "68%",
         max_width = "68%",
 
@@ -21,6 +29,10 @@ return {
         highlighter = wilder.basic_highlighter(),
       }))
     )
-    wilder.setup({ modes = { ":", "/", "?" } })
+
+    wilder.setup({
+      modes = { ":", "/", "?" },
+      accept_key = "<C-y>",
+    })
   end,
 }

@@ -21,7 +21,8 @@ let colors_name = "github"
 
 hi Normal       ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
 hi Cursor       ctermfg=239   ctermbg=15    guifg=#F8F8FF guibg=#444454
-hi Visual       ctermfg=15    ctermbg=61    guifg=#FFFFFF guibg=#3465a3
+hi Visual       ctermbg=252   guibg=#d4d4d4
+" hi Visual       ctermfg=15    ctermbg=255   guifg=#FFFFFF guibg=#000000
 hi VisualNOS    ctermfg=15    ctermbg=24    guifg=#FFFFFF guibg=#204a87
 hi Search       ctermfg=236   ctermbg=228   guifg=#000000 guibg=#FFFF8C cterm=bold  gui=bold
 hi Folded       ctermfg=8     ctermbg=15    guifg=#808080 guibg=#ECECEC gui=bold    cterm=bold
@@ -77,9 +78,9 @@ hi GitSignsChange guifg=#cdcdfd
 
 " nvim-navic
 " hi NavicIconsFile
-" hi NavicIconsModule
+hi link NavicIconsModule      Label
 hi link NavicIconsNamespace   Identifier
-" hi NavicIconsPackage
+hi link NavicIconsPackage     Label
 hi link NavicIconsClass       Type
 hi link NavicIconsMethod      Function
 hi link NavicIconsProperty    Identifier
@@ -164,13 +165,22 @@ endfor
 
 hi StatusLineInactive   guifg=#404040 guibg=#d4d4d4
 
-hi WinBar           guifg=#959595 gui=bold
-hi WinBarNC         guifg=#d4d4d4 gui=bold
-hi WinBarLocation   guifg=#888888 gui=bold
-hi WinBarModified   guifg=#d7d787 gui=bold
-hi WinBarGitDirty   guifg=#d7afd7 gui=bold
-hi WinBarIndicator  guifg=#5fafd7 gui=bold
-hi WinBarIcon       guifg=#404040
+hi WinBar           guifg=#959595 gui=none
+hi WinBarNC         guifg=#d4d4d4 gui=none
+hi WinBarLocation   guifg=#888888 gui=none
+hi WinBarModified   guifg=#d7d787 gui=none
+hi WinBarGitDirty   guifg=#d7afd7 gui=none
+hi WinBarIndicator  guifg=#5fafd7 gui=none
+hi WinBarIcon       guifg=#404040 gui=none
 
 hi link FloatBorder Normal
 hi link NormalFloat Normal
+
+call interface#PartialLink('TelescopeNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
+hi link TelescopePromptNormal Normal
+hi TelescopeBorder  guibg=#F1F1F1 guifg=#d4d4d4
+hi TelescopeTitle   guifg=#000000 guibg=#F1F1F1 gui=bold
+
+call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
+hi WilderBorder  guibg=#F1F1F1 guifg=#F1F1F1
+hi WilderPrompt  ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF

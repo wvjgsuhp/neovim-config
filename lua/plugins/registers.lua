@@ -9,7 +9,7 @@ return {
     })
   end,
   keys = {
-    { '"', mode = { "n", "v" } },
+    { '<Leader>"', mode = { "n", "v" } },
     { "<C-R>", mode = "i" },
   },
   cmd = "Registers",
