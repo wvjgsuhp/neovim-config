@@ -5,10 +5,6 @@ return {
     "nvim-telescope/telescope-fzf-native.nvim",
   },
   config = function()
-    -- plugin: telescope.nvim
-    -- see: https://github.com/nvim-telescope/telescope.nvim
-    -- rafi settings
-
     -- Custom window-sizes
     local horizontal_preview_width = function(_, cols, _)
       if cols > 200 then
@@ -27,9 +23,8 @@ return {
       local layout =
         require("telescope.pickers.layout_strategies").horizontal(picker, max_columns, max_lines, layout_config)
 
-      -- layout.prompt.title = ""
       layout.prompt.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
-      -- layout.prompt.borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+      layout.preview.borderchars = { " ", " ", " ", "▏", " ", " ", " ", " " }
 
       layout.results.title = ""
       -- layout.results.borderchars = { "─", "│", "─", "│", "│", "│", "┘", "└" }
@@ -37,10 +32,6 @@ return {
       layout.results.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
       layout.results.line = layout.results.line - 1
       layout.results.height = layout.results.height + 1
-
-      -- layout.preview.title = ""
-      layout.preview.borderchars = { " ", " ", " ", "▏", " ", " ", " ", " " }
-      -- layout.preview.borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
 
       return layout
     end
@@ -93,18 +84,10 @@ return {
           width = 0.9,
           height = 0.85,
           prompt_position = "top",
-          -- center = {
-          --  preview_cutoff = 40
-          -- },
           horizontal = {
-            -- width_padding = 0.1,
-            -- height_padding = 0.1,
-            -- preview_cutoff = 60,
             preview_width = horizontal_preview_width,
           },
           vertical = {
-            -- width_padding = 0.05,
-            -- height_padding = 1,
             width = 0.75,
             height = 0.85,
             preview_height = 0.4,
@@ -176,7 +159,6 @@ return {
           require("telescope.themes").get_cursor({
             layout_config = { width = 0.35, height = 0.35 },
           }),
-          -- require("telescope.themes").get_dropdown(),
         },
         fzf = {
           fuzzy = true, -- false will only do exact matching
