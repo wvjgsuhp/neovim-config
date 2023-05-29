@@ -128,8 +128,8 @@ nmap <Leader>mj <cmd>sp<bar>execute 'edit'
 
 " quit
 nnoremap <Leader>cc <cmd>cclose<cr>
-autocmd FileType lazy,help,NvimTree,checkhealth,Trouble nnoremap <buffer> <esc> <cmd>q<cr>
-autocmd FileType lazy,help,NvimTree,checkhealth,Trouble nmap <buffer> q <esc>
+autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice nnoremap <buffer> <esc> <cmd>q<cr>
+autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice nmap <buffer> q <esc>
 
 " override defaults
 nnoremap s <Nop>

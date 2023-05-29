@@ -17,6 +17,7 @@ return {
       "quickpick-filter",
       "WhichKey",
       "csv",
+      "noice",
     }
     vim.cmd([[
       augroup user_plugin_indentguides

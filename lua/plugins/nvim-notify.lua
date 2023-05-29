@@ -4,7 +4,21 @@ return {
   "rcarriga/nvim-notify",
   config = function()
     local notify = require("notify")
-    notify.setup({ stages = "static" })
+    local stages = require("notify.stages.static")("top_down")
+
+    notify.setup({
+      render = "compact",
+      stages = {
+        function(...)
+          local opts = stages[1](...)
+          if opts then
+            opts.border = "single"
+          end
+          return opts
+        end,
+        unpack(stages, 2),
+      },
+    })
     vim.notify = notify
 
     utils.noremap(

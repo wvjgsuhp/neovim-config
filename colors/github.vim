@@ -22,7 +22,6 @@ let colors_name = "github"
 hi Normal       ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
 hi Cursor       ctermfg=239   ctermbg=15    guifg=#F8F8FF guibg=#444454
 hi Visual       ctermbg=252   guibg=#d4d4d4
-" hi Visual       ctermfg=15    ctermbg=255   guifg=#FFFFFF guibg=#000000
 hi VisualNOS    ctermfg=15    ctermbg=24    guifg=#FFFFFF guibg=#204a87
 hi Search       ctermfg=236   ctermbg=228   guifg=#000000 guibg=#FFFF8C cterm=bold  gui=bold
 hi Folded       ctermfg=8     ctermbg=15    guifg=#808080 guibg=#ECECEC gui=bold    cterm=bold
@@ -37,12 +36,14 @@ hi SignColumn   ctermbg=none  guibg=none
 call interface#PartialLink("VertSplit", "Normal", ["guibg", 'ctermbg'], "ctermfg=250 guifg=#bbbbbb")
 call interface#PartialLink("LineNr", "Normal", ["guibg", 'ctermbg'], "ctermfg=246 guifg=#959595")
 
-hi CursorLine ctermbg=253 guibg=#D8D8DD
-hi MatchParen ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
-hi Pmenu      ctermfg=0   ctermbg=255 guifg=#000000 guibg=#F8F8FF
-hi PmenuSel   ctermfg=15  ctermbg=61  guifg=#FFFFFF guibg=#3465a3
-hi PmenuSbar  ctermfg=246 ctermbg=15  guifg=#959595 guibg=#ECECEC
-hi PmenuThumb ctermfg=250 ctermbg=250 guifg=#bbbbbb guibg=#bbbbbb
+hi CursorLine   ctermbg=253 guibg=#D8D8DD
+hi MatchParen   ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
+hi Pmenu        ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1
+hi PmenuSel     ctermfg=15  ctermbg=61  guifg=#FFFFFF guibg=#3465a3
+hi PmenuSbar    ctermfg=246 ctermbg=15  guifg=#959595 guibg=#ECECEC
+hi PmenuThumb   ctermfg=250 ctermbg=250 guifg=#bbbbbb guibg=#bbbbbb
+hi PmenuBorder  ctermfg=254 ctermbg=254 guibg=#F1F1F1 guifg=#F1F1F1
+hi PmenuTitle   ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1 gui=bold  cterm=bold
 
 hi DiffAdd    ctermfg=233 ctermbg=194   guifg=#003300 guibg=#DDFFDD gui=none  cterm=none
 hi DiffChange ctermbg=255 guibg=#ececec gui=none      cterm=none
@@ -138,16 +139,17 @@ if has("spell")
   hi spellLocal   guisp=#729fcf
 endif
 
-hi StatusLineN1         ctermfg=188   ctermbg=0   guifg=#dddddd guibg=#000000 gui=none cterm=none
-hi StatusLineN2         ctermfg=188   ctermbg=238 guifg=#dddddd guibg=#404040 gui=none cterm=none
-hi StatusLineN3         ctermfg=0     ctermbg=188 guifg=#000000 guibg=#dddddd gui=none cterm=none
-hi StatusLineI1         ctermfg=188   ctermbg=26  guifg=#dddddd guibg=#005cc5 gui=none cterm=none
-hi StatusLineI2         ctermfg=188   ctermbg=17  guifg=#dddddd guibg=#032f62 gui=none cterm=none
-hi StatusLineV1         ctermfg=188   ctermbg=91  guifg=#dddddd guibg=#6f42c1 gui=none cterm=none
-hi StatusLineV2         ctermfg=188   ctermbg=237 guifg=#dddddd guibg=#45267d gui=none cterm=none
-hi StatusLineR1         ctermfg=188   ctermbg=167 guifg=#dddddd guibg=#d73a49 gui=none cterm=none
-hi StatusLineR2         ctermfg=188   ctermbg=124 guifg=#dddddd guibg=#b31d28 gui=none cterm=none
-hi StatusLineRO         ctermfg=167   ctermbg=188 guifg=#ff0000 guibg=#dddddd gui=none cterm=none
+hi StatusLineN1       ctermfg=188   ctermbg=0   guifg=#dddddd guibg=#000000 gui=none cterm=none
+hi StatusLineN2       ctermfg=188   ctermbg=238 guifg=#dddddd guibg=#404040 gui=none cterm=none
+hi StatusLineN3       ctermfg=0     ctermbg=188 guifg=#000000 guibg=#dddddd gui=none cterm=none
+hi StatusLineI1       ctermfg=188   ctermbg=26  guifg=#dddddd guibg=#005cc5 gui=none cterm=none
+hi StatusLineI2       ctermfg=188   ctermbg=17  guifg=#dddddd guibg=#032f62 gui=none cterm=none
+hi StatusLineV1       ctermfg=188   ctermbg=91  guifg=#dddddd guibg=#6f42c1 gui=none cterm=none
+hi StatusLineV2       ctermfg=188   ctermbg=237 guifg=#dddddd guibg=#45267d gui=none cterm=none
+hi StatusLineR1       ctermfg=188   ctermbg=167 guifg=#dddddd guibg=#d73a49 gui=none cterm=none
+hi StatusLineR2       ctermfg=188   ctermbg=124 guifg=#dddddd guibg=#b31d28 gui=none cterm=none
+hi StatusLineRO       ctermfg=167   ctermbg=188 guifg=#ff0000 guibg=#dddddd gui=none cterm=none
+hi StatusLineInactive guifg=#404040 guibg=#d4d4d4
 
 let s:win_bar_glyph_hl = {
   \"StatusLineError":       "guifg=#ff0000",
@@ -163,8 +165,6 @@ for [hl, attributes] in items(s:win_bar_glyph_hl)
   call interface#PartialLink(hl, "StatusLineN3", ["guibg"], attributes)
 endfor
 
-hi StatusLineInactive   guifg=#404040 guibg=#d4d4d4
-
 hi WinBar           guifg=#959595 gui=none
 hi WinBarNC         guifg=#d4d4d4 gui=none
 hi WinBarLocation   guifg=#888888 gui=none
@@ -176,10 +176,14 @@ hi WinBarIcon       guifg=#404040 gui=none
 hi link FloatBorder Normal
 hi link NormalFloat Normal
 
+hi link NoiceCmdlinePopupBorder PmenuBorder
+hi link NoiceCmdlinePopup       Normal
+hi link NoiceCmdlineIcon        Normal
+
 call interface#PartialLink('TelescopeNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
 hi link TelescopePromptNormal Normal
+hi link TelescopeTitle        PmenuTitle
 hi TelescopeBorder  guibg=#F1F1F1 guifg=#d4d4d4
-hi TelescopeTitle   guifg=#000000 guibg=#F1F1F1 gui=bold
 
 call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
 hi WilderBorder  guibg=#F1F1F1 guifg=#F1F1F1
