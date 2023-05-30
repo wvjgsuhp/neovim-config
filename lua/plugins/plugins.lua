@@ -16,15 +16,6 @@ return {
     },
   },
   {
-    "tpope/vim-fugitive",
-    config = function()
-      utils.noremap("n", "<Leader>gs", "<cmd>G status<CR>")
-      utils.noremap("n", "<Leader>gp", "<cmd>G push<CR>")
-      utils.noremap("n", "<Leader>gac", ":G commit -am ''<Left>")
-      utils.noremap("n", "<Leader>gaa", "<cmd>G add .<CR>")
-    end,
-  },
-  {
     "mzlogin/vim-markdown-toc",
     config = function()
       vim.g.vmt_auto_update_on_save = 0

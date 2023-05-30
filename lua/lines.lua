@@ -2,13 +2,9 @@
 local M = {}
 local utils = require("utils")
 
-local isempty = function(s)
-  return s == nil or s == ""
-end
-
 local is_current = function()
   local winid = vim.g.actual_curwin
-  if isempty(winid) then
+  if utils.isempty(winid) then
     return false
   else
     return winid == tostring(vim.api.nvim_get_current_win())
@@ -45,7 +41,7 @@ M.get_winbar = function()
   --   return M.active_indicator()
   else
     -- real files do not have buftypes
-    if isempty(buftype) then
+    if utils.isempty(buftype) then
       return table.concat({
         mode_part,
         M.get_filename(),
@@ -170,7 +166,7 @@ M.get_icon = function()
   local buftype = vim.bo.buftype
   local filetype = vim.bo.filetype
 
-  if isempty(buftype) then
+  if utils.isempty(buftype) then
     if vim.bo.modified then
       return " %#WinBarModified# %*"
     end
@@ -249,7 +245,7 @@ end
 
 M.get_git_branch = function()
   local branch = vim.fn.FugitiveStatusline():sub(6, -3)
-  if isempty(branch) then
+  if utils.isempty(branch) then
     return ""
   else
     return "  " .. branch .. " "
@@ -265,7 +261,7 @@ local git_changes = {
 
 M.get_git_changes = function()
   local changes = ""
-  if not isempty(vim.b.gitsigns_status_dict) then
+  if not utils.isempty(vim.b.gitsigns_status_dict) then
     for _, change in ipairs(use_git_changes) do
       local sign = git_changes[change]
       local change_count = vim.b.gitsigns_status_dict[change]
@@ -290,7 +286,7 @@ M.get_location = function()
     end
 
     local location = provider.get_location({})
-    if not isempty(location) and location ~= "error" then
+    if not utils.isempty(location) and location ~= "error" then
       return "%#WinBarLocation# " .. location .. "%*"
     else
       return ""

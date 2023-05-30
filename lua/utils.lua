@@ -22,4 +22,10 @@ function utils.capitalize(str)
   return (str:lower():gsub("^%l", string.upper))
 end
 
+---check if string is empty
+---@param str string
+function utils.isempty(str)
+  return str == nil or str == ""
+end
+
 return utils
