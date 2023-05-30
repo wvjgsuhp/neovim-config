@@ -188,3 +188,5 @@ hi TelescopeBorder  guibg=#F1F1F1 guifg=#d4d4d4
 call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
 hi WilderBorder  guibg=#F1F1F1 guifg=#F1F1F1
 hi WilderPrompt  ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
+
+hi link LazyNormal Pmenu

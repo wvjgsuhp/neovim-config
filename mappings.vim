@@ -88,7 +88,7 @@ nnoremap <Leader>yaa ggyG''
 nnoremap <Leader>ypG VGyGp
 
 " Delete current file
-nnoremap <Leader>rm <cmd>call delete(expand('%'))<bar>b#<bar>bd#<cr>
+nnoremap <Leader>rm <cmd>silent! write<bar>call delete(expand('%'))<bar>b#<bar>bd#<cr>
 
 " Close current buffer
 nnoremap <Leader>bd <cmd>b#<bar>bd#<CR>

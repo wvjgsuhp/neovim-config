@@ -1,13 +1,11 @@
 return {
   "tversteeg/registers.nvim",
-  config = function()
-    require("registers").setup({
-      window = {
-        border = "single",
-        transparency = 0,
-      },
-    })
-  end,
+  opts = {
+    window = {
+      border = "single",
+      transparency = 0,
+    },
+  },
   keys = {
     { '<Leader>"', mode = { "n", "v" } },
     { "<C-R>", mode = "i" },

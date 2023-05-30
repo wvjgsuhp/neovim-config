@@ -49,7 +49,7 @@ set diffopt+=iwhite             " Diff mode: ignore whitespace
 " Interface
 set termguicolors
 set noshowmode          " Don't show mode in cmd window
-set shortmess=aoOTI     " Shorten messages and don't show intro
+set shortmess=aoOTIFW   " Shorten messages and don't show intro
 set sidescrolloff=5     " Keep at least 5 lines left/right
 set noruler             " Disable default status ruler
 set list                " Show hidden characters

@@ -37,6 +37,7 @@ return {
         autocmd BufWritePre *.ts Neoformat
         autocmd BufWritePre *.tsx Neoformat
         autocmd BufWritePre *.yaml Neoformat
+        autocmd BufWritePre *.R Neoformat
       augroup END
     ]])
   end,
