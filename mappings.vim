@@ -130,8 +130,8 @@ nmap <Leader>mj <cmd>sp<bar>execute 'edit'
 nnoremap <Leader>cc <cmd>cclose<cr>
 augroup quit_on_non_file
   autocmd!
-  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice nnoremap <buffer> <esc> <cmd>q<cr>
-  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice nmap <buffer> q <esc>
+  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nnoremap <buffer> <esc> <cmd>q<cr>
+  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <esc>
 augroup END
 
 " csv specific
