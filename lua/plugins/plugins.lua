@@ -111,7 +111,17 @@ return {
 
   -- Vimscript syntax/indent plugins
 
-  { "chrisbra/csv.vim", ft = { "csv" } },
+  { "chrisbra/csv.vim", config=function ()
+    vim.g.no_csv_maps = 1
+    vim.g.csv_arrange_align = 'l*'
+    vim.cmd([[
+      augroup csv_plugin
+        autocmd!
+        autocmd FileType csv nnoremap <buffer> <Leader>aa ggVG:'<,'>ArrangeColumn<cr>
+        autocmd FileType csv nnoremap <buffer> <Leader>au ggVG:'<,'>UnArrangeColumn<cr>
+      augroup END
+    ]])
+  end, ft = { "csv" } },
   -- - { repo: MTDL9/vim-log-highlighting, on_ft: log }
 
   -- - repo: preservim/vim-markdown

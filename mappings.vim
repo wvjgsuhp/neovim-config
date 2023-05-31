@@ -128,8 +128,18 @@ nmap <Leader>mj <cmd>sp<bar>execute 'edit'
 
 " quit
 nnoremap <Leader>cc <cmd>cclose<cr>
-autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice nnoremap <buffer> <esc> <cmd>q<cr>
-autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice nmap <buffer> q <esc>
+augroup quit_on_non_file
+  autocmd!
+  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice nnoremap <buffer> <esc> <cmd>q<cr>
+  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice nmap <buffer> q <esc>
+augroup END
+
+" csv specific
+augroup csv
+  autocmd!
+  autocmd FileType csv nnoremap <buffer> <Leader>ptt <cmd>%s/\|/\t/g<cr>
+  autocmd FileType csv nnoremap <buffer> <Leader>ttp <cmd>%s/\t/\|/g<cr>
+augroup END
 
 " override defaults
 nnoremap s <Nop>
