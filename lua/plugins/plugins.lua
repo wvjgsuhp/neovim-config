@@ -111,45 +111,22 @@ return {
 
   -- Vimscript syntax/indent plugins
 
-  { "chrisbra/csv.vim", config=function ()
-    vim.g.no_csv_maps = 1
-    vim.g.csv_arrange_align = 'l*'
-    vim.cmd([[
+  {
+    "chrisbra/csv.vim",
+    config = function()
+      vim.g.no_csv_maps = 1
+      vim.g.csv_arrange_align = "l*"
+      vim.cmd([[
       augroup csv_plugin
         autocmd!
         autocmd FileType csv nnoremap <buffer> <Leader>aa ggVG:'<,'>ArrangeColumn<cr>
         autocmd FileType csv nnoremap <buffer> <Leader>au ggVG:'<,'>UnArrangeColumn<cr>
       augroup END
     ]])
-  end, ft = { "csv" } },
+    end,
+    ft = { "csv" },
+  },
   -- - { repo: MTDL9/vim-log-highlighting, on_ft: log }
-
-  -- - repo: preservim/vim-markdown
-  --   on_ft: markdown
-  --   hook_add: |-
-  --     let g:vim_markdown_frontmatter = 1
-  --     let g:vim_markdown_strikethrough = 1
-  --     let g:vim_markdown_folding_disabled = 1
-  --     let g:vim_markdown_conceal = 1
-  --     let g:vim_markdown_conceal_code_blocks = 1
-  --     let g:vim_markdown_new_list_item_indent = 0
-  --     let g:vim_markdown_toc_autofit = 0
-  --     let g:vim_markdown_follow_anchor = 0
-  --     let g:vim_markdown_no_extensions_in_markdown = 1
-  --     let g:vim_markdown_edit_url_in = 'vsplit'
-  --     let g:vim_markdown_fenced_languages = [
-  --       \ 'c++=cpp',
-  --       \ 'viml=vim',
-  --       \ 'bash=sh',
-  --       \ 'ini=dosini',
-  --       \ 'js=javascript',
-  --       \ 'json=javascript',
-  --       \ 'jsx=javascriptreact',
-  --       \ 'tsx=typescriptreact',
-  --       \ 'docker=Dockerfile',
-  --       \ 'makefile=make',
-  --       \ 'py=python'
-  --       \ ]
 
   -- operators and text objects
   {

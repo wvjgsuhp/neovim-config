@@ -30,7 +30,6 @@ return {
         autocmd BufWritePre *.json Neoformat
         autocmd BufWritePre *.jsx Neoformat
         autocmd BufWritePre *.lua Neoformat
-        autocmd BufWritePre *.md Neoformat
         autocmd BufWritePre *.py Neoformat
         autocmd BufWritePre *.rs Neoformat
         autocmd BufWritePre *.sql Neoformat
