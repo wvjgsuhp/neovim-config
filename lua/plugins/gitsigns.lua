@@ -3,10 +3,6 @@ local utils = require("utils")
 return {
   "lewis6991/gitsigns.nvim",
   config = function()
-    -- plugin: gitsigns.nvim
-    -- see: https://github.com/lewis6991/gitsigns.nvim
-    -- rafi settings
-
     require("gitsigns").setup({
       signs = {
         add = { text = "▍" },
@@ -24,22 +20,6 @@ return {
       current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
       preview_config = {
         border = "single",
-      },
-      keymaps = {
-        noremap = true,
-
-        ["n ]g"] = {
-          expr = true,
-          "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'",
-        },
-        ["n [g"] = {
-          expr = true,
-          "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'",
-        },
-
-        -- Text objects
-        ["o ih"] = ":<C-U>Gitsigns select_hunk<CR>",
-        ["x ih"] = ":<C-U>Gitsigns select_hunk<CR>",
       },
     })
 

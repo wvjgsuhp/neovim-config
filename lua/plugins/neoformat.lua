@@ -1,4 +1,4 @@
-local utils = require('utils')
+local utils = require("utils")
 
 return {
   "sbdchd/neoformat",
@@ -23,43 +23,25 @@ return {
       replace = 1,
     }
 
-    utils.augroup('formatting')
+    utils.augroup("formatting")
     local auto_format_extensions = {
-        '*.html',
-        '*.java',
-        '*.js',
-        '*.json',
-        '*.jsx',
-        '*.lua',
-        '*.py',
-        '*.rs',
-        '*.sql',
-        '*.ts',
-        '*.tsx',
-        '*.yaml',
-        '*.R',
+      "*.html",
+      "*.java",
+      "*.js",
+      "*.json",
+      "*.jsx",
+      "*.lua",
+      "*.py",
+      "*.rs",
+      "*.sql",
+      "*.ts",
+      "*.tsx",
+      "*.yaml",
+      "*.R",
     }
-    utils.autocmd('BufWritePre', {
-      pattern=auto_format_extensions,
-      callback='Neoformat'
+    utils.autocmd("BufWritePre", {
+      pattern = auto_format_extensions,
+      command = "Neoformat",
     })
-    -- vim.cmd([[
-    --   augroup formatting
-    --     autocmd!
-    --     autocmd BufWritePre *.html Neoformat
-    --     autocmd BufWritePre *.java Neoformat
-    --     autocmd BufWritePre *.js Neoformat
-    --     autocmd BufWritePre *.json Neoformat
-    --     autocmd BufWritePre *.jsx Neoformat
-    --     autocmd BufWritePre *.lua Neoformat
-    --     autocmd BufWritePre *.py Neoformat
-    --     autocmd BufWritePre *.rs Neoformat
-    --     autocmd BufWritePre *.sql Neoformat
-    --     autocmd BufWritePre *.ts Neoformat
-    --     autocmd BufWritePre *.tsx Neoformat
-    --     autocmd BufWritePre *.yaml Neoformat
-    --     autocmd BufWritePre *.R Neoformat
-    --   augroup END
-    -- ]])
   end,
 }

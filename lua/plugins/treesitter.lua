@@ -7,10 +7,6 @@ return {
   },
   build = ":TSUpdate",
   config = function()
-    -- plugin: nvim-treesitter
-    -- see: https://github.com/nvim-treesitter/nvim-treesitter
-    -- rafi settings
-
     -- Setup treesitter
     require("nvim-treesitter.configs").setup({
       -- all, maintained, or list of languages
@@ -35,7 +31,6 @@ return {
         "tsx",
         "typescript",
         "vim",
-        "yaml",
       },
 
       highlight = {

@@ -20,7 +20,7 @@ cmap <C-s> <space>w
 " Go from terminal to normal mode
 tnoremap <Esc> <C-\><C-n>zz
 
-" Use ctrl-[hjkl] to select the active split!
+" move between active splits
 nmap <silent> <c-k> <cmd>wincmd k<CR>
 nmap <silent> <c-j> <cmd>wincmd j<CR>
 nmap <silent> <c-h> <cmd>wincmd h<CR>
@@ -96,7 +96,6 @@ nnoremap <Leader>bd <cmd>b#<bar>bd#<CR>
 " Git
 nnoremap <Leader>gdh <cmd>diffget //2<cr>
 nnoremap <Leader>gdl <cmd>diffget //3<cr>
-nnoremap <Leader>gpn 6kyyGpi
 
 " Find
 nmap <Leader>fp /<C-r>0<cr>

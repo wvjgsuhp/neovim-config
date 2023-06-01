@@ -28,17 +28,21 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
       require("which-key").setup({ window = { border = "single" } })
-      utils.noremap("n", "<Leader>k", "<cmd>WhichKey<cr>")
     end,
+    keys = {
+      { "<Leader>k", "<cmd>WhichKey<CR>" },
+    },
   },
   {
     "nvim-telescope/telescope-ui-select.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension("ui-select")
     end,
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
+    lazy = true,
     cond = vim.g.is_unix == 1,
     build = "make",
     config = function()
@@ -50,10 +54,6 @@ return {
 
   "MunifTanjim/nui.nvim",
   "romainl/vim-cool",
-  {"norcalli/nvim-colorizer.lua",
-  opts={
-'html', 'css', 'vim'
-    },ft = {'html','css','vim'},},
   {
     "rhysd/clever-f.vim",
     config = function()

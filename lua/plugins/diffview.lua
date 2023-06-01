@@ -1,10 +1,6 @@
 return {
   "sindrets/diffview.nvim",
   config = function()
-    -- plugin: diffview.nvim
-    -- see: https://github.com/sindrets/diffview.nvim
-    -- rafi settings
-
     local cb = require("diffview.config").diffview_callback
 
     vim.cmd([[
@@ -19,6 +15,7 @@ return {
       enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
       key_bindings = {
         view = {
+          ["<esc>"] = "<cmd>DiffviewClose<CR>",
           ["q"] = "<cmd>DiffviewClose<CR>",
           ["<tab>"] = cb("select_next_entry"),
           ["<s-tab>"] = cb("select_prev_entry"),
