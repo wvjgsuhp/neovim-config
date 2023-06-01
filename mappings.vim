@@ -101,7 +101,7 @@ nnoremap <Leader>gpn 6kyyGpi
 " Find
 nmap <Leader>fp /<C-r>0<cr>
 nnoremap <Leader>fn <cmd>Navbuddy<cr>
-nnoremap * *zz
+nmap * *N
 
 " Edit file
 nnoremap <Leader>ze <cmd>e ~/.zshrc<cr>

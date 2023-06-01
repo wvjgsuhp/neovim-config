@@ -49,8 +49,11 @@ return {
   -- interface
 
   "MunifTanjim/nui.nvim",
-  "lilydjwg/colorizer",
   "romainl/vim-cool",
+  {"norcalli/nvim-colorizer.lua",
+  opts={
+'html', 'css', 'vim'
+    },ft = {'html','css','vim'},},
   {
     "rhysd/clever-f.vim",
     config = function()
