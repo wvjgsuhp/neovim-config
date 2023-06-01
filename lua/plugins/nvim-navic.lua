@@ -4,6 +4,9 @@ return {
   "SmiteshP/nvim-navic",
   opts = {
     icons = constants.icons,
+    lsp = {
+      auto_attach = true,
+    },
     highlight = true,
     separator = " ",
   },

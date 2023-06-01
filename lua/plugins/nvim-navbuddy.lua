@@ -2,7 +2,10 @@ local constants = require("constants")
 
 return {
   "SmiteshP/nvim-navbuddy",
-  dependencies = { "MunifTanjim/nui.nvim" },
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "SmiteshP/nvim-navic",
+  },
   opts = {
     window = {
       border = "single", -- "rounded", "double", "solid", "none"
@@ -27,6 +30,14 @@ return {
           preview = "leaf", -- Right section can show previews too.
           -- Options: "leaf", "always" or "never"
         },
+      },
+    },
+    node_markers = {
+      enabled = true,
+      icons = {
+        leaf = "  ",
+        leaf_selected = "  ",
+        branch = " ",
       },
     },
     icons = constants.icons,

@@ -10,16 +10,10 @@ return {
     -- "jose-elias-alvarez/nvim-lsp-ts-utils",
     "jose-elias-alvarez/null-ls.nvim",
     --'jayp0521/mason-null-ls.nvim',
-    -- "nvim-lua/plenary.nvim",
+    "nvim-lua/plenary.nvim",
     -- "b0o/schemastore.nvim",
     "folke/neodev.nvim",
-    {
-      "SmiteshP/nvim-navbuddy",
-      dependencies = {
-        "SmiteshP/nvim-navic",
-        "MunifTanjim/nui.nvim",
-      },
-    },
+    "SmiteshP/nvim-navbuddy",
   },
   config = function()
     require("mason").setup()
@@ -83,9 +77,9 @@ return {
         )
       end
 
-      if client.server_capabilities.documentSymbolProvider then
-        require("nvim-navic").attach(client, bufnr)
-      end
+      -- if client.server_capabilities.documentSymbolProvider then
+      --   require("nvim-navic").attach(client, bufnr)
+      -- end
 
       if client.name == "omnisharp" then
         client.server_capabilities.semanticTokensProvider = {
