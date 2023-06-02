@@ -22,7 +22,7 @@ return {
           col = "50%",
         },
         size = {
-          width = 60,
+          width = 89,
           height = "auto",
         },
         win_options = {
@@ -36,8 +36,8 @@ return {
           col = "50%",
         },
         size = {
-          width = 60,
-          height = 10,
+          width = 89,
+          height = 13,
         },
         win_options = {
           winhighlight = { Normal = "Pmenu" },

@@ -24,17 +24,17 @@ return {
     utils.noremap(
       "n",
       "<Leader>yfn",
-      "<cmd>let @+=expand('%:t')<CR>:lua vim.notify('Yanked filename: <c-r>+', 'info')<CR>"
+      "<cmd>let @+=expand('%:t')<CR>:lua vim.notify('Yanked filename: <c-r>+')<CR>"
     )
     utils.noremap(
       "n",
       "<Leader>yrp",
-      "<cmd>let @+=expand('%:~:.')<CR>:lua vim.notify('Yanked relative path: <c-r>+', 'info')<CR>"
+      "<cmd>let @+=expand('%:~:.')<CR>:lua vim.notify('Yanked relative path: <c-r>+')<CR>"
     )
     utils.noremap(
       "n",
       "<Leader>yap",
-      "<cmd>let @+=expand('%:p')<CR>:lua vim.notify('Yanked absolute path: <c-r>+', 'info')<CR>"
+      "<cmd>let @+=expand('%:p')<CR>:lua vim.notify('Yanked absolute path: <c-r>+')<CR>"
     )
   end,
 }

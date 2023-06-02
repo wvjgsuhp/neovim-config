@@ -10,3 +10,4 @@
 NUL
 *.log
 .luarc.json
+*/local

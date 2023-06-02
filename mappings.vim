@@ -26,6 +26,20 @@ nmap <silent> <c-j> <cmd>wincmd j<CR>
 nmap <silent> <c-h> <cmd>wincmd h<CR>
 nmap <silent> <c-l> <cmd>wincmd l<CR>
 
+" move between tabs
+nnoremap <Leader>tl <cmd>tabnext<CR>
+nnoremap <Leader>th <cmd>tabprev<CR>
+noremap <Leader>1 1gt
+noremap <Leader>2 2gt
+noremap <Leader>3 3gt
+noremap <Leader>4 4gt
+noremap <Leader>5 5gt
+noremap <Leader>6 6gt
+noremap <Leader>7 7gt
+noremap <Leader>8 8gt
+noremap <Leader>9 9gt
+noremap <Leader>0 <cmd>tablast<cr>
+
 " Yank
 nnoremap <Leader>yfn <cmd>let @+=expand("%:t")<CR>
   \ <cmd>echo 'Yanked filename: <c-r>+'<CR>
@@ -48,18 +62,6 @@ vnoremap <localleader>p :VisualPaste '"+p'<CR>
 nnoremap <localleader>v "+p
 nnoremap <localleader>V "+P
 vnoremap <localleader>v :VisualPaste '"+p'<CR>
-
-" Go to tab by number
-noremap <Leader>1 1gt
-noremap <Leader>2 2gt
-noremap <Leader>3 3gt
-noremap <Leader>4 4gt
-noremap <Leader>5 5gt
-noremap <Leader>6 6gt
-noremap <Leader>7 7gt
-noremap <Leader>8 8gt
-noremap <Leader>9 9gt
-noremap <Leader>0 <cmd>tablast<cr>
 
 " Jump to the beginning/end of a line
 noremap <Leader>h ^

@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 return {
   "folke/lsp-colors.nvim",
   "nvim-lua/plenary.nvim",
