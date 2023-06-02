@@ -21,6 +21,7 @@ return {
       preview_config = {
         border = "single",
       },
+      trouble = false,
     })
 
     utils.noremap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zz")

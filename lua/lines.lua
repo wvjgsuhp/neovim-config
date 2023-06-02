@@ -1,6 +1,7 @@
 -- https://www.reddit.com/r/neovim/comments/vpxexc/pde_custom_winbar_and_statusline_without_plugins/
 local M = {}
 local utils = require("utils")
+local constants = require("constants")
 
 local is_current = function()
   local winid = vim.g.actual_curwin
@@ -29,7 +30,7 @@ M.get_winbar = function()
     return table.concat({
       mode_part,
       M.get_icon(),
-      " TERMINAL-%n %#WinBarLocation# %{b:term_title}%*",
+      " TERMINAL-%n" .. constants.win_bar_separator .. "%{b:term_title}",
     })
   elseif buftype == "nofile" then
     return table.concat({
@@ -205,12 +206,7 @@ M.get_filename = function()
 end
 
 local severity_levels = { "Error", "Warn", "Info", "Hint" }
-local diagnostic_signs = {
-  Error = "󰅙 ",
-  Warn = "󱇎 ",
-  Info = " ",
-  Hint = "󰌵 ",
-}
+local diagnostic_signs = constants.diagnostics
 
 local get_sign = function(severity)
   local hl = "%#StatusLine" .. severity .. "#"
@@ -240,6 +236,7 @@ M.get_diags = function()
       result = result .. " " .. get_sign(level) .. severity_count
     end
   end
+
   return result
 end
 
@@ -287,7 +284,7 @@ M.get_location = function()
 
     local location = provider.get_location({})
     if not utils.isempty(location) and location ~= "error" then
-      return "%#WinBarLocation# " .. location .. "%*"
+      return constants.win_bar_separator .. location
     else
       return ""
     end

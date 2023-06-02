@@ -8,6 +8,6 @@ return {
       auto_attach = true,
     },
     highlight = true,
-    separator = " ",
+    separator = constants.win_bar_separator,
   },
 }

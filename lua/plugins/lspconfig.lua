@@ -1,4 +1,5 @@
 local utils = require("utils")
+local constants = require("constants")
 
 return {
   "neovim/nvim-lspconfig",
@@ -76,10 +77,6 @@ return {
           false
         )
       end
-
-      -- if client.server_capabilities.documentSymbolProvider then
-      --   require("nvim-navic").attach(client, bufnr)
-      -- end
 
       if client.name == "omnisharp" then
         client.server_capabilities.semanticTokensProvider = {
@@ -191,12 +188,7 @@ return {
         severity_sort = true,
       })
 
-      -- Diagnostics signs and highlights
-      --   Error:   ✘
-      --   Warn:  ⚠  
-      --   Hint:  
-      --   Info:   ⁱ
-      local signs = { Error = "✘", Warn = "", Hint = "", Info = "ⁱ" }
+      local signs = constants.diagnostics
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })

@@ -165,7 +165,7 @@ for [hl, attributes] in items(s:win_bar_glyph_hl)
   call interface#PartialLink(hl, "StatusLineN3", ["guibg"], attributes)
 endfor
 
-hi WinBar           guifg=#959595 gui=none
+hi WinBar           guifg=#888888 gui=none
 hi WinBarNC         guifg=#d4d4d4 gui=none
 hi WinBarLocation   guifg=#888888 gui=none
 hi WinBarModified   guifg=#d7d787 gui=none
@@ -190,3 +190,19 @@ hi WilderBorder  guibg=#F1F1F1 guifg=#F1F1F1
 hi WilderPrompt  ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
 
 hi link LazyNormal Pmenu
+
+call interface#PartialLink('CmpItemAbbrDeprecated', "Ignore", ['guifg'], 'gui=strikethrough')
+" blue
+hi CmpItemAbbrMatch guibg=NONE guifg=#0086B3
+hi link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
+" light blue
+hi link CmpItemKindVariable   Identifier
+hi link CmpItemKindInterface  CmpItemKindVariable
+hi link CmpItemKindText       CmpItemKindVariable
+" pink
+hi link CmpItemKindFunction   Function
+hi link CmpItemKindMethod     CmpItemKindFunction
+" front
+hi link CmpItemKindKeyword    Statement
+hi link CmpItemKindProperty   CmpItemKindKeyword
+hi link CmpItemKindUnit       CmpItemKindKeyword
