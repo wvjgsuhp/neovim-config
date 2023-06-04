@@ -60,6 +60,17 @@ return {
         )
       end
 
+      if client.supports_method("textDocument/formatting") then
+        if vim.fn.has("nvim-0.8") == 1 then
+          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>", opts)
+        else
+          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>", opts)
+        end
+      end
+      if client.supports_method("textDocument/rangeFormatting") then
+        map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+      end
+
       if client.name == "omnisharp" then
         client.server_capabilities.semanticTokensProvider = {
           full = vim.empty_dict(),

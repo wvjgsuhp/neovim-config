@@ -23,7 +23,8 @@ M.get_winbar = function()
     return ""
   end
 
-  local mode_part = M.get_mode_part()
+  local mode = M.get_mode()
+  local mode_part = M.get_mode_part(mode)
 
   local buftype = vim.bo.buftype
   if buftype == "terminal" then
@@ -48,6 +49,8 @@ M.get_winbar = function()
         M.get_filename(),
         "%<",
         M.get_location(),
+        "%=",
+        M.get_tabs(mode),
       })
     else
       -- Meant for quickfix, help, etc
@@ -296,6 +299,35 @@ M.get_location = function()
   return result
 end
 
+--- @param mode string
+M.get_tabs = function(mode)
+  -- uncomment to display tabs in |1|2|...
+  -- if mode:len() > 1 then
+  --   return ""
+  -- end
+
+  local last_tab = vim.fn.tabpagenr("$")
+  if last_tab == 1 then
+    return ""
+  end
+
+  -- local mode_colors = M.get_mode_colors(mode)
+  local this_tab = vim.fn.tabpagenr()
+  -- return " " .. mode_colors["a"] .. " " .. tostring(this_tab) .. "/" .. tostring(last_tab) .. " "
+  -- local tabs = " "
+  -- for tab = 1, last_tab, 1 do
+  --   if tab ~= this_tab then
+  --     tabs = tabs .. "%#StatusLineInactive# " .. tostring(tab) .. " %*"
+  --   else
+  --     tabs = tabs .. mode_colors["a"] .. " " .. tostring(tab) .. " %*"
+  --   end
+  -- end
+  --
+  -- return tabs
+
+  return "  " .. tostring(this_tab) .. "/" .. tostring(last_tab)
+end
+
 M.get_recording = function()
   local recording_register = vim.fn.reg_recording()
   if recording_register == "" then
@@ -362,8 +394,8 @@ M.get_mode_colors = function(mode)
   }
 end
 
-M.get_mode_part = function()
-  local mode = M.get_mode()
+--- @param mode string
+M.get_mode_part = function(mode)
   if mode:len() > 1 then
     return mode
   end

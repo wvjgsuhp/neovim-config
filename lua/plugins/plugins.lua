@@ -125,6 +125,13 @@ return {
   -- Vimscript syntax/indent plugins
 
   {
+    "jalvesaq/Nvim-R",
+    config = function()
+      vim.g.R_assign = 0
+      vim.g.R_nvim_wd = 0
+    end,
+  },
+  {
     "chrisbra/csv.vim",
     config = function()
       vim.g.no_csv_maps = 1

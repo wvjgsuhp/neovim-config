@@ -32,6 +32,8 @@ nnoremap <silent> <Tab> <C-w>w
 " move between tabs
 nnoremap <Leader>tl <Cmd>tabnext<CR>
 nnoremap <Leader>th <Cmd>tabprev<CR>
+nnoremap <Leader>tq <Cmd>tabclose<CR>
+nnoremap <Leader>tn <Cmd>tabnew<CR>
 noremap <Leader>1 1gt
 noremap <Leader>2 2gt
 noremap <Leader>3 3gt
@@ -54,7 +56,6 @@ nnoremap <Localleader>y "+y
 vnoremap <Localleader>y "+y
 
 " Paste
-nnoremap <Leader>piw viwpyiw
 nnoremap <Leader>pa ggVGp
 command! -range -nargs=1 VisualPaste call utils#visualPaste(<args>)
 xnoremap p :VisualPaste 'p'<CR>
@@ -146,6 +147,8 @@ augroup non_file_mapping
   autocmd!
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nnoremap <buffer> <Esc> <Cmd>q<CR>
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
+  autocmd FileType qf nnoremap <buffer> <Esc> <Cmd>cclose<CR>
+  autocmd FileType qf unmap <CR>
 augroup END
 
 " csv specific
@@ -158,4 +161,5 @@ augroup END
 " override defaults
 nnoremap s <Nop>
 
-
+" execute current file
+map <F9> <Cmd>!%:p<CR>
