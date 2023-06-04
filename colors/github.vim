@@ -35,6 +35,7 @@ hi ColorColumn  ctermbg=254   guibg=#e4e4e4
 hi SignColumn   ctermbg=none  guibg=none
 call interface#PartialLink("VertSplit", "Normal", ["guibg", 'ctermbg'], "ctermfg=250 guifg=#bbbbbb")
 call interface#PartialLink("LineNr", "Normal", ["guibg", 'ctermbg'], "ctermfg=246 guifg=#959595")
+hi EndOfBuffer  ctermfg=255   ctermbg=255   guifg=#F8F8FF guibg=#F8F8FF
 
 hi CursorLine   ctermbg=253 guibg=#D8D8DD
 hi MatchParen   ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
@@ -192,17 +193,17 @@ hi WilderPrompt  ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
 hi link LazyNormal Pmenu
 
 call interface#PartialLink('CmpItemAbbrDeprecated', "Ignore", ['guifg'], 'gui=strikethrough')
-" blue
 hi CmpItemAbbrMatch guibg=NONE guifg=#0086B3
 hi link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
-" light blue
 hi link CmpItemKindVariable   Identifier
 hi link CmpItemKindInterface  CmpItemKindVariable
 hi link CmpItemKindText       CmpItemKindVariable
-" pink
 hi link CmpItemKindFunction   Function
 hi link CmpItemKindMethod     CmpItemKindFunction
-" front
 hi link CmpItemKindKeyword    Statement
 hi link CmpItemKindProperty   CmpItemKindKeyword
 hi link CmpItemKindUnit       CmpItemKindKeyword
+
+hi link NvimTreeNormal      Pmenu
+hi link NvimTreeNormalFloat Pmenu
+hi link NvimTreeEndOfBuffer PmenuBorder

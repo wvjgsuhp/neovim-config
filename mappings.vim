@@ -46,6 +46,7 @@ noremap <Leader>9 9gt
 noremap <Leader>0 <Cmd>tablast<CR>
 
 " Yank
+nnoremap <Leader>yb <Cmd>%y+<CR>
 nnoremap <Leader>yfn <Cmd>let @+=expand("%:t")<CR>
   \ <Cmd>echo 'Yanked filename: <C-r>+'<CR>
 nnoremap <Leader>yrp <Cmd>let @+=expand("%:~:.")<CR>
@@ -147,8 +148,9 @@ augroup non_file_mapping
   autocmd!
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nnoremap <buffer> <Esc> <Cmd>q<CR>
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
+  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType qf nnoremap <buffer> <Esc> <Cmd>cclose<CR>
-  autocmd FileType qf unmap <CR>
+  autocmd FileType qf nnoremap <buffer> <CR> <Cmd>.cc<CR>
 augroup END
 
 " csv specific
