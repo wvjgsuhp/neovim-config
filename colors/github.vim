@@ -173,8 +173,8 @@ hi WinBarGitDirty   guifg=#d7afd7 gui=none
 hi WinBarIndicator  guifg=#5fafd7 gui=none
 hi WinBarIcon       guifg=#404040 gui=none
 
-hi link FloatBorder Normal
 hi link NormalFloat Normal
+hi link FloatBorder Normal
 
 hi link NoiceCmdlinePopupBorder PmenuBorder
 hi link NoiceCmdlinePopup       Normal

@@ -7,10 +7,7 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
-    "kosayoda/nvim-lightbulb",
-    -- "jose-elias-alvarez/nvim-lsp-ts-utils",
     "jose-elias-alvarez/null-ls.nvim",
-    --'jayp0521/mason-null-ls.nvim',
     "nvim-lua/plenary.nvim",
     -- "b0o/schemastore.nvim",
     "folke/neodev.nvim",
@@ -41,25 +38,10 @@ return {
       map_buf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
       map_buf("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
       map_buf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-      map_buf("n", ",wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-      map_buf("n", ",wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-      map_buf("n", ",wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
       map_buf("n", ",rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       map_buf("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
       map_buf("n", "<Leader>dp", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>", opts)
       map_buf("n", "<Leader>dk", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>", opts)
-
-      -- Set some keybinds conditional on server capabilities
-      if client.supports_method("textDocument/formatting") then
-        if vim.fn.has("nvim-0.8") == 1 then
-          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>", opts)
-        else
-          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>", opts)
-        end
-      end
-      if client.supports_method("textDocument/rangeFormatting") then
-        map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-      end
 
       if client.config.flags then
         client.config.flags.allow_incremental_sync = true
@@ -194,9 +176,6 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
-      -- Setup CompletionItemKind symbols, see lua/lsp_kind.lua
-      -- require('lsp_kind').init()
-
       -- Configure LSP Handlers
       vim.lsp.handlers["textDocument/publishDiagnostics"] =
         vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -207,10 +186,7 @@ return {
           },
         })
 
-      -- Configure help hover (normal K) handler
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-
-      -- Configure signature help (,s) handler
       vim.lsp.handlers["textDocument/signatureHelp"] =
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 
@@ -232,20 +208,6 @@ return {
       -- utils.noremap("n", "<Leader>a", '<cmd>lua require("user").diagnostic.publish_loclist(true)<CR>')
       utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
       utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-
-      require("nvim-lightbulb").setup({ ignore = { "null-ls" } })
-
-      vim.api.nvim_exec(
-        [[augroup user_lspconfig
-          autocmd!
-
-          " See https://github.com/kosayoda/nvim-lightbulb
-          autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-          " Automatic diagnostic hover
-          " autocmd CursorHold * lua require("user").diagnostic.open_float({ focusable=false })
-        augroup END]],
-        false
-      )
 
       require("lspconfig.ui.windows").default_options.border = "single"
     end

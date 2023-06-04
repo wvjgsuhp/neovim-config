@@ -14,7 +14,7 @@ return {
     views = {
       cmdline_popup = {
         border = {
-          style = "rounded",
+          style = "single",
           padding = { 0, 1 },
         },
         position = {

@@ -18,6 +18,7 @@ return {
       "WhichKey",
       "csv",
       "noice",
+      "notify",
     }
     vim.cmd([[
       augroup user_plugin_indentguides

@@ -178,5 +178,6 @@ return {
     { "<c-f>", "<cmd>Telescope live_grep<CR>", desc = "Find words" },
     { "<Leader>fz", "<cmd>Telescope grep_string<CR>", desc = "Fuzzy find words" },
     { "<Leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy find words" },
+    { "<Leader>fr", "<cmd>Telescope resume<CR>", desc = "Resume Telescope" },
   },
 }
