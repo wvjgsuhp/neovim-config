@@ -114,8 +114,8 @@ return {
             ["<C-n>"] = actions.cycle_history_next,
             ["<C-p>"] = actions.cycle_history_prev,
 
-            ["<C-b>"] = actions.preview_scrolling_up,
-            ["<C-f>"] = actions.preview_scrolling_down,
+            ["<C-k>"] = actions.preview_scrolling_up,
+            ["<C-j>"] = actions.preview_scrolling_down,
           },
 
           n = {
@@ -125,31 +125,20 @@ return {
             ["<Tab>"] = actions.move_selection_next,
             ["<S-Tab>"] = actions.move_selection_previous,
 
-            ["<C-b>"] = actions.preview_scrolling_up,
-            ["<C-f>"] = actions.preview_scrolling_down,
+            ["<C-k>"] = actions.preview_scrolling_up,
+            ["<C-j>"] = actions.preview_scrolling_down,
 
-            ["<C-n>"] = actions.cycle_history_next,
-            ["<C-p>"] = actions.cycle_history_prev,
-
-            ["*"] = actions.toggle_all,
-            ["u"] = actions.drop_all,
-            ["J"] = actions.toggle_selection + actions.move_selection_next,
-            ["K"] = actions.toggle_selection + actions.move_selection_previous,
-            ["<Space>"] = {
-              actions.toggle_selection + actions.move_selection_next,
-              type = "action",
-              opts = { nowait = true },
-            },
+            ["v"] = actions.toggle_selection + actions.move_selection_next,
 
             ["gg"] = actions.move_to_top,
             ["G"] = actions.move_to_bottom,
 
-            ["sv"] = actions.select_horizontal,
-            ["sg"] = actions.select_vertical,
+            ["oj"] = actions.select_horizontal,
+            ["ol"] = actions.select_vertical,
+            ["ot"] = actions.select_tab,
+            ["sj"] = actions.select_horizontal,
+            ["sl"] = actions.select_vertical,
             ["st"] = actions.select_tab,
-            ["l"] = actions.select_default,
-
-            ["!"] = actions.edit_command_line,
           },
         },
       },

@@ -1,51 +1,61 @@
 local constants = require("constants")
+local utils = require("utils")
 
 return {
   "SmiteshP/nvim-navbuddy",
+  enabled = false,
   dependencies = {
     "MunifTanjim/nui.nvim",
     "SmiteshP/nvim-navic",
   },
-  opts = {
-    window = {
-      border = "single", -- "rounded", "double", "solid", "none"
-      -- or an array with eight chars building up the border in a clockwise fashion
-      -- starting with the top-left corner. eg: { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" }.
-      size = "62%", -- Or table format example: { height = "40%", width = "100%"}
-      position = "50%", -- Or table format example: { row = "100%", col = "0%"}
-      scrolloff = nil, -- scrolloff value within navbuddy window
-      sections = {
-        left = {
-          size = "20%",
-          border = nil, -- You can set border style for each section individually as well.
-        },
-        mid = {
-          size = "40%",
-          border = nil,
-        },
-        right = {
-          -- No size option for right most section. It fills to
-          -- remaining area.
-          border = nil,
-          preview = "leaf", -- Right section can show previews too.
-          -- Options: "leaf", "always" or "never"
+  config = function()
+    require("nvim-navbuddy").setup({
+      window = {
+        sections = {
+          left = {
+            border = { style = { " ", " ", " ", " ", " ", " ", " ", " " } },
+          },
+          mid = {
+            border = { style = { "│", " ", "│", "│", "│", " ", "│", "│" } },
+          },
         },
       },
-    },
-    node_markers = {
-      enabled = true,
-      icons = {
-        leaf = "  ",
-        leaf_selected = "  ",
-        branch = " ",
+      node_markers = {
+        enabled = true,
+        icons = {
+          leaf = "  ",
+          leaf_selected = "  ",
+          branch = " ",
+        },
       },
-    },
-    icons = constants.icons,
-    lsp = {
-      auto_attach = true, -- If set to true, you don't need to manually use attach function
-      preference = nil, -- list of lsp server names in order of preference
-    },
-  },
+      icons = constants.icons,
+      lsp = {
+        auto_attach = true, -- If set to true, you don't need to manually use attach function
+      },
+    })
+
+    utils.augroup("highlight_navbuddy")
+    -- utils.autocmd("FileType", {
+    --   group = "highlight_navbuddy",
+    --   pattern = "Navbuddy",
+    --   command = "highlight! link EndOfBuffer PmenuEnd",
+    -- })
+    utils.autocmd({ "FileType", "BufWinEnter" }, {
+      group = "highlight_navbuddy",
+      pattern = "Navbuddy",
+      command = "set winhighlight+=EndOfBuffer:PmenuEnd",
+    })
+    utils.autocmd({ "FileType", "BufWinEnter" }, {
+      group = "highlight_navbuddy",
+      pattern = "Navbuddy",
+      command = "echo 'ssssdf'",
+    })
+    -- utils.autocmd("BufLeave", {
+    --   group = "highlight_navbuddy",
+    --   pattern = "Navbuddy",
+    --   command = "highlight! EndOfBuffer ctermfg=255 ctermbg=255 guifg=#F8F8FF guibg=#F8F8FF",
+    -- })
+  end,
   keys = {
     { "<Leader>fn", "<cmd>Navbuddy<cr>" },
   },

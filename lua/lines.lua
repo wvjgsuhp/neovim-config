@@ -417,6 +417,6 @@ vim.o.winbar = "%{%v:lua.status.get_winbar()%}"
 vim.o.statusline = "%{%v:lua.status.get_statusline()%}"
 
 -- fix statusline diappears when enter insert mode
-vim.api.nvim_create_autocmd("InsertEnter", { command = ":let &stl=&stl" })
+utils.autocmd("InsertEnter", { command = ":let &stl=&stl" })
 
 return M

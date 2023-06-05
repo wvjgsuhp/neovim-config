@@ -37,14 +37,16 @@ call interface#PartialLink("VertSplit", "Normal", ["guibg", 'ctermbg'], "ctermfg
 call interface#PartialLink("LineNr", "Normal", ["guibg", 'ctermbg'], "ctermfg=246 guifg=#959595")
 hi EndOfBuffer  ctermfg=255   ctermbg=255   guifg=#F8F8FF guibg=#F8F8FF
 
-hi CursorLine   ctermbg=253 guibg=#D8D8DD
-hi MatchParen   ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
-hi Pmenu        ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1
-hi PmenuSel     ctermfg=15  ctermbg=61  guifg=#FFFFFF guibg=#3465a3
-hi PmenuSbar    ctermfg=246 ctermbg=15  guifg=#959595 guibg=#ECECEC
-hi PmenuThumb   ctermfg=250 ctermbg=250 guifg=#bbbbbb guibg=#bbbbbb
-hi PmenuBorder  ctermfg=254 ctermbg=254 guibg=#F1F1F1 guifg=#F1F1F1
-hi PmenuTitle   ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1 gui=bold  cterm=bold
+hi CursorLine     ctermbg=253 guibg=#D8D8DD
+hi MatchParen     ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
+hi Pmenu          ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1
+hi PmenuSel       ctermfg=15  ctermbg=61  guifg=#FFFFFF guibg=#3465a3
+hi PmenuSbar      ctermfg=246 ctermbg=15  guifg=#959595 guibg=#ECECEC
+hi PmenuThumb     ctermfg=250 ctermbg=250 guifg=#bbbbbb guibg=#bbbbbb
+hi PmenuBorder    ctermfg=254 ctermbg=254 guibg=#F1F1F1 guifg=#F1F1F1
+hi PmenuTitle     ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1 gui=bold  cterm=bold
+hi PmenuSeparator ctermfg=252 ctermbg=254 guibg=#F1F1F1 guifg=#d4d4d4
+hi PmenuEnd       ctermfg=254 ctermbg=254 guibg=#F1F1F1 guifg=#F1F1F1
 
 hi DiffAdd    ctermfg=233 ctermbg=194   guifg=#003300 guibg=#DDFFDD gui=none  cterm=none
 hi DiffChange ctermbg=255 guibg=#ececec gui=none      cterm=none
@@ -67,6 +69,8 @@ hi Label        ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi StorageClass ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi Structure    ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
+
+" hi ShadowBorder ctermfg=252 ctermbg=255 guibg=#F8F8FF guifg=#d4d4d4
 
 " treesitter
 hi link @operator  Normal
@@ -184,7 +188,7 @@ hi link NoiceCmdlineIcon        Normal
 call interface#PartialLink('TelescopeNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
 hi link TelescopePromptNormal Normal
 hi link TelescopeTitle        PmenuTitle
-hi TelescopeBorder  guibg=#F1F1F1 guifg=#d4d4d4
+hi link TelescopeBorder       PmenuSeparator
 
 call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
 hi WilderBorder  guibg=#F1F1F1 guifg=#F1F1F1
@@ -207,3 +211,8 @@ hi link CmpItemKindUnit       CmpItemKindKeyword
 hi link NvimTreeNormal      Pmenu
 hi link NvimTreeNormalFloat Pmenu
 hi link NvimTreeEndOfBuffer PmenuBorder
+
+" hi link NavbuddyNormalFloat Pmenu
+" hi link NavbuddyFloatBorder PmenuSeparator
+
+hi link WhichKeyFloat Pmenu
