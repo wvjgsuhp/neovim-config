@@ -1,3 +1,4 @@
+local constants = require("constants")
 return {
   "kyazdani42/nvim-tree.lua",
   dependencies = { "kyazdani42/nvim-web-devicons" },
@@ -23,7 +24,7 @@ return {
       api.config.mappings.default_on_attach(bufnr)
 
       -- custom mappings
-      vim.keymap.set("n", "<c-space>", api.node.open.edit, opts("Open"))
+      vim.keymap.set("n", "<C-n>", api.fs.create, opts("Create"))
     end
 
     local height_ratio = 0.8
@@ -35,7 +36,6 @@ return {
       respect_buf_cwd = true,
       sync_root_with_cwd = true,
       view = {
-        -- relativenumber = true,
         float = {
           enable = true,
           open_win_config = function()
@@ -61,14 +61,29 @@ return {
           return math.floor(vim.opt.columns:get() * width_ratio)
         end,
       },
+      renderer = {
+        root_folder_label = ":~:s?$?/?",
+      },
+      diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = true,
+        debounce_delay = 50,
+        severity = {
+          min = vim.diagnostic.severity.HINT,
+          max = vim.diagnostic.severity.ERROR,
+        },
+        icons = {
+          hint = constants.diagnostics.Hint,
+          info = constants.diagnostics.Info,
+          warning = constants.diagnostics.Warn,
+          error = constants.diagnostics.Error,
+        },
+      },
     })
   end,
   keys = {
-    { "<Leader>e", "<cmd>NvimTreeToggle .<bar>NvimTreeResize 34<cr>", desc = "Toggle explorer" },
-    {
-      "<Leader>fe",
-      "<cmd>NvimTreeFindFile<bar>NvimTreeResize 34<bar>NvimTreeFocus<cr>",
-      desc = "Find the current buffer in explorer",
-    },
+    { "<Leader>e", "<cmd>NvimTreeToggle .<cr>", desc = "Toggle explorer" },
+    { "<Leader>fe", "<cmd>NvimTreeFindFile<cr>", desc = "Find the current buffer in explorer" },
   },
 }

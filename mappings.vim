@@ -119,8 +119,8 @@ nnoremap <Leader>ze <Cmd>e ~/.zshrc<CR>
 " Center focused line
 let line_moved_commands = ['u', 'e', '<C-r>', 'n', 'N', 'G', 'w', 'b', '``']
 for cmd in line_moved_commands
-  execute 'nmap <silent> '.cmd.' '.cmd.'zz'
-  execute 'vmap <silent> '.cmd.' '.cmd.'zz'
+  execute 'noremap <silent> '.cmd.' '.cmd.'zz'
+  " execute 'vnoremap <silent> '.cmd.' '.cmd.'zz'
 endfor
 
 vmap <silent> j jzz
