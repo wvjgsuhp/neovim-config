@@ -33,9 +33,9 @@ end
 --- @param opts? table
 function utils.augroup(group, opts)
   if opts == nil then
-    opts = {clear = true}
+    opts = { clear = true }
   end
-  vim.api.nvim_create_augroup(group, opts)
+  return vim.api.nvim_create_augroup(group, opts)
 end
 
 utils.autocmd = vim.api.nvim_create_autocmd

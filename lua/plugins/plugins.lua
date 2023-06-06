@@ -31,22 +31,6 @@ return {
       { "<Leader>k", "<cmd>WhichKey<CR>" },
     },
   },
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    lazy = true,
-    config = function()
-      require("telescope").load_extension("ui-select")
-    end,
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    lazy = true,
-    cond = vim.g.is_unix == 1,
-    build = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end,
-  },
 
   -- interface
 

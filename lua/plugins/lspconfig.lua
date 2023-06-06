@@ -1,6 +1,3 @@
-local utils = require("utils")
-local constants = require("constants")
-
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -11,21 +8,59 @@ return {
     "nvim-lua/plenary.nvim",
     -- "b0o/schemastore.nvim",
     "folke/neodev.nvim",
-    "SmiteshP/nvim-navbuddy",
+    -- "SmiteshP/nvim-navbuddy",
   },
   config = function()
+    local constants = require("constants")
+    local utils = require("utils")
+
+    local lsp_highlight_group = utils.augroup("lsp_highlight", {})
+    local activate_lsp_highlight = function(client, bufnr)
+      if vim.b.has_lsp_highlight or not client.server_capabilities.documentHighlightProvider then
+        return
+      end
+      vim.b.has_lsp_highlight = true
+
+      utils.autocmd("CursorHold", {
+        buffer = bufnr,
+        group = lsp_highlight_group,
+        callback = function()
+          vim.lsp.buf.document_highlight()
+        end,
+      })
+      utils.autocmd("CursorMoved", {
+        buffer = bufnr,
+        group = lsp_highlight_group,
+        callback = function()
+          vim.lsp.buf.clear_references()
+        end,
+      })
+    end
+
+    local map_lsp_format = function(client)
+      if client.supports_method("textDocument/formatting") then
+        if vim.fn.has("nvim-0.8") == 1 then
+          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>")
+        else
+          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>")
+        end
+      end
+      if client.supports_method("textDocument/rangeFormatting") then
+        map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
+      end
+    end
+
     require("mason").setup()
     require("mason-lspconfig").setup()
 
     -- Buffer attached
     local on_attach = function(client, bufnr)
-      local function map_buf(...)
-        vim.api.nvim_buf_set_keymap(bufnr, ...)
+      local function map_buf(mode, lhs, rhs)
+        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
       end
 
       -- Keyboard mappings
-      local opts = { noremap = true, silent = true }
-      map_buf("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+      map_buf("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 
       -- Short-circuit for Helm template files
       if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
@@ -33,15 +68,15 @@ return {
         return
       end
 
-      map_buf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-      map_buf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-      map_buf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-      map_buf("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-      map_buf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-      map_buf("n", ",rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-      map_buf("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-      map_buf("n", "<Leader>dp", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>", opts)
-      map_buf("n", "<Leader>dk", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>", opts)
+      map_buf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+      map_buf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+      map_buf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+      map_buf("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+      map_buf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+      map_buf("n", ",rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+      map_buf("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+      map_buf("n", "<Leader>dp", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>")
+      map_buf("n", "<Leader>dk", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>")
 
       if client.config.flags then
         client.config.flags.allow_incremental_sync = true
@@ -49,124 +84,25 @@ return {
       end
 
       -- Set autocommands conditional on server capabilities
-      if client.supports_method("textDocument/documentHighlight") then
-        vim.api.nvim_exec(
-          [[augroup lsp_document_highlight
-            autocmd! * <buffer>
-            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-          augroup END]],
-          false
-        )
-      end
-
-      if client.supports_method("textDocument/formatting") then
-        if vim.fn.has("nvim-0.8") == 1 then
-          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>", opts)
-        else
-          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>", opts)
-        end
-      end
-      if client.supports_method("textDocument/rangeFormatting") then
-        map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-      end
-
-      if client.name == "omnisharp" then
-        client.server_capabilities.semanticTokensProvider = {
-          full = vim.empty_dict(),
-          legend = {
-            tokenModifiers = { "static_symbol" },
-            tokenTypes = {
-              "comment",
-              "excluded_code",
-              "identifier",
-              "keyword",
-              "keyword_control",
-              "number",
-              "operator",
-              "operator_overloaded",
-              "preprocessor_keyword",
-              "string",
-              "whitespace",
-              "text",
-              "static_symbol",
-              "preprocessor_text",
-              "punctuation",
-              "string_verbatim",
-              "string_escape_character",
-              "class_name",
-              "delegate_name",
-              "enum_name",
-              "interface_name",
-              "module_name",
-              "struct_name",
-              "type_parameter_name",
-              "field_name",
-              "enum_member_name",
-              "constant_name",
-              "local_name",
-              "parameter_name",
-              "method_name",
-              "extension_method_name",
-              "property_name",
-              "event_name",
-              "namespace_name",
-              "label_name",
-              "xml_doc_comment_attribute_name",
-              "xml_doc_comment_attribute_quotes",
-              "xml_doc_comment_attribute_value",
-              "xml_doc_comment_cdata_section",
-              "xml_doc_comment_comment",
-              "xml_doc_comment_delimiter",
-              "xml_doc_comment_entity_reference",
-              "xml_doc_comment_name",
-              "xml_doc_comment_processing_instruction",
-              "xml_doc_comment_text",
-              "xml_literal_attribute_name",
-              "xml_literal_attribute_quotes",
-              "xml_literal_attribute_value",
-              "xml_literal_cdata_section",
-              "xml_literal_comment",
-              "xml_literal_delimiter",
-              "xml_literal_embedded_expression",
-              "xml_literal_entity_reference",
-              "xml_literal_name",
-              "xml_literal_processing_instruction",
-              "xml_literal_text",
-              "regex_comment",
-              "regex_character_class",
-              "regex_anchor",
-              "regex_quantifier",
-              "regex_grouping",
-              "regex_alternation",
-              "regex_text",
-              "regex_self_escaped_character",
-              "regex_other_escape",
-            },
-          },
-          range = true,
-        }
-      end
+      activate_lsp_highlight(client, bufnr)
+      map_lsp_format(client)
     end
 
     -- Combine base config for each server and merge user-defined settings.
     local function make_config(server_name)
       -- Setup base config for each server.
-      local c = {}
-      c.on_attach = on_attach
+      local config = {}
+      config.on_attach = on_attach
       local cap = vim.lsp.protocol.make_client_capabilities()
-      c.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
+      config.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
 
       -- user-defined lsp settings
       local exists, user_config = pcall(require, "lsp." .. server_name)
       if exists then
-        -- local user_config = module.config(c)
-        for k, v in pairs(user_config) do
-          c[k] = v
-        end
+        user_config(config)
       end
 
-      return c
+      return config
     end
 
     -- main
@@ -188,15 +124,6 @@ return {
       end
 
       -- Configure LSP Handlers
-      vim.lsp.handlers["textDocument/publishDiagnostics"] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = {
-            -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-source-in-diagnostics-neovim-06-only
-            source = "if_many",
-            prefix = "●",
-          },
-        })
-
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
       vim.lsp.handlers["textDocument/signatureHelp"] =
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
@@ -216,7 +143,6 @@ return {
       end
 
       -- global custom location-list diagnostics window toggle.
-      -- utils.noremap("n", "<Leader>a", '<cmd>lua require("user").diagnostic.publish_loclist(true)<CR>')
       utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
       utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 

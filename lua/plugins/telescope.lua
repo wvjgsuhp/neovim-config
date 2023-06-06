@@ -1,8 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-    "nvim-telescope/telescope-ui-select.nvim",
-    "nvim-telescope/telescope-fzf-native.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", cond = vim.g.is_unix == 1, build = "make" },
   },
   config = function()
     -- Custom window-sizes
@@ -105,6 +104,9 @@ return {
         mappings = {
           i = {
             ["jj"] = { "<Esc>", type = "command" },
+            ["jk"] = { "<Esc>", type = "command" },
+            ["kk"] = { "<Esc>", type = "command" },
+            ["kj"] = { "<Esc>", type = "command" },
 
             ["<Tab>"] = actions.move_selection_next,
             ["<S-Tab>"] = actions.move_selection_previous,
@@ -133,9 +135,13 @@ return {
             ["gg"] = actions.move_to_top,
             ["G"] = actions.move_to_bottom,
 
-            ["oj"] = actions.select_horizontal,
-            ["ol"] = actions.select_vertical,
-            ["ot"] = actions.select_tab,
+            ["<Leader>j"] = actions.select_horizontal,
+            ["<Leader>l"] = actions.select_vertical,
+            ["<Leader>t"] = {
+              actions.select_tab,
+              type = "action",
+              opts = { nowait = true },
+            },
             ["sj"] = actions.select_horizontal,
             ["sl"] = actions.select_vertical,
             ["st"] = actions.select_tab,
@@ -144,11 +150,6 @@ return {
       },
 
       extensions = {
-        ["ui-select"] = {
-          require("telescope.themes").get_cursor({
-            layout_config = { width = 0.35, height = 0.35 },
-          }),
-        },
         fzf = {
           fuzzy = true, -- false will only do exact matching
           override_generic_sorter = true, -- override the generic sorter
@@ -159,14 +160,16 @@ return {
       },
     })
     -- Telescope extensions are loaded in each plugin.
+    require("telescope").load_extension("fzf")
   end,
   keys = {
     { "<Leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-    { "<c-o>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-    { "<Leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Find words" },
-    { "<c-f>", "<cmd>Telescope live_grep<CR>", desc = "Find words" },
+    { "<C-o>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+    { "<Leader>fg", "<cmd>Telescope grep_string search=<CR>", desc = "Find words" },
+    { "<C-f>", "<cmd>Telescope grep_string search=<CR>", desc = "Find words" },
     { "<Leader>fz", "<cmd>Telescope grep_string<CR>", desc = "Fuzzy find words" },
     { "<Leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy find words" },
     { "<Leader>fr", "<cmd>Telescope resume<CR>", desc = "Resume Telescope" },
+    { "<Leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Find symbols" },
   },
 }
