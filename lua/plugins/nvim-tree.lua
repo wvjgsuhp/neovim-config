@@ -36,6 +36,7 @@ return {
       respect_buf_cwd = true,
       sync_root_with_cwd = true,
       view = {
+        relativenumber = true,
         float = {
           enable = true,
           open_win_config = function()

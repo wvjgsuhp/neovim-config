@@ -118,6 +118,8 @@ return {
 
             ["<C-k>"] = actions.preview_scrolling_up,
             ["<C-j>"] = actions.preview_scrolling_down,
+
+            ["<C-l>"] = actions.select_vertical,
           },
 
           n = {
@@ -137,6 +139,7 @@ return {
 
             ["<Leader>j"] = actions.select_horizontal,
             ["<Leader>l"] = actions.select_vertical,
+            ["<C-l>"] = actions.select_vertical,
             ["<Leader>t"] = {
               actions.select_tab,
               type = "action",

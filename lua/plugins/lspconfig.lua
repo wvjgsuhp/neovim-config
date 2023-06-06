@@ -37,19 +37,6 @@ return {
       })
     end
 
-    local map_lsp_format = function(client)
-      if client.supports_method("textDocument/formatting") then
-        if vim.fn.has("nvim-0.8") == 1 then
-          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>")
-        else
-          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>")
-        end
-      end
-      if client.supports_method("textDocument/rangeFormatting") then
-        map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
-      end
-    end
-
     require("mason").setup()
     require("mason-lspconfig").setup()
 
@@ -85,7 +72,17 @@ return {
 
       -- Set autocommands conditional on server capabilities
       activate_lsp_highlight(client, bufnr)
-      map_lsp_format(client)
+
+      if client.supports_method("textDocument/formatting") then
+        if vim.fn.has("nvim-0.8") == 1 then
+          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>")
+        else
+          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>")
+        end
+      end
+      if client.supports_method("textDocument/rangeFormatting") then
+        map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
+      end
     end
 
     -- Combine base config for each server and merge user-defined settings.

@@ -67,8 +67,6 @@ vnoremap <Localleader>p :VisualPaste '"+p'<CR>
 nnoremap <Localleader>v "+p
 vnoremap <Localleader>v :VisualPaste '"+p'<CR>
 nnoremap <Localleader>V "+P
-nnoremap <C-v> "+p
-vnoremap <C-v> :VisualPaste '"+p'<CR>
 
 " Jump to the beginning/end of a line
 noremap <Leader>h ^
@@ -140,7 +138,6 @@ nmap <Leader>mj <Cmd>sp<bar>execute 'edit'
 nnoremap <CR> ciw
 "   <C-H> maps to <C-Backspace>
 inoremap <C-H> <C-w>
-inoremap <C-v> <C-V>
 
 " quit
 nnoremap <Leader>cc <Cmd>cclose<CR>
