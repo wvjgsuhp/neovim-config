@@ -20,7 +20,7 @@ endif
 let colors_name = "github"
 
 hi Normal       ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
-hi Cursor       ctermfg=255   ctermbg=250   guifg=#F8F8FF guibg=#bbbbbb
+hi Cursor       ctermfg=255   ctermbg=250   guifg=#F8F8FF guibg=#87d7ff
 hi Visual       ctermbg=252   guibg=#d4d4d4
 hi VisualNOS    ctermfg=15    ctermbg=24    guifg=#FFFFFF guibg=#204a87
 hi Search       ctermfg=236   ctermbg=228   guifg=#000000 guibg=#FFFF8C cterm=bold  gui=bold
