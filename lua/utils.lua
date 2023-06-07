@@ -47,18 +47,6 @@ function utils.debug_opened_windows()
     local buf = vim.api.nvim_win_get_buf(current_window)
     local buf_ft = vim.api.nvim_buf_get_option(buf, "filetype")
     print(buf_ft)
-
-    -- local local_return = false
-    -- for _, ft_to_bypass in ipairs(file_types_to_bypass) do
-    --     if buf_ft == ft_to_bypass then
-    --         local_return = true
-    --         break
-    --     end
-    -- end
-
-    -- if local_return == false then
-    --     return false
-    -- end
   end
 
   return true

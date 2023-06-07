@@ -33,7 +33,7 @@ return {
       }
     end
 
-    dashboard.section.header.val = constants.alpha.header.blood_01
+    dashboard.section.header.val = constants.alpha.header.portal_01
     dashboard.section.header.opts.hl = "DashboardHeader"
 
     dashboard.section.buttons.val = {
