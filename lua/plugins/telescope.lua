@@ -120,6 +120,8 @@ return {
             ["<C-j>"] = actions.preview_scrolling_down,
 
             ["<C-l>"] = actions.select_vertical,
+
+            ["<C-u>"] = false,
           },
 
           n = {
@@ -163,7 +165,9 @@ return {
       },
     })
     -- Telescope extensions are loaded in each plugin.
-    require("telescope").load_extension("fzf")
+    if vim.g.is_unix == 1 then
+      require("telescope").load_extension("fzf")
+    end
   end,
   keys = {
     { "<Leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },

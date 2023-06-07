@@ -1,5 +1,6 @@
 return {
   "rmagatti/auto-session",
+  cond = vim.g.is_unix == 1,
   config = function()
     local utils = require("utils")
 

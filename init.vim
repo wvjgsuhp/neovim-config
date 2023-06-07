@@ -12,11 +12,10 @@ source ./native-settings.vim
 source ./config.vim
 source ./mappings.vim
 
-lua require('lazy-bootstrap')
-lua require('lines')
-
-if filereadable('./lua/local/init.lua') || filereadable('./lua/local.lua')
-  lua require('local')
+if g:is_unix == 0
+  source ./windows/init.vim
 endif
+
+lua require('init')
 
 exe 'cd ' . g:owd

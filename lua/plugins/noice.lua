@@ -5,7 +5,9 @@ return {
     "MunifTanjim/nui.nvim",
     "rcarriga/nvim-notify",
   },
-  opts = {
+  config = function ()
+    local utils = require("utils")
+    require("noice").setup({
     cmdline = {
       format = {
         cmdline = { pattern = "^:", icon = ":", lang = "vim" },
@@ -69,5 +71,8 @@ return {
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = true, -- add a border to hover docs and signature help
     },
-  },
+  })
+
+    utils.noremap('n', '<Leader>md', '<Cmd>Noice dismiss<CR>')
+  end
 }
