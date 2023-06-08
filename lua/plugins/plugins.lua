@@ -27,6 +27,7 @@ return {
       vim.o.timeoutlen = 300
       require("which-key").setup()
     end,
+    cmd = "WhichKey",
     keys = {
       { "<Leader>k", "<cmd>WhichKey<CR>" },
     },
@@ -82,6 +83,7 @@ return {
   { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
   {
     "L3MON4D3/LuaSnip",
+    lazy = true,
     version = "1.*",
     -- install jsregexp (optional!).
     build = "make install_jsregexp",

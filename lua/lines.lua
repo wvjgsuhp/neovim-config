@@ -12,14 +12,17 @@ local is_current = function()
   end
 end
 
--- local winbar_filetype_exclude = {
---   [""] = true,
--- }
+local winbar_exclude_file_types = {
+  alpha = true,
+}
 
 M.get_winbar = function()
   -- floating window
   local cfg = vim.api.nvim_win_get_config(0)
   if cfg.relative > "" or cfg.external then
+    return ""
+  end
+  if winbar_exclude_file_types[vim.bo.filetype] then
     return ""
   end
 
@@ -39,8 +42,6 @@ M.get_winbar = function()
       M.get_icon(),
       " " .. vim.bo.filetype,
     })
-  -- elseif winbar_filetype_exclude[vim.bo.filetype] then
-  --   return M.active_indicator()
   else
     -- real files do not have buftypes
     if utils.isempty(buftype) then
@@ -148,14 +149,6 @@ local mode_map = {
   ["!"]     = "SHELL",
   ["t"]     = "T",
 }
-
--- M.active_indicator = function()
---   if is_current() then
---     return "%#WinBarIndicator#▔▔▔▔▔▔▔▔%*"
---   else
---     return ""
---   end
--- end
 
 -- stylua: ignore
 local cache_icons = {

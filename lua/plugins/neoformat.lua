@@ -13,16 +13,6 @@ return {
       args = { "--max-line-length=80", "--experimental" },
     }
 
-    vim.g.neoformat_lua_stylua = {
-      exe = "stylua",
-      args = {
-        "--indent-type='Spaces'",
-        "--indent-width=2",
-        "--column-width=112",
-      },
-      replace = 1,
-    }
-
     utils.augroup("formatting")
     local auto_format_extensions = {
       "*.html",

@@ -1,13 +1,6 @@
-local constants = require("constants")
-
-local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 return {
   "hrsh7th/nvim-cmp",
+  event = "InsertEnter",
   dependencies = {
     "L3MON4D3/LuaSnip",
     "hrsh7th/cmp-buffer",
@@ -20,6 +13,15 @@ return {
     "windwp/nvim-autopairs",
   },
   config = function()
+    local constants = require("constants")
+
+    local has_words_before = function()
+      unpack = unpack or table.unpack
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0
+        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
+
     local lspkind = require("lspkind")
     local luasnip = require("luasnip")
 
@@ -56,6 +58,11 @@ return {
           return kind
         end,
       },
+      experimental = {
+        ghost_text = {
+          hl_group = "Comment",
+        },
+      },
       mapping = cmp.mapping.preset.insert({
         ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
         ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
@@ -67,7 +74,7 @@ return {
 
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
           -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
           -- they way you will only jump inside the snippet region
           elseif luasnip.expand_or_jumpable() then

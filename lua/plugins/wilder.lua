@@ -1,6 +1,7 @@
 return {
   "gelguy/wilder.nvim",
   dependencies = { "kyazdani42/nvim-web-devicons" },
+  enabled = false,
   config = function()
     local wilder = require("wilder")
 

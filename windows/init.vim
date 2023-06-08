@@ -19,4 +19,6 @@ endfunction
 command! RestoreSession call RestoreSess()
 
 autocmd VimLeave * call SaveSess()
-autocmd VimEnter * nested call RestoreSess()
+" autocmd VimEnter * nested call RestoreSess()
+
+nnoremap <Leader>sr <Cmd>RestoreSession<CR>

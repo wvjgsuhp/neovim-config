@@ -98,7 +98,7 @@ return {
           },
         },
         path_display = { "truncate" },
-        winblend = 0,
+        winblend = 8,
         color_devicons = true,
 
         mappings = {

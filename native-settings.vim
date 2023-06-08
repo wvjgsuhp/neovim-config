@@ -54,6 +54,7 @@ set shortmess=aoOTIFW   " Shorten messages and don't show intro
 set sidescrolloff=5     " Keep at least 5 lines left/right
 set noruler             " Disable default status ruler
 set list                " Show hidden characters
+set pumblend=8
 
 set helpheight=0        " Disable help window resizing
 set winwidth=30         " Minimum width for active window

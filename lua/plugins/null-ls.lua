@@ -1,5 +1,6 @@
 return {
   "jose-elias-alvarez/null-ls.nvim",
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
     local builtins = require("null-ls").builtins
     local on_attach = require("plugins.lspconfig").on_attach
