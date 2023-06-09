@@ -51,7 +51,7 @@ return {
     },
   },
 
-  -- completion and code analysis
+  -- coding
 
   "folke/neodev.nvim",
   {
@@ -65,7 +65,6 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ui = {
-        border = "single",
         icons = {
           package_installed = " ",
           package_pending = " ",
@@ -92,6 +91,16 @@ return {
       vim.tbl_map(function(type)
         require("luasnip.loaders.from_" .. type).lazy_load()
       end, { "vscode", "snipmate", "lua" })
+    end,
+  },
+  {
+    "goerz/jupytext.vim",
+    ft = { "json" },
+    config = function()
+      vim.g.jupytext_enabled = 1
+      vim.g.jupytext_command = "jupytext"
+      vim.g.jupytext_fmt = "py"
+      vim.g.jupytext_to_ipynb_opts = "--to=ipynb --update"
     end,
   },
 

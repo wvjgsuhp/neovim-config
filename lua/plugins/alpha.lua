@@ -38,7 +38,7 @@ return {
     end
 
     dashboard.section.header.val = constants.alpha.header.portal_01
-    dashboard.section.header.opts.hl = "Normal"
+    dashboard.section.header.opts.hl = "DashboardHeader"
 
     dashboard.section.buttons.val = {
       create_alpha_button("<Leader>ff", "󰍉 Find files"),
@@ -54,16 +54,23 @@ return {
       pattern = "LazyVimStarted",
       callback = function()
         local stats = require("lazy").stats()
-        local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
-        local footer = "  " .. stats.count .. " plugins lazy-loaded in " .. ms .. " ms  "
+        local plugin_count = tostring(stats.count)
+        local ms = tostring(math.floor((stats.startuptime * 100 + 0.5) / 100))
+        local stats_padding = "%-" .. math.max(#plugin_count, #ms) + 1 .. "s"
+
+        local footer = {
+          "  " .. string.format(stats_padding, stats.count) .. "plugins",
+          "󰦖  " .. string.format(stats_padding, ms) .. "ms",
+        }
 
         dashboard.section.footer.val = footer
+        dashboard.section.footer.opts.hl = "DashboardFooter"
         pcall(vim.cmd.AlphaRedraw)
       end,
     })
 
-    dashboard.config.layout[1].val = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * 0.2) })
-    dashboard.config.layout[3].val = 3
+    -- dashboard.config.layout[1].val = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * 0.2) })
+    -- dashboard.config.layout[3].val = 3
     dashboard.config.opts.noautocmd = true
 
     require("alpha").setup(dashboard.config)

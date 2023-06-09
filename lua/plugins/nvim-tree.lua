@@ -36,6 +36,7 @@ return {
       respect_buf_cwd = true,
       sync_root_with_cwd = true,
       view = {
+        number = true,
         relativenumber = true,
         float = {
           enable = true,
@@ -84,7 +85,7 @@ return {
     })
   end,
   keys = {
-    { "<Leader>e", "<cmd>NvimTreeToggle .<cr>", desc = "Toggle explorer" },
-    { "<Leader>fe", "<cmd>NvimTreeFindFile<cr>", desc = "Find the current buffer in explorer" },
+    { "<Leader>e", "<Cmd>NvimTreeToggle .<CR>", desc = "Toggle explorer" },
+    { "<Leader>fe", "<Cmd>NvimTreeFindFile<CR>", desc = "Find the current buffer in explorer" },
   },
 }

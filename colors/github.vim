@@ -190,9 +190,9 @@ hi link TelescopePromptNormal Normal
 hi link TelescopeTitle        PmenuTitle
 hi link TelescopeBorder       PmenuSeparator
 
-call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
-hi WilderBorder  guibg=#F1F1F1 guifg=#F1F1F1
-hi WilderPrompt  ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
+" call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
+" hi WilderBorder  guibg=#F1F1F1 guifg=#F1F1F1
+" hi WilderPrompt  ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
 
 hi link LazyNormal Pmenu
 
@@ -217,3 +217,9 @@ hi link NvimTreeEndOfBuffer PmenuBorder
 " hi link NavbuddyFloatBorder PmenuSeparator
 
 hi link WhichKeyFloat Pmenu
+
+hi link DashboardHeader Normal
+hi link DashboardFooter Constant
+
+hi link MasonNormal Pmenu
+hi link MasonHeader PmenuTitle
