@@ -44,6 +44,7 @@ hi PmenuSel       ctermfg=15  ctermbg=61  guifg=#FFFFFF guibg=#3465a3
 hi PmenuSbar      ctermfg=246 ctermbg=15  guifg=#959595 guibg=#ECECEC
 hi PmenuThumb     ctermfg=250 ctermbg=250 guifg=#bbbbbb guibg=#bbbbbb
 hi PmenuBorder    ctermfg=254 ctermbg=254 guibg=#F1F1F1 guifg=#F1F1F1
+hi PmenuPadding   ctermfg=254 ctermbg=254 guibg=#F8F8FF guifg=#F1F1F1
 hi PmenuTitle     ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1 gui=bold  cterm=bold
 hi PmenuSeparator ctermfg=252 ctermbg=254 guibg=#F1F1F1 guifg=#d4d4d4
 hi PmenuEnd       ctermfg=254 ctermbg=254 guibg=#F1F1F1 guifg=#F1F1F1
@@ -144,6 +145,12 @@ if has("spell")
   hi spellLocal   guisp=#729fcf
 endif
 
+hi DiagnosticError  ctermfg=1   guifg=#ff0000
+hi DiagnosticWarn   ctermfg=209 guifg=#FF895C
+hi DiagnosticInfo   ctermfg=245 guifg=#888888
+hi DiagnosticHint   ctermfg=111 guifg=#87d7ff
+hi DiagnosticOk     ctermfg=2   guifg=#159828
+
 hi StatusLineN1       ctermfg=188   ctermbg=0   guifg=#dddddd guibg=#000000 gui=none cterm=none
 hi StatusLineN2       ctermfg=188   ctermbg=238 guifg=#dddddd guibg=#404040 gui=none cterm=none
 hi StatusLineN3       ctermfg=0     ctermbg=188 guifg=#000000 guibg=#dddddd gui=none cterm=none
@@ -177,13 +184,39 @@ hi WinBarModified   guifg=#d7d787 gui=none
 hi WinBarGitDirty   guifg=#d7afd7 gui=none
 hi WinBarIndicator  guifg=#5fafd7 gui=none
 hi WinBarIcon       guifg=#404040 gui=none
+hi WinBarIconDarker guifg=#404040 guibg=#F1F1F1 gui=none
 
-hi link NormalFloat Normal
+" hi link NormalFloat Normal
 hi link FloatBorder Normal
+hi link NormalFloat Pmenu
+" hi link FloatBorder PmenuBorder
 
-hi link NoiceCmdlinePopupBorder PmenuBorder
+hi link NoiceCmdlinePopupBorder PmenuPadding
 hi link NoiceCmdlinePopup       Normal
 hi link NoiceCmdlineIcon        Normal
+hi link NoicePopup              Pmenu
+hi link NoicePopupBorder        PmenuPadding
+hi link NoiceSplit              Pmenu
+hi link NoiceConfirm            Pmenu
+
+hi link NotifyBackground Pmenu
+hi link NotifyERRORBody Pmenu
+hi link NotifyWARNBody Pmenu
+hi link NotifyINFOBody Pmenu
+hi link NotifyDEBUGBody Pmenu
+hi link NotifyTRACEBody Pmenu
+" hi link NotifyERRORBorder DiagnosticError
+" hi link NotifyWARNBorder  DiagnosticWarn
+" hi link NotifyINFOBorder  DiagnosticInfo
+" hi link NotifyDEBUGBorder DiagnosticHint
+hi link NotifyERRORIcon   DiagnosticError
+hi link NotifyWARNIcon    DiagnosticWarn
+hi link NotifyINFOIcon    DiagnosticInfo
+hi link NotifyDEBUGIcon   DiagnosticHint
+hi link NotifyERRORTitle  DiagnosticError
+hi link NotifyWARNTitle   DiagnosticWarn
+hi link NotifyINFOTitle   DiagnosticInfo
+hi link NotifyDEBUGTitle  DiagnosticHint
 
 call interface#PartialLink('TelescopeNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
 hi link TelescopePromptNormal Normal
@@ -215,10 +248,11 @@ hi link NvimTreeEndOfBuffer PmenuBorder
 
 " hi link NavbuddyNormalFloat Pmenu
 " hi link NavbuddyFloatBorder PmenuSeparator
+" hi link EndOfBuffer         PmenuBorder
 
 hi link WhichKeyFloat Pmenu
 
-hi link DashboardHeader Normal
+hi link DashboardHeader Ignore
 hi link DashboardFooter Constant
 
 hi link MasonNormal Pmenu

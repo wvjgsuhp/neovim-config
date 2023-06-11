@@ -1,6 +1,3 @@
-local constants = require("constants")
-local utils = require("utils")
-
 return {
   "SmiteshP/nvim-navbuddy",
   enabled = false,
@@ -9,6 +6,9 @@ return {
     "SmiteshP/nvim-navic",
   },
   config = function()
+    local constants = require("constants")
+    local utils = require("utils")
+
     require("nvim-navbuddy").setup({
       window = {
         sections = {
@@ -16,7 +16,7 @@ return {
             border = { style = { " ", " ", " ", " ", " ", " ", " ", " " } },
           },
           mid = {
-            border = { style = { "│", " ", "│", "│", "│", " ", "│", "│" } },
+            border = { style = { " ", " ", " ", "│", " ", " ", " ", "│" } },
           },
         },
       },
@@ -34,22 +34,22 @@ return {
       },
     })
 
-    utils.augroup("highlight_navbuddy")
+    -- utils.augroup("highlight_navbuddy")
     -- utils.autocmd("FileType", {
     --   group = "highlight_navbuddy",
     --   pattern = "Navbuddy",
     --   command = "highlight! link EndOfBuffer PmenuEnd",
     -- })
-    utils.autocmd({ "FileType", "BufWinEnter" }, {
-      group = "highlight_navbuddy",
-      pattern = "Navbuddy",
-      command = "set winhighlight+=EndOfBuffer:PmenuEnd",
-    })
-    utils.autocmd({ "FileType", "BufWinEnter" }, {
-      group = "highlight_navbuddy",
-      pattern = "Navbuddy",
-      command = "echo 'ssssdf'",
-    })
+    -- utils.autocmd({ "FileType", "BufWinEnter" }, {
+    --   group = "highlight_navbuddy",
+    --   pattern = "Navbuddy",
+    --   command = "set winhighlight+=EndOfBuffer:PmenuEnd",
+    -- })
+    -- utils.autocmd({ "FileType", "BufWinEnter" }, {
+    --   group = "highlight_navbuddy",
+    --   pattern = "Navbuddy",
+    --   command = "echo 'ssssdf'",
+    -- })
     -- utils.autocmd("BufLeave", {
     --   group = "highlight_navbuddy",
     --   pattern = "Navbuddy",

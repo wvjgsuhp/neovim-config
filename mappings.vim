@@ -161,4 +161,4 @@ augroup END
 nnoremap s <Nop>
 
 " execute current file
-map <F9> <Cmd>!%:p<CR>
+noremap <F9> <Cmd>w<bar>!%:p<CR>

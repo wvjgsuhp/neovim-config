@@ -2,6 +2,7 @@ local constants = require("constants")
 
 return {
   "SmiteshP/nvim-navic",
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     icons = constants.icons,
     lsp = {

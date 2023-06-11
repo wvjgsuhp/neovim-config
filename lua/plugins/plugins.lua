@@ -1,6 +1,5 @@
 return {
-  "folke/lsp-colors.nvim",
-  "nvim-lua/plenary.nvim",
+  -- "nvim-lua/plenary.nvim",
   "kyazdani42/nvim-web-devicons",
 
   -- commands
@@ -22,11 +21,7 @@ return {
   },
   {
     "folke/which-key.nvim",
-    config = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-      require("which-key").setup()
-    end,
+    opts = {},
     cmd = "WhichKey",
     keys = {
       { "<Leader>k", "<cmd>WhichKey<CR>" },
@@ -63,6 +58,7 @@ return {
   },
   {
     "williamboman/mason.nvim",
+    lazy = true,
     opts = {
       ui = {
         icons = {
@@ -72,14 +68,18 @@ return {
         },
       },
     },
+    cmd = { "Mason", "MasonInstall" },
   },
   {
     "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup()
-    end,
+    event = { "BufReadPost", "BufNewFile" },
+    config = true,
   },
-  { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  {
+    "folke/todo-comments.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
   {
     "L3MON4D3/LuaSnip",
     lazy = true,
@@ -146,9 +146,7 @@ return {
   -- operators and text objects
   {
     "phaazon/hop.nvim",
-    config = function()
-      require("hop").setup()
-    end,
+    opts = {},
     keys = {
       { "<Leader>fw", "<cmd>HopWord<cr>", mode = { "n", "v", "o" }, desc = "Jump to a word" },
       { "<Leader>fa", "<cmd>HopAnywhere<cr>", mode = { "n", "v", "o" }, desc = "Jump anywhere" },
@@ -159,7 +157,11 @@ return {
 
   -- buffer
 
-  { "chrisgrieser/nvim-early-retirement", config = true },
+  {
+    "chrisgrieser/nvim-early-retirement",
+    event = { "BufReadPre", "BufNewFile" },
+    config = true,
+  },
 
   -- debug
 

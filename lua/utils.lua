@@ -52,4 +52,19 @@ function utils.debug_opened_windows()
   return true
 end
 
+--- merge two tables with values from `table_2` overriding values from `table_1`
+--- @param table_1 table
+--- @param table_2 table
+utils.merge_tables = function(table_1, table_2)
+  local merged_table = {}
+  for k, v in pairs(table_1) do
+    merged_table[k] = v
+  end
+  for k, v in pairs(table_2) do
+    merged_table[k] = v
+  end
+
+  return merged_table
+end
+
 return utils

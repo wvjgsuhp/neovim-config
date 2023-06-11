@@ -37,12 +37,14 @@ return {
       }
     end
 
-    dashboard.section.header.val = constants.alpha.header.portal_01
+    dashboard.section.header.val = constants.alpha.header.neovim_04
     dashboard.section.header.opts.hl = "DashboardHeader"
 
     dashboard.section.buttons.val = {
       create_alpha_button("<Leader>ff", "󰍉 Find files"),
-      create_alpha_button("<Leader>e", " Explore"),
+      create_alpha_button("<Leader>fg", "󰒻 Fuzzy-find words"),
+      create_alpha_button("e", " Explore", "<Leader>e"),
+      create_alpha_button("f", " Find words", "<Leader>fm"),
       create_alpha_button("r", "󰦛 Restore session", "<Cmd>SessionRestore<CR>"),
       create_alpha_button("w", "󰥻 WhichKey", "<Cmd>WhichKey<CR>"),
       create_alpha_button("z", "󰒲 Lazy", "<Cmd>Lazy<CR>"),

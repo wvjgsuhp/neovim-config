@@ -14,6 +14,11 @@ end
 
 local winbar_exclude_file_types = {
   alpha = true,
+  TelescopePrompt = true,
+}
+
+local darker_background_file_types = {
+  noice = true,
 }
 
 M.get_winbar = function()
@@ -22,7 +27,8 @@ M.get_winbar = function()
   if cfg.relative > "" or cfg.external then
     return ""
   end
-  if winbar_exclude_file_types[vim.bo.filetype] then
+  local filetype = vim.bo.filetype
+  if winbar_exclude_file_types[filetype] then
     return ""
   end
 
@@ -37,10 +43,13 @@ M.get_winbar = function()
       " TERMINAL-%n" .. constants.win_bar_separator .. "%{b:term_title}",
     })
   elseif buftype == "nofile" then
+    local background = darker_background_file_types[filetype] and "%#Pmenu#" or ""
     return table.concat({
       mode_part,
+      background,
       M.get_icon(),
-      " " .. vim.bo.filetype,
+      background,
+      " " .. filetype,
     })
   else
     -- real files do not have buftypes
@@ -60,6 +69,21 @@ M.get_winbar = function()
   end
 end
 
+local minimal_status_line_file_types = utils.merge_tables(winbar_exclude_file_types, {
+  [""] = true,
+  lazy = true,
+  help = true,
+  NvimTree = true,
+  checkhealth = true,
+  Trouble = true,
+  noice = true,
+  fugitiveblame = true,
+})
+
+local is_minimal = function()
+  return minimal_status_line_file_types[vim.bo.filetype] or vim.bo.buftype == "terminal"
+end
+
 M.get_statusline = function()
   local mode = M.get_mode()
   local mode_color = M.get_mode_colors(mode)
@@ -67,11 +91,13 @@ M.get_statusline = function()
   local relative_path = M.get_relative_path()
   local lines_columns = " %3l/%L󰉸 %3c󰤼 %*"
 
+  local is_buffer_minimal = is_minimal()
+
   if is_current() then
     local parts = {
       -- left
       mode_color["a"],
-      M.get_git_branch(),
+      is_buffer_minimal and "" or M.get_git_branch(),
       mode_color["b"],
       M.get_recording(),
 
@@ -79,13 +105,13 @@ M.get_statusline = function()
       "%<",
       mode_color["c"],
       relative_path,
-      M.get_git_changes(),
-      M.get_diags(),
+      is_buffer_minimal and "" or M.get_git_changes(),
+      is_buffer_minimal and "" or M.get_diags(),
 
       -- middle-right
       "%=",
       mode_color["c"],
-      M.get_language_servers(),
+      is_buffer_minimal and "" or M.get_language_servers(),
       " ",
 
       -- right
@@ -157,6 +183,8 @@ local cache_icons = {
   terminal  = "",
   Trouble   = "",
   r         = "󰟔 ",
+  noice     = "󰚢",
+  help      = "󰮥",
 }
 
 M.get_icon = function()
@@ -180,7 +208,7 @@ M.get_icon = function()
     end
   end
 
-  local default_icon_hl = " %#WinBarIcon#"
+  local default_icon_hl = darker_background_file_types[filetype] and " %#WinBarIconDarker#" or " %#WinBarIcon#"
   if buftype == "terminal" then
     return default_icon_hl .. cache_icons.terminal .. "%*"
   end
@@ -206,7 +234,7 @@ local diagnostic_signs = constants.diagnostics
 
 local get_sign = function(severity)
   local hl = "%#StatusLine" .. severity .. "#"
-  return hl .. diagnostic_signs[severity]
+  return hl .. diagnostic_signs[severity] .. " "
 end
 
 M.get_diags = function()

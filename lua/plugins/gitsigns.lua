@@ -1,8 +1,9 @@
-local utils = require("utils")
-
 return {
   "lewis6991/gitsigns.nvim",
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
+    local utils = require("utils")
+
     require("gitsigns").setup({
       signs = {
         add = { text = "▍" },

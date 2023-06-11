@@ -1,6 +1,7 @@
 return {
   "rmagatti/auto-session",
   cond = vim.g.is_unix == 1,
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     log_level = "error",
     auto_save_enabled = true,

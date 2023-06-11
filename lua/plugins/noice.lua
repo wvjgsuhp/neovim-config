@@ -6,18 +6,20 @@ return {
     "rcarriga/nvim-notify",
   },
   config = function()
+    local constants = require("constants")
     local utils = require("utils")
+
     require("noice").setup({
       cmdline = {
         format = {
-          cmdline = { pattern = "^:", icon = ":", lang = "vim" },
+          cmdline = { title = "", pattern = "^:", icon = "❯", lang = "vim" },
         },
       },
       views = {
         cmdline_popup = {
           border = {
-            style = "single",
-            padding = { 0, 1 },
+            style = constants.border.none,
+            padding = { 0, 0 },
           },
           position = {
             row = 5,
@@ -26,9 +28,6 @@ return {
           size = {
             width = 89,
             height = "auto",
-          },
-          win_options = {
-            winhighlight = { FloatTitle = "PmenuTitle" },
           },
         },
         popupmenu = {
@@ -47,22 +46,21 @@ return {
         },
         hover = {
           border = {
-            style = "single",
+            style = constants.border.none,
+            padding = { 0, 0 },
           },
         },
         confirm = {
           border = {
-            style = "single",
+            style = "none",
           },
+        },
+        split = {
+          enter = true,
+          size = "55%",
         },
       },
       lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
         signature = {
           enabled = false,
         },
@@ -77,5 +75,15 @@ return {
     })
 
     utils.noremap("n", "<Leader>md", "<Cmd>Noice dismiss<CR>")
+
+    local noice_number = utils.augroup("noice_number")
+    utils.autocmd({ "FileType", "BufEnter" }, {
+      group = noice_number,
+      pattern = "noice",
+      callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+      end,
+    })
   end,
 }
