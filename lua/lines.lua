@@ -69,7 +69,7 @@ M.get_winbar = function()
   end
 end
 
-local minimal_status_line_file_types = utils.merge_tables(winbar_exclude_file_types, {
+local minimal_status_line_file_types = vim.tbl_deep_extend("force", winbar_exclude_file_types, {
   [""] = true,
   lazy = true,
   help = true,

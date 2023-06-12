@@ -15,6 +15,7 @@
   "diffview.nvim": { "branch": "main", "commit": "6780a8a27f5cd326f502653cecef701611641fdf" },
   "friendly-snippets": { "branch": "main", "commit": "b71d1ddc30a10ce0474156f7ee93bc9006d0cd74" },
   "fsread.nvim": { "branch": "main", "commit": "a637bf048f733def7c5c46f5bf482f93a8311b29" },
+  "github-nvim-theme": { "branch": "main", "commit": "ab90dd7bd835cb90572e2d8337ff50452cdec58c" },
   "gitsigns.nvim": { "branch": "main", "commit": "4455bb5364d29ff86639dfd5533d4fe4b48192d4" },
   "hop.nvim": { "branch": "master", "commit": "03f0434869f1f38868618198b5f4f2ab6d39aef2" },
   "jupytext.vim": { "branch": "master", "commit": "32c1e37b2edf63a7e38d0deb92cc3f1462cc4dcd" },

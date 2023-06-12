@@ -8,6 +8,7 @@
 "       Thanks to Ryan Heath for an easy list of some of the colours:
 "       http://rpheath.com/posts/356-github-theme-for-syntax-gem
 
+" TODO: make it more readable and configurable
 set background=light
 
 if version > 580
@@ -19,8 +20,8 @@ endif
 
 let colors_name = "github"
 
-hi Normal       ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
-hi Cursor       ctermfg=255   ctermbg=250   guifg=#F8F8FF guibg=#00F8F8
+hi Normal       ctermfg=0     ctermbg=255   guifg=#000000 guibg=#f6f8fa
+hi Cursor       ctermfg=255   ctermbg=14    guifg=#f6f8fa guibg=#00F8F8
 hi Visual       ctermbg=252   guibg=#d4d4d4
 hi VisualNOS    ctermfg=15    ctermbg=24    guifg=#FFFFFF guibg=#204a87
 hi Search       ctermfg=236   ctermbg=228   guifg=#000000 guibg=#FFFF8C cterm=bold  gui=bold
@@ -35,19 +36,19 @@ hi ColorColumn  ctermbg=254   guibg=#e4e4e4
 hi SignColumn   ctermbg=none  guibg=none
 call interface#PartialLink("VertSplit", "Normal", ["guibg", 'ctermbg'], "ctermfg=250 guifg=#bbbbbb")
 call interface#PartialLink("LineNr", "Normal", ["guibg", 'ctermbg'], "ctermfg=246 guifg=#959595")
-hi EndOfBuffer  ctermfg=255   ctermbg=255   guifg=#F8F8FF guibg=#F8F8FF
+hi EndOfBuffer  ctermfg=255   guifg=#f6f8fa
 
 hi CursorLine     ctermbg=253 guibg=#D8D8DD
 hi MatchParen     ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
-hi Pmenu          ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1
+hi Pmenu          ctermfg=0   ctermbg=254 guifg=#000000 guibg=#eaeef2
 hi PmenuSel       ctermfg=15  ctermbg=61  guifg=#FFFFFF guibg=#3465a3
 hi PmenuSbar      ctermfg=246 ctermbg=15  guifg=#959595 guibg=#ECECEC
 hi PmenuThumb     ctermfg=250 ctermbg=250 guifg=#bbbbbb guibg=#bbbbbb
-hi PmenuBorder    ctermfg=254 ctermbg=254 guibg=#F1F1F1 guifg=#F1F1F1
-hi PmenuPadding   ctermfg=254 ctermbg=254 guibg=#F8F8FF guifg=#F1F1F1
-hi PmenuTitle     ctermfg=0   ctermbg=254 guifg=#000000 guibg=#F1F1F1 gui=bold  cterm=bold
-hi PmenuSeparator ctermfg=252 ctermbg=254 guibg=#F1F1F1 guifg=#d4d4d4
-hi PmenuEnd       ctermfg=254 ctermbg=254 guibg=#F1F1F1 guifg=#F1F1F1
+hi PmenuBorder    ctermfg=254 ctermbg=254 guibg=#eaeef2 guifg=#eaeef2
+hi PmenuPadding   ctermfg=254 ctermbg=254 guibg=#f6f8fa guifg=#eaeef2
+hi PmenuTitle     ctermfg=0   ctermbg=254 guifg=#000000 guibg=#eaeef2 gui=bold  cterm=bold
+hi PmenuSeparator ctermfg=252 ctermbg=254 guibg=#eaeef2 guifg=#d4d4d4
+hi PmenuEnd       ctermfg=254 ctermbg=254 guibg=#eaeef2 guifg=#eaeef2
 
 hi DiffAdd    ctermfg=233 ctermbg=194   guifg=#003300 guibg=#DDFFDD gui=none  cterm=none
 hi DiffChange ctermbg=255 guibg=#ececec gui=none      cterm=none
@@ -71,7 +72,7 @@ hi StorageClass ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi Structure    ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 
-" hi ShadowBorder ctermfg=252 ctermbg=255 guibg=#F8F8FF guifg=#d4d4d4
+" hi ShadowBorder ctermfg=252 ctermbg=255 guibg=#f6f8fa guifg=#d4d4d4
 
 " treesitter
 hi link @operator  Normal
@@ -184,7 +185,7 @@ hi WinBarModified   guifg=#d7d787 gui=none
 hi WinBarGitDirty   guifg=#d7afd7 gui=none
 hi WinBarIndicator  guifg=#5fafd7 gui=none
 hi WinBarIcon       guifg=#404040 gui=none
-hi WinBarIconDarker guifg=#404040 guibg=#F1F1F1 gui=none
+hi WinBarIconDarker guifg=#404040 guibg=#eaeef2 gui=none
 
 " hi link NormalFloat Normal
 hi link FloatBorder Normal
@@ -218,14 +219,14 @@ hi link NotifyWARNTitle   DiagnosticWarn
 hi link NotifyINFOTitle   DiagnosticInfo
 hi link NotifyDEBUGTitle  DiagnosticHint
 
-call interface#PartialLink('TelescopeNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
+call interface#PartialLink('TelescopeNormal', "Normal", ['guifg'], 'guibg=#eaeef2')
 hi link TelescopePromptNormal Normal
 hi link TelescopeTitle        PmenuTitle
 hi link TelescopeBorder       PmenuSeparator
 
-" call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#F1F1F1')
-" hi WilderBorder  guibg=#F1F1F1 guifg=#F1F1F1
-" hi WilderPrompt  ctermfg=0     ctermbg=255   guifg=#000000 guibg=#F8F8FF
+" call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#eaeef2')
+" hi WilderBorder  guibg=#eaeef2 guifg=#eaeef2
+" hi WilderPrompt  ctermfg=0     ctermbg=255   guifg=#000000 guibg=#f6f8fa
 
 hi link LazyNormal Pmenu
 
