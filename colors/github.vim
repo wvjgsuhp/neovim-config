@@ -76,9 +76,9 @@ hi link @operator  Normal
 call interface#PartialLink("@punctuation.delimiter", "Special", ["guifg", 'ctermfg'])
 hi link @punctuation.bracket @punctuation.delimiter
 
-hi LspReferenceText   ctermbg=254 guibg=#eaeef2
-hi LspReferenceRead   ctermbg=254 guibg=#eaeef2
-hi LspReferenceWrite  ctermbg=254 guibg=#eaeef2
+hi LspReferenceText ctermbg=252 guibg=#d0d7de
+hi link LspReferenceRead   LspReferenceText
+hi link LspReferenceWrite  LspReferenceText
 
 " gitsigns
 hi GitSignsAdd    guifg=#A0D3C1
