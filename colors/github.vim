@@ -8,7 +8,6 @@
 "       Thanks to Ryan Heath for an easy list of some of the colours:
 "       http://rpheath.com/posts/356-github-theme-for-syntax-gem
 
-" TODO: make it more readable and configurable
 set background=light
 
 if version > 580
@@ -36,7 +35,7 @@ hi ColorColumn  ctermbg=254   guibg=#e4e4e4
 hi SignColumn   ctermbg=none  guibg=none
 call interface#PartialLink("VertSplit", "Normal", ["guibg", 'ctermbg'], "ctermfg=250 guifg=#bbbbbb")
 call interface#PartialLink("LineNr", "Normal", ["guibg", 'ctermbg'], "ctermfg=246 guifg=#959595")
-hi EndOfBuffer  ctermfg=255   guifg=#f6f8fa
+hi EndOfBuffer  ctermfg=255   ctermbg=255   guifg=#f6f8fa guibg=#f6f8fa
 
 hi CursorLine     ctermbg=253 guibg=#D8D8DD
 hi MatchParen     ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
@@ -72,12 +71,14 @@ hi StorageClass ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi Structure    ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 
-" hi ShadowBorder ctermfg=252 ctermbg=255 guibg=#f6f8fa guifg=#d4d4d4
-
 " treesitter
 hi link @operator  Normal
 call interface#PartialLink("@punctuation.delimiter", "Special", ["guifg", 'ctermfg'])
 hi link @punctuation.bracket @punctuation.delimiter
+
+hi LspReferenceText   ctermbg=254 guibg=#eaeef2
+hi LspReferenceRead   ctermbg=254 guibg=#eaeef2
+hi LspReferenceWrite  ctermbg=254 guibg=#eaeef2
 
 " gitsigns
 hi GitSignsAdd    guifg=#A0D3C1

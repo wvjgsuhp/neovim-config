@@ -103,7 +103,26 @@ return {
       vim.g.jupytext_to_ipynb_opts = "--to=ipynb --update"
     end,
   },
-
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    lazy = true,
+    dependencies = "mason.nvim",
+    cmd = { "DapInstall", "DapUninstall" },
+    opts = {
+      -- Makes a best effort to setup the various debuggers with
+      -- reasonable debug configurations
+      automatic_installation = true,
+      ensure_installed = {
+        -- Update this to ensure that you have the debuggers for the langs you want
+      },
+    },
+  },
+  -- {
+  --   "mfussenegger/nvim-dap-python",
+  --   config = function()
+  --     require("dap-python").setup("~/.venv/debugpy/bin/python")
+  --   end,
+  -- },
   -- - repo: mattn/emmet-vim
   --   on_event: InsertEnter
   --   on_ft: [html, css, vue, javascript, javascriptreact, svelte]

@@ -1,7 +1,9 @@
-local constants = require("constants")
 return {
   "goolord/alpha-nvim",
+  event = "VimEnter",
   config = function()
+    local constants = require("constants")
+    local utils = require("utils")
     local dashboard = require("alpha.themes.dashboard")
 
     local create_alpha_button = function(shortcut, text, pressing_keys)
@@ -52,7 +54,7 @@ return {
     }
 
     -- footer
-    vim.api.nvim_create_autocmd("User", {
+    utils.autocmd("User", {
       pattern = "LazyVimStarted",
       callback = function()
         local stats = require("lazy").stats()
@@ -74,6 +76,16 @@ return {
     -- dashboard.config.layout[1].val = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * 0.2) })
     -- dashboard.config.layout[3].val = 3
     dashboard.config.opts.noautocmd = true
+
+    if vim.o.filetype == "lazy" then
+      vim.cmd.close()
+      utils.autocmd("User", {
+        pattern = "AlphaReady",
+        callback = function()
+          require("lazy").show()
+        end,
+      })
+    end
 
     require("alpha").setup(dashboard.config)
   end,
