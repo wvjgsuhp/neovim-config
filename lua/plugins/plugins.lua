@@ -33,12 +33,6 @@ return {
   "MunifTanjim/nui.nvim",
   "romainl/vim-cool",
   {
-    "rhysd/clever-f.vim",
-    config = function()
-      vim.g.clever_f_mark_direct = 1
-    end,
-  },
-  {
     "rhysd/accelerated-jk",
     keys = {
       { "j", "<Plug>(accelerated_jk_gj)zz" },
@@ -53,7 +47,7 @@ return {
     "folke/trouble.nvim",
     keys = {
       { "<Leader>dd", "<cmd>Trouble document_diagnostics<cr>", desc = "Diagnose the current buffer" },
-      { "<Leader>dw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Diagnose the current workspace" },
+      -- { "<Leader>dw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Diagnose the current workspace" },
     },
   },
   {
@@ -108,14 +102,12 @@ return {
     lazy = true,
     dependencies = "mason.nvim",
     cmd = { "DapInstall", "DapUninstall" },
-    opts = {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
-      automatic_installation = true,
-      ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
-      },
-    },
+    config = function()
+      require("mason").setup()
+      require("mason-nvim-dap").setup({
+        automatic_installation = true,
+      })
+    end,
   },
   -- {
   --   "mfussenegger/nvim-dap-python",
@@ -163,16 +155,6 @@ return {
   -- - { repo: MTDL9/vim-log-highlighting, on_ft: log }
 
   -- operators and text objects
-  {
-    "phaazon/hop.nvim",
-    opts = {},
-    keys = {
-      { "<Leader>fw", "<cmd>HopWord<cr>", mode = { "n", "v", "o" }, desc = "Jump to a word" },
-      { "<Leader>fa", "<cmd>HopAnywhere<cr>", mode = { "n", "v", "o" }, desc = "Jump anywhere" },
-      { "<Leader>fl", "<cmd>HopLine<cr>", mode = { "n", "v", "o" }, desc = "Jump to a line" },
-      { "<Leader>fc", "<cmd>HopChar1<cr>", mode = { "n", "v", "o" }, desc = "Jump to a character" },
-    },
-  },
 
   -- buffer
 

@@ -1,4 +1,4 @@
-require('lazy-bootstrap')
-require('lines')
+require("lazy-bootstrap")
+require("lines")
 
-pcall(require, 'local')
+pcall(require, "local")

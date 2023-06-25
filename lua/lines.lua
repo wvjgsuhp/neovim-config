@@ -41,6 +41,8 @@ M.get_winbar = function()
       mode_part,
       M.get_icon(),
       " TERMINAL-%n" .. constants.win_bar_separator .. "%{b:term_title}",
+      "%=",
+      M.get_tabs(mode),
     })
   elseif buftype == "nofile" then
     local background = darker_background_file_types[filetype] and "%#Pmenu#" or ""
@@ -179,12 +181,12 @@ local mode_map = {
 -- stylua: ignore
 local cache_icons = {
   -- custom icons here
-  NvimTree  = "",
-  terminal  = "",
-  Trouble   = "",
-  r         = "󰟔 ",
-  noice     = "󰚢",
-  help      = "󰮥",
+  NvimTree = "",
+  terminal = "",
+  Trouble  = "",
+  r        = "󰟔 ",
+  noice    = "󰚢",
+  help     = "󰮥",
 }
 
 M.get_icon = function()

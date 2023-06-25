@@ -2,6 +2,7 @@ local utils = require("utils")
 
 return {
   "sbdchd/neoformat",
+  -- enabled = false,
   config = function()
     vim.g.neoformat_sql_sqlformat = {
       exe = "sqlformat",
@@ -13,25 +14,25 @@ return {
       args = { "--max-line-length=80", "--experimental" },
     }
 
-    utils.augroup("formatting")
-    local auto_format_extensions = {
-      "*.html",
-      "*.java",
-      "*.js",
-      "*.json",
-      "*.jsx",
-      "*.lua",
-      "*.py",
-      "*.rs",
-      "*.sql",
-      "*.ts",
-      "*.tsx",
-      "*.yaml",
-      "*.R",
-    }
-    utils.autocmd("BufWritePre", {
-      pattern = auto_format_extensions,
-      command = "Neoformat",
-    })
+    -- utils.augroup("neoformat_formatting")
+    -- local auto_format_extensions = {
+    --   "*.html",
+    --   "*.java",
+    --   "*.js",
+    --   "*.json",
+    --   "*.jsx",
+    --   "*.lua",
+    --   "*.py",
+    --   "*.rs",
+    --   "*.sql",
+    --   "*.ts",
+    --   "*.tsx",
+    --   "*.yaml",
+    --   "*.R",
+    -- }
+    -- utils.autocmd("BufWritePre", {
+    --   pattern = auto_format_extensions,
+    --   command = "Neoformat",
+    -- })
   end,
 }

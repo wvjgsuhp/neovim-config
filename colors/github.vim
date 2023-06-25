@@ -20,7 +20,7 @@ endif
 let colors_name = "github"
 
 hi Normal       ctermfg=0     ctermbg=255   guifg=#000000 guibg=#f6f8fa
-hi Cursor       ctermfg=255   ctermbg=14    guifg=#f6f8fa guibg=#00F8F8
+hi Cursor       ctermfg=0     ctermbg=14    guifg=#f6f8fa guibg=#00F8F8
 hi Visual       ctermbg=252   guibg=#d4d4d4
 hi VisualNOS    ctermfg=15    ctermbg=24    guifg=#FFFFFF guibg=#204a87
 hi Search       ctermfg=236   ctermbg=228   guifg=#000000 guibg=#FFFF8C cterm=bold  gui=bold
@@ -35,7 +35,7 @@ hi ColorColumn  ctermbg=254   guibg=#e4e4e4
 hi SignColumn   ctermbg=none  guibg=none
 call interface#PartialLink("VertSplit", "Normal", ["guibg", 'ctermbg'], "ctermfg=250 guifg=#bbbbbb")
 call interface#PartialLink("LineNr", "Normal", ["guibg", 'ctermbg'], "ctermfg=246 guifg=#959595")
-hi EndOfBuffer  ctermfg=255   ctermbg=255   guifg=#f6f8fa guibg=#f6f8fa
+hi EndOfBuffer  ctermfg=255   guifg=#f6f8fa
 
 hi CursorLine     ctermbg=253 guibg=#D8D8DD
 hi MatchParen     ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
@@ -259,3 +259,5 @@ hi link DashboardFooter Constant
 
 hi link MasonNormal Pmenu
 hi link MasonHeader PmenuTitle
+
+hi FlashLabel ctermbg=14 guibg=#00F8F8 cterm=bold gui=bold
