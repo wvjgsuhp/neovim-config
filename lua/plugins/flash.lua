@@ -2,14 +2,19 @@ return {
   "folke/flash.nvim",
   event = "VeryLazy",
   opts = {
-    highlight = {
-      label = {
-        current = false,
-        after = false, ---@type boolean|number[]
-        before = true, ---@type boolean|number[]
-        -- position of the label extmark
-        style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
-        reuse = "lowercase", ---@type "lowercase" | "all"
+    labels = "fdghjklsaqwertyuiopzxcvbnm",
+    label = {
+      current = false,
+      -- after = true, ---@type boolean|number[]
+      -- before = false, ---@type boolean|number[]
+      -- position of the label extmark
+      -- style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
+      reuse = "all", ---@type "lowercase" | "all"
+    },
+    highlight = { backdrop = false },
+    modes = {
+      char = {
+        highlight = { backdrop = false },
       },
     },
   },

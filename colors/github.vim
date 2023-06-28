@@ -260,4 +260,4 @@ hi link DashboardFooter Constant
 hi link MasonNormal Pmenu
 hi link MasonHeader PmenuTitle
 
-hi FlashLabel ctermbg=14 guibg=#00F8F8 cterm=bold gui=bold
+hi FlashLabel ctermbg=88 ctermfg=15 guibg=#990000 guifg=#FFFFFF cterm=bold gui=bold

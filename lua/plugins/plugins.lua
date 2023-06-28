@@ -21,7 +21,7 @@ return {
   },
   {
     "folke/which-key.nvim",
-    opts = {},
+    config = true,
     cmd = "WhichKey",
     keys = {
       { "<Leader>k", "<cmd>WhichKey<CR>" },
@@ -32,13 +32,13 @@ return {
 
   "MunifTanjim/nui.nvim",
   "romainl/vim-cool",
-  {
-    "rhysd/accelerated-jk",
-    keys = {
-      { "j", "<Plug>(accelerated_jk_gj)zz" },
-      { "k", "<Plug>(accelerated_jk_gk)zz" },
-    },
-  },
+  -- {
+  --   "rhysd/accelerated-jk",
+  --   keys = {
+  --     { "j", "<Plug>(accelerated_jk_gj)zz" },
+  --     { "k", "<Plug>(accelerated_jk_gk)zz" },
+  --   },
+  -- },
 
   -- coding
 

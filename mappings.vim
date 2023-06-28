@@ -115,15 +115,20 @@ nmap * *N
 nnoremap <Leader>ze <Cmd>e ~/.zshrc<CR>
 
 " Center focused line
-let line_moved_commands = ['u', 'e', '<C-r>', 'n', 'N', 'G', 'w', 'b', '``', 'p']
+let line_moved_commands = ['u', 'e', '<C-r>', 'n', 'N', 'G', 'w', 'b', '``', 'j', 'k']
 for cmd in line_moved_commands
   execute 'nnoremap <silent> '.cmd.' '.cmd.'zz'
   execute 'vmap <silent> '.cmd.' '.cmd.'zz'
 endfor
 
-vmap <silent> j jzz
-vmap <silent> k kzz
 cmap <expr> <CR> getcmdtype() =~ '^[/?]$' ? '<CR>zz' : '<CR>'
+
+" excluding alpha
+augroup alpha_mapping
+  autocmd!
+  autocmd FileType alpha noremap <buffer> j j
+  autocmd FileType alpha noremap <buffer> k k
+augroup END
 
 nnoremap <Leader>zr <Cmd>res 13<CR>
 

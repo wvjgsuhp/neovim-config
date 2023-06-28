@@ -3,7 +3,7 @@ local M = {}
 local utils = require("utils")
 local constants = require("constants")
 
-local is_current = function()
+local function is_current()
   local winid = vim.g.actual_curwin
   if utils.isempty(winid) then
     return false
@@ -82,7 +82,7 @@ local minimal_status_line_file_types = vim.tbl_deep_extend("force", winbar_exclu
   fugitiveblame = true,
 })
 
-local is_minimal = function()
+local function is_minimal()
   return minimal_status_line_file_types[vim.bo.filetype] or vim.bo.buftype == "terminal"
 end
 
@@ -234,7 +234,7 @@ end
 local severity_levels = { "Error", "Warn", "Info", "Hint" }
 local diagnostic_signs = constants.diagnostics
 
-local get_sign = function(severity)
+local function get_sign(severity)
   local hl = "%#StatusLine" .. severity .. "#"
   return hl .. diagnostic_signs[severity] .. " "
 end
