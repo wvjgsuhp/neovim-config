@@ -5,8 +5,8 @@ return {
     labels = "fdghjklsaqwertyuiopzxcvbnm",
     label = {
       current = false,
-      -- after = true, ---@type boolean|number[]
-      -- before = false, ---@type boolean|number[]
+      after = false, ---@type boolean|number[]
+      before = true, ---@type boolean|number[]
       -- position of the label extmark
       -- style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
       reuse = "all", ---@type "lowercase" | "all"
@@ -30,12 +30,21 @@ return {
     },
     {
       "S",
-      mode = { "n", "o", "x" },
+      mode = { "n", "x", "o" },
       function()
-        require("flash").treesitter()
+        -- default options: exact mode, multi window, all directions, with a backdrop
+        require("flash").jump()
       end,
-      desc = "Flash Treesitter",
+      desc = "Flash",
     },
+    -- {
+    --   "S",
+    --   mode = { "n", "o", "x" },
+    --   function()
+    --     require("flash").treesitter()
+    --   end,
+    --   desc = "Flash Treesitter",
+    -- },
     {
       "r",
       mode = "o",
