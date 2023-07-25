@@ -195,7 +195,7 @@ M.get_icon = function()
 
   if utils.isempty(buftype) then
     if vim.bo.modified then
-      return " %#WinBarModified# %*"
+      return " %#WinBarModified# %*"
     end
 
     local icon = cache_icons[filetype]
