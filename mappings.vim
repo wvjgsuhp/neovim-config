@@ -28,7 +28,6 @@ nnoremap <silent> <C-h> <Cmd>wincmd h<CR>
 nnoremap <silent> <C-l> <Cmd>wincmd l<CR>
 nnoremap <silent> <Tab> <C-w>w
 
-
 " move between tabs
 nnoremap <Leader>tl <Cmd>tabnext<CR>
 nnoremap <Leader>th <Cmd>tabprev<CR>
@@ -154,6 +153,8 @@ augroup non_file_mapping
   autocmd FileType qf nnoremap <buffer> <Esc> <Cmd>cclose<CR>
   autocmd FileType qf nnoremap <buffer> <CR> <Cmd>.cc<CR>
 augroup END
+nnoremap <Leader>rr <Cmd>lua os.exit(1)<CR>
+" nnoremap <Leader>rr <Cmd>SessionSave<bar>lua os.exit(1)<CR>
 
 " csv specific
 augroup csv
@@ -167,3 +168,9 @@ nnoremap s <Nop>
 
 " execute current file
 noremap <F9> <Cmd>w<bar>!%:p<CR>
+augroup file_specific_command
+  autocmd FileType r,rmd noremap <buffer> <F9> <Cmd>w<bar>!./render_rmd.R %:p<CR>
+augroup END
+
+" remove trailing white spaces
+nnoremap <Leader>tw <Cmd>%s/\s\+$//g<CR>

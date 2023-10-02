@@ -28,7 +28,6 @@ set backspace=indent,eol,start  " Intuitive backspacing in insert mode
 
 " Tabs, indents
 set tabstop=2 shiftwidth=2 expandtab
-set textwidth=80    " Text width maximum chars before wrapping
 set softtabstop=-1  " Automatically keeps in sync with shiftwidth
 set smarttab        " Tab insert blanks according to 'shiftwidth'
 set autoindent      " Use same indenting on new lines
@@ -68,7 +67,7 @@ set showtabline=0
 set noshowcmd           " Don't show command in status line
 set cmdwinheight=5      " Command-line lines
 set laststatus=3        " Always show a status line
-set colorcolumn=+0      " Column highlight at textwidth's max character-limit
+set colorcolumn=112
 set display=lastline
 
 set sessionoptions=blank,curdir,help,terminal,tabpages
@@ -89,3 +88,8 @@ if ! has('nvim')
   set viewdir=$VIM_DATA_PATH/view/
   set spellfile=$VIM_DATA_PATH/spell/en.utf-8.add
 endif
+
+augroup markdown_setting
+  autocmd!
+  autocmd FileType markdown let &l:textwidth=&colorcolumn
+augroup END

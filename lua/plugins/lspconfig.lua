@@ -140,8 +140,8 @@ return {
       end
 
       -- global custom location-list diagnostics window toggle.
-      utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-      utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_next()<CR>")
+      utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+      utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 
       require("lspconfig.ui.windows").default_options.border = "single"
     end
@@ -159,10 +159,10 @@ return {
       "*.lua",
       "*.py",
       "*.rs",
-      "*.sql",
+      -- "*.sql",
       "*.ts",
       "*.tsx",
-      "*.yaml",
+      -- "*.yaml",
       "*.R",
       "*.rmd",
     }

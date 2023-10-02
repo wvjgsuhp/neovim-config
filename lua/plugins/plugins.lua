@@ -14,10 +14,7 @@ return {
   },
   {
     "mzlogin/vim-markdown-toc",
-    config = function()
-      vim.g.vmt_auto_update_on_save = 1
-    end,
-    cmd = "GenTocGFM",
+    ft = { "markdown" },
   },
   {
     "folke/which-key.nvim",
