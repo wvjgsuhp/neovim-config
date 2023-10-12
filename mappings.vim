@@ -22,17 +22,17 @@ nmap <C-S> <Cmd>let @+=expand("%:t")<CR>:saveas <C-r>+
 tnoremap <Esc> <C-\><C-n>zz
 
 " move between active splits
-nnoremap <silent> <C-k> <Cmd>wincmd k<CR>
-nnoremap <silent> <C-j> <Cmd>wincmd j<CR>
-nnoremap <silent> <C-h> <Cmd>wincmd h<CR>
-nnoremap <silent> <C-l> <Cmd>wincmd l<CR>
-nnoremap <silent> <Tab> <C-w>w
+noremap <silent> <C-k> <Cmd>wincmd k<CR>
+noremap <silent> <C-j> <Cmd>wincmd j<CR>
+noremap <silent> <C-h> <Cmd>wincmd h<CR>
+noremap <silent> <C-l> <Cmd>wincmd l<CR>
+noremap <silent> <Tab> <C-w>w
 
 " move between tabs
-nnoremap <Leader>tl <Cmd>tabnext<CR>
-nnoremap <Leader>th <Cmd>tabprev<CR>
-nnoremap <Leader>tq <Cmd>tabclose<CR>
-nnoremap <Leader>tn <Cmd>tabnew<CR>
+noremap <Leader>tl <Cmd>tabnext<CR>
+noremap <Leader>th <Cmd>tabprev<CR>
+noremap <Leader>tq <Cmd>tabclose<CR>
+noremap <Leader>tn <Cmd>tabnew<CR>
 noremap <Leader>1 1gt
 noremap <Leader>2 2gt
 noremap <Leader>3 3gt

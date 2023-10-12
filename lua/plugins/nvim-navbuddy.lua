@@ -7,7 +7,7 @@ return {
   },
   config = function()
     local constants = require("constants")
-    local utils = require("utils")
+    -- local utils = require("utils")
 
     require("nvim-navbuddy").setup({
       window = {

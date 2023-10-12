@@ -11,8 +11,8 @@ return {
   "tpope/vim-fugitive",
   event = { "BufReadPost", "BufNewFile" },
   keys = {
-    { "<Leader>gs", "<cmd>G status<CR>" },
-    { "<Leader>gp", "<cmd>G push<CR>" },
+    { "<Leader>gs",  "<cmd>G status<CR>" },
+    { "<Leader>gp",  "<cmd>G push<CR>" },
     { "<Leader>gac", get_commit_message },
     { "<Leader>gaa", "<cmd>G add .<CR>" },
   },

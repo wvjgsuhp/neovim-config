@@ -14,7 +14,7 @@ return {
       sources = {
         -- Whitespace
         builtins.diagnostics.trail_space.with({
-          disabled_filetypes = { "gitcommit" },
+          disabled_filetypes = { "gitcommit", "NvimTree" },
         }),
 
         builtins.diagnostics.eslint,

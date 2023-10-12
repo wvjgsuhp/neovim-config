@@ -15,6 +15,7 @@ return {
     modes = {
       char = {
         highlight = { backdrop = false },
+        -- keys = {},
       },
     },
   },
@@ -22,6 +23,15 @@ return {
     {
       "s",
       mode = { "n", "x", "o" },
+      function()
+        -- default options: exact mode, multi window, all directions, with a backdrop
+        require("flash").jump()
+      end,
+      desc = "Flash",
+    },
+    {
+      "v",
+      mode = { "o" },
       function()
         -- default options: exact mode, multi window, all directions, with a backdrop
         require("flash").jump()
