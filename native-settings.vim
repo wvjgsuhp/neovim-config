@@ -19,7 +19,7 @@ set magic                       " For regular expressions turn magic on
 set path+=**                    " Directories to search when using gf and friends
 set isfname-==                  " Remove =, detects filename in var=/foo/bar
 set virtualedit=block           " Position cursor anywhere in visual block
-set synmaxcol=2500              " Don't syntax highlight long lines
+set synmaxcol=377               " Don't syntax highlight long lines
 set nostartofline               " Cursor in same column for few commands
 set whichwrap+=h,l,<,>,[,],~    " Move to following line on certain keys
 set splitbelow splitright       " Splits open bottom right
@@ -91,5 +91,5 @@ endif
 
 augroup markdown_setting
   autocmd!
-  autocmd FileType markdown let &l:textwidth=&colorcolumn
+  autocmd FileType markdown,tex let &l:textwidth=&colorcolumn
 augroup END

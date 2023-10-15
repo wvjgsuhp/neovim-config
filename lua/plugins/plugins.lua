@@ -106,6 +106,23 @@ return {
       })
     end,
   },
+  {
+    "andythigpen/nvim-coverage",
+    config = function()
+      require("coverage").setup({
+        commands = true,
+        signs = {
+          covered = { hl = "GitSignsAdd", text = "▌" },
+          uncovered = { hl = "GitSignsDelete", text = "▌" },
+        },
+      })
+    end,
+    cmd = { "Coverage", "CoverageLoad", "CoverageToggle" },
+    keys = {
+      { "<Leader>ct", "<cmd>CoverageToggle<CR>" },
+      { "<Leader>cs", "<cmd>Coverage<CR>" },
+    },
+  },
   -- {
   --   "mfussenegger/nvim-dap-python",
   --   config = function()
