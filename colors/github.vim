@@ -72,7 +72,7 @@ hi Structure    ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 
 " treesitter
-hi link @operator  Normal
+call interface#PartialLink("@operator", "Normal", ["guifg", 'ctermfg'])
 call interface#PartialLink("@punctuation.delimiter", "Special", ["guifg", 'ctermfg'])
 hi link @punctuation.bracket @punctuation.delimiter
 

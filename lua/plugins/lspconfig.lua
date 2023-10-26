@@ -5,7 +5,7 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
-    "jose-elias-alvarez/null-ls.nvim",
+    -- "jose-elias-alvarez/null-ls.nvim",
     "nvim-lua/plenary.nvim",
     -- "b0o/schemastore.nvim",
     "folke/neodev.nvim",
@@ -147,30 +147,5 @@ return {
     end
 
     setup()
-
-    -- autoformat
-    utils.augroup("lsp_format")
-    local auto_format_extensions = {
-      "*.html",
-      "*.java",
-      "*.js",
-      "*.json",
-      "*.jsx",
-      "*.lua",
-      "*.py",
-      "*.rs",
-      -- "*.sql",
-      "*.ts",
-      "*.tsx",
-      -- "*.yaml",
-      "*.R",
-      "*.rmd",
-    }
-    utils.autocmd("BufWritePre", {
-      pattern = auto_format_extensions,
-      callback = function()
-        vim.lsp.buf.format({ timeout_ms = 2000 })
-      end,
-    })
   end,
 }
