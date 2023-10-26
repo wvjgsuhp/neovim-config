@@ -37,7 +37,7 @@ call interface#PartialLink("VertSplit", "Normal", ["guibg", 'ctermbg'], "ctermfg
 call interface#PartialLink("LineNr", "Normal", ["guibg", 'ctermbg'], "ctermfg=246 guifg=#959595")
 hi EndOfBuffer  ctermfg=255   guifg=#f6f8fa
 
-hi CursorLine     ctermbg=253 guibg=#D8D8DD
+hi CursorLine     ctermbg=253 guibg=#ECECEC
 hi MatchParen     ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd
 hi Pmenu          ctermfg=0   ctermbg=254 guifg=#000000 guibg=#eaeef2
 hi PmenuSel       ctermfg=15  ctermbg=61  guifg=#FFFFFF guibg=#3465a3

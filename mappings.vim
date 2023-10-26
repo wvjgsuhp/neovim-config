@@ -108,7 +108,7 @@ nnoremap <Leader>gdl <Cmd>diffget //3<CR>
 " Find
 nmap <Leader>fp /<C-r>0<CR>
 nnoremap <Leader>fn <Cmd>Navbuddy<CR>
-nmap * *N
+nnoremap * *Nzz
 
 " Edit file
 nnoremap <Leader>ze <Cmd>e ~/.zshrc<CR>
@@ -174,3 +174,8 @@ augroup END
 
 " remove trailing white spaces
 nnoremap <Leader>tw <Cmd>%s/\s\+$//g<CR>
+
+" coding
+vnoremap <Leader>ap <Cmd>'<,'>s/\(\w\+\).*/self.\1=\1/g<bar>noh<CR><Esc>
+" match kwargs with variables
+vnoremap <Leader>am <Cmd>'<,'>s/\(\w\+\).*/\1=\1,/g<bar>noh<CR><Esc>
