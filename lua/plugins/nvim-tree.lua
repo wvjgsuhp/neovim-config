@@ -28,7 +28,8 @@ return {
     end
 
     local height_ratio = 0.8
-    local width_ratio = 0.5
+    local width_ratio = 0.3
+    local max_window_w = 89
     require("nvim-tree").setup({
       on_attach = on_attach,
       disable_netrw = true,
@@ -43,10 +44,12 @@ return {
           open_win_config = function()
             local screen_w = vim.opt.columns:get()
             local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-            local window_w = screen_w * width_ratio
+
+            local window_w = math.max(screen_w * width_ratio, max_window_w)
             local window_h = screen_h * height_ratio
             local window_w_int = math.floor(window_w)
             local window_h_int = math.floor(window_h)
+
             local center_x = (screen_w - window_w) / 2
             local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
             return {
@@ -60,7 +63,7 @@ return {
           end,
         },
         width = function()
-          return math.floor(vim.opt.columns:get() * width_ratio)
+          return math.floor(math.max(vim.opt.columns:get() * width_ratio, max_window_w))
         end,
       },
       renderer = {
@@ -85,7 +88,7 @@ return {
     })
   end,
   keys = {
-    { "<Leader>e",  "<Cmd>NvimTreeToggle .<CR>", desc = "Toggle explorer" },
+    { "<Leader>e", "<Cmd>NvimTreeToggle .<CR>", desc = "Toggle explorer" },
     { "<Leader>fe", "<Cmd>NvimTreeFindFile<CR>", desc = "Find the current buffer in explorer" },
   },
 }
