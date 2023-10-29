@@ -246,6 +246,7 @@ hi link CmpItemKindUnit       CmpItemKindKeyword
 hi link NvimTreeNormal      Pmenu
 hi link NvimTreeNormalFloat Pmenu
 hi link NvimTreeLineNr      Pmenu
+hi link NvimTreeCursorLine  PmenuSel
 hi link NvimTreeEndOfBuffer PmenuBorder
 
 " hi link NavbuddyNormalFloat Pmenu
