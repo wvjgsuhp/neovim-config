@@ -35,13 +35,30 @@ return {
       return layout
     end
 
-    -- Enable indent-guides in telescope preview
-    vim.cmd([[
-      augroup telescope_events
-        autocmd!
-        autocmd User TelescopePreviewerLoaded setlocal wrap list
-      augroup END
-    ]])
+    -- -- Enable indent-guides in telescope preview
+    -- vim.cmd([[
+    --   augroup telescope_events
+    --     autocmd!
+    --     autocmd User TelescopePreviewerLoaded setlocal wrap list
+    --   augroup END
+    -- ]])
+    local flash = function(prompt_bufnr)
+      require("flash").jump({
+        pattern = "^",
+        search = {
+          mode = "search",
+          exclude = {
+            function(win)
+              return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
+            end,
+          },
+        },
+        action = function(match)
+          local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+          picker:set_selection(match.pos[1] - 1)
+        end,
+      })
+    end
 
     local telescope = require("telescope")
     local actions = require("telescope.actions")
@@ -60,7 +77,6 @@ return {
           "--column",
           "--smart-case",
         },
-        -- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         sorting_strategy = "ascending",
         selection_strategy = "closest",
         scroll_strategy = "cycle",
@@ -70,8 +86,6 @@ return {
         },
 
         prompt_prefix = "❯ ",
-        -- ♥ ❥ ➤ 🔭
-        -- selection_caret = "▍ ",
         selection_caret = "  ",
         multi_icon = "v",
         set_env = { COLORTERM = "truecolor" },
@@ -147,9 +161,7 @@ return {
               type = "action",
               opts = { nowait = true },
             },
-            ["sj"] = actions.select_horizontal,
-            ["sl"] = actions.select_vertical,
-            ["st"] = actions.select_tab,
+            ["s"] = flash,
           },
         },
       },
@@ -164,7 +176,7 @@ return {
         },
       },
     })
-    -- Telescope extensions are loaded in each plugin.
+
     if vim.g.is_unix == 1 then
       require("telescope").load_extension("fzf")
     end
@@ -179,5 +191,7 @@ return {
     { "<Leader>fm", "<cmd>Telescope live_grep<CR>", desc = "Find words" },
     { "<Leader>fr", "<cmd>Telescope resume<CR>", desc = "Resume Telescope" },
     { "<Leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Find symbols" },
+    { "<Leader>dt", "<cmd>Telescope diagnostics<CR>", desc = "Diagnose buffer" },
+    { "<Leader>fd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnose buffer" },
   },
 }
