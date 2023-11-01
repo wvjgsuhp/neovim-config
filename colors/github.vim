@@ -55,6 +55,7 @@ hi DiffText   ctermfg=233 ctermbg=189   guifg=#000033 guibg=#DDDDFF gui=none  ct
 hi DiffDelete ctermfg=252 ctermbg=224   guifg=#DDCCCC guibg=#FFDDDD gui=none  cterm=none
 
 hi Ignore       ctermfg=8   guifg=#808080
+" hi Identifier   ctermfg=31  guifg=#204a87
 hi Identifier   ctermfg=31  guifg=#0086B3
 hi PreProc      ctermfg=247 guifg=#A0A0A0 gui=bold      cterm=bold
 hi Comment      ctermfg=246 guifg=#999988

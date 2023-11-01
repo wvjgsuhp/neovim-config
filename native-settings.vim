@@ -47,6 +47,7 @@ set diffopt+=iwhite             " Diff mode: ignore whitespace
 
 " Interface
 set cursorline
+set cursorlineopt=both
 set termguicolors
 set guicursor=n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor
 set noshowmode          " Don't show mode in cmd window
@@ -93,4 +94,12 @@ endif
 augroup markdown_setting
   autocmd!
   autocmd FileType markdown,tex let &l:textwidth=&colorcolumn
+augroup END
+
+augroup cursor_line
+  autocmd!
+  autocmd BufWinEnter,WinEnter,InsertLeave * set cursorlineopt=both
+  autocmd InsertEnter * set cursorlineopt=number
+  autocmd WinEnter * set cursorline
+  autocmd WinLeave * set nocursorline
 augroup END
