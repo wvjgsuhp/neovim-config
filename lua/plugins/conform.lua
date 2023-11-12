@@ -9,12 +9,11 @@ return {
         python = { "isort", "autopep8" },
         javascript = { { "prettierd", "prettier" } },
         typescript = { { "prettierd", "prettier" } },
-
-        markdown = { "mdformat" },
+        typescriptreact = { { "prettierd", "prettier" } },
       },
       format_on_save = {
         -- These options will be passed to conform.format()
-        timeout_ms = 500,
+        timeout_ms = 70000,
         lsp_fallback = true,
       },
     })
