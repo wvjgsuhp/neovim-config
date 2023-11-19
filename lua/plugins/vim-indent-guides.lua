@@ -1,5 +1,6 @@
 return {
   "nathanaelkane/vim-indent-guides",
+  enabled = false,
   event = { "BufReadPost", "BufNewFile" },
   config = function()
     vim.g.indent_guides_enable_on_vim_startup = 0

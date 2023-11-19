@@ -73,6 +73,8 @@ set colorcolumn=112
 set display=lastline
 
 set sessionoptions=blank,curdir,help,terminal,tabpages
+set listchars=leadmultispace:┊\ ,nbsp:⍽,tab:⇥\ ,trail:-
+" set listchars+=leadmultispace:┆ ,nbsp:⍽,tab:⇥
 
 " time
 set timeout ttimeout

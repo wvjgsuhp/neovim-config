@@ -36,6 +36,7 @@ hi SignColumn   ctermbg=none  guibg=none
 call interface#PartialLink("VertSplit", "Normal", ["guibg", 'ctermbg'], "ctermfg=250 guifg=#bbbbbb")
 call interface#PartialLink("LineNr", "Normal", ["guibg", 'ctermbg'], "ctermfg=246 guifg=#959595")
 hi EndOfBuffer  ctermfg=255   guifg=#f6f8fa
+hi Whitespace   ctermfg=254   guifg=#e4e4e4
 
 hi CursorLine     ctermbg=253 guibg=#ECECEC
 hi MatchParen     ctermfg=0   ctermbg=252 guifg=#000000 guibg=#cdcdfd

@@ -102,21 +102,20 @@ M.get_statusline = function()
       is_buffer_minimal and "" or M.get_git_branch(),
       mode_color["b"],
       M.get_recording(),
+      mode_color["c"],
 
-      -- middle-left
-      "%<",
+      -- middle
+      "%=",
+      is_buffer_minimal and "" or M.get_git_changes(),
       mode_color["c"],
       relative_path,
-      is_buffer_minimal and "" or M.get_git_changes(),
       is_buffer_minimal and "" or M.get_diags(),
-
-      -- middle-right
-      "%=",
       mode_color["c"],
-      is_buffer_minimal and "" or M.get_language_servers(),
-      " ",
+      "%=",
 
       -- right
+      is_buffer_minimal and "" or M.get_language_servers(),
+      " ",
       mode_color["b"],
       os.date(" %H:%M "),
       mode_color["a"],
@@ -254,7 +253,7 @@ M.get_diags = function()
     grouped[severity] = grouped[severity] + 1
   end
 
-  local result = " "
+  local result = ""
   local severity = vim.diagnostic.severity
   for _, level in ipairs(severity_levels) do
     local severity_count = grouped[severity[level:upper()]]
@@ -289,7 +288,7 @@ M.get_git_changes = function()
       local sign = git_changes[change]
       local change_count = vim.b.gitsigns_status_dict[change]
       if change_count and change_count > 0 then
-        local hl = " %#StatusLineGit" .. utils.capitalize(change) .. "#"
+        local hl = "%#StatusLineGit" .. utils.capitalize(change) .. "# "
         changes = changes .. hl .. sign .. tostring(change_count)
       end
     end
@@ -367,7 +366,9 @@ M.get_relative_path = function()
     return " " .. vim.bo.filetype
   end
 
-  local file = " %f"
+  -- local file = " %f"
+  -- local file = " %{expand('%:~:.')}"
+  local file = " " .. vim.fn.expand("%:.")
 
   local is_modifiable = vim.api.nvim_buf_get_option(0, "modifiable")
   if vim.bo.readonly or not is_modifiable then
