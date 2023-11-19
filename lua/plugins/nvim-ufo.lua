@@ -14,36 +14,38 @@ return {
     vim.keymap.set("n", "zR", require("ufo").openAllFolds)
     vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
-    local function virtual_text_handler(virtText, lnum, endLnum, width, truncate)
-      local newVirtText = {}
+    local function virtual_text_handler(virtual_text, lnum, endLnum, width, truncate)
+      local new_virtual_text = {}
       local fill_char = "─ "
       local suffix = ""
-      local targetWidth = tonumber(vim.o.colorcolumn)
-      local curWidth = 0
-      for _, chunk in ipairs(virtText) do
-        local chunkText = chunk[1]
-        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-        if targetWidth > curWidth + chunkWidth then
-          table.insert(newVirtText, chunk)
+      local colorcolumn = tonumber(vim.o.colorcolumn)
+      local target_width = math.min(colorcolumn and colorcolumn or 80, width)
+
+      local total_width = 0
+      for _, chunk in ipairs(virtual_text) do
+        local chunk_text = chunk[1]
+        local chunk_width = vim.fn.strdisplaywidth(chunk_text)
+        if target_width > total_width + chunk_width then
+          table.insert(new_virtual_text, chunk)
         else
-          chunkText = truncate(chunkText, targetWidth - curWidth)
-          local hlGroup = chunk[2]
-          table.insert(newVirtText, { chunkText, hlGroup })
-          chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          chunk_text = truncate(chunk_text, target_width - total_width)
+          local hl_group = chunk[2]
+          table.insert(new_virtual_text, { chunk_text, hl_group })
+          chunk_width = vim.fn.strdisplaywidth(chunk_text)
 
           break
         end
 
-        if curWidth < targetWidth then
-          local n_repeats = math.floor((targetWidth - curWidth - 2) / vim.fn.strdisplaywidth(fill_char))
+        if total_width < target_width then
+          local n_repeats = math.floor((target_width - total_width - 2) / vim.fn.strdisplaywidth(fill_char))
           suffix = " " .. (fill_char):rep(n_repeats)
         end
 
-        curWidth = curWidth + chunkWidth
+        total_width = total_width + chunk_width
       end
 
-      table.insert(newVirtText, { suffix, "Comment" })
-      return newVirtText
+      table.insert(new_virtual_text, { suffix, "Comment" })
+      return new_virtual_text
     end
 
     -- Option 3: treesitter as a main provider instead
