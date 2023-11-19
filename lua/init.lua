@@ -1,5 +1,5 @@
 require("lazy-bootstrap")
 require("lines")
-require("interface")
+require("functions")
 
 pcall(require, "local")

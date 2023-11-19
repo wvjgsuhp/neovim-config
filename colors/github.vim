@@ -169,8 +169,8 @@ hi StatusLineInactive guifg=#404040 guibg=#d4d4d4
 
 let s:win_bar_glyph_hl = {
   \"StatusLineError":       "guifg=#ff0000",
-  \"StatusLineInfo":        "guifg=#87d7ff",
-  \"StatusLineHint":        "guifg=#888888",
+  \"StatusLineInfo":        "guifg=#888888",
+  \"StatusLineHint":        "guifg=#87d7ff",
   \"StatusLineWarn":        "guifg=#FF895C",
   \"StatusLineChanges":     "guifg=#6f42c1",
   \"StatusLineGitAdded":    "guifg=#159828",
