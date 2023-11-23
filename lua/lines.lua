@@ -103,6 +103,7 @@ M.get_statusline = function()
       mode_color["b"],
       M.get_recording(),
       mode_color["c"],
+      is_buffer_minimal and "" or M.get_language_servers(),
 
       -- middle
       "%=",
@@ -114,10 +115,8 @@ M.get_statusline = function()
       "%=",
 
       -- right
-      is_buffer_minimal and "" or M.get_language_servers(),
-      " ",
       mode_color["b"],
-      os.date(" %H:%M "),
+      os.date(" 󰥔 %H:%M "),
       mode_color["a"],
       lines_columns,
     }
@@ -177,15 +176,22 @@ local mode_map = {
   ["t"]     = "T",
 }
 
+local mode_char = {
+  N = "󰜱󰜴",
+  I = " ",
+  V = " ",
+}
+
 -- stylua: ignore
 local cache_icons = {
   -- custom icons here
-  NvimTree = "",
-  terminal = "",
-  Trouble  = "",
-  r        = "󰟔 ",
-  noice    = "󰚢",
-  help     = "󰮥",
+  NvimTree  = "",
+  terminal  = "",
+  Trouble   = "",
+  r         = "󰟔 ",
+  noice     = "󰚢",
+  help      = "󰮥",
+  pem       = "󰄤 ",
 }
 
 M.get_icon = function()
@@ -270,7 +276,7 @@ M.get_git_branch = function()
   if utils.isempty(branch) then
     return ""
   else
-    return "  " .. branch .. " "
+    return " 󰙁 " .. branch .. " "
   end
 end
 
@@ -355,7 +361,7 @@ M.get_recording = function()
   if recording_register == "" then
     return ""
   else
-    return " recording @" .. recording_register .. " "
+    return " recording  " .. recording_register .. " "
   end
 end
 
@@ -394,7 +400,7 @@ M.get_language_servers = function()
   end
 
   if #servers > 0 then
-    return "   " .. table.concat(servers, ", ")
+    return "   " .. table.concat(servers, ", ")
   end
 
   return ""
@@ -420,12 +426,12 @@ end
 
 --- @param mode string
 M.get_mode_part = function(mode)
-  if mode:len() > 1 then
+  if vim.fn.strdisplaywidth(mode) > 1 then
     return mode
   end
 
   local mode_colors = M.get_mode_colors(mode)
-  return M.paint(" " .. mode .. " ", mode_colors["a"])
+  return M.paint(" " .. (mode_char[mode] or mode) .. " ", mode_colors["a"])
 end
 
 M.paint = function(text, color)
