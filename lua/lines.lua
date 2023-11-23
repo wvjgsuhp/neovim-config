@@ -86,12 +86,13 @@ local function is_minimal()
   return minimal_status_line_file_types[vim.bo.filetype] or vim.bo.buftype == "terminal"
 end
 
-M.get_statusline = function()
+M.get_status_line = function()
   local mode = M.get_mode()
   local mode_color = M.get_mode_colors(mode)
 
   local relative_path = M.get_relative_path()
-  local lines_columns = " %3l/%L󰉸 %3c󰤼 %*"
+  local line_icon = M.get_line_icon()
+  local lines_columns = " %3l/%L" .. line_icon .. " %3c󰤼 %*"
 
   local is_buffer_minimal = is_minimal()
 
@@ -131,6 +132,15 @@ M.get_statusline = function()
     }
     return table.concat(parts)
   end
+end
+
+local line_icons = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
+-- local line_icons = { "⡀", "⣀", "⣄", "⣤", "⣦", "⣶", "⣾", "⣿" }
+M.get_line_icon = function()
+  local current_line = vim.fn.line(".")
+  local total_line = vim.fn.line("$")
+  local icon_index = math.floor(current_line / total_line * (#line_icons - 1)) + 1
+  return line_icons[icon_index]
 end
 
 -- mode_map copied from:
@@ -176,10 +186,11 @@ local mode_map = {
   ["t"]     = "T",
 }
 
-local mode_char = {
+local mode_icons = {
   N = "󰜱󰜴",
   I = " ",
   V = " ",
+  T = " ",
 }
 
 -- stylua: ignore
@@ -431,7 +442,7 @@ M.get_mode_part = function(mode)
   end
 
   local mode_colors = M.get_mode_colors(mode)
-  return M.paint(" " .. (mode_char[mode] or mode) .. " ", mode_colors["a"])
+  return M.paint(" " .. (mode_icons[mode] or mode) .. " ", mode_colors["a"])
 end
 
 M.paint = function(text, color)
@@ -444,7 +455,7 @@ end
 
 _G.status = M
 vim.o.winbar = "%{%v:lua.status.get_winbar()%}"
-vim.o.statusline = "%{%v:lua.status.get_statusline()%}"
+vim.o.statusline = "%{%v:lua.status.get_status_line()%}"
 
 -- fix statusline diappears when enter insert mode
 utils.autocmd("InsertEnter", { command = ":let &stl=&stl" })
