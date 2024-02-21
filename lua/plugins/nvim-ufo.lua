@@ -16,7 +16,7 @@ return {
 
     local function virtual_text_handler(virtual_text, lnum, endLnum, width, truncate)
       local new_virtual_text = {}
-      local fill_char = "─ "
+      local fill_char = " ─ "
       local suffix = ""
       local colorcolumn = tonumber(vim.o.colorcolumn)
       local target_width = math.min(colorcolumn and colorcolumn or 80, width)
@@ -38,7 +38,7 @@ return {
 
         if total_width < target_width then
           local n_repeats = math.floor((target_width - total_width - 2) / vim.fn.strdisplaywidth(fill_char))
-          suffix = " " .. (fill_char):rep(n_repeats)
+          suffix = " " .. fill_char:rep(n_repeats)
         end
 
         total_width = total_width + chunk_width

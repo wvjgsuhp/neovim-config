@@ -1,5 +1,4 @@
 return {
-  -- "nvim-lua/plenary.nvim",
   "kyazdani42/nvim-web-devicons",
 
   -- commands
@@ -29,13 +28,6 @@ return {
 
   "MunifTanjim/nui.nvim",
   "romainl/vim-cool",
-  -- {
-  --   "rhysd/accelerated-jk",
-  --   keys = {
-  --     { "j", "<Plug>(accelerated_jk_gj)zz" },
-  --     { "k", "<Plug>(accelerated_jk_gk)zz" },
-  --   },
-  -- },
 
   -- coding
 
@@ -44,7 +36,6 @@ return {
     "folke/trouble.nvim",
     keys = {
       { "<Leader>dd", "<cmd>Trouble document_diagnostics<cr>", desc = "Diagnose the current buffer" },
-      -- { "<Leader>dw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Diagnose the current workspace" },
     },
   },
   {
@@ -53,9 +44,9 @@ return {
     opts = {
       ui = {
         icons = {
-          package_installed = " ",
-          package_pending = " ",
-          package_uninstalled = " ",
+          package_installed = " ",
+          package_pending = " ",
+          package_uninstalled = " ",
         },
       },
     },
@@ -123,6 +114,12 @@ return {
       { "<Leader>ct", "<cmd>CoverageToggle<CR>" },
       { "<Leader>cs", "<cmd>Coverage<CR>" },
     },
+  },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    config = function()
+      require("ts_context_commentstring").setup({ enable_autocmd = false })
+    end,
   },
   -- {
   --   "mfussenegger/nvim-dap-python",

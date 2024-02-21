@@ -153,8 +153,7 @@ augroup non_file_mapping
   autocmd FileType qf nnoremap <buffer> <Esc> <Cmd>cclose<CR>
   autocmd FileType qf nnoremap <buffer> <CR> <Cmd>.cc<CR>
 augroup END
-nnoremap <Leader>rr <Cmd>lua os.exit(1)<CR>
-" nnoremap <Leader>rr <Cmd>SessionSave<bar>lua os.exit(1)<CR>
+nnoremap <Leader>rr :SessionSave<CR><Cmd>lua os.exit(1)<CR>
 
 " csv specific
 augroup csv

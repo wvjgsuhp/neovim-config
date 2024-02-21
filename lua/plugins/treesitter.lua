@@ -66,13 +66,6 @@ return {
         },
       },
 
-      -- See: https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-      context_commentstring = {
-        enable = true,
-        -- Let other plugins (kommentary) call 'update_commentstring()' manually.
-        enable_autocmd = false,
-      },
-
       -- See: https://github.com/windwp/nvim-ts-autotag
       autotag = {
         enable = true,

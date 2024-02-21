@@ -8,7 +8,7 @@ return {
       accept_keymap = "<C-l>",
       dismiss_keymap = "<C-n>",
       debounce_ms = 800,
-      suggestion_color = { gui = "#808080", cterm = 244 },
+      suggestion_color = { gui = "#999988", cterm = 246 },
       exclude_filetypes = { "TelescopePrompt" },
       log_file_path = nil, -- absolute path to Tabnine log file
     })

@@ -134,8 +134,8 @@ M.get_status_line = function()
   end
 end
 
-local line_icons = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
--- local line_icons = { "⡀", "⣀", "⣄", "⣤", "⣦", "⣶", "⣾", "⣿" }
+-- local line_icons = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
+local line_icons = { "⡀", "⣀", "⣄", "⣤", "⣦", "⣶", "⣾", "⣿" }
 M.get_line_icon = function()
   local current_line = vim.fn.line(".")
   local total_line = vim.fn.line("$")
@@ -187,10 +187,14 @@ local mode_map = {
 }
 
 local mode_icons = {
-  N = "󰜱󰜴",
-  I = " ",
-  V = " ",
-  T = " ",
+  -- N = "󰜱󰜴",
+  -- I = " ",
+  -- V = " ",
+  -- T = " ",
+  N = "󰎐",
+  I = "󰷈",
+  V = "󰩬",
+  T = "",
 }
 
 -- stylua: ignore
