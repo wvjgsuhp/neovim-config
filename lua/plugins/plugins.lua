@@ -111,8 +111,8 @@ return {
     end,
     cmd = { "Coverage", "CoverageLoad", "CoverageToggle" },
     keys = {
-      { "<Leader>ct", "<cmd>CoverageToggle<CR>" },
-      { "<Leader>cs", "<cmd>Coverage<CR>" },
+      { "<Leader>ct", "<cmd>CoverageToggle<CR>", desc = "Toggle coverage" },
+      { "<Leader>cs", "<cmd>Coverage<CR>", desc = "Update coverage" },
     },
   },
   {

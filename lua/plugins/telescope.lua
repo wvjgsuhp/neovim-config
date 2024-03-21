@@ -154,7 +154,9 @@ return {
             ["G"] = actions.move_to_bottom,
 
             ["<Leader>j"] = actions.select_horizontal,
+            ["J"] = actions.select_horizontal,
             ["<Leader>l"] = actions.select_vertical,
+            ["L"] = actions.select_vertical,
             ["<C-l>"] = actions.select_vertical,
             ["<Leader>t"] = {
               actions.select_tab,
