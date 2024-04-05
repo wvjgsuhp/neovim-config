@@ -2,6 +2,7 @@
 "
 " Author: Anthony Carapetis <anthony.carapetis@gmail.com>
 " Contributors: Lucas Tadeu <lucastadeuteixeira@gmail.com>
+"               Wasin Pipattungsakul <wasin.pas@hotmail.com>
 "
 " Note: Based on github's syntax highlighting theme
 "       Used Brian Mock's darkspectrum as a starting point/template
@@ -75,8 +76,10 @@ hi TypeDef      ctermfg=0   guifg=#000000 gui=bold      cterm=bold
 
 " treesitter
 call interface#PartialLink("@operator", "Normal", ["guifg", 'ctermfg'])
+call interface#PartialLink("@variable.member", "Type", ["guifg", 'ctermfg'])
 call interface#PartialLink("@punctuation.delimiter", "Special", ["guifg", 'ctermfg'])
 hi link @punctuation.bracket @punctuation.delimiter
+hi link @variable.builtin @punctuation.delimiter
 
 hi LspReferenceText ctermbg=252 guibg=#d0d7de
 hi link LspReferenceRead   LspReferenceText
@@ -157,13 +160,18 @@ hi DiagnosticOk     ctermfg=2   guifg=#159828
 
 hi StatusLineN1       ctermfg=188   ctermbg=0   guifg=#dddddd guibg=#000000 gui=none cterm=none
 hi StatusLineN2       ctermfg=188   ctermbg=238 guifg=#dddddd guibg=#404040 gui=none cterm=none
+hi StatusLineRecord   ctermfg=1   guifg=#ff0000 ctermbg=none  guibg=none
+call interface#PartialLink("StatusLineN2Record", 'StatusLineN2', ["guibg"], 'ctermfg=1 guifg=#ff0000')
 hi StatusLineN3       ctermfg=0     ctermbg=188 guifg=#000000 guibg=#dddddd gui=none cterm=none
 hi StatusLineI1       ctermfg=188   ctermbg=26  guifg=#dddddd guibg=#005cc5 gui=none cterm=none
 hi StatusLineI2       ctermfg=188   ctermbg=17  guifg=#dddddd guibg=#032f62 gui=none cterm=none
+call interface#PartialLink("StatusLineI2Record", 'StatusLineI2', ["guibg"], 'ctermfg=1 guifg=#ff0000')
 hi StatusLineV1       ctermfg=188   ctermbg=91  guifg=#dddddd guibg=#6f42c1 gui=none cterm=none
 hi StatusLineV2       ctermfg=188   ctermbg=237 guifg=#dddddd guibg=#45267d gui=none cterm=none
+call interface#PartialLink("StatusLineV2Record", 'StatusLineV2', ["guibg"], 'ctermfg=1 guifg=#ff0000')
 hi StatusLineR1       ctermfg=188   ctermbg=167 guifg=#dddddd guibg=#d73a49 gui=none cterm=none
 hi StatusLineR2       ctermfg=188   ctermbg=124 guifg=#dddddd guibg=#b31d28 gui=none cterm=none
+call interface#PartialLink("StatusLineR2Record", 'StatusLineR2', ["guibg"], 'ctermfg=15 guifg=#ffffff')
 hi StatusLineRO       ctermfg=167   ctermbg=188 guifg=#ff0000 guibg=#dddddd gui=none cterm=none
 hi StatusLineInactive guifg=#404040 guibg=#d4d4d4
 

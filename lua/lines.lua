@@ -101,8 +101,8 @@ M.get_status_line = function()
       -- left
       mode_color["a"],
       is_buffer_minimal and "" or M.get_git_branch(),
-      mode_color["b"],
-      M.get_recording(),
+      -- mode_color["b"],
+      M.get_recording(mode_color["b"], mode_color["record"]),
       mode_color["c"],
       is_buffer_minimal and "" or M.get_language_servers(),
 
@@ -371,12 +371,12 @@ M.get_tabs = function(mode)
   return "  " .. tostring(this_tab) .. "/" .. tostring(last_tab)
 end
 
-M.get_recording = function()
+M.get_recording = function(mode_color, record_color)
   local recording_register = vim.fn.reg_recording()
   if recording_register == "" then
     return ""
   else
-    return " recording  " .. recording_register .. " "
+    return mode_color .. " recording " .. record_color .. " " .. mode_color .. recording_register .. " "
   end
 end
 
@@ -431,10 +431,12 @@ M.get_mode = function()
 end
 
 M.get_mode_colors = function(mode)
+  local mode_char = mode:sub(1, 1)
   return {
-    a = "%#StatusLine" .. mode:sub(1, 1) .. "1#",
-    b = "%#StatusLine" .. mode:sub(1, 1) .. "2#",
+    a = "%#StatusLine" .. mode_char .. "1#",
+    b = "%#StatusLine" .. mode_char .. "2#",
     c = "%#StatusLineN3#",
+    record = "%#StatusLine" .. mode_char .. "2Record#",
     inactive = "%#StatusLineInactive#",
   }
 end
