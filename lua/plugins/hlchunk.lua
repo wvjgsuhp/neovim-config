@@ -8,9 +8,10 @@ return {
         enable = true,
         use_treesitter = true,
         chars = {
+          horizontal_line = " ",
           left_top = "┌",
           left_bottom = "└",
-          right_arrow = "─",
+          right_arrow = " ",
         },
         style = {
           { fg = hl_color },

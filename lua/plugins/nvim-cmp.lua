@@ -73,7 +73,7 @@ return {
         ["<C-q>"] = cmp.mapping.close(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
 
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<C-l>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
@@ -87,7 +87,7 @@ return {
           end
         end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        ["<C-h>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then

@@ -28,7 +28,13 @@ return {
 
   "MunifTanjim/nui.nvim",
   "romainl/vim-cool",
-
+  {
+    "folke/zen-mode.nvim",
+    opts = {},
+    keys = {
+      { "<Leader>zm", "<cmd>ZenMode<CR>" },
+    },
+  },
   -- coding
 
   "folke/neodev.nvim",

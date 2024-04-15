@@ -34,7 +34,7 @@ return {
     --   pattern = auto_format_extensions,
     --   command = "Neoformat",
     -- })
-    mapping = ",f"
+    local mapping = ",f"
     utils.autocmd("FileType", {
       pattern = "markdown",
       callback = function()
