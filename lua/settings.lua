@@ -7,6 +7,6 @@ vim.filetype.add({
 })
 
 utils.autocmd("BufWrite", {
-  pattern = { "*.tex" },
+  pattern = { "*.tex", "*.bib" },
   command = ":%s/\\s\\+$//g",
 })
