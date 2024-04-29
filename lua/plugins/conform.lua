@@ -11,6 +11,8 @@ return {
         typescript = { { "prettierd", "prettier" } },
         typescriptreact = { { "prettierd", "prettier" } },
         yaml = { "prettier" },
+        tex = { "latexindent" },
+        bib = { "bibtex-tidy" },
       },
       format_on_save = {
         -- These options will be passed to conform.format()
