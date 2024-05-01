@@ -19,7 +19,7 @@ cmap <C-s> <space>w
 nmap <C-S> <Cmd>let @+=expand("%:t")<CR>:saveas <C-r>+
 
 " Go from terminal to normal mode
-tnoremap <Esc> <C-\><C-n>zz
+tnoremap <Esc> <C-\><C-n>
 
 " move between active splits
 noremap <silent> <C-k> <Cmd>wincmd k<CR>
@@ -114,13 +114,14 @@ nnoremap * *Nzz
 nnoremap <Leader>ze <Cmd>e ~/.zshrc<CR>
 
 " Center focused line
-let line_moved_commands = ['e', '<C-r>', 'n', 'N', 'G', 'w', 'b', '``', 'j', 'k']
-for cmd in line_moved_commands
-  execute 'nnoremap <silent> '.cmd.' '.cmd.'zz'
-  execute 'vnoremap <silent> '.cmd.' '.cmd.'zz'
-endfor
-
-cmap <expr> <CR> getcmdtype() =~ '^[/?]$' ? '<CR>zz' : '<CR>'
+nnoremap zz zz29<c-e>
+" let line_moved_commands = ['e', '<C-r>', 'n', 'N', 'G', 'w', 'b', '``', 'j', 'k']
+" for cmd in line_moved_commands
+"   execute 'nnoremap <silent> '.cmd.' '.cmd.'zz29<c-e>'
+"   execute 'vnoremap <silent> '.cmd.' '.cmd.'zz29<c-e>'
+" endfor
+"
+" cmap <expr> <CR> getcmdtype() =~ '^[/?]$' ? '<CR>zz29<c-e>' : '<CR>'
 
 " excluding alpha
 augroup alpha_mapping

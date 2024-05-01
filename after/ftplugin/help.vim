@@ -31,11 +31,8 @@ function! s:setup_buffer()
   setlocal iskeyword+=#
   setlocal iskeyword+=-
 
-  if s:count_windows() > 2
-    wincmd K
-  else
-    wincmd L
-  endif
+  " move help up
+  wincmd K
 
   " Exit help window with 'q'
   nnoremap <buffer> q <cmd>quit<CR>

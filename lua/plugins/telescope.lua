@@ -13,22 +13,23 @@ return {
       end
     end
 
-    require("telescope.pickers.layout_strategies").horizontal_merged = function(
-      picker,
-      max_columns,
-      max_lines,
-      layout_config
-    )
-      local layout =
-        require("telescope.pickers.layout_strategies").horizontal(picker, max_columns, max_lines, layout_config)
+    local layout_strategies = require("telescope.pickers.layout_strategies")
+    layout_strategies.flexible_merged = function(picker, max_columns, max_lines, layout_config)
+      local is_vertical = vim.o.lines * 3 > vim.o.columns
+      local layout
+      if is_vertical then
+        layout = layout_strategies.vertical(picker, max_columns, max_lines, layout_config)
+        layout.preview.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
+        layout.results.borderchars = { " ", " ", "─", " ", " ", " ", " ", " " }
+      else
+        layout = layout_strategies.horizontal(picker, max_columns, max_lines, layout_config)
+        layout.preview.borderchars = { " ", " ", " ", "▏", " ", " ", " ", " " }
+        layout.results.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
+      end
 
+      -- { "─", "│", "─", "│", "├", "┤", "┘", "└" }
       layout.prompt.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
-      layout.preview.borderchars = { " ", " ", " ", "▏", " ", " ", " ", " " }
-
       layout.results.title = ""
-      -- layout.results.borderchars = { "─", "│", "─", "│", "│", "│", "┘", "└" }
-      -- layout.results.borderchars = { "─", "│", "─", "│", "├", "┤", "┘", "└" }
-      layout.results.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
       layout.results.line = layout.results.line - 1
       layout.results.height = layout.results.height + 1
 
@@ -92,19 +93,19 @@ return {
 
         -- Flex layout swaps between horizontal and vertical strategies
         -- based on the window width. See :h telescope.layout
-        layout_strategy = "horizontal_merged",
+        layout_strategy = "flexible_merged",
         layout_config = {
-          width = 0.9,
-          height = 0.85,
           prompt_position = "top",
           horizontal = {
             preview_width = horizontal_preview_width,
+            width = 0.9,
+            height = 0.85,
           },
           vertical = {
             width = 0.75,
             height = 0.85,
-            preview_height = 0.4,
-            mirror = false,
+            preview_height = 0.8,
+            mirror = true,
           },
           flex = {
             -- change to horizontal after 120 cols
