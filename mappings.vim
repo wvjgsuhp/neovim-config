@@ -80,7 +80,7 @@ noremap <Leader>zz <Cmd>terminal<CR>i
 noremap <Leader>zj <Cmd>split<CR><Cmd>terminal<CR>13<C-w>_i
 nmap <Leader>zl <Cmd>vsplit<CR> zz
 command! ToggleTerminal call interface#ToggleTerminal()
-nnoremap <Leader>` <Cmd>ToggleTerminal<CR>
+" nnoremap <Leader>` <Cmd>ToggleTerminal<CR>
 " nnoremap <Leader>z4 :term<CR>:vs<CR>:term<CR>:sp<CR>:term<CR>:wincmd h<CR>:sp<CR>:term<CR>
 
 " Preview markdown
@@ -108,7 +108,8 @@ nnoremap <Leader>gdl <Cmd>diffget //3<CR>
 " Find
 nmap <Leader>fp /<C-r>0<CR>
 nnoremap <Leader>fn <Cmd>Navbuddy<CR>
-nnoremap * *Nzz
+nnoremap * *N
+" nnoremap * *Nzz
 
 " Edit file
 nnoremap <Leader>ze <Cmd>e ~/.zshrc<CR>
@@ -148,7 +149,7 @@ inoremap <C-H> <C-w>
 nnoremap <Leader>cc <Cmd>cclose<CR>
 augroup non_file_mapping
   autocmd!
-  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nnoremap <buffer> <Esc> <Cmd>q<CR>
+  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame,floaterm nnoremap <buffer> <Esc> <Cmd>q<CR>
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType qf nnoremap <buffer> <Esc> <Cmd>cclose<CR>

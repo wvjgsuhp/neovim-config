@@ -35,6 +35,19 @@ return {
       { "<Leader>zm", "<cmd>ZenMode<CR>" },
     },
   },
+  {
+    "voldikss/vim-floaterm",
+    config = function()
+      vim.g.floaterm_width = 0.9
+      vim.g.floaterm_borderchars = "        "
+      vim.g.floaterm_titleposition = "center"
+    end,
+    keys = {
+      { "<Leader>`", "<cmd>FloatermToggle<CR>" },
+      { "<Leader>zn", "<cmd>FloatermNew<CR>" },
+    },
+  },
+
   -- coding
 
   "folke/neodev.nvim",

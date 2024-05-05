@@ -4,7 +4,6 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", cond = vim.g.is_unix == 1, build = "make" },
   },
   config = function()
-    -- Custom window-sizes
     local horizontal_preview_width = function(_, cols, _)
       if cols > 200 then
         return math.floor(cols * 0.7)
@@ -68,16 +67,22 @@ return {
     -- See telescope.nvim/lua/telescope/config.lua for defaults.
     telescope.setup({
       defaults = {
-        vimgrep_arguments = {
-          "rg",
-          "-L",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
+        file_ignore_patterns = {
+          "node_modules/",
+          "env/",
+          "__pycache__/",
         },
+        -- vimgrep_arguments = {
+        --   "rg",
+        --   "-L",
+        --   "--color=never",
+        --   "--no-heading",
+        --   "--with-filename",
+        --   "--line-number",
+        --   "--column",
+        --   "--smart-case",
+        --   "--ignore-file=~/.ignore",
+        -- },
         sorting_strategy = "ascending",
         selection_strategy = "closest",
         scroll_strategy = "cycle",
@@ -91,8 +96,6 @@ return {
         multi_icon = "v",
         set_env = { COLORTERM = "truecolor" },
 
-        -- Flex layout swaps between horizontal and vertical strategies
-        -- based on the window width. See :h telescope.layout
         layout_strategy = "flexible_merged",
         layout_config = {
           prompt_position = "top",
@@ -166,6 +169,11 @@ return {
             },
             ["s"] = flash,
           },
+        },
+      },
+      pickers = {
+        find_files = {
+          no_ignore = true,
         },
       },
 
