@@ -81,6 +81,9 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
+    keys = {
+      { "<Leader>ft", "<cmd>TodoTelescope<CR>", desc = "Fuzzy find todo comments" },
+    },
   },
   {
     "L3MON4D3/LuaSnip",
