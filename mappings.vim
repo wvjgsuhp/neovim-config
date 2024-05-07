@@ -108,7 +108,7 @@ nnoremap <Leader>gdl <Cmd>diffget //3<CR>
 " Find
 nmap <Leader>fp /<C-r>0<CR>
 nnoremap <Leader>fn <Cmd>Navbuddy<CR>
-nnoremap * *N
+" nnoremap * *N
 " nnoremap * *Nzz
 
 " Edit file

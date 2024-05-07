@@ -38,7 +38,9 @@ return {
   {
     "voldikss/vim-floaterm",
     config = function()
+      vim.g.floaterm_title = " $1/$2"
       vim.g.floaterm_width = 0.9
+      vim.g.floaterm_height = math.min(55 / vim.o.lines, 0.6)
       vim.g.floaterm_borderchars = "        "
       vim.g.floaterm_titleposition = "center"
     end,
