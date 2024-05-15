@@ -41,6 +41,7 @@ return {
       spell = "[Spell]",
     }
 
+    local constants = require("constants")
     local cmp = require("cmp")
     cmp.setup({
       enabled = function()
@@ -58,11 +59,6 @@ return {
           return kind
         end,
       },
-      -- experimental = {
-      --   ghost_text = {
-      --     hl_group = "Comment",
-      --   },
-      -- },
       mapping = cmp.mapping.preset.insert({
         ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
         ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
@@ -115,12 +111,45 @@ return {
       },
       window = {
         completion = {
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None,CursorLine:PmenuSel",
-          col_offset = -2,
+          winhighlight = "Normal:Normal,FloatBorder:Normal,Search:None,CursorLine:PmenuSel",
+          -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None,CursorLine:PmenuSel",
+          col_offset = -1,
           side_padding = 0,
+          border = {
+            { "", "CmpStar" },
+            -- { "·", "CmpStar" },
+            -- { "·", "CmpStar" },
+            { "─", "CmpStar" },
+            { " " },
+            { " " },
+            { " " },
+            { " " },
+            { " " },
+            -- { "▀", "BGBorder" },
+            -- { "▀", "BGBorder" },
+            -- { "▀", "BGBorder" },
+            { "│", "CmpStar" },
+          },
         },
         documentation = {
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+          -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+          winhighlight = "Normal:Normal,FloatBorder:Normal,Search:None",
+          border = {
+            { constants.diagnostics.Hint, "CmpHint" },
+            -- { "━", "CmpHint" },
+            -- { "━", "CmpHint" },
+            { "─", "CmpHint" },
+            { " " },
+            { " " },
+            { " " },
+            { " " },
+            { " " },
+            -- { "▀", "BGBorder" },
+            -- { "▀", "BGBorder" },
+            -- { "▀", "BGBorder" },
+            -- { " " },
+            { "│", "CmpHint" },
+          },
         },
       },
       duplicates = {

@@ -50,6 +50,7 @@ hi PmenuPadding   ctermfg=254 ctermbg=254 guibg=#f6f8fa guifg=#eaeef2
 hi PmenuTitle     ctermfg=0   ctermbg=254 guifg=#000000 guibg=#eaeef2 gui=bold  cterm=bold
 hi PmenuSeparator ctermfg=252 ctermbg=254 guibg=#eaeef2 guifg=#d4d4d4
 hi PmenuEnd       ctermfg=254 ctermbg=254 guibg=#eaeef2 guifg=#eaeef2
+call interface#PartialLink("BGBorder", "PmenuBorder", ["guifg", 'ctermfg'])
 
 hi DiffAdd    ctermfg=233 ctermbg=194   guifg=#003300 guibg=#DDFFDD gui=none  cterm=none
 hi DiffChange ctermbg=255 guibg=#ececec gui=none      cterm=none
@@ -231,9 +232,10 @@ hi link NotifyINFOTitle   DiagnosticInfo
 hi link NotifyDEBUGTitle  DiagnosticHint
 
 call interface#PartialLink('TelescopeNormal', "Normal", ['guifg'], 'guibg=#eaeef2')
-hi link TelescopePromptNormal Normal
-hi link TelescopeTitle        PmenuTitle
-hi link TelescopeBorder       PmenuSeparator
+call interface#PartialLink("TelescopePromptCounter", "LineNr", ["guifg", 'ctermfg'])
+hi link TelescopePromptNormal   Pmenu
+hi link TelescopeTitle          PmenuTitle
+hi link TelescopeBorder         PmenuSeparator
 
 " call interface#PartialLink('WilderNormal', "Normal", ['guifg'], 'guibg=#eaeef2')
 " hi WilderBorder  guibg=#eaeef2 guifg=#eaeef2
@@ -252,6 +254,10 @@ hi link CmpItemKindMethod     CmpItemKindFunction
 hi link CmpItemKindKeyword    Statement
 hi link CmpItemKindProperty   CmpItemKindKeyword
 hi link CmpItemKindUnit       CmpItemKindKeyword
+hi link CmpHint               DiagnosticHint
+hi link CmpStar               DiagnosticWarn
+" call interface#PartialLink('CmpHint', "PmenuBorder", ['guibg', 'ctermbg'], 'ctermfg=111 guifg=#87d7ff')
+" call interface#PartialLink('CmpStar', "PmenuBorder", ['guibg', 'ctermbg'], 'guifg=#FF895C')
 
 hi link NvimTreeNormal      Pmenu
 hi link NvimTreeNormalFloat Pmenu

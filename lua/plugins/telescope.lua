@@ -71,6 +71,7 @@ return {
           "node_modules/",
           "env/",
           "__pycache__/",
+          ".git/",
           "%.RData",
           "%.Rdata",
           "%.parquet",
@@ -79,6 +80,13 @@ return {
           "%.rda",
           "%.gif",
           "%.pdf",
+          "%.hex",
+          "%.aux",
+          "%.doc",
+          "%.docx",
+          "%.xls",
+          "%.xlsx",
+          "%.svg",
         },
         -- vimgrep_arguments = {
         --   "rg",
@@ -99,7 +107,7 @@ return {
           limit_entries = 300,
         },
 
-        prompt_prefix = "❯ ",
+        prompt_prefix = "  ",
         selection_caret = "  ",
         multi_icon = "v",
         set_env = { COLORTERM = "truecolor" },
@@ -182,6 +190,7 @@ return {
       pickers = {
         find_files = {
           no_ignore = true,
+          hidden = true,
         },
       },
 
@@ -191,6 +200,7 @@ return {
           override_generic_sorter = true, -- override the generic sorter
           override_file_sorter = true, -- override the file sorter
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          hidden = true,
         },
       },
     })

@@ -42,12 +42,30 @@ return {
       vim.g.floaterm_width = 0.9
       vim.g.floaterm_height = math.min(55 / vim.o.lines, 0.6)
       vim.g.floaterm_borderchars = "        "
+      vim.g.floaterm_autoinsert = false
       vim.g.floaterm_titleposition = "center"
     end,
     keys = {
       { "<Leader>`", "<cmd>FloatermToggle<CR>" },
       { "<Leader>zn", "<cmd>FloatermNew<CR>" },
     },
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      -- transparent = true,
+      italic_comments = true,
+      hide_fillchars = true,
+      borderless_telescope = true,
+      terminal_colors = true,
+    },
+    -- config = function()
+    --     require("cyberdream").setup({
+    --         -- Recommended - see "Configuring" below for more config options
+    --     })
+    -- end,
   },
 
   -- coding

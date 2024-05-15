@@ -3,6 +3,7 @@ local utils = require("utils")
 vim.filetype.add({
   extension = {
     pem = "pem",
+    mmor = "json",
   },
 })
 
