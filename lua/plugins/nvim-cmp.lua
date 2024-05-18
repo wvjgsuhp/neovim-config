@@ -41,11 +41,11 @@ return {
       spell = "[Spell]",
     }
 
-    local constants = require("constants")
     local cmp = require("cmp")
     cmp.setup({
       enabled = function()
-        return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+        return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
+        -- return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
       end,
 
       formatting = {
@@ -120,14 +120,14 @@ return {
             -- { "·", "CmpStar" },
             -- { "·", "CmpStar" },
             { "─", "CmpStar" },
-            { " " },
-            { " " },
+            { "╴", "CmpStar" },
             { " " },
             { " " },
             { " " },
             -- { "▀", "BGBorder" },
             -- { "▀", "BGBorder" },
             -- { "▀", "BGBorder" },
+            { "╵", "CmpStar" },
             { "│", "CmpStar" },
           },
         },
@@ -139,8 +139,7 @@ return {
             -- { "━", "CmpHint" },
             -- { "━", "CmpHint" },
             { "─", "CmpHint" },
-            { " " },
-            { " " },
+            { "╴", "CmpHint" },
             { " " },
             { " " },
             { " " },
@@ -148,6 +147,7 @@ return {
             -- { "▀", "BGBorder" },
             -- { "▀", "BGBorder" },
             -- { " " },
+            { "╵", "CmpHint" },
             { "│", "CmpHint" },
           },
         },

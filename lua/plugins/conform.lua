@@ -8,6 +8,7 @@ return {
         lua = { "stylua" },
         python = { "isort", "autopep8" },
         javascript = { { "prettierd", "prettier" } },
+        toml = { "taplo" },
         typescript = { { "prettierd", "prettier" } },
         typescriptreact = { { "prettierd", "prettier" } },
         yaml = { "prettier" },

@@ -387,11 +387,9 @@ M.get_relative_path = function()
     return " " .. vim.bo.filetype
   end
 
-  -- local file = " %f"
-  -- local file = " %{expand('%:~:.')}"
   local file = " " .. vim.fn.expand("%:.")
 
-  local is_modifiable = vim.api.nvim_buf_get_option(0, "modifiable")
+  local is_modifiable = vim.api.nvim_get_option_value("modifiable", { buf = 0 })
   if vim.bo.readonly or not is_modifiable then
     local color = ""
     if is_current() then
@@ -400,7 +398,7 @@ M.get_relative_path = function()
     return color .. file .. " "
   end
 
-  local is_modified = vim.api.nvim_buf_get_option(0, "modified")
+  local is_modified = vim.api.nvim_get_option_value("modified", { buf = 0 })
   if is_modified then
     return file .. "  "
   end
@@ -408,7 +406,7 @@ M.get_relative_path = function()
 end
 
 M.get_language_servers = function()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
   local servers = {}
   for _, client in ipairs(clients) do
     table.insert(servers, client.name)

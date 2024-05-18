@@ -1,5 +1,5 @@
 return {
-  "kyazdani42/nvim-web-devicons",
+  "nvim-tree/nvim-web-devicons",
 
   -- commands
 
@@ -61,11 +61,12 @@ return {
       borderless_telescope = true,
       terminal_colors = true,
     },
-    -- config = function()
-    --     require("cyberdream").setup({
-    --         -- Recommended - see "Configuring" below for more config options
-    --     })
-    -- end,
+  },
+  {
+    "wvjgsuhp/github",
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
 
   -- coding
@@ -157,12 +158,12 @@ return {
       { "<Leader>cs", "<cmd>Coverage<CR>", desc = "Update coverage" },
     },
   },
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    config = function()
-      require("ts_context_commentstring").setup({ enable_autocmd = false })
-    end,
-  },
+  -- {
+  --   "JoosepAlviste/nvim-ts-context-commentstring",
+  --   config = function()
+  --     require("ts_context_commentstring").setup({ enable_autocmd = false })
+  --   end,
+  -- },
   -- {
   --   "mfussenegger/nvim-dap-python",
   --   config = function()

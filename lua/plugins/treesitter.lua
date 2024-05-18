@@ -37,7 +37,7 @@ return {
 
       highlight = {
         enable = true,
-        disable = { "vim" },
+        -- disable = { "vim" },
       },
 
       additional_vim_regex_highlighting = false,

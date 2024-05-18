@@ -79,8 +79,6 @@ noremap L g_
 noremap <Leader>zz <Cmd>terminal<CR>i
 noremap <Leader>zj <Cmd>split<CR><Cmd>terminal<CR>13<C-w>_i
 nmap <Leader>zl <Cmd>vsplit<CR> zz
-command! ToggleTerminal call interface#ToggleTerminal()
-" nnoremap <Leader>` <Cmd>ToggleTerminal<CR>
 " nnoremap <Leader>z4 :term<CR>:vs<CR>:term<CR>:sp<CR>:term<CR>:wincmd h<CR>:sp<CR>:term<CR>
 
 " Preview markdown
@@ -116,6 +114,7 @@ nnoremap <Leader>ze <Cmd>e ~/.zshrc<CR>
 
 " Center focused line
 nnoremap zz zz29<c-e>
+nmap G Gzz
 " let line_moved_commands = ['e', '<C-r>', 'n', 'N', 'G', 'w', 'b', '``', 'j', 'k']
 " for cmd in line_moved_commands
 "   execute 'nnoremap <silent> '.cmd.' '.cmd.'zz29<c-e>'

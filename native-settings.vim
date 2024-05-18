@@ -93,11 +93,6 @@ if ! has('nvim')
   set spellfile=$VIM_DATA_PATH/spell/en.utf-8.add
 endif
 
-augroup markdown_setting
-  autocmd!
-  autocmd FileType markdown,tex let &l:textwidth=&colorcolumn
-augroup END
-
 augroup cursor_line
   autocmd!
   autocmd BufWinEnter,WinEnter,InsertLeave * set cursorlineopt=both

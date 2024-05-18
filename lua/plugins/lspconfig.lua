@@ -11,6 +11,7 @@ return {
     "folke/neodev.nvim",
     -- "SmiteshP/nvim-navbuddy",
   },
+  -- TODO: check inlay hints
   config = function()
     local constants = require("constants")
     local utils = require("utils")
@@ -43,12 +44,11 @@ return {
 
     -- Buffer attached
     local on_attach = function(client, bufnr)
+      -- TODO: enable if no treesitter
+      client.server_capabilities.semanticTokensProvider = nil
       local function map_buf(mode, lhs, rhs)
         vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
       end
-
-      -- Keyboard mappings
-      map_buf("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 
       -- Short-circuit for Helm template files
       if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
@@ -56,6 +56,7 @@ return {
         return
       end
 
+      map_buf("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
       map_buf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
       map_buf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
       map_buf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
