@@ -11,3 +11,4 @@ NUL
 *.log
 .luarc.json
 */local
+*.bk

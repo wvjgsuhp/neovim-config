@@ -28,6 +28,7 @@ return {
 
       -- { "─", "│", "─", "│", "├", "┤", "┘", "└" }
       layout.prompt.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
+      layout.preview.title = "Preview"
       layout.results.title = ""
       layout.results.line = layout.results.line - 1
       layout.results.height = layout.results.height + 1
@@ -63,8 +64,6 @@ return {
     local telescope = require("telescope")
     local actions = require("telescope.actions")
 
-    -- Setup Telescope
-    -- See telescope.nvim/lua/telescope/config.lua for defaults.
     telescope.setup({
       defaults = {
         file_ignore_patterns = {
@@ -88,17 +87,6 @@ return {
           "%.xlsx",
           "%.svg",
         },
-        -- vimgrep_arguments = {
-        --   "rg",
-        --   "-L",
-        --   "--color=never",
-        --   "--no-heading",
-        --   "--with-filename",
-        --   "--line-number",
-        --   "--column",
-        --   "--smart-case",
-        --   "--ignore-file=~/.ignore",
-        -- },
         sorting_strategy = "ascending",
         selection_strategy = "closest",
         scroll_strategy = "cycle",
@@ -107,7 +95,7 @@ return {
           limit_entries = 300,
         },
 
-        prompt_prefix = "  ",
+        prompt_prefix = "   ",
         selection_caret = "  ",
         multi_icon = "v",
         set_env = { COLORTERM = "truecolor" },
@@ -126,10 +114,9 @@ return {
             preview_height = 0.8,
             mirror = true,
           },
-          flex = {
-            -- change to horizontal after 120 cols
-            flip_columns = 120,
-          },
+          -- flex = {
+          --   flip_columns = 120,
+          -- },
         },
         path_display = { "truncate" },
         winblend = 8,

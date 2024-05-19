@@ -9,7 +9,7 @@ return {
       before = true, ---@type boolean|number[]
       -- position of the label extmark
       -- style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
-      reuse = "all", ---@type "lowercase" | "all"
+      reuse = "lowercase", ---@type "lowercase" | "all"
     },
     highlight = { backdrop = false },
     modes = {
@@ -47,14 +47,6 @@ return {
       end,
       desc = "Flash",
     },
-    -- {
-    --   "S",
-    --   mode = { "n", "o", "x" },
-    --   function()
-    --     require("flash").treesitter()
-    --   end,
-    --   desc = "Flash Treesitter",
-    -- },
     {
       "r",
       mode = "o",

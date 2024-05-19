@@ -38,18 +38,38 @@ constants.icons = {
   Variable =      " ",
 }
 
-constants.border = {
-  none = { "▄", "▄", "▄", "█", "▀", "▀", "▀", "█" },
-}
-
-constants.win_bar_separator = " "
-
 constants.diagnostics = {
   Error = "󰅙",
   Warn = "󱇎",
   Info = "",
   Hint = "󰌵",
 }
+
+constants.border = {
+  none = { "▄", "▄", "▄", "█", "▀", "▀", "▀", "█" },
+  completion = {
+    { "", "CompletionBorder" },
+    { "─", "CompletionBorder" },
+    { "╴", "CompletionBorder" },
+    { " ", "CompletionBorder" },
+    { " ", "CompletionBorder" },
+    { " ", "CompletionBorder" },
+    { "╵", "CompletionBorder" },
+    { "│", "CompletionBorder" },
+  },
+  hint = {
+    { constants.diagnostics.Hint, "HintBorder" },
+    { "─", "HintBorder" },
+    { "╴", "HintBorder" },
+    { " ", "HintBorder" },
+    { " ", "HintBorder" },
+    { " ", "HintBorder" },
+    { "╵", "HintBorder" },
+    { "│", "HintBorder" },
+  },
+}
+
+constants.win_bar_separator = " "
 
 constants.alpha = {
   header = {

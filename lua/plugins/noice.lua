@@ -13,6 +13,9 @@ return {
       cmdline = {
         format = {
           cmdline = { title = "", pattern = "^:", icon = "❯", lang = "vim" },
+          search_down = { title = "", kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+          search_up = { title = "", kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+          input = { title = "" },
         },
       },
       views = {
@@ -46,8 +49,12 @@ return {
         },
         hover = {
           border = {
-            style = constants.border.none,
+            style = constants.border.hint,
             padding = { 0, 0 },
+          },
+          position = { row = 2, col = 1 },
+          size = {
+            max_height = 23,
           },
         },
         confirm = {
@@ -64,18 +71,15 @@ return {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
-          -- ["cmp.entry.get_documentation"] = true,
         },
         signature = {
           enabled = false,
         },
       },
       presets = {
-        bottom_search = true,         -- use a classic bottom cmdline for search
-        command_palette = true,       -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false,       -- add a border to hover docs and signature help
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false, -- add a border to hover docs and signature help
       },
     })
 

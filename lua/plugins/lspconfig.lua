@@ -5,11 +5,8 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
-    -- "jose-elias-alvarez/null-ls.nvim",
     "nvim-lua/plenary.nvim",
-    -- "b0o/schemastore.nvim",
     "folke/neodev.nvim",
-    -- "SmiteshP/nvim-navbuddy",
   },
   -- TODO: check inlay hints
   config = function()
@@ -26,16 +23,12 @@ return {
       utils.autocmd("CursorHold", {
         buffer = bufnr,
         group = lsp_highlight_group,
-        callback = function()
-          vim.lsp.buf.document_highlight()
-        end,
+        callback = vim.lsp.buf.document_highlight,
       })
       utils.autocmd("CursorMoved", {
         buffer = bufnr,
         group = lsp_highlight_group,
-        callback = function()
-          vim.lsp.buf.clear_references()
-        end,
+        callback = vim.lsp.buf.clear_references,
       })
     end
 
@@ -66,6 +59,11 @@ return {
       map_buf("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.code_action()<CR>")
       map_buf("n", "<Leader>dp", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>")
       map_buf("n", "<Leader>dk", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>")
+      map_buf(
+        "n",
+        "H",
+        "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({bufnr = 0}), {bufnr = 0})<CR>"
+      )
 
       if client.config.flags then
         client.config.flags.allow_incremental_sync = true
@@ -106,30 +104,28 @@ return {
     -- main
 
     local function setup()
-      -- Config
       vim.diagnostic.config({
-        virtual_text = true,
+        virtual_text = {
+          source = "if_many",
+          prefix = "",
+        },
         signs = true,
         underline = true,
         update_in_insert = false,
         severity_sort = true,
       })
 
+      -- diagnostic signs in sign column
       local signs = constants.diagnostics
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
-      -- Configure LSP Handlers
-      -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-      -- vim.lsp.handlers["textDocument/signatureHelp"] =
-      --   vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
-
       require("neodev").setup()
 
-      -- Setup language servers using nvim-lspconfig
-      local lspconfig = require("lspconfig")
+      -- set up language servers using nvim-lspconfig
+      local lsp_config = require("lspconfig")
       local servers = require("mason-lspconfig").get_installed_servers()
 
       -- add custom server
@@ -137,14 +133,14 @@ return {
 
       for _, server in ipairs(servers) do
         local opts = make_config(server)
-        lspconfig[server].setup(opts)
+        lsp_config[server].setup(opts)
       end
 
       -- global custom location-list diagnostics window toggle.
       utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
       utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 
-      require("lspconfig.ui.windows").default_options.border = "single"
+      require("lspconfig.ui.windows").default_options.border = constants.border.none
     end
 
     setup()

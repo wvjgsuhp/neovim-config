@@ -56,14 +56,14 @@ return {
     priority = 1000,
     opts = {
       -- transparent = true,
-      italic_comments = true,
+      italic_comments = false,
       hide_fillchars = true,
       borderless_telescope = true,
       terminal_colors = true,
     },
   },
   {
-    "wvjgsuhp/github",
+    "wvjgsuhp/nvim-github-theme",
     lazy = false,
     priority = 1000,
     opts = {},

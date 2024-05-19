@@ -69,7 +69,6 @@ nnoremap <Localleader>V "+P
 
 " Jump to the beginning/end of a line
 noremap <Leader>h ^
-noremap H ^
 nnoremap <Leader>l $
 onoremap <Leader>l $
 xnoremap <Leader>l $h
@@ -114,7 +113,9 @@ nnoremap <Leader>ze <Cmd>e ~/.zshrc<CR>
 
 " Center focused line
 nnoremap zz zz29<c-e>
+nnoremap J j
 nmap G Gzz
+nmap j jzz
 " let line_moved_commands = ['e', '<C-r>', 'n', 'N', 'G', 'w', 'b', '``', 'j', 'k']
 " for cmd in line_moved_commands
 "   execute 'nnoremap <silent> '.cmd.' '.cmd.'zz29<c-e>'
@@ -148,6 +149,8 @@ inoremap <C-H> <C-w>
 nnoremap <Leader>cc <Cmd>cclose<CR>
 augroup non_file_mapping
   autocmd!
+  autocmd FileType noice nnoremap <buffer> j j
+  autocmd FileType noice nnoremap <buffer> G G
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame,floaterm nnoremap <buffer> <Esc> <Cmd>q<CR>
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
