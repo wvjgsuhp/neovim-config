@@ -15,6 +15,7 @@ return {
           cmdline = { title = "", pattern = "^:", icon = "❯", lang = "vim" },
           search_down = { title = "", kind = "search", pattern = "^/", icon = " ", lang = "regex" },
           search_up = { title = "", kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+          filter = { title = "", pattern = "^:%s*!", icon = "", lang = "bash" },
           input = { title = "" },
         },
       },
