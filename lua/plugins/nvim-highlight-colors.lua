@@ -11,5 +11,6 @@ return {
     "toml",
     "typescript",
     "javascript",
+    "tex",
   },
 }

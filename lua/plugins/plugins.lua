@@ -2,7 +2,6 @@ return {
   "nvim-tree/nvim-web-devicons",
 
   -- commands
-
   "tpope/vim-repeat",
   "tpope/vim-surround",
   {
@@ -25,7 +24,6 @@ return {
   },
 
   -- interface
-
   "MunifTanjim/nui.nvim",
   "romainl/vim-cool",
   {
@@ -70,13 +68,18 @@ return {
   },
 
   -- coding
-
   "folke/neodev.nvim",
   {
     "folke/trouble.nvim",
     keys = {
       { "<Leader>dd", "<cmd>Trouble document_diagnostics<cr>", desc = "Diagnose the current buffer" },
     },
+  },
+  {
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+    enabled = vim.fn.has("nvim-0.10.0") == 1,
   },
   {
     "williamboman/mason.nvim",
@@ -159,12 +162,6 @@ return {
     },
   },
   -- {
-  --   "JoosepAlviste/nvim-ts-context-commentstring",
-  --   config = function()
-  --     require("ts_context_commentstring").setup({ enable_autocmd = false })
-  --   end,
-  -- },
-  -- {
   --   "mfussenegger/nvim-dap-python",
   --   config = function()
   --     require("dap-python").setup("~/.venv/debugpy/bin/python")
@@ -184,13 +181,13 @@ return {
   "tpope/vim-sleuth",
 
   -- Vimscript syntax/indent plugins
-
   {
     "jalvesaq/Nvim-R",
     config = function()
       vim.g.R_assign = 0
       vim.g.R_nvim_wd = 0
     end,
+    ft = { "r" },
   },
   {
     "chrisbra/csv.vim",
