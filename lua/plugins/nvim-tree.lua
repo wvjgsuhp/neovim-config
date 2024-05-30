@@ -1,7 +1,7 @@
 local constants = require("constants")
 return {
   "kyazdani42/nvim-tree.lua",
-  dependencies = { "kyazdani42/nvim-web-devicons" },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     -- disable netrw at the very start of your init.lua (strongly advised)
     vim.g.loaded = 1

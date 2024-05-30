@@ -64,7 +64,10 @@ return {
     "wvjgsuhp/nvim-github-theme",
     lazy = false,
     priority = 1000,
-    opts = {},
+    config = function()
+      require("github-theme").setup()
+      vim.g.colors_name = "github"
+    end,
   },
 
   -- coding
@@ -80,20 +83,6 @@ return {
     opts = {},
     event = "VeryLazy",
     enabled = vim.fn.has("nvim-0.10.0") == 1,
-  },
-  {
-    "williamboman/mason.nvim",
-    lazy = true,
-    opts = {
-      ui = {
-        icons = {
-          package_installed = " ",
-          package_pending = " ",
-          package_uninstalled = " ",
-        },
-      },
-    },
-    cmd = { "Mason", "MasonInstall" },
   },
   {
     "windwp/nvim-autopairs",

@@ -88,7 +88,8 @@ nnoremap <Bslash> :!
 noremap <Leader>q <Cmd>e!<CR>
 
 " Open previous buffer
-noremap <Leader>bb <C-^>
+" noremap <Leader>bb <C-^>
+noremap <Leader>bb <Cmd>b!#<CR>
 
 nnoremap <Leader>yaa ggyG''
 nnoremap <Leader>ypG VGyGp

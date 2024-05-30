@@ -70,6 +70,7 @@ return {
           "node_modules/",
           "env/",
           "__pycache__/",
+          ".ropeproject/",
           ".git/",
           "%.RData",
           "%.Rdata",
