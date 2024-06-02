@@ -24,8 +24,15 @@ end
 
 --- check if string is empty
 --- @param str string
-function utils.isempty(str)
+function utils.is_empty(str)
   return str == nil or str == ""
+end
+
+--- return an empty string if the string is nil
+--- @param str string
+--- @param default? string
+function utils.ensure_string(str, default)
+  return str and str or (default and default or "")
 end
 
 --- vim augroup
@@ -39,13 +46,15 @@ function utils.augroup(group, opts)
 end
 
 utils.autocmd = vim.api.nvim_create_autocmd
+utils.emit_event = vim.api.nvim_exec_autocmds
 
 function utils.debug_opened_windows()
   local windows = vim.api.nvim_list_wins()
 
   for _, current_window in ipairs(windows) do
-    local buf = vim.api.nvim_win_get_buf(current_window)
-    local buf_ft = vim.api.nvim_buf_get_option(buf, "filetype")
+    -- local buf = vim.api.nvim_win_get_buf(current_window)
+    local buf_ft = vim.bo.filetype
+    -- local buf_ft = vim.api.nvim_buf_get_option(buf, "filetype")
     print(buf_ft)
   end
 
