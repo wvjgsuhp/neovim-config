@@ -69,6 +69,11 @@ return {
       vim.g.colors_name = "github"
     end,
   },
+  {
+    "lukas-reineke/headlines.nvim",
+    opts = {},
+    ft = { "markdown" },
+  },
 
   -- coding
   {
