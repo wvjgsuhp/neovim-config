@@ -12,5 +12,6 @@ return {
     "typescript",
     "javascript",
     "tex",
+    "lua",
   },
 }

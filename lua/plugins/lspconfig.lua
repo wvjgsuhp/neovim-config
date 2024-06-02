@@ -6,7 +6,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "nvim-lua/plenary.nvim",
-    "folke/neodev.nvim",
   },
   -- TODO: check inlay hints
   config = function()
@@ -121,8 +120,6 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
-
-      require("neodev").setup()
 
       -- set up language servers using nvim-lspconfig
       local lsp_config = require("lspconfig")

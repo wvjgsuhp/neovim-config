@@ -147,9 +147,9 @@ nnoremap <Leader>cc <Cmd>cclose<CR>
 augroup non_file_mapping
   autocmd!
   autocmd FileType noice,NvimTree,floaterm nnoremap <buffer> G G
-  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame,floaterm nnoremap <buffer> <Esc> <Cmd>q<CR>
-  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
-  autocmd FileType lazy,help,NvimTree,checkhealth,Trouble,noice,fugitiveblame nmap <buffer> q <Esc>
+  autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame,floaterm nnoremap <buffer> <Esc> <Cmd>q<CR>
+  autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame nmap <buffer> q <Esc>
+  autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType qf nnoremap <buffer> <Esc> <Cmd>cclose<CR>
   autocmd FileType qf nnoremap <buffer> <CR> <Cmd>.cc<CR>
 augroup END

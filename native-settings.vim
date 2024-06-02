@@ -54,6 +54,7 @@ set sidescrolloff=5     " Keep at least 5 lines left/right
 set noruler             " Disable default status ruler
 set list                " Show hidden characters
 set pumblend=8
+set winblend=8
 
 set helpheight=0        " Disable help window resizing
 set winwidth=30         " Minimum width for active window
@@ -66,11 +67,10 @@ set cmdheight=0
 set showtabline=0
 set noshowcmd           " Don't show command in status line
 set cmdwinheight=5      " Command-line lines
-set laststatus=3        " Always show a status line
+set laststatus=2        " Always show a status line
 set colorcolumn=112
 set display=lastline
 
-set sessionoptions=blank,curdir,help,terminal,tabpages
 set listchars=leadmultispace:│\ ┊\ ,nbsp:⍽,tab:⇥\ ,trail:-
 " set listchars+=leadmultispace:┆ ,nbsp:⍽,tab:⇥
 
@@ -98,3 +98,5 @@ augroup cursor_line
   autocmd WinEnter * set cursorline
   autocmd WinLeave * set nocursorline
 augroup END
+
+set spell spelllang=en_au

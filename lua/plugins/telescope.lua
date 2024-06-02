@@ -71,6 +71,7 @@ return {
           "env/",
           "__pycache__/",
           ".ropeproject/",
+          ".mypy_cache/",
           ".git/",
           "%.RData",
           "%.Rdata",
@@ -120,7 +121,7 @@ return {
           -- },
         },
         path_display = { "truncate" },
-        winblend = 8,
+        winblend = vim.o.pumblend,
         color_devicons = true,
 
         mappings = {
@@ -179,6 +180,9 @@ return {
         find_files = {
           no_ignore = true,
           hidden = true,
+        },
+        colorscheme = {
+          enable_preview = true,
         },
       },
 

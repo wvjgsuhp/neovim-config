@@ -33,6 +33,14 @@ return {
             width = 89,
             height = "auto",
           },
+          win_options = {
+            winblend = 0,
+          },
+        },
+        notify = {
+          win_options = {
+            winblend = 0,
+          },
         },
         popupmenu = {
           relative = "editor",
@@ -56,6 +64,11 @@ return {
           position = { row = 2, col = 1 },
           size = {
             max_height = 23,
+          },
+        },
+        mini = {
+          win_options = {
+            winblend = 8,
           },
         },
         confirm = {

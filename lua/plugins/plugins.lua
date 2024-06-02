@@ -65,17 +65,27 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require("github-theme").setup()
+      require("github").setup()
       vim.g.colors_name = "github"
     end,
   },
 
   -- coding
-  "folke/neodev.nvim",
+  {
+    "folke/lazydev.nvim",
+    dependencies = { "Bilal2453/luvit-meta" },
+    opts = {
+      library = {
+        vim.env.LAZY .. "/luvit-meta/library",
+      },
+    },
+    ft = "lua",
+  },
   {
     "folke/trouble.nvim",
+    opts = {},
     keys = {
-      { "<Leader>dd", "<cmd>Trouble document_diagnostics<cr>", desc = "Diagnose the current buffer" },
+      { "<Leader>dd", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnose the current buffer" },
     },
   },
   {

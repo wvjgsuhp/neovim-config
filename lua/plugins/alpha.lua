@@ -33,7 +33,7 @@ return {
           cursor = 5,
           width = 36,
           align_shortcut = "right",
-          hl = "Identifier",
+          hl = "DashboardText",
           hl_shortcut = "String",
         },
       }
@@ -45,6 +45,7 @@ return {
     dashboard.section.buttons.val = {
       create_alpha_button("<Leader>ff", "󰍉 Find files"),
       create_alpha_button("<Leader>fg", "󰒻 Fuzzy-find words"),
+      create_alpha_button("n", " New file", ":e "),
       create_alpha_button("e", " Explore", "<Leader>e"),
       create_alpha_button("f", " Find words", "<Leader>fm"),
       create_alpha_button("r", "󰦛 Restore session", "<Cmd>SessionRestore<CR>"),
@@ -68,7 +69,7 @@ return {
         }
 
         dashboard.section.footer.val = footer
-        dashboard.section.footer.opts.hl = "DashboardFooter"
+        dashboard.section.footer.opts.hl = "Comment"
         pcall(vim.cmd.AlphaRedraw)
       end,
     })

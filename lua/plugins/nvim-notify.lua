@@ -41,13 +41,11 @@ return {
       desc = "yank filename",
     },
     {
-
       "<Leader>yrp",
       "<cmd>let @+=expand('%:~:.')<CR>:lua vim.notify('Yanked relative path: <c-r>+')<CR>",
       desc = "yank relative path",
     },
     {
-
       "<Leader>yap",
       "<cmd>let @+=expand('%:p')<CR>:lua vim.notify('Yanked absolute path: <c-r>+')<CR>",
       desc = "yank absolute path",

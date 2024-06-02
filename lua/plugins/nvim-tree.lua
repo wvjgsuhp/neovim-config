@@ -25,6 +25,7 @@ return {
 
       -- custom mappings
       vim.keymap.set("n", "<C-n>", api.fs.create, opts("Create"))
+      vim.keymap.set("n", "  ", api.node.open.edit)
     end
 
     local height_ratio = 0.8
@@ -37,8 +38,8 @@ return {
       respect_buf_cwd = true,
       sync_root_with_cwd = true,
       view = {
-        number = true,
-        relativenumber = true,
+        number = false,
+        relativenumber = false,
         float = {
           enable = true,
           open_win_config = function()
@@ -84,6 +85,9 @@ return {
           warning = constants.diagnostics.Warn,
           error = constants.diagnostics.Error,
         },
+      },
+      filters = {
+        exclude = { "%.log" },
       },
     })
   end,
