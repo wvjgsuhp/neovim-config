@@ -72,7 +72,6 @@ end
 
 local function get_location()
   local success, result = pcall(function()
-    -- if not is_current() then
     if not vim.w.is_current then
       return ""
     end
@@ -219,16 +218,16 @@ local mode_map = {
   ["i"]     = "I",
   ["ic"]    = "I",
   ["ix"]    = "I",
-  ["R"]     = "REPLACE",
-  ["Rc"]    = "REPLACE",
-  ["Rx"]    = "REPLACE",
-  ["Rv"]    = "V-REPLACE",
-  ["Rvc"]   = "V-REPLACE",
-  ["Rvx"]   = "V-REPLACE",
+  ["R"]     = "R",
+  ["Rc"]    = "R",
+  ["Rx"]    = "R",
+  ["Rv"]    = "R",
+  ["Rvc"]   = "R",
+  ["Rvx"]   = "R",
   ["c"]     = "C",
   ["cv"]    = "C",
   ["ce"]    = "C",
-  ["r"]     = "REPLACE",
+  ["r"]     = "R",
   ["rm"]    = "MORE",
   ["r?"]    = "CONFIRM",
   ["!"]     = "SHELL",
@@ -243,6 +242,7 @@ local mode_icons = {
   N = "󰎐",
   I = "󰷈",
   V = "󰩬",
+  R = "󰙩",
   T = "",
 }
 
@@ -277,7 +277,7 @@ local function get_diags()
     elseif grouped[severity] then
       grouped[severity] = grouped[severity] + 1
     else
-      grouped[severity] = 0
+      grouped[severity] = 1
     end
   end
 

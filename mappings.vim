@@ -164,6 +164,7 @@ augroup END
 
 " override defaults
 nnoremap s <Nop>
+nnoremap S <Nop>
 
 " execute current file
 noremap <F9> <Cmd>w<bar>!%:p<CR>

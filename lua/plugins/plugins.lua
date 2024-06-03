@@ -2,8 +2,6 @@ return {
   "nvim-tree/nvim-web-devicons",
 
   -- commands
-  "tpope/vim-repeat",
-  "tpope/vim-surround",
   {
     "nullchilly/fsread.nvim",
     keys = {
@@ -50,10 +48,8 @@ return {
   },
   {
     "scottmckendry/cyberdream.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     opts = {
-      -- transparent = true,
       italic_comments = false,
       hide_fillchars = true,
       borderless_telescope = true,
@@ -64,15 +60,12 @@ return {
     "wvjgsuhp/nvim-github-theme",
     lazy = false,
     priority = 1000,
-    config = function()
-      require("github").setup()
-      vim.g.colors_name = "github"
-    end,
+    opts = {},
   },
   {
     "lukas-reineke/headlines.nvim",
     opts = {},
-    ft = { "markdown" },
+    ft = { "markdown", "rmd" },
   },
 
   -- coding
@@ -180,11 +173,11 @@ return {
   --     let g:user_emmet_install_command = 0
   --     let g:user_emmet_complete_tag = 0
 
-  -- syntax
-
-  "tpope/vim-sleuth",
-
-  -- Vimscript syntax/indent plugins
+  -- syntax/indent plugins
+  {
+    "NMAC427/guess-indent.nvim",
+    opts = {},
+  },
   {
     "jalvesaq/Nvim-R",
     config = function()
