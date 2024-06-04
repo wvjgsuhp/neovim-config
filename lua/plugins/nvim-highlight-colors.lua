@@ -3,6 +3,7 @@ return {
   opts = {
     render = "virtual",
     virtual_symbol = "",
+    exclude_filetypes = { "lazy" },
   },
   ft = {
     "html",

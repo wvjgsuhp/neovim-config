@@ -7,7 +7,6 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "nvim-lua/plenary.nvim",
   },
-  -- TODO: check inlay hints
   config = function()
     local constants = require("constants")
     local utils = require("utils")
@@ -56,8 +55,7 @@ return {
       map_buf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
       map_buf("n", ",rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
       map_buf("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-      map_buf("n", "<Leader>dp", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>")
-      map_buf("n", "<Leader>dk", "<cmd>lua vim.diagnostic.open_float({ border = 'single' })<CR>")
+      map_buf("n", "<Leader>dk", "<cmd>lua vim.diagnostic.open_float()<CR>")
       map_buf(
         "n",
         "H",
@@ -104,14 +102,15 @@ return {
 
     local function setup()
       vim.diagnostic.config({
+        underline = true,
         virtual_text = {
           source = "if_many",
           prefix = "",
         },
         signs = true,
-        underline = true,
-        update_in_insert = false,
+        float = { border = constants.border.diagnostic },
         severity_sort = true,
+        update_in_insert = false,
       })
 
       -- diagnostic signs in sign column

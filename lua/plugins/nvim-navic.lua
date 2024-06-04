@@ -4,7 +4,7 @@ return {
   "SmiteshP/nvim-navic",
   event = { "BufReadPre", "BufNewFile" },
   opts = {
-    icons = constants.icons,
+    icons = constants.icons.kinds,
     lsp = {
       auto_attach = true,
     },

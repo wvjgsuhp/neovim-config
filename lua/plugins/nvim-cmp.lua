@@ -8,12 +8,13 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-path",
-    "onsails/lspkind-nvim",
     "saadparwaiz1/cmp_luasnip",
     "windwp/nvim-autopairs",
   },
   config = function()
     local constants = require("constants")
+    local luasnip = require("luasnip")
+    local cmp = require("cmp")
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -22,41 +23,26 @@ return {
         and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
-    local lspkind = require("lspkind")
-    local luasnip = require("luasnip")
-
-    require("lspkind").init({
-      mode = "symbol",
-      preset = "default",
-      symbol_map = constants.icons,
-    })
-
-    local source_mapping = {
-      buffer = "[Buffer]",
-      luasnip = "[LuaSnip]",
-      nvim_lsp = "[LSP]",
-      vsnip = "[VSnip]",
-      look = "[Look]",
-      path = "[Path]",
-      spell = "[Spell]",
-    }
-
-    local cmp = require("cmp")
     cmp.setup({
       enabled = function()
         return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
-        -- return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
       end,
 
       formatting = {
         fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-          local kind = lspkind.cmp_format({ mode = "symbol", maxwidth = 50 })(entry, vim_item)
-          local strings = vim.split(kind.kind, "%s", { trimempty = true })
-          kind.kind = " " .. (strings[1] or "") .. " "
-          kind.menu = "  " .. (source_mapping[entry.source.name] or "")
+        format = function(_, completion)
+          local kind = completion.kind
+          local icon = constants.icons.kinds[kind]
 
-          return kind
+          completion.kind = icon and " " .. icon or ""
+          completion.menu = " " .. kind
+          completion.menu_hl_group = "CmpItemKind" .. kind
+
+          if completion.abbr:len() > 31 then
+            completion.abbr = completion.abbr:sub(1, 31) .. "..."
+          end
+
+          return completion
         end,
       },
       mapping = cmp.mapping.preset.insert({
@@ -112,13 +98,11 @@ return {
       window = {
         completion = {
           winhighlight = "Normal:Normal,FloatBorder:Normal,Search:None,CursorLine:PmenuSel",
-          -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None,CursorLine:PmenuSel",
           col_offset = -1,
           side_padding = 0,
           border = constants.border.completion,
         },
         documentation = {
-          -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
           winhighlight = "Normal:Normal,FloatBorder:Normal,Search:None",
           border = constants.border.hint,
         },

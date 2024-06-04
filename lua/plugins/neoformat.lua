@@ -34,12 +34,13 @@ return {
     --   pattern = auto_format_extensions,
     --   command = "Neoformat",
     -- })
-    local mapping = ",f"
     utils.autocmd("FileType", {
       pattern = "markdown",
       callback = function()
-        vim.api.nvim_buf_set_keymap(0, "n", mapping, "<Cmd>Neoformat<CR>", { noremap = true, silent = true })
+        vim.api.nvim_buf_set_keymap(0, "n", ",f", "<Cmd>Neoformat<CR>", { noremap = true, silent = true })
       end,
     })
   end,
+  ft = { "markdown" },
+  cmd = { "Neoformat" },
 }

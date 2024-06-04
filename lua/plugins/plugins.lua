@@ -23,7 +23,6 @@ return {
 
   -- interface
   "MunifTanjim/nui.nvim",
-  "romainl/vim-cool",
   {
     "folke/zen-mode.nvim",
     opts = {},
@@ -95,7 +94,7 @@ return {
   {
     "windwp/nvim-autopairs",
     event = { "BufReadPost", "BufNewFile" },
-    config = true,
+    opts = {},
   },
   {
     "folke/todo-comments.nvim",
@@ -117,16 +116,6 @@ return {
       vim.tbl_map(function(type)
         require("luasnip.loaders.from_" .. type).lazy_load()
       end, { "vscode", "snipmate", "lua" })
-    end,
-  },
-  {
-    "goerz/jupytext.vim",
-    ft = { "json" },
-    config = function()
-      vim.g.jupytext_enabled = 1
-      vim.g.jupytext_command = "jupytext"
-      vim.g.jupytext_fmt = "py"
-      vim.g.jupytext_to_ipynb_opts = "--to=ipynb --update"
     end,
   },
   {
@@ -206,11 +195,10 @@ return {
   -- operators and text objects
 
   -- buffer
-
   {
     "chrisgrieser/nvim-early-retirement",
     event = { "BufReadPre", "BufNewFile" },
-    config = true,
+    opts = {},
   },
 
   -- debug

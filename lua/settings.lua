@@ -18,3 +18,13 @@ utils.autocmd("FileType", {
     vim.bo.textwidth = tonumber(vim.o.colorcolumn)
   end,
 })
+
+utils.autocmd("CursorMoved", {
+  callback = function()
+    if vim.v.hlsearch == 1 and vim.fn.searchcount().exact_match == 0 then
+      vim.schedule(function()
+        vim.cmd.nohlsearch()
+      end)
+    end
+  end,
+})
