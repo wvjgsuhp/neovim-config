@@ -383,8 +383,7 @@ local function get_mode_part(mode)
     return mode
   end
 
-  local mode_colors = get_mode_colors(mode)
-  return paint(" " .. (mode_icons[mode] or mode) .. " ", mode_colors["a"])
+  return paint(" " .. (mode_icons[mode] or mode) .. " ", vim.w.mode_colors["a"])
 end
 
 local minimal_status_line_file_types = vim.tbl_deep_extend("force", winbar_exclude_file_types, {
@@ -439,26 +438,21 @@ end
 
 local status_line_group = utils.augroup("status_line")
 
-utils.autocmd({ "RecordingEnter" }, {
-  group = status_line_group,
-  callback = function()
-    vim.g.recording = get_recording()
-  end,
-})
-
-utils.autocmd({ "RecordingLeave" }, {
-  group = status_line_group,
-  callback = function()
-    vim.g.recording = ""
-  end,
-})
-
 utils.autocmd({ "WinEnter", "BufEnter" }, {
   group = status_line_group,
   callback = function()
     vim.w.is_current = true
     vim.b.is_buffer_minimal = is_minimal()
     vim.b.icon = get_icon()
+  end,
+})
+
+utils.autocmd({ "ModeChanged", "WinEnter", "BufEnter", "WinLeave", "BufLeave" }, {
+  group = status_line_group,
+  callback = function()
+    vim.w.mode = get_mode()
+    vim.w.mode_colors = get_mode_colors(vim.w.mode)
+    vim.w.mode_part = get_mode_part(vim.w.mode)
   end,
 })
 
@@ -504,15 +498,6 @@ utils.autocmd({ "InsertEnter", "WinEnter", "BufEnter" }, {
   end,
 })
 
-utils.autocmd({ "ModeChanged", "WinEnter", "BufEnter", "WinLeave", "BufLeave" }, {
-  group = status_line_group,
-  callback = function()
-    vim.w.mode = get_mode()
-    vim.w.mode_part = get_mode_part(vim.w.mode)
-    vim.w.mode_colors = get_mode_colors(vim.w.mode)
-  end,
-})
-
 utils.autocmd({ "WinEnter", "BufEnter" }, {
   group = status_line_group,
   callback = function()
@@ -532,6 +517,20 @@ utils.autocmd({ "User", "WinEnter", "BufEnter" }, {
   pattern = "GitSignsUpdate",
   callback = function()
     vim.b.git_signs = get_git_signs()
+  end,
+})
+
+utils.autocmd({ "RecordingEnter" }, {
+  group = status_line_group,
+  callback = function()
+    vim.g.recording = get_recording()
+  end,
+})
+
+utils.autocmd({ "RecordingLeave" }, {
+  group = status_line_group,
+  callback = function()
+    vim.g.recording = ""
   end,
 })
 
