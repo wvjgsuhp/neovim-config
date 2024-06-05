@@ -143,7 +143,7 @@ M.get_winbar = function()
 end
 
 M.get_status_line = function()
-  local mode_colors = vim.w.mode_colors
+  local mode_colors = vim.w.mode_colors and vim.w.mode_colors or {}
   local relative_path = utils.ensure_string(vim.b.relative_path)
 
   if vim.w.is_current then
