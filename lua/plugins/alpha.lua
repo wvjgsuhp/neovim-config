@@ -1,4 +1,5 @@
 return {
+  -- TODO: migrate to less buggy splash screen
   "goolord/alpha-nvim",
   event = "VimEnter",
   config = function()
@@ -76,15 +77,15 @@ return {
 
     dashboard.config.opts.noautocmd = true
 
-    -- if vim.o.filetype == "lazy" then
-    --   vim.cmd.close()
-    --   utils.autocmd("User", {
-    --     pattern = "AlphaReady",
-    --     callback = function()
-    --       require("lazy").show()
-    --     end,
-    --   })
-    -- end
+    if vim.o.filetype == "lazy" then
+      vim.cmd.close()
+      utils.autocmd("User", {
+        pattern = "AlphaReady",
+        callback = function()
+          require("lazy").show()
+        end,
+      })
+    end
 
     require("alpha").setup(dashboard.config)
   end,

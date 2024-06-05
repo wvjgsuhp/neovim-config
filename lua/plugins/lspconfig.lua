@@ -108,7 +108,7 @@ return {
           prefix = "",
         },
         signs = true,
-        float = { border = constants.border.diagnostic },
+        float = { border = constants.border.error },
         severity_sort = true,
         update_in_insert = false,
       })

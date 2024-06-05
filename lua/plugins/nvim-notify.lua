@@ -2,10 +2,19 @@ return {
   "rcarriga/nvim-notify",
   config = function()
     local constants = require("constants")
+    local utils = require("utils")
 
     local notify = require("notify")
-    local stages = require("notify.stages.static")("top_down")
-    local render = require("notify.render.compact")
+    local base = require("notify.render.base")
+    local namespace = base.namespace()
+
+    local border = {
+      ERROR = constants.border.error,
+      INFO = constants.border.info,
+      TRACE = constants.border.hint,
+      WARN = constants.border.warn,
+      DEBUG = constants.border.debug,
+    }
 
     notify.setup({
       icons = {
@@ -15,21 +24,26 @@ return {
         WARN = constants.diagnostics.Warn,
       },
 
-      render = function(bufnr, notif, highlights)
-        highlights.border = "PmenuPadding"
-        return render(bufnr, notif, highlights)
+      render = function(bufnr, record, _)
+        for i = 1, #record.message do
+          if not utils.is_empty(record.message[i]) then
+            record.message[i] = " " .. record.message[i]
+          end
+        end
+
+        vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, record.message)
+        vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
+          end_line = #record.message - 1,
+          end_col = #record.message[#record.message],
+          priority = 50,
+        })
       end,
 
-      stages = {
-        function(...)
-          local opts = stages[1](...)
-          if opts then
-            opts.border = constants.border.none
-          end
-          return opts
-        end,
-        unpack(stages, 2),
-      },
+      on_open = function(win, record)
+        vim.api.nvim_win_set_config(win, { border = border[record.level] })
+      end,
+
+      stages = "static",
     })
 
     vim.notify = notify

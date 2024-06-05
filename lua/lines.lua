@@ -26,7 +26,7 @@ local function get_mode_colors(mode)
   return {
     a = "%#StatusLine" .. mode_char .. "1#",
     b = "%#StatusLine" .. mode_char .. "2#",
-    c = "%#StatusLineN3#",
+    c = "%#StatusLine" .. mode_char .. "3#",
     record = "%#StatusLine" .. mode_char .. "2Record#",
     inactive = "%#StatusLineInactive#",
   }
@@ -475,6 +475,7 @@ utils.autocmd({ "CursorMoved", "CursorMovedI", "WinEnter", "BufEnter", "BufWrite
   group = status_line_group,
   callback = function()
     vim.b.filename = get_filename()
+    vim.b.relative_path = get_relative_path()
   end,
 })
 
@@ -496,13 +497,6 @@ utils.autocmd({ "LSPAttach", "WinEnter", "BufEnter" }, {
   group = status_line_group,
   callback = function()
     vim.b.language_servers = get_language_servers()
-  end,
-})
-
-utils.autocmd({ "InsertEnter", "WinEnter", "BufEnter" }, {
-  group = status_line_group,
-  callback = function()
-    vim.b.relative_path = get_relative_path()
   end,
 })
 

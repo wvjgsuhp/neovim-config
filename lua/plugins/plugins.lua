@@ -105,8 +105,6 @@ return {
     "L3MON4D3/LuaSnip",
     lazy = true,
     version = "1.*",
-    -- install jsregexp (optional!).
-    build = "make install_jsregexp",
     dependencies = { "rafamadriz/friendly-snippets" },
     config = function()
       vim.tbl_map(function(type)

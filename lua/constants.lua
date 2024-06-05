@@ -41,7 +41,7 @@ constants.icons = {
 }
 
 constants.diagnostics = {
-  Error = "󰅙",
+  Error = "",
   Warn = "󱇎",
   Info = "",
   Hint = "󰌵",
@@ -69,7 +69,7 @@ constants.border = {
     { "╵", "DiagnosticHint" },
     { "│", "DiagnosticHint" },
   },
-  diagnostic = {
+  error = {
     { "󰚑", "DiagnosticError" },
     { "─", "DiagnosticError" },
     { "╴", "DiagnosticError" },
@@ -78,6 +78,36 @@ constants.border = {
     { " ", "DiagnosticError" },
     { "╵", "DiagnosticError" },
     { "│", "DiagnosticError" },
+  },
+  info = {
+    { "", "DiagnosticInfo" },
+    { "─", "DiagnosticInfo" },
+    { "╴", "DiagnosticInfo" },
+    { " ", "DiagnosticInfo" },
+    { " ", "DiagnosticInfo" },
+    { " ", "DiagnosticInfo" },
+    { "╵", "DiagnosticInfo" },
+    { "│", "DiagnosticInfo" },
+  },
+  warn = {
+    { constants.diagnostics.Warn, "DiagnosticWarn" },
+    { "─", "DiagnosticWarn" },
+    { "╴", "DiagnosticWarn" },
+    { " ", "DiagnosticWarn" },
+    { " ", "DiagnosticWarn" },
+    { " ", "DiagnosticWarn" },
+    { "╵", "DiagnosticWarn" },
+    { "│", "DiagnosticWarn" },
+  },
+  debug = {
+    { "󰃤", "DiagnosticOk" },
+    { "─", "DiagnosticOk" },
+    { "╴", "DiagnosticOk" },
+    { " ", "DiagnosticOk" },
+    { " ", "DiagnosticOk" },
+    { " ", "DiagnosticOk" },
+    { "╵", "DiagnosticOk" },
+    { "│", "DiagnosticOk" },
   },
 }
 
