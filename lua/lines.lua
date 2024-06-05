@@ -12,6 +12,14 @@ local darker_background_file_types = {
   noice = true,
 }
 
+local default_mode_colors = {
+  a = "%#StatusLine#",
+  b = "%#StatusLine#",
+  c = "%#StatusLineN3#",
+  record = "%#StatusLine#",
+  inactive = "%#StatusLineInactive#",
+}
+
 --- @param mode string
 local function get_mode_colors(mode)
   local mode_char = mode:sub(1, 1)
@@ -143,7 +151,7 @@ M.get_winbar = function()
 end
 
 M.get_status_line = function()
-  local mode_colors = vim.w.mode_colors and vim.w.mode_colors or {}
+  local mode_colors = vim.w.mode_colors and vim.w.mode_colors or default_mode_colors
   local relative_path = utils.ensure_string(vim.b.relative_path)
 
   if vim.w.is_current then
