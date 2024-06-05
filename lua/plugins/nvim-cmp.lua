@@ -4,7 +4,6 @@ return {
   dependencies = {
     "L3MON4D3/LuaSnip",
     "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-path",
@@ -119,6 +118,7 @@ return {
         { name = "buffer", priority = 500 },
         { name = "path", priority = 250 },
         { name = "nvim_lsp_signature_help" },
+        { name = "lazydev", group_index = 0 },
       },
       completion = {
         completeopt = "menu,menuone,noinsert,preview",

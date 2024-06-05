@@ -74,19 +74,17 @@ return {
       end,
     })
 
-    -- dashboard.config.layout[1].val = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * 0.2) })
-    -- dashboard.config.layout[3].val = 3
     dashboard.config.opts.noautocmd = true
 
-    if vim.o.filetype == "lazy" then
-      vim.cmd.close()
-      utils.autocmd("User", {
-        pattern = "AlphaReady",
-        callback = function()
-          require("lazy").show()
-        end,
-      })
-    end
+    -- if vim.o.filetype == "lazy" then
+    --   vim.cmd.close()
+    --   utils.autocmd("User", {
+    --     pattern = "AlphaReady",
+    --     callback = function()
+    --       require("lazy").show()
+    --     end,
+    --   })
+    -- end
 
     require("alpha").setup(dashboard.config)
   end,

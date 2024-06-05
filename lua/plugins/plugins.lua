@@ -14,7 +14,7 @@ return {
   },
   {
     "folke/which-key.nvim",
-    config = true,
+    opts = {},
     cmd = "WhichKey",
     keys = {
       { "<Leader>k", "<cmd>WhichKey<CR>" },
@@ -70,19 +70,15 @@ return {
   -- coding
   {
     "folke/lazydev.nvim",
-    dependencies = { "Bilal2453/luvit-meta" },
-    opts = {
-      library = {
-        vim.env.LAZY .. "/luvit-meta/library",
-      },
-    },
+    opts = {},
     ft = "lua",
   },
   {
     "folke/trouble.nvim",
     opts = {},
     keys = {
-      { "<Leader>dd", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnose the current buffer" },
+      { "<Leader>dd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Diagn current buffer" },
+      { "<Leader>dw", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diag current workspace" },
     },
   },
   {
@@ -100,7 +96,7 @@ return {
     "folke/todo-comments.nvim",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = true,
+    opts = {},
     keys = {
       { "<Leader>ft", "<cmd>TodoTelescope<CR>", desc = "Fuzzy find todo comments" },
     },
@@ -120,6 +116,7 @@ return {
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
+    enabled = false,
     lazy = true,
     dependencies = "mason.nvim",
     cmd = { "DapInstall", "DapUninstall" },

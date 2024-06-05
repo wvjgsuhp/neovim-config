@@ -4,7 +4,7 @@ let g:is_unix = has('macunix') || has('unix')
 let $VIM_PATH = expand('<sfile>:p:h')
 cd $VIM_PATH
 
-let $LAZY = '~/.local/share/nvim/lazy'
+" let $LAZY = '~/.local/share/nvim/lazy'
 let $VIM_DATA_PATH = exists('*stdpath')
   \ ? stdpath('data')
   \ : expand(($XDG_DATA_HOME ? $XDG_DATA_HOME : '~/.local/share') . '/nvim', 1)
