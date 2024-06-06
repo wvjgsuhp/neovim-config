@@ -215,4 +215,5 @@ return {
     { "<Leader>dt", "<cmd>Telescope diagnostics<CR>", desc = "Diagnose buffer" },
     { "<Leader>fd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnose buffer" },
   },
+  cmd = "Telescope",
 }

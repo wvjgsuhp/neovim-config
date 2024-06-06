@@ -5,6 +5,7 @@ local constants = require("constants")
 
 local winbar_exclude_file_types = {
   alpha = true,
+  dashboard = true,
   TelescopePrompt = true,
 }
 

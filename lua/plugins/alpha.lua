@@ -1,6 +1,7 @@
 return {
   -- TODO: migrate to less buggy splash screen
   "goolord/alpha-nvim",
+  enabled = false,
   event = "VimEnter",
   config = function()
     local constants = require("constants")

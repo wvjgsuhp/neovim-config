@@ -95,4 +95,5 @@ return {
     { "<Leader>e", "<Cmd>NvimTreeToggle .<CR>", desc = "Toggle explorer" },
     { "<Leader>fe", "<Cmd>NvimTreeFindFile<CR>", desc = "Find the current buffer in explorer" },
   },
+  cmd = { "NvimTreeToggle" },
 }
