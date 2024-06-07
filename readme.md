@@ -19,7 +19,7 @@ A Neovim configuration you can tweak with.
 
 <details><summary>On your local machine</summary>
 
-**Please back up your current configuration if there is.**
+Back up your current configuration if there is.
 
 ```sh
 mv ~/.config/nvim ~/.config/nvim.bak
