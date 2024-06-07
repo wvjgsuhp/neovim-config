@@ -22,7 +22,7 @@ return {
           { action = "NvimTreeToggle .",              desc = " Explore",          icon = " ", key = "e" },
           { action = "Telescope live_grep",           desc = " Find words",       icon = " ", key = "f" },
           { action = "SessionRestore",                desc = " Restore session",  icon = "󰦛 ", key = "r" },
-          { action = "WhichKey",                      desc = " WhichKey",         icon = "󰥻 ", key = "w" },
+          { action = "WhichKey",                      desc = " Open key maps",    icon = "󰥻 ", key = "w" },
           { action = "Lazy",                          desc = " Lazy",             icon = "󰒲 ", key = "z" },
           { action = "qa",                            desc = " Quit",             icon = "󰩈 ", key = "q" },
         },
