@@ -121,13 +121,6 @@ nmap G Gzz
 "
 " cmap <expr> <CR> getcmdtype() =~ '^[/?]$' ? '<CR>zz29<c-e>' : '<CR>'
 
-" excluding alpha
-augroup alpha_mapping
-  autocmd!
-  autocmd FileType alpha noremap <buffer> j j
-  autocmd FileType alpha noremap <buffer> k k
-augroup END
-
 nnoremap <Leader>zr <Cmd>res 13<CR>
 
 " Print messages to buffer
@@ -147,7 +140,7 @@ nnoremap <Leader>cc <Cmd>cclose<CR>
 augroup non_file_mapping
   autocmd!
   autocmd FileType noice,NvimTree,floaterm nnoremap <buffer> G G
-  autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame,floaterm nnoremap <buffer> <Esc> <Cmd>q<CR>
+  autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame,floaterm,git nnoremap <buffer> <Esc> <Cmd>q<CR>
   autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType qf nnoremap <buffer> <Esc> <Cmd>cclose<CR>

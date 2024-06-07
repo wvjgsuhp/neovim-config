@@ -1,8 +1,9 @@
 return {
   "nvimdev/dashboard-nvim",
   lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
-  opts = function()
+  config = function()
     local constants = require("constants")
+    local utils = require("utils")
     local width = 31
     local logo = vim.list_extend({ "", "", "", "", "", "", "", "" }, constants.logo.neovim_04)
     logo = vim.list_extend(logo, { "", "", "" })
@@ -54,14 +55,12 @@ return {
     -- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == "lazy" then
       vim.cmd.close()
-      vim.api.nvim_create_autocmd("User", {
+      utils.autocmd("User", {
         pattern = "DashboardLoaded",
-        callback = function()
-          require("lazy").show()
-        end,
+        callback = require("lazy").show,
       })
     end
 
-    return opts
+    require("dashboard").setup(opts)
   end,
 }

@@ -253,6 +253,7 @@ local mode_icons = {
   V = "󰩬",
   R = "󰙩",
   T = "",
+  C = "",
 }
 
 local function get_filename()

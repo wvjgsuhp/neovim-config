@@ -1,5 +1,21 @@
 local constants = {}
 
+constants.non_files = {
+  "checkhealth",
+  "dashboard",
+  "floaterm",
+  "fugitiveblame",
+  "help",
+  "lazy",
+  "lspinfo",
+  "mason",
+  "noice",
+  "NvimTree",
+  "TelescopePrompt",
+  "TelescopeResults",
+  "trouble",
+}
+
 -- from https://github.com/utilyre/barbecue.nvim
 -- stylua: ignore
 constants.icons = {

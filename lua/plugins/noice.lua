@@ -12,7 +12,8 @@ return {
     require("noice").setup({
       cmdline = {
         format = {
-          cmdline = { title = "", pattern = "^:", icon = "❯", lang = "vim" },
+          -- 
+          cmdline = { title = "", pattern = "^:", icon = "", lang = "vim" },
           search_down = { title = "", kind = "search", pattern = "^/", icon = " ", lang = "regex" },
           search_up = { title = "", kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
           filter = { title = "", pattern = "^:%s*!", icon = "", lang = "bash" },
@@ -33,11 +34,6 @@ return {
             width = 89,
             height = "auto",
           },
-          win_options = {
-            winblend = 0,
-          },
-        },
-        notify = {
           win_options = {
             winblend = 0,
           },

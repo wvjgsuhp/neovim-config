@@ -160,6 +160,7 @@ return {
   -- syntax/indent plugins
   {
     "NMAC427/guess-indent.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {},
   },
   {
