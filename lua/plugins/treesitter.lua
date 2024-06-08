@@ -9,6 +9,7 @@ return {
   build = ":TSUpdate",
   config = function()
     -- Setup treesitter
+    ---@diagnostic disable-next-line: missing-fields
     require("nvim-treesitter.configs").setup({
       -- all, maintained, or list of languages
       ensure_installed = {
@@ -51,19 +52,13 @@ return {
         highlight_current_scope = { enable = true },
       },
 
-      -- See: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
       textobjects = {
-        select = {
+        move = {
           enable = true,
-          -- Automatically jump forward to textobj, similar to targets.vim
-          lookahead = true,
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-          },
+          goto_next_start = { ["]fs"] = "@function.outer", ["]cs"] = "@class.outer" },
+          goto_next_end = { ["]fe"] = "@function.outer", ["]ce"] = "@class.outer" },
+          goto_previous_start = { ["]Fs"] = "@function.outer", ["]Cs"] = "@class.outer" },
+          goto_previous_end = { ["]Fe"] = "@function.outer", ["]Ce"] = "@class.outer" },
         },
       },
 
@@ -74,9 +69,10 @@ return {
           "html",
           "javascript",
           "javascriptreact",
-          "typescriptreact",
           "svelte",
+          "typescriptreact",
           "vue",
+          "markdown",
         },
       },
     })

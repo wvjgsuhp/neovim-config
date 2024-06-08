@@ -46,6 +46,9 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 </details>
 
+<!-- TODO: add detail for tweaking -->
+<!-- TODO: add common mappings -->
+
 <!--external-->
 
 [cmake]: https://cmake.org/

@@ -26,6 +26,7 @@ return {
       "R=r",
     }
 
+    -- TODO: properly convert to lua
     vim.cmd([[
       augroup md_syntax
         autocmd!

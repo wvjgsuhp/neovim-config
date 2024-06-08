@@ -1,6 +1,7 @@
 return {
   "sindrets/diffview.nvim",
   config = function()
+    -- TODO: properly convert to lua
     vim.cmd([[
       augroup diffview_cursorline
         autocmd!

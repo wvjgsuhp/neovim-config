@@ -26,7 +26,6 @@ return {
         layout.results.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
       end
 
-      -- { "─", "│", "─", "│", "├", "┤", "┘", "└" }
       layout.prompt.borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
       layout.preview.title = "Preview"
       layout.results.title = ""
@@ -116,9 +115,6 @@ return {
             preview_height = 0.8,
             mirror = true,
           },
-          -- flex = {
-          --   flip_columns = 120,
-          -- },
         },
         path_display = { "truncate" },
         winblend = vim.o.pumblend,
