@@ -13,6 +13,9 @@ return function(config)
       doc = {
         privateName = { "^_" },
       },
+      diagnostics = {
+        disable = { "missing-fields" },
+      },
       hint = {
         enable = true,
         setType = true,

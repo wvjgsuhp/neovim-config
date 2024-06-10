@@ -54,7 +54,6 @@ return {
     -- Option 3: treesitter as a main provider instead
     -- Only depend on `nvim-treesitter/queries/filetype/folds.scm`,
     -- performance and stability are better than `foldmethod=nvim_treesitter#foldexpr()`
-    ---@diagnostic disable-next-line: missing-fields
     require("ufo").setup({
       fold_virt_text_handler = virtual_text_handler,
       provider_selector = function(_, _, _)

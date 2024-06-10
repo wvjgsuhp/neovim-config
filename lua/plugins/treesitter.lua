@@ -9,7 +9,6 @@ return {
   build = ":TSUpdate",
   config = function()
     -- Setup treesitter
-    ---@diagnostic disable-next-line: missing-fields
     require("nvim-treesitter.configs").setup({
       -- all, maintained, or list of languages
       ensure_installed = {

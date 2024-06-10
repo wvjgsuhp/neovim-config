@@ -27,7 +27,6 @@ return {
         return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
       end,
 
-      ---@diagnostic disable-next-line: missing-fields
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(_, completion)

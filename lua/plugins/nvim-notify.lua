@@ -16,7 +16,6 @@ return {
       DEBUG = constants.border.debug,
     }
 
-    ---@diagnostic disable-next-line: missing-fields
     notify.setup({
       icons = {
         ERROR = constants.diagnostics.Error,

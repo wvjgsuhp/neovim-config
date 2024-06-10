@@ -91,7 +91,6 @@ noremap <Leader>q <Cmd>e!<CR>
 " noremap <Leader>bb <C-^>
 noremap <Leader>bb <Cmd>b!#<CR>
 
-nnoremap <Leader>yaa ggyG''
 nnoremap <Leader>ypG VGyGp
 
 " Delete current file
