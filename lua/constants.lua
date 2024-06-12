@@ -9,6 +9,7 @@ constants.non_files = {
   "lazy",
   "lspinfo",
   "mason",
+  "neo-tree",
   "noice",
   "NvimTree",
   "TelescopePrompt",
@@ -54,13 +55,17 @@ constants.icons = {
     Value =         " ",
     Variable =      " ",
   },
-}
-
-constants.diagnostics = {
-  Error = "",
-  Warn = "󱇎",
-  Info = "",
-  Hint = "󰌵",
+  diagnostics = {
+    error = "",
+    warn = "󱇎",
+    info = "",
+    hint = "󰌵",
+  },
+  git_signs = {
+    added = "󰐖 ",
+    removed = "󰍵 ",
+    changed = "󰏬 ",
+  }
 }
 
 constants.border = {
@@ -76,7 +81,7 @@ constants.border = {
     { "│", "DiagnosticWarn" },
   },
   hint = {
-    { constants.diagnostics.Hint, "DiagnosticHint" },
+    { constants.icons.diagnostics.hint, "DiagnosticHint" },
     { "─", "DiagnosticHint" },
     { "╴", "DiagnosticHint" },
     { " ", "DiagnosticHint" },
@@ -106,7 +111,7 @@ constants.border = {
     { "│", "DiagnosticInfo" },
   },
   warn = {
-    { constants.diagnostics.Warn, "DiagnosticWarn" },
+    { constants.icons.diagnostics.warn, "DiagnosticWarn" },
     { "─", "DiagnosticWarn" },
     { "╴", "DiagnosticWarn" },
     { " ", "DiagnosticWarn" },

@@ -16,12 +16,13 @@ return {
       DEBUG = constants.border.debug,
     }
 
+    local diagnostics = constants.icons.diagnostics
     notify.setup({
       icons = {
-        ERROR = constants.diagnostics.Error,
-        INFO = constants.diagnostics.Info,
-        TRACE = constants.diagnostics.Hint,
-        WARN = constants.diagnostics.Warn,
+        ERROR = diagnostics.error,
+        INFO = diagnostics.info,
+        TRACE = diagnostics.hint,
+        WARN = diagnostics.warn,
       },
 
       render = function(bufnr, record, _)

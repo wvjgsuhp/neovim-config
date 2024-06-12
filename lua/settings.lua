@@ -1,4 +1,5 @@
 local utils = require("utils")
+local constants = require("constants")
 
 vim.filetype.add({
   extension = {
@@ -26,3 +27,9 @@ utils.autocmd("CursorMoved", {
     end
   end,
 })
+
+local signs = constants.icons.diagnostics
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. utils.capitalize(type)
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end

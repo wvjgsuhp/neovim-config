@@ -266,12 +266,12 @@ local function get_filename()
 end
 
 local severity_levels = { "Error", "Warn", "Info", "Hint" }
-local diagnostic_signs = constants.diagnostics
+local diagnostic_signs = constants.icons.diagnostics
 
 --- @param severity string
 local function get_sign(severity)
   local hl = "%#StatusLine" .. severity .. "#"
-  return hl .. diagnostic_signs[severity] .. " "
+  return hl .. diagnostic_signs[severity:lower()] .. " "
 end
 
 local function get_diags()
@@ -304,11 +304,7 @@ local function get_diags()
 end
 
 local use_git_changes = { "added", "removed", "changed" }
-local git_signs = {
-  added = "󰐖 ",
-  removed = "󰍵 ",
-  changed = "󰏬 ",
-}
+local git_signs = constants.icons.git_signs
 
 local function get_git_signs()
   local changes = ""

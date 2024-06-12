@@ -3,7 +3,7 @@ return {
   cond = vim.g.is_unix == 1,
   event = { "BufReadPre", "BufNewFile" },
   config = function()
-    vim.o.sessionoptions = "blank,buffers,curdir,folds,tabpages,winsize,winpos,terminal,localoptions"
+    vim.o.sessionoptions = "blank,buffers,curdir,folds,tabpages,winsize,winpos,terminal,localoptions,help"
 
     require("auto-session").setup({
       log_level = "error",

@@ -12,7 +12,6 @@ return {
       end
     end
 
-    utils.noremap("n", "<Leader>gs", "<cmd>G status<CR>")
     utils.noremap("n", "<Leader>gp", "<cmd>Git! push<CR>")
     utils.noremap("n", "<Leader>gac", get_commit_message)
     utils.noremap("n", "<Leader>gaa", "<cmd>Git! add .<CR>")

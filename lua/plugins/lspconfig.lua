@@ -113,12 +113,12 @@ return {
         update_in_insert = false,
       })
 
-      -- diagnostic signs in sign column
-      local signs = constants.diagnostics
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
+      -- -- diagnostic signs in sign column
+      -- local signs = constants.diagnostics
+      -- for type, icon in pairs(signs) do
+      --   local hl = "DiagnosticSign" .. type
+      --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      -- end
 
       -- set up language servers using nvim-lspconfig
       local lsp_config = require("lspconfig")
