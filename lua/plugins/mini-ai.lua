@@ -121,10 +121,13 @@ return {
       i[key] = vim.tbl_extend("force", { name = "Inside " .. name .. " textobject" }, ic)
       a[key] = vim.tbl_extend("force", { name = "Around " .. name .. " textobject" }, ac)
     end
-    require("which-key").register({
-      mode = { "o", "x" },
-      i = i,
-      a = a,
-    })
+
+    if not vim.g.vscode then
+      require("which-key").register({
+        mode = { "o", "x" },
+        i = i,
+        a = a,
+      })
+    end
   end,
 }

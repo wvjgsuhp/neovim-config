@@ -61,6 +61,13 @@ return {
       })
     end
 
+    utils.autocmd_filetype(
+      "dashboard",
+      vim.schedule_wrap(function()
+        vim.opt_local.foldenable = false
+      end)
+    )
+
     require("dashboard").setup(opts)
   end,
 }

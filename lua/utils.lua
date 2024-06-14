@@ -48,6 +48,16 @@ end
 utils.autocmd = vim.api.nvim_create_autocmd
 utils.emit_event = vim.api.nvim_exec_autocmds
 
+--- vim autocmd for filetype
+--- @param filetype string
+--- @param callback function
+function utils.autocmd_filetype(filetype, callback)
+  utils.autocmd("FileType", {
+    pattern = filetype,
+    callback = callback,
+  })
+end
+
 function utils.debug_opened_windows()
   local windows = vim.api.nvim_list_wins()
 

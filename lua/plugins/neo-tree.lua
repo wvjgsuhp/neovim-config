@@ -7,12 +7,13 @@ return {
     "MunifTanjim/nui.nvim",
     -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
   },
-  opts = function()
+  config = function()
     local constants = require("constants")
+    local utils = require("utils")
     local commands = require("neo-tree.sources.buffers.commands")
     local git_signs = constants.icons.git_signs
 
-    return {
+    require("neo-tree").setup({
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       window = {
         mappings = {
@@ -21,14 +22,14 @@ return {
           ["o"] = {
             function(state)
               local path = state.tree:get_node().path
-              vim.cmd("!explorer.exe " .. (path:gsub("/", "\\\\")))
+              vim.cmd("!explorer.exe '" .. (path:gsub("/", "\\\\")) .. "'")
             end,
             desc = "Open file with system",
           },
           ["-"] = {
             function(state)
               local path = state.tree:get_node().path
-              vim.cmd("!git add " .. path)
+              vim.cmd("!git add '" .. path .. "'")
               commands.refresh()
             end,
             desc = "Stage file",
@@ -40,6 +41,11 @@ return {
               commands.refresh()
             end,
             desc = "Unstage file",
+          },
+          ["<Esc>"] = {
+            function(_)
+              vim.cmd("q")
+            end,
           },
         },
       },
@@ -63,7 +69,14 @@ return {
           },
         },
       },
-    }
+    })
+
+    utils.autocmd_filetype(
+      "neo-tree",
+      vim.schedule_wrap(function()
+        vim.opt_local.winblend = 0
+      end)
+    )
   end,
   keys = {
     { "<Leader>e", "<Cmd>Neotree float<CR>", desc = "Explore files" },

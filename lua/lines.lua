@@ -456,6 +456,10 @@ utils.autocmd({ "WinEnter", "BufEnter" }, {
 utils.autocmd({ "ModeChanged", "WinEnter", "BufEnter", "WinLeave", "BufLeave" }, {
   group = status_line_group,
   callback = function()
+    vim.w.mode = get_mode()
+    vim.w.mode_colors = get_mode_colors(vim.w.mode)
+    vim.w.mode_part = get_mode_part(vim.w.mode)
+
     vim.schedule(function()
       vim.w.mode = get_mode()
       vim.w.mode_colors = get_mode_colors(vim.w.mode)
