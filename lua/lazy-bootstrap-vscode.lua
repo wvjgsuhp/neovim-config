@@ -11,4 +11,4 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins.flash")
+require("lazy").setup("plugins-vscode")
