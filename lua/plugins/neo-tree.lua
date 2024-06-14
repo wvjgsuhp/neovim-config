@@ -9,15 +9,38 @@ return {
   },
   opts = function()
     local constants = require("constants")
+    local commands = require("neo-tree.sources.buffers.commands")
     local git_signs = constants.icons.git_signs
 
     return {
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       window = {
         mappings = {
-          -- TODO: add open with system
           ["<C-n>"] = "add",
           ["P"] = { "toggle_preview", config = { use_float = true } },
+          ["o"] = {
+            function(state)
+              local path = state.tree:get_node().path
+              vim.cmd("!explorer.exe " .. (path:gsub("/", "\\\\")))
+            end,
+            desc = "Open file with system",
+          },
+          ["-"] = {
+            function(state)
+              local path = state.tree:get_node().path
+              vim.cmd("!git add " .. path)
+              commands.refresh()
+            end,
+            desc = "Stage file",
+          },
+          ["_"] = {
+            function(state)
+              local path = state.tree:get_node().path
+              vim.cmd("!git restore --staged " .. path)
+              commands.refresh()
+            end,
+            desc = "Unstage file",
+          },
         },
       },
       default_component_configs = {
