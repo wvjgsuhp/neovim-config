@@ -12,12 +12,12 @@ return {
 
     -- Module mappings. Use `''` (empty string) to disable one.
     mappings = {
-      add = "Sa", -- Add surrounding in Normal and Visual modes
-      delete = "Sd", -- Delete surrounding
+      add = "ys", -- Add surrounding in Normal and Visual modes
+      delete = "ds", -- Delete surrounding
       find = "Sf", -- Find surrounding (to the right)
       find_left = "SF", -- Find surrounding (to the left)
       highlight = "Sh", -- Highlight surrounding
-      replace = "Sr", -- Replace surrounding
+      replace = "cs", -- Replace surrounding
       update_n_lines = "Sn", -- Update `n_lines`
 
       suffix_last = "l", -- Suffix to search with "prev" method
