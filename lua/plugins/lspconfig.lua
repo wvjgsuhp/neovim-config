@@ -101,19 +101,6 @@ return {
     -- main
 
     local function setup()
-      -- vim.diagnostic.config({
-      --   underline = true,
-      --   virtual_text = {
-      --     source = "if_many",
-      --     prefix = "",
-      --   },
-      --   signs = true,
-      --   float = { border = constants.border.error },
-      --   severity_sort = true,
-      --   update_in_insert = false,
-      -- })
-
-      -- set up language servers using nvim-lspconfig
       local lsp_config = require("lspconfig")
       local servers = require("mason-lspconfig").get_installed_servers()
 
