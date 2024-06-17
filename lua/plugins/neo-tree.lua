@@ -18,11 +18,17 @@ return {
       window = {
         mappings = {
           ["<C-n>"] = "add",
+          ["s"] = {
+            function(_)
+              require("flash").jump()
+            end,
+            desc = "Flash",
+          },
           ["P"] = { "toggle_preview", config = { use_float = true } },
           ["o"] = {
             function(state)
               local path = state.tree:get_node().path
-              vim.cmd("!explorer.exe '" .. (path:gsub("/", "\\\\")) .. "'")
+              vim.cmd('!explorer.exe "' .. (path:gsub("/", "\\\\")) .. '"')
             end,
             desc = "Open file with system",
           },

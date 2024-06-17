@@ -28,8 +28,21 @@ utils.autocmd("CursorMoved", {
   end,
 })
 
+-- diagnostic
 local signs = constants.icons.diagnostics
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. utils.capitalize(type)
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
+
+vim.diagnostic.config({
+  underline = true,
+  virtual_text = {
+    source = "if_many",
+    prefix = "",
+  },
+  signs = true,
+  float = { border = constants.border.error },
+  severity_sort = true,
+  update_in_insert = false,
+})

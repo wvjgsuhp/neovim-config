@@ -175,6 +175,7 @@ M.get_status_line = function()
       "%=",
 
       -- right
+      utils.ensure_string(vim.b.ai_completion),
       mode_colors["b"],
       os.date(" 󰥔 %H:%M "),
       mode_colors["a"],
@@ -537,6 +538,26 @@ utils.autocmd({ "RecordingLeave" }, {
   group = status_line_group,
   callback = function()
     vim.g.recording = ""
+  end,
+})
+
+utils.autocmd({ "User", "WinEnter", "BufEnter" }, {
+  group = status_line_group,
+  pattern = "AICompletionStarted",
+  callback = function()
+    local ai_completion = ""
+
+    -- supermaven
+    local is_exist, supermaven = pcall(require, "supermaven-nvim.api")
+    if is_exist and supermaven.is_running() then
+      ai_completion = "supermaven"
+    end
+
+    if ai_completion ~= "" then
+      vim.b.ai_completion = "  " .. ai_completion .. " "
+    else
+      vim.b.ai_completion = ""
+    end
   end,
 })
 
