@@ -101,6 +101,12 @@ local function get_location()
   return success and result or ""
 end
 
+-- https://www.reddit.com/r/neovim/comments/uz3ofs/heres_a_function_to_grab_the_name_of_the_current/
+local function get_branch_name()
+  local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+  return utils.is_empty(branch) and "" or (" 󰙁 " .. branch .. " ")
+end
+
 M.get_winbar = function()
   -- floating window
   local cfg = vim.api.nvim_win_get_config(0)
@@ -159,7 +165,8 @@ M.get_status_line = function()
     return table.concat({
       -- left
       mode_colors["a"],
-      vim.b.branch_name,
+      -- get_branch_name(),
+      utils.ensure_string(vim.b.branch_name),
       mode_colors["record"],
       utils.ensure_string(vim.g.recording),
       mode_colors["c"],
@@ -248,13 +255,15 @@ local mode_icons = {
   -- N = "󰜱󰜴",
   -- I = " ",
   -- V = " ",
+  -- R = "󰯍 ",
   -- T = " ",
+  -- C = " ",
   N = "󰎐",
   I = "󰷈",
   V = "󰩬",
   R = "󰙩",
   T = "",
-  C = "",
+  C = "󰇘",
 }
 
 local function get_filename()
@@ -427,12 +436,6 @@ local function get_language_servers()
   return ""
 end
 
--- https://www.reddit.com/r/neovim/comments/uz3ofs/heres_a_function_to_grab_the_name_of_the_current/
-local function get_branch_name()
-  local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
-  return utils.is_empty(branch) and "" or (" 󰙁 " .. branch .. " ")
-end
-
 local function get_mode()
   if not vim.w.is_current then
     return "%#StatusLineInactive# " .. vim.fn.winnr() .. " %*"
@@ -441,6 +444,22 @@ local function get_mode()
   local mode_code = vim.api.nvim_get_mode().mode
   local mode = mode_map[mode_code] or string.upper(mode_code)
   return mode
+end
+
+local function get_ai_completion()
+  local ai_completion = ""
+
+  -- supermaven
+  local is_exist, supermaven = pcall(require, "supermaven-nvim.api")
+  if is_exist and supermaven.is_running() then
+    ai_completion = "supermaven"
+  end
+
+  if ai_completion ~= "" then
+    return "  " .. ai_completion .. " "
+  else
+    return ""
+  end
 end
 
 local status_line_group = utils.augroup("status_line")
@@ -493,9 +512,9 @@ utils.autocmd("CursorMoved", {
 
 utils.autocmd({ "WinEnter", "BufEnter", "CmdlineLeave" }, {
   group = status_line_group,
-  callback = function()
+  callback = vim.schedule_wrap(function()
     vim.b.branch_name = get_branch_name()
-  end,
+  end),
 })
 
 utils.autocmd({ "LSPAttach", "WinEnter", "BufEnter" }, {
@@ -519,7 +538,7 @@ utils.autocmd({ "DiagnosticChanged", "WinEnter", "BufEnter" }, {
   end,
 })
 
-utils.autocmd({ "User", "WinEnter", "BufEnter" }, {
+utils.autocmd("User", {
   group = status_line_group,
   pattern = "GitSignsUpdate",
   callback = function()
@@ -541,23 +560,20 @@ utils.autocmd({ "RecordingLeave" }, {
   end,
 })
 
-utils.autocmd({ "User", "WinEnter", "BufEnter" }, {
+utils.autocmd("User", {
   group = status_line_group,
   pattern = "AICompletionStarted",
   callback = function()
-    local ai_completion = ""
+    vim.b.ai_completion = get_ai_completion()
+  end,
+})
 
-    -- supermaven
-    local is_exist, supermaven = pcall(require, "supermaven-nvim.api")
-    if is_exist and supermaven.is_running() then
-      ai_completion = "supermaven"
-    end
-
-    if ai_completion ~= "" then
-      vim.b.ai_completion = "  " .. ai_completion .. " "
-    else
-      vim.b.ai_completion = ""
-    end
+utils.autocmd({ "WinEnter", "BufEnter" }, {
+  group = status_line_group,
+  callback = function()
+    vim.b.branch_name = get_branch_name()
+    vim.b.git_signs = get_git_signs()
+    vim.b.ai_completion = get_ai_completion()
   end,
 })
 

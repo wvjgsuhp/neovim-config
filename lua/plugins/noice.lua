@@ -9,15 +9,19 @@ return {
     local constants = require("constants")
     local utils = require("utils")
 
+    local cmdline_row = math.floor(vim.o.lines * 0.13)
+
     require("noice").setup({
       cmdline = {
         format = {
           -- 
-          cmdline = { title = "", pattern = "^:", icon = "", lang = "vim" },
-          search_down = { title = "", kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-          search_up = { title = "", kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-          filter = { title = "", pattern = "^:%s*!", icon = "", lang = "bash" },
-          input = { title = "" },
+          cmdline = { title = "", icon = "" },
+          search_down = { title = "" },
+          search_up = { title = "" },
+          filter = { title = "", icon = "" },
+          lua = { title = "" },
+          help = { title = "" },
+          input = { title = "", icon = " " },
         },
       },
       views = {
@@ -27,7 +31,7 @@ return {
             padding = { 0, 0 },
           },
           position = {
-            row = 5,
+            row = cmdline_row,
             col = "50%",
           },
           size = {
@@ -38,10 +42,16 @@ return {
             winblend = 0,
           },
         },
+        cmdline_input = {
+          border = {
+            style = constants.border.none,
+            padding = { 0, 0 },
+          },
+        },
         popupmenu = {
           relative = "editor",
           position = {
-            row = 7,
+            row = cmdline_row + 2,
             col = "50%",
           },
           size = {
