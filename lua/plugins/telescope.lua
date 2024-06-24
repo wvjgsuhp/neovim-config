@@ -74,6 +74,7 @@ return {
           "node_modules/",
           "%.aux",
           "%.bbl",
+          "%.blg",
           "%.doc",
           "%.docx",
           "%.gif",
