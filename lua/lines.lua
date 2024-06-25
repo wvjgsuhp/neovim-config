@@ -446,10 +446,22 @@ local function get_mode()
   return mode
 end
 
+local function has_ai_completion()
+  local ai_completions = { "supermaven-nvim" }
+  for _, ai_completion in ipairs(ai_completions) do
+    if package.loaded[ai_completion] then
+      return true
+    end
+  end
+
+  return false
+end
+
 local function get_ai_completion()
   local ai_completion = ""
 
   -- supermaven
+  --
   local is_exist, supermaven = pcall(require, "supermaven-nvim.api")
   if is_exist and supermaven.is_running() then
     ai_completion = "supermaven"
@@ -568,20 +580,20 @@ utils.autocmd("User", {
   end,
 })
 
-utils.autocmd({ "WinEnter", "BufEnter" }, {
+utils.autocmd({ "BufReadPre", "BufNewFile" }, {
   group = status_line_group,
   callback = function()
     vim.b.branch_name = get_branch_name()
     vim.b.git_signs = get_git_signs()
-    vim.b.ai_completion = get_ai_completion()
+
+    if has_ai_completion() then
+      vim.b.ai_completion = get_ai_completion()
+    end
   end,
 })
 
 _G.status = M
 vim.o.winbar = "%{%v:lua.status.get_winbar()%}"
 vim.o.statusline = "%{%v:lua.status.get_status_line()%}"
-
--- fix statusline diappears when enter insert mode
-utils.autocmd("InsertEnter", { command = ":let &stl=&stl" })
 
 return M
