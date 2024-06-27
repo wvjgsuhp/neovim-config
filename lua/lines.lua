@@ -161,34 +161,68 @@ M.get_winbar = function()
   end
 end
 
+local fill_char = "─"
 M.get_status_line = function()
   local mode_colors = vim.w.mode_colors and vim.w.mode_colors or default_mode_colors
   local relative_path = utils.ensure_string(vim.b.relative_path)
+  local modify_status = utils.ensure_string(vim.b.modify_status)
+  local max_chars_half = (vim.o.columns - utils.display_width(relative_path)) / 2
 
   if vim.w.is_current then
+    local branch_name = utils.ensure_string(vim.b.branch_name)
+    local recording = utils.ensure_string(vim.g.recording)
+    local language_servers = utils.ensure_string(vim.b.language_servers)
+    local git_signs = utils.ensure_string(vim.b.git_signs)
+    local diags = utils.ensure_string(vim.b.diags)
+    local ai_completion = utils.ensure_string(vim.b.ai_completion)
+    local date = os.date(" 󰥔 %H:%M ")
+
+    local max_chars_left = math.floor(max_chars_half)
+    local max_chars_right = math.ceil(max_chars_half)
+
+    local n_empty_left = max_chars_left
+      - 2
+      - utils.display_width(branch_name .. recording .. language_servers .. git_signs)
+    local n_empty_right = max_chars_right
+      - 2
+      - utils.display_width(modify_status .. diags .. ai_completion .. date .. vim.w.line_column)
+
+    local left_fill
+    local right_fill
+    if utils.is_empty(relative_path) then
+      left_fill = " " .. fill_char:rep(n_empty_left)
+      right_fill = fill_char:rep(n_empty_right) .. " "
+    else
+      -- TODO: figure out why a total of -3 is needed here
+      left_fill = " " .. fill_char:rep(n_empty_left - 1) .. " "
+      right_fill = " " .. fill_char:rep(n_empty_right - 2) .. " "
+    end
+
     return table.concat({
       -- left
       mode_colors["a"],
-      -- get_branch_name(),
-      utils.ensure_string(vim.b.branch_name),
+      branch_name,
       mode_colors["record"],
-      utils.ensure_string(vim.g.recording),
+      recording,
       mode_colors["c"],
-      utils.ensure_string(vim.b.language_servers),
+      language_servers,
+      left_fill,
 
       -- middle
       "%=",
-      utils.ensure_string(vim.b.git_signs),
+      git_signs,
       mode_colors["c"],
       relative_path,
-      utils.ensure_string(vim.b.diags),
+      modify_status,
+      diags,
       mode_colors["c"],
       "%=",
+      right_fill,
 
       -- right
-      utils.ensure_string(vim.b.ai_completion),
+      ai_completion,
       mode_colors["b"],
-      os.date(" 󰥔 %H:%M "),
+      date,
       mode_colors["a"],
       vim.w.line_column,
     })
@@ -197,6 +231,7 @@ M.get_status_line = function()
       "%<",
       mode_colors["inactive"],
       relative_path,
+      modify_status,
       "%=",
       vim.w.line_column,
     })
@@ -327,8 +362,8 @@ local function get_git_signs()
       local sign = git_signs[change]
       local change_count = vim.b.gitsigns_status_dict[change]
       if change_count and change_count > 0 then
-        local hl = "%#StatusLineGit" .. utils.capitalize(change) .. "# "
-        changes = changes .. hl .. sign .. tostring(change_count)
+        local hl = "%#StatusLineGit" .. utils.capitalize(change) .. "#"
+        changes = changes .. hl .. sign .. tostring(change_count) .. " "
       end
     end
   end
@@ -368,12 +403,12 @@ end
 local function get_relative_path()
   local buftype = vim.bo.buftype
   if buftype == "terminal" then
-    return " terminal"
+    return "terminal"
   elseif buftype == "nofile" or buftype == "prompt" then
-    return " " .. vim.bo.filetype
+    return vim.bo.filetype
   end
 
-  local file = " " .. vim.fn.expand("%:.")
+  local file = vim.fn.expand("%:.")
 
   local is_modifiable = vim.api.nvim_get_option_value("modifiable", { buf = 0 })
   if vim.bo.readonly or not is_modifiable then
@@ -384,11 +419,22 @@ local function get_relative_path()
     return color .. file .. " "
   end
 
+  -- local is_modified = vim.api.nvim_get_option_value("modified", { buf = 0 })
+  -- if is_modified then
+  --   return file .. "  "
+  -- end
+  return file:sub(1, -1)
+end
+
+local function get_modify_status()
+  if utils.is_empty(vim.b.relative_path) then
+    return ""
+  end
+
   local is_modified = vim.api.nvim_get_option_value("modified", { buf = 0 })
   if is_modified then
-    return file .. "  "
+    return "  "
   end
-  return file:sub(1, -1)
 end
 
 --- @param text string
@@ -515,7 +561,7 @@ utils.autocmd({ "CursorMoved", "CursorMovedI", "WinEnter", "BufEnter", "BufWrite
   group = status_line_group,
   callback = function()
     vim.b.filename = get_filename()
-    vim.b.relative_path = get_relative_path()
+    vim.b.modify_status = get_modify_status()
   end,
 })
 
@@ -589,6 +635,7 @@ utils.autocmd({ "BufReadPre", "BufNewFile" }, {
   callback = function()
     vim.b.branch_name = get_branch_name()
     vim.b.git_signs = get_git_signs()
+    vim.b.relative_path = get_relative_path()
 
     if has_ai_completion() then
       vim.b.ai_completion = get_ai_completion()

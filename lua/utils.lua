@@ -35,6 +35,18 @@ function utils.ensure_string(str, default)
   return str and str or (default and default or "")
 end
 
+--- remove highlight groups from a string
+--- @param str string
+function utils.strip_highlight_groups(str)
+  return (str:gsub("%%#%w+#", ""):gsub("%%*", ""))
+end
+
+--- return number of display characters without highlight groups
+--- @param str string
+function utils.display_width(str)
+  return vim.fn.strwidth(utils.strip_highlight_groups(str))
+end
+
 --- vim augroup
 --- @param group string
 --- @param opts? table
