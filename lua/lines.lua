@@ -181,20 +181,18 @@ M.get_status_line = function()
     local max_chars_right = math.ceil(max_chars_half)
 
     local n_empty_left = max_chars_left
-      - 2
       - utils.display_width(branch_name .. recording .. language_servers .. git_signs)
     local n_empty_right = max_chars_right
-      - 2
+      - vim.w.number_width
       - utils.display_width(modify_status .. diags .. ai_completion .. date .. vim.w.line_column)
 
     local left_fill
     local right_fill
     if utils.is_empty(relative_path) then
-      left_fill = " " .. fill_char:rep(n_empty_left)
-      right_fill = fill_char:rep(n_empty_right) .. " "
+      left_fill = " " .. fill_char:rep(n_empty_left - 1)
+      right_fill = fill_char:rep(n_empty_right - 1) .. " "
     else
-      -- TODO: figure out why a total of -3 is needed here
-      left_fill = " " .. fill_char:rep(n_empty_left - 1) .. " "
+      left_fill = " " .. fill_char:rep(n_empty_left - 2) .. " "
       right_fill = " " .. fill_char:rep(n_empty_right - 2) .. " "
     end
 
@@ -243,8 +241,21 @@ local line_icons = { "⡀", "⣀", "⣄", "⣤", "⣦", "⣶", "⣾", "⣿" }
 local function get_line_column()
   local current_line = vim.fn.line(".")
   local total_line = vim.fn.line("$")
+
+  local n_line_digits = math.floor(math.log10(total_line)) + 1
+  local n_column_digits = math.floor(math.log10(vim.o.columns)) + 1
+
   local icon_index = math.floor(current_line / total_line * (#line_icons - 1)) + 1
-  return " %3l/%L" .. line_icons[icon_index] .. " %3c󰤼 %*"
+  return {
+    line_column = " %"
+      .. n_line_digits
+      .. "l/%L"
+      .. line_icons[icon_index]
+      .. " %"
+      .. n_column_digits
+      .. "c󰤼 %*",
+    number_width = 2 * n_line_digits + n_column_digits,
+  }
 end
 
 -- mode_map copied from:
@@ -568,7 +579,9 @@ utils.autocmd({ "CursorMoved", "CursorMovedI", "WinEnter", "BufEnter", "BufWrite
 utils.autocmd("CursorMoved", {
   group = status_line_group,
   callback = function()
-    vim.w.line_column = get_line_column()
+    local line_column = get_line_column()
+    vim.w.line_column = line_column.line_column
+    vim.w.number_width = line_column.number_width
   end,
 })
 

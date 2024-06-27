@@ -38,13 +38,13 @@ end
 --- remove highlight groups from a string
 --- @param str string
 function utils.strip_highlight_groups(str)
-  return (str:gsub("%%#%w+#", ""):gsub("%%*", ""))
+  return (str:gsub("%%#%w+#", ""):gsub("%%%*", ""))
 end
 
---- return number of display characters without highlight groups
+--- return number of display characters without highlight groups and %\w+
 --- @param str string
 function utils.display_width(str)
-  return vim.fn.strwidth(utils.strip_highlight_groups(str))
+  return vim.fn.strwidth((utils.strip_highlight_groups(str):gsub("%%%w+", "")))
 end
 
 --- vim augroup
