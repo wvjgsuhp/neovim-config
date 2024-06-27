@@ -76,8 +76,8 @@ noremap L g_
 
 " Terminal
 noremap <Leader>zz <Cmd>terminal<CR>i
-noremap <Leader>zj <Cmd>split<CR><Cmd>terminal<CR>13<C-w>_i
-nmap <Leader>zl <Cmd>vsplit<CR> zz
+noremap <Leader>zsp <Cmd>split<CR><Cmd>terminal<CR>13<C-w>_i
+nmap <Leader>zvs <Cmd>vsplit<CR> zz
 " nnoremap <Leader>z4 :term<CR>:vs<CR>:term<CR>:sp<CR>:term<CR>:wincmd h<CR>:sp<CR>:term<CR>
 nnoremap <Bslash> :!
 

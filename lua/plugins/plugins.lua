@@ -43,6 +43,8 @@ return {
     keys = {
       { "<Leader>`", "<cmd>FloatermToggle<CR>" },
       { "<Leader>zn", "<cmd>FloatermNew<CR>" },
+      { "<Leader>zl", "<cmd>FloatermNext<CR>" },
+      { "<Leader>zh", "<cmd>FloatermPrev<CR>" },
     },
   },
   {
