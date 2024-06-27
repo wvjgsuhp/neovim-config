@@ -14,14 +14,14 @@ return {
     require("noice").setup({
       cmdline = {
         format = {
-          -- 
+          -- ❯
           cmdline = { title = "", icon = "" },
           search_down = { title = "" },
           search_up = { title = "" },
           filter = { title = "", icon = "" },
           lua = { title = "" },
           help = { title = "" },
-          input = { title = "", icon = " " },
+          input = { title = "", icon = "󰌌 " },
         },
       },
       views = {

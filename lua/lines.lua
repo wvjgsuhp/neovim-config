@@ -104,7 +104,11 @@ end
 -- https://www.reddit.com/r/neovim/comments/uz3ofs/heres_a_function_to_grab_the_name_of_the_current/
 local function get_branch_name()
   local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
-  return utils.is_empty(branch) and "" or (" 󰙁 " .. branch .. " ")
+  if utils.is_empty(branch) then
+    return "   ❮not-a-repo❯ "
+  else
+    return " 󰙁 " .. branch .. " "
+  end
 end
 
 M.get_winbar = function()
