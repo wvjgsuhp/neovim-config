@@ -166,6 +166,8 @@ M.get_status_line = function()
   local mode_colors = vim.w.mode_colors and vim.w.mode_colors or default_mode_colors
   local relative_path = utils.ensure_string(vim.b.relative_path)
   local modify_status = utils.ensure_string(vim.b.modify_status)
+  local line_column = utils.ensure_string(vim.w.line_column)
+
   local max_chars_half = (vim.o.columns - utils.display_width(relative_path)) / 2
 
   if vim.w.is_current then
@@ -183,8 +185,8 @@ M.get_status_line = function()
     local n_empty_left = max_chars_left
       - utils.display_width(branch_name .. recording .. language_servers .. git_signs)
     local n_empty_right = max_chars_right
-      - vim.w.number_width
-      - utils.display_width(modify_status .. diags .. ai_completion .. date .. vim.w.line_column)
+      - (vim.w.number_width or 0)
+      - utils.display_width(modify_status .. diags .. ai_completion .. date .. line_column)
 
     local left_fill
     local right_fill
@@ -198,31 +200,31 @@ M.get_status_line = function()
 
     return table.concat({
       -- left
-      mode_colors["a"],
+      mode_colors.a,
       branch_name,
-      mode_colors["record"],
+      mode_colors.record,
       recording,
-      mode_colors["c"],
+      mode_colors.c,
       language_servers,
       left_fill,
 
       -- middle
       "%=",
       git_signs,
-      mode_colors["c"],
+      mode_colors.c,
       relative_path,
       modify_status,
       diags,
-      mode_colors["c"],
+      mode_colors.c,
       "%=",
       right_fill,
 
       -- right
       ai_completion,
-      mode_colors["b"],
+      mode_colors.b,
       date,
-      mode_colors["a"],
-      vim.w.line_column,
+      mode_colors.a,
+      line_column,
     })
   else
     return table.concat({
@@ -231,7 +233,7 @@ M.get_status_line = function()
       relative_path,
       modify_status,
       "%=",
-      vim.w.line_column,
+      line_column,
     })
   end
 end
