@@ -4,6 +4,10 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", cond = vim.g.is_unix == 1, build = "make" },
   },
   config = function()
+    local telescope = require("telescope")
+    local actions = require("telescope.actions")
+    local layout_strategies = require("telescope.pickers.layout_strategies")
+
     local horizontal_preview_width = function(_, cols, _)
       if cols > 200 then
         return math.floor(cols * 0.7)
@@ -12,7 +16,6 @@ return {
       end
     end
 
-    local layout_strategies = require("telescope.pickers.layout_strategies")
     layout_strategies.flexible_merged = function(picker, max_columns, max_lines, layout_config)
       local is_vertical = vim.o.lines * 3 > vim.o.columns
       local layout
@@ -42,6 +45,8 @@ return {
     --     autocmd User TelescopePreviewerLoaded setlocal wrap list
     --   augroup END
     -- ]])
+
+    -- mapping functions
     local flash = function(prompt_bufnr)
       require("flash").jump({
         pattern = "^",
@@ -60,8 +65,25 @@ return {
       })
     end
 
-    local telescope = require("telescope")
-    local actions = require("telescope.actions")
+    -- https://github.com/nvim-telescope/telescope.nvim/issues/2778#issuecomment-2202572413
+    local focus_preview = function(prompt_bufnr)
+      local action_state = require("telescope.actions.state")
+      local picker = action_state.get_current_picker(prompt_bufnr)
+      local prompt_win = picker.prompt_win
+      local previewer = picker.previewer
+      local winid = previewer.state.winid
+      local bufnr = previewer.state.bufnr
+
+      vim.keymap.set("n", "<C-f>", function()
+        vim.cmd(string.format("noautocmd lua vim.api.nvim_set_current_win(%s)", prompt_win))
+      end, { buffer = bufnr })
+
+      vim.keymap.set("n", "<Esc>", function()
+        actions.close(prompt_bufnr)
+      end, { buffer = bufnr })
+
+      vim.cmd(string.format("noautocmd lua vim.api.nvim_set_current_win(%s)", winid))
+    end
 
     telescope.setup({
       defaults = {
@@ -82,6 +104,7 @@ return {
           "%.gz",
           "%.gzip",
           "%.hex",
+          "%.ipynb",
           "%.jpg",
           "%.parquet",
           "%.pdf",
@@ -143,6 +166,7 @@ return {
 
             ["<C-k>"] = actions.preview_scrolling_up,
             ["<C-j>"] = actions.preview_scrolling_down,
+            ["<C-f>"] = focus_preview,
 
             ["<C-l>"] = actions.select_vertical,
 
@@ -158,6 +182,7 @@ return {
 
             ["<C-k>"] = actions.preview_scrolling_up,
             ["<C-j>"] = actions.preview_scrolling_down,
+            ["<C-f>"] = focus_preview,
 
             ["v"] = actions.toggle_selection + actions.move_selection_next,
 
@@ -207,7 +232,7 @@ return {
     { "<Leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
     { "<C-o>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
     { "<Leader>fg", "<cmd>Telescope grep_string search=<CR>", desc = "Fuzzy find words" },
-    { "<C-f>", "<cmd>Telescope grep_string search=<CR>", desc = "Fuzzy find words" },
+    -- { "<C-f>", "<cmd>Telescope grep_string search=<CR>", desc = "Fuzzy find words" },
     { "<Leader>fz", "<cmd>Telescope grep_string<CR>", desc = "Fuzzy find words under cursor" },
     { "<Leader>fib", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy find in buffer" },
     { "<Leader>fb", "<cmd>Telescope buffers<CR>", desc = "Fuzzy find buffers" },

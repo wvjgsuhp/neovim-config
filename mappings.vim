@@ -26,7 +26,7 @@ noremap <silent> <C-k> <Cmd>wincmd k<CR>
 noremap <silent> <C-j> <Cmd>wincmd j<CR>
 noremap <silent> <C-h> <Cmd>wincmd h<CR>
 noremap <silent> <C-l> <Cmd>wincmd l<CR>
-noremap <silent> <Tab> <C-w>w
+" noremap <silent> <Tab> <C-w>w
 
 " move between tabs
 noremap <Leader>tl <Cmd>tabnext<CR>
@@ -158,6 +158,7 @@ augroup END
 nnoremap s <Nop>
 nnoremap S <Nop>
 nnoremap , <Nop>
+" nnoremap <C-f> <Nop>
 
 " execute current file
 noremap <F9> <Cmd>w<bar>!%:p<CR>

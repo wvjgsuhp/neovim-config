@@ -32,6 +32,36 @@ return {
             end,
             desc = "Open file with system",
           },
+          -- https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/370#discussioncomment-4144005
+          ["n"] = {
+            function(state)
+              local node = state.tree:get_node()
+              local filename = node.name
+
+              vim.fn.setreg('"', filename)
+              vim.notify("Copied: " .. filename)
+            end,
+          },
+          ["y"] = {
+            function(state)
+              local node = state.tree:get_node()
+              local filepath = node:get_id()
+              local relative_path = "./" .. vim.fn.fnamemodify(filepath, ":.")
+
+              vim.fn.setreg('"', relative_path)
+              vim.notify("Copied: " .. relative_path)
+            end,
+          },
+          ["Y"] = {
+            function(state)
+              local node = state.tree:get_node()
+              local filepath = node:get_id()
+              local absolute_path = filepath
+
+              vim.fn.setreg('"', absolute_path)
+              vim.notify("Copied: " .. absolute_path)
+            end,
+          },
           ["-"] = {
             function(state)
               local path = state.tree:get_node().path
