@@ -24,6 +24,11 @@ local default_mode_colors = {
 --- @param mode string
 local function get_mode_colors(mode)
   local mode_char = mode:sub(1, 1)
+
+  if mode_char == "T" then
+    mode_char = "C"
+  end
+
   return {
     a = "%#StatusLine" .. mode_char .. "1#",
     b = "%#StatusLine" .. mode_char .. "2#",
