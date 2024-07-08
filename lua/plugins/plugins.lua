@@ -70,6 +70,13 @@ return {
     opts = {},
     ft = { "markdown", "rmd" },
   },
+  {
+    "rhysd/clever-f.vim",
+    event = "VeryLazy",
+    config = function()
+      vim.g.clever_f_smart_case = 1
+    end,
+  },
 
   -- coding
   {

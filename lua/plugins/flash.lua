@@ -14,7 +14,8 @@ return {
     highlight = { backdrop = false },
     modes = {
       char = {
-        highlight = { backdrop = false },
+        enabled = false,
+        -- highlight = { backdrop = false },
         -- keys = {},
       },
     },
