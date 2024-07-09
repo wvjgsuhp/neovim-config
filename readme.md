@@ -60,5 +60,5 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 <!--images-->
 
-[splash]: https://github.com/wvjgsuhp/neovim-config/assets/20987347/63172b0c-ff9b-4042-8e6f-4482f7c96e62
-[cmp]: https://github.com/wvjgsuhp/neovim-config/assets/20987347/855d9a42-484e-4749-9c79-dd0b27b95fee
+[splash]: https://github.com/wvjgsuhp/neovim-config/assets/20987347/95c95384-91f5-4f75-84a3-1c1a14d78114
+[cmp]: https://github.com/wvjgsuhp/neovim-config/assets/20987347/a407a955-6732-459b-8c16-24d96ebb1795
