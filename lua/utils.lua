@@ -47,6 +47,15 @@ function utils.display_width(str)
   return vim.fn.strwidth((utils.strip_highlight_groups(str):gsub("%%%w+", "")))
 end
 
+--- truncate a string and add a trailing character
+--- @param str string
+--- @param max_length number
+--- @param trailing? string
+function utils.truncate(str, max_length, trailing)
+  local length = max_length + str:len() - utils.display_width(str)
+  return str:sub(1, length) .. (trailing ~= nil and trailing or "")
+end
+
 --- vim augroup
 --- @param group string
 --- @param opts? table
