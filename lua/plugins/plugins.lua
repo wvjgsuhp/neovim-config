@@ -64,9 +64,7 @@ return {
     opts = {},
   },
   {
-    "wvjgsuhp/markview.nvim",
-    branch = "dev",
-    -- "lukas-reineke/headlines.nvim",
+    "MeanderingProgrammer/markdown.nvim",
     opts = {},
     ft = { "markdown", "rmd" },
   },

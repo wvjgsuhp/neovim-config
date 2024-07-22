@@ -14,6 +14,8 @@ return {
     vim.keymap.set("n", "zR", require("ufo").openAllFolds)
     vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
+    local utils = require("utils")
+
     local function virtual_text_handler(virtual_text, lnum, endLnum, width, truncate)
       local new_virtual_text = {}
       local fill_char = " ─ "
@@ -25,21 +27,21 @@ return {
       local total_width = 0
       for _, chunk in ipairs(virtual_text) do
         local chunk_text = chunk[1]
-        local chunk_width = vim.fn.strdisplaywidth(chunk_text)
+        local chunk_width = utils.display_width(chunk_text)
         if target_width > total_width + chunk_width then
           table.insert(new_virtual_text, chunk)
         else
           chunk_text = truncate(chunk_text, target_width - total_width)
           local hl_group = chunk[2]
           table.insert(new_virtual_text, { chunk_text, hl_group })
-          chunk_width = vim.fn.strdisplaywidth(chunk_text)
+          chunk_width = utils.display_width(chunk_text)
 
           break
         end
 
         if total_width < target_width then
-          local occupied_chars = target_width - total_width - vim.fn.strdisplaywidth(n_folded_lines) - 2
-          local n_repeats = math.floor(occupied_chars / vim.fn.strdisplaywidth(fill_char))
+          local occupied_chars = target_width - total_width - utils.display_width(n_folded_lines) - 2
+          local n_repeats = math.floor(occupied_chars / utils.display_width(fill_char))
           suffix = fill_char:rep(n_repeats)
         end
 

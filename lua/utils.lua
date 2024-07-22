@@ -52,8 +52,13 @@ end
 --- @param max_length number
 --- @param trailing? string
 function utils.truncate(str, max_length, trailing)
-  local length = max_length + str:len() - utils.display_width(str)
-  return str:sub(1, length) .. (trailing ~= nil and trailing or "")
+  local length = utils.display_width(str)
+  max_length = max_length + str:len() - length
+  if length < max_length then
+    return str
+  end
+
+  return str:sub(1, max_length) .. (trailing ~= nil and trailing or "")
 end
 
 --- vim augroup

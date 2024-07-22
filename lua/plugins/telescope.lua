@@ -93,6 +93,7 @@ return {
           ".ropeproject/",
           "__pycache__/",
           "env/",
+          "man/",
           "node_modules/",
           "%.7z",
           "%.aux",
