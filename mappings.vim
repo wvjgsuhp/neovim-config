@@ -69,8 +69,7 @@ nnoremap <Localleader>V "+P
 
 " Jump to the beginning/end of a line
 noremap <Leader>h ^
-nnoremap <Leader>l $
-onoremap <Leader>l $
+noremap <Leader>l $
 xnoremap <Leader>l $h
 noremap L g_
 

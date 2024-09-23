@@ -14,6 +14,7 @@ return {
     local constants = require("constants")
     local luasnip = require("luasnip")
     local cmp = require("cmp")
+    local utils = require("utils")
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -30,7 +31,7 @@ return {
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(_, completion)
-          local kind = completion.kind
+          local kind = utils.ensure_string(completion.kind)
           local icon = constants.icons.kinds[kind]
 
           completion.kind = icon and " " .. icon or ""

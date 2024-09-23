@@ -340,7 +340,7 @@ local mode_icons = {
 
 local function get_filename()
   local has_icon, icon = pcall(get_icon)
-  if has_icon then
+  if has_icon and not utils.is_empty(icon) then
     return icon .. "%t"
   else
     return " %t"

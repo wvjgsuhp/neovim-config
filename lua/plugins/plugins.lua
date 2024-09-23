@@ -20,6 +20,16 @@ return {
       { "<Leader>k", "<cmd>WhichKey<CR>" },
     },
   },
+  {
+    "echasnovski/mini.splitjoin",
+    opts = {
+      mappings = {
+        toggle = "<Leader>ss",
+        split = "",
+        join = "",
+      },
+    },
+  },
 
   -- interface
   "MunifTanjim/nui.nvim",
