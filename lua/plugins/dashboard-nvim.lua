@@ -19,7 +19,7 @@ return {
         center = {
           { action = "Telescope find_files",          desc = " Find files",       icon = "󰍉 ", key = "<Leader>ff" },
           { action = "Telescope grep_string search=", desc = " Fuzzy-find words", icon = "󰒻 ", key = "<Leader>fg" },
-          { action = "NvimTreeToggle .",              desc = " Explore",          icon = " ", key = "e" },
+          { action = "Neotree float",                 desc = " Explore",          icon = " ", key = "e" },
           { action = "Telescope live_grep",           desc = " Find words",       icon = " ", key = "f" },
           { action = "SessionRestore",                desc = " Restore session",  icon = "󰦛 ", key = "r" },
           { action = "WhichKey",                      desc = " Open key maps",    icon = "󰥻 ", key = "w" },

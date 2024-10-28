@@ -105,6 +105,7 @@ return {
           "%.gz",
           "%.gzip",
           "%.hex",
+          "%.html",
           "%.ipynb",
           "%.jpg",
           "%.parquet",

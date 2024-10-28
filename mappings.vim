@@ -109,8 +109,8 @@ nmap <Leader>fp /<C-r>+<CR>
 nnoremap <Leader>ze <Cmd>e ~/.zshrc<CR>
 
 " Center focused line
-nnoremap zz zz29<c-e>
-nmap G Gzz
+" nnoremap zz zz29<c-e>
+" nmap G Gzz
 " let line_moved_commands = ['e', '<C-r>', 'n', 'N', 'G', 'w', 'b', '``', 'j', 'k']
 " for cmd in line_moved_commands
 "   execute 'nnoremap <silent> '.cmd.' '.cmd.'zz29<c-e>'
