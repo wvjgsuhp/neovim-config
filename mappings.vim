@@ -2,9 +2,8 @@ let mapleader=' '
 let maplocalleader=';'
 
 " move between open and close brackets
-nnoremap <backspace> %
-vnoremap <backspace> %
-onoremap <backspace> %
+noremap <backspace> %
+nnoremap <Leader><backspace> Vg_%
 
 " Folding
 nnoremap <Leader><Leader> za
@@ -54,6 +53,8 @@ nnoremap <Leader>yap <Cmd>let @+=expand("%:p")<CR>
   \ <Cmd>echo 'Yanked absolute path: <C-r>+'<CR>
 nnoremap <Localleader>y "+y
 vnoremap <Localleader>y "+y
+nnoremap <Localleader>Y "+yg_
+vnoremap <Localleader>Y "+yg_
 
 " Paste
 nnoremap <Leader>pa ggVGp

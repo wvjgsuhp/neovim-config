@@ -92,6 +92,8 @@ return {
           ".mypy_cache/",
           ".ropeproject/",
           "__pycache__/",
+          "build/",
+          "dist/",
           "env/",
           "man/",
           "node_modules/",

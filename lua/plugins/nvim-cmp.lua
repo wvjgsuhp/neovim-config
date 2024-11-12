@@ -115,8 +115,8 @@ return {
       },
       sources = {
         { name = "nvim_lsp", priority = 1000 },
-        { name = "luasnip", priority = 750 },
-        { name = "buffer", priority = 500 },
+        { name = "luasnip", priority = 750, max_item_count = 5 },
+        { name = "buffer", priority = 500, max_item_count = 5, keyword_length = 2 },
         { name = "path", priority = 250 },
         { name = "nvim_lsp_signature_help" },
         { name = "lazydev", group_index = 0 },
