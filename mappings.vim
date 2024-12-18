@@ -4,6 +4,7 @@ let maplocalleader=';'
 " move between open and close brackets
 noremap <backspace> %
 nnoremap <Leader><backspace> Vg_%
+nnoremap <Leader>v Vg_%
 
 " Folding
 nnoremap <Leader><Leader> za
