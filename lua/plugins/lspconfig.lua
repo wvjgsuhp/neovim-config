@@ -4,7 +4,8 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
+    -- "saghen/blink.cmp",
+    -- "hrsh7th/cmp-nvim-lsp",
     "nvim-lua/plenary.nvim",
   },
   config = function()
@@ -86,8 +87,9 @@ return {
       -- Setup base config for each server.
       local config = {}
       config.on_attach = on_attach
-      local cap = vim.lsp.protocol.make_client_capabilities()
-      config.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
+      -- local cap = vim.lsp.protocol.make_client_capabilities()
+      config.capabilities = require("blink.cmp").get_lsp_capabilities()
+      -- config.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
 
       -- user-defined lsp settings
       local exists, user_config = pcall(require, "lsp." .. server_name)
@@ -108,8 +110,8 @@ return {
       servers[#servers + 1] = "r_language_server"
 
       for _, server in ipairs(servers) do
-        local opts = make_config(server)
-        lsp_config[server].setup(opts)
+        local config = make_config(server)
+        lsp_config[server].setup(config)
       end
 
       -- global custom location-list diagnostics window toggle.

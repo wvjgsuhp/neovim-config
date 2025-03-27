@@ -191,10 +191,14 @@ M.get_status_line = function()
   local max_chars_half = (vim.o.columns - utils.display_width(relative_path)) / 2
 
   if vim.w.is_current then
+    -- left
     local branch_name = utils.ensure_string(vim.b.branch_name)
     local recording = utils.ensure_string(vim.g.recording)
     local language_servers = utils.ensure_string(vim.b.language_servers)
+    local filetype = " 󰔰 " .. vim.bo.filetype
     local git_signs = utils.ensure_string(vim.b.git_signs)
+
+    -- right
     local diags = utils.ensure_string(vim.b.diags)
     local ai_completion = utils.ensure_string(vim.b.ai_completion)
     local date = os.date(" 󰥔 %H:%M ")
@@ -203,7 +207,7 @@ M.get_status_line = function()
     local max_chars_right = math.ceil(max_chars_half)
 
     local n_empty_left = max_chars_left
-      - utils.display_width(branch_name .. recording .. language_servers .. git_signs)
+      - utils.display_width(branch_name .. recording .. language_servers .. filetype .. git_signs)
     local n_empty_right = max_chars_right
       - (vim.w.number_width or 0)
       - utils.display_width(modify_status .. diags .. ai_completion .. date .. line_column)
@@ -226,6 +230,7 @@ M.get_status_line = function()
       recording,
       mode_colors.c,
       language_servers,
+      filetype,
       left_fill,
 
       -- middle
