@@ -1,3 +1,4 @@
+-- TODO: retain default on_attach
 return function(config)
   local on_attach = config.on_attach
   config.on_attach = function(client, bufnr)

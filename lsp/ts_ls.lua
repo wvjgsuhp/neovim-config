@@ -1,5 +1,5 @@
-return function(config)
-  config.init_options = {
+return {
+  init_options = {
     preferences = {
       includeInlayParameterNameHints = "all",
       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
@@ -10,5 +10,5 @@ return function(config)
       includeInlayEnumMemberValueHints = true,
       importModuleSpecifierPreference = "non-relative",
     },
-  }
-end
+  },
+}

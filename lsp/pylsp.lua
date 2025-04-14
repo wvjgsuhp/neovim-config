@@ -1,5 +1,5 @@
-return function(config)
-  config.settings = {
+return {
+  settings = {
     pylsp = {
       plugins = {
         pycodestyle = {
@@ -8,5 +8,5 @@ return function(config)
         },
       },
     },
-  }
-end
+  },
+}

@@ -3,8 +3,6 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    -- "hrsh7th/cmp-nvim-lsp",
     "nvim-lua/plenary.nvim",
   },
   config = function()
@@ -30,9 +28,7 @@ return {
       })
     end
 
-    require("mason").setup()
-    require("mason-lspconfig").setup()
-
+    -- TODO: migrate to LspAttach
     -- Buffer attached
     local on_attach = function(client, bufnr)
       -- TODO: enable if no treesitter
@@ -82,35 +78,33 @@ return {
     end
 
     -- Combine base config for each server and merge user-defined settings.
-    local function make_config(server_name)
-      -- Setup base config for each server.
-      local config = {}
-      config.on_attach = on_attach
-      -- local cap = vim.lsp.protocol.make_client_capabilities()
-      -- config.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
-
-      -- user-defined lsp settings
-      local exists, user_config = pcall(require, "lsp." .. server_name)
-      if exists then
-        user_config(config)
-      end
-
-      return config
-    end
+    -- local function make_config(server_name)
+    --   -- Setup base config for each server.
+    --   local config = { on_attach = on_attach }
+    --
+    --   return config
+    -- end
 
     -- main
-
     local function setup()
-      local lsp_config = require("lspconfig")
-      local servers = require("mason-lspconfig").get_installed_servers()
-
-      -- add custom server
-      servers[#servers + 1] = "r_language_server"
+      local servers = {
+        "lua_ls",
+        "r_language_server",
+        "ts_ls",
+        "bashls",
+        "yamlls",
+        "cssls",
+        "texlab",
+        "html",
+        "pylsp",
+      }
 
       for _, server in ipairs(servers) do
-        local config = make_config(server)
-        lsp_config[server].setup(config)
+        -- local config = make_config(server)
+        -- vim.lsp.config(server, config)
+        vim.lsp.config(server, { on_attach = on_attach })
       end
+      vim.lsp.enable(servers)
 
       -- global custom location-list diagnostics window toggle.
       utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
