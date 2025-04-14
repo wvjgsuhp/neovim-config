@@ -2,7 +2,7 @@
   "LuaSnip": { "branch": "master", "commit": "500981ff6cefc7343e3959ef0f939bd0bfd49ba9" },
   "Nvim-R": { "branch": "master", "commit": "295857d133a5c8c8840486abd34d36b5112edfa9" },
   "auto-session": { "branch": "main", "commit": "317412742990371f8e4709074da5c378456a27ff" },
-  "blink.cmp": { "branch": "main", "commit": "49f211fe5d729df53df4c042d7c3464cf47d199e" },
+  "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
   "clever-f.vim": { "branch": "master", "commit": "6a3ac5e3688598af9411ab741737f98c47370c22" },
   "conform.nvim": { "branch": "master", "commit": "f9ef25a7ef00267b7d13bfc00b0dea22d78702d5" },
   "csv.vim": { "branch": "master", "commit": "b8eb7f67babce96168e7f6b93b2ba8328b72a390" },

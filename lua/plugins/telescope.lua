@@ -117,6 +117,7 @@ return {
           "%.RData",
           "%.Rdata",
           "%.svg",
+          "%.ttf",
           "%.xls",
           "%.xlsx",
           "%.zip",

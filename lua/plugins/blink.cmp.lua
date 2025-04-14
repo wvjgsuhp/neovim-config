@@ -33,6 +33,9 @@ return {
         preset = "enter",
         ["<Tab>"] = { "select_next", "fallback" },
         ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "snippet_forward", "fallback" },
+        ["<C-b>"] = { "snippet_backward", "fallback" },
+        ["<C-o>"] = { "select_accept_and_enter", "fallback" },
       },
       signature = { enabled = true },
 
@@ -55,6 +58,11 @@ return {
           border = constants.border.completion,
           draw = {
             components = {
+              kind_icon = {
+                text = function(ctx)
+                  return ctx.kind_icon .. string.sub(ctx.icon_gap, 2)
+                end,
+              },
               label = { width = { fill = true, max = 21 } },
             },
             gap = 1,

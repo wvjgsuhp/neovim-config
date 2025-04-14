@@ -4,7 +4,6 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    -- "saghen/blink.cmp",
     -- "hrsh7th/cmp-nvim-lsp",
     "nvim-lua/plenary.nvim",
   },
@@ -88,7 +87,6 @@ return {
       local config = {}
       config.on_attach = on_attach
       -- local cap = vim.lsp.protocol.make_client_capabilities()
-      config.capabilities = require("blink.cmp").get_lsp_capabilities()
       -- config.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
 
       -- user-defined lsp settings
