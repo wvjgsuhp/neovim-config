@@ -24,14 +24,14 @@ return {
     local utils = require("utils")
 
     local lsp_highlight_group = utils.augroup("lsp_highlight", {})
-    local activate_lsp_highlight = function(client, bufnr)
+    local activate_lsp_highlight = function(client, buffer_number)
       if vim.b.has_lsp_highlight or not client.server_capabilities.documentHighlightProvider then
         return
       end
       vim.b.has_lsp_highlight = true
 
       utils.autocmd("CursorHold", {
-        buffer = bufnr,
+        buffer = buffer_number,
         group = lsp_highlight_group,
         callback = function()
           vim.lsp.buf.clear_references()
@@ -40,7 +40,7 @@ return {
       })
 
       utils.autocmd({ "CursorMoved", "BufLeave" }, {
-        buffer = bufnr,
+        buffer = buffer_number,
         group = lsp_highlight_group,
         callback = vim.lsp.buf.clear_references,
       })
@@ -63,32 +63,24 @@ return {
         client.config.flags.allow_incremental_sync = true
       end
 
-      local function map_buf(mode, lhs, rhs)
-        vim.keymap.set(mode, lhs, rhs, { buffer = true, silent = true, noremap = true })
-      end
-
       -- Short-circuit for Helm template files
       if vim.bo[buffer_number].buftype ~= "" or vim.bo[buffer_number].filetype == "helm" then
         require("user").diagnostic.disable(buffer_number)
         return
       end
 
-      map_buf("n", "gD", vim.lsp.buf.declaration)
-      map_buf("n", "gd", vim.lsp.buf.definition)
-      map_buf("n", "gr", vim.lsp.buf.references)
-      map_buf("n", "gy", vim.lsp.buf.type_definition)
-      map_buf("n", "gi", vim.lsp.buf.implementation)
-      map_buf("n", ",rn", vim.lsp.buf.rename)
-      map_buf("n", "<Leader>ds", vim.lsp.buf.code_action)
-      map_buf("n", "<Leader>dk", vim.diagnostic.open_float)
-      map_buf("n", "H", lsp_toggle_inlay_hint)
-      map_buf({ "n", "x" }, ",f", lsp_format)
+      utils.map_buf("n", "gD", vim.lsp.buf.declaration)
+      utils.map_buf("n", "gd", vim.lsp.buf.definition)
+      utils.map_buf("n", "gr", vim.lsp.buf.references)
+      utils.map_buf("n", "gy", vim.lsp.buf.type_definition)
+      utils.map_buf("n", "gi", vim.lsp.buf.implementation)
+      utils.map_buf("n", ",rn", vim.lsp.buf.rename)
+      utils.map_buf("n", "<Leader>ds", vim.lsp.buf.code_action)
+      utils.map_buf("n", "<Leader>dk", vim.diagnostic.open_float)
+      utils.map_buf("n", "H", lsp_toggle_inlay_hint)
+      utils.map_buf({ "n", "x" }, ",f", lsp_format)
 
       activate_lsp_highlight(client, buffer_number)
-
-      -- if client.supports_method("textDocument/rangeFormatting") then
-      --   map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
-      -- end
     end
 
     -- global custom location-list diagnostics window toggle.

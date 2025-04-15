@@ -84,6 +84,18 @@ function utils.autocmd_filetype(filetype, callback)
   })
 end
 
+--- vim.keymap.set for buffer
+---@param mode string|string[] Mode "short-name" (see |nvim_set_keymap()|), or a list thereof.
+---@param lhs string           Left-hand side |{lhs}| of the mapping.
+---@param rhs string|function  Right-hand side |{rhs}| of the mapping, can be a Lua function.
+---@param opts? vim.keymap.set.Opts
+function utils.map_buf(mode, lhs, rhs, opts)
+  if opts == nil then
+    opts = { buffer = true, silent = true, noremap = true }
+  end
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 function utils.debug_opened_windows()
   local windows = vim.api.nvim_list_wins()
 
