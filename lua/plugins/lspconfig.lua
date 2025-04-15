@@ -3,122 +3,97 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    -- "hrsh7th/cmp-nvim-lsp",
     "nvim-lua/plenary.nvim",
   },
   config = function()
+    local servers = {
+      "bashls",
+      "cssls",
+      "html",
+      "lua_ls",
+      "pylsp",
+      "r_language_server",
+      "texlab",
+      "ts_ls",
+      "yamlls",
+    }
+
+    vim.lsp.enable(servers)
+
     local constants = require("constants")
     local utils = require("utils")
 
     local lsp_highlight_group = utils.augroup("lsp_highlight", {})
-    local activate_lsp_highlight = function(client, bufnr)
+    local activate_lsp_highlight = function(client, buffer_number)
       if vim.b.has_lsp_highlight or not client.server_capabilities.documentHighlightProvider then
         return
       end
       vim.b.has_lsp_highlight = true
 
       utils.autocmd("CursorHold", {
-        buffer = bufnr,
+        buffer = buffer_number,
         group = lsp_highlight_group,
-        callback = vim.lsp.buf.document_highlight,
+        callback = function()
+          vim.lsp.buf.clear_references()
+          vim.lsp.buf.document_highlight()
+        end,
       })
-      utils.autocmd("CursorMoved", {
-        buffer = bufnr,
+
+      utils.autocmd({ "CursorMoved", "BufLeave" }, {
+        buffer = buffer_number,
         group = lsp_highlight_group,
         callback = vim.lsp.buf.clear_references,
       })
     end
 
-    require("mason").setup()
-    require("mason-lspconfig").setup()
+    local function lsp_toggle_inlay_hint()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+    end
 
-    -- Buffer attached
-    local on_attach = function(client, bufnr)
+    local function lsp_format()
+      vim.lsp.buf.format({ timeout_ms = 2000 })
+    end
+
+    local function on_attach(client)
+      local buffer_number = vim.api.nvim_get_current_buf()
+
       -- TODO: enable if no treesitter
       client.server_capabilities.semanticTokensProvider = nil
-      local function map_buf(mode, lhs, rhs)
-        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
-      end
-
-      -- Short-circuit for Helm template files
-      if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-        require("user").diagnostic.disable(bufnr)
-        return
-      end
-
-      map_buf("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-      map_buf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-      map_buf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-      map_buf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-      map_buf("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-      map_buf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-      map_buf("n", ",rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-      map_buf("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-      map_buf("n", "<Leader>dk", "<cmd>lua vim.diagnostic.open_float()<CR>")
-      map_buf(
-        "n",
-        "H",
-        "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({bufnr = 0}), {bufnr = 0})<CR>"
-      )
-
       if client.config.flags then
         client.config.flags.allow_incremental_sync = true
       end
 
-      -- Set autocommands conditional on server capabilities
-      activate_lsp_highlight(client, bufnr)
+      -- Short-circuit for Helm template files
+      if vim.bo[buffer_number].buftype ~= "" or vim.bo[buffer_number].filetype == "helm" then
+        require("user").diagnostic.disable(buffer_number)
+        return
+      end
 
-      if client.supports_method("textDocument/formatting") then
-        if vim.fn.has("nvim-0.8") == 1 then
-          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>")
-        else
-          map_buf("n", ",f", "<cmd>lua vim.lsp.buf.formatting(nil, 2000)<CR>")
-        end
-      end
-      if client.supports_method("textDocument/rangeFormatting") then
-        map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
-      end
+      utils.map_buf("n", "gD", vim.lsp.buf.declaration)
+      utils.map_buf("n", "gd", vim.lsp.buf.definition)
+      utils.map_buf("n", "gr", vim.lsp.buf.references)
+      utils.map_buf("n", "gy", vim.lsp.buf.type_definition)
+      utils.map_buf("n", "gi", vim.lsp.buf.implementation)
+      utils.map_buf("n", ",rn", vim.lsp.buf.rename)
+      utils.map_buf("n", "<Leader>ds", vim.lsp.buf.code_action)
+      utils.map_buf("n", "<Leader>dk", vim.diagnostic.open_float)
+      utils.map_buf("n", "H", lsp_toggle_inlay_hint)
+      utils.map_buf({ "n", "x" }, ",f", lsp_format)
+
+      activate_lsp_highlight(client, buffer_number)
     end
 
-    -- Combine base config for each server and merge user-defined settings.
-    local function make_config(server_name)
-      -- Setup base config for each server.
-      local config = {}
-      config.on_attach = on_attach
-      -- local cap = vim.lsp.protocol.make_client_capabilities()
-      -- config.capabilities = require("cmp_nvim_lsp").default_capabilities(cap)
+    -- global custom location-list diagnostics window toggle.
+    utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+    utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 
-      -- user-defined lsp settings
-      local exists, user_config = pcall(require, "lsp." .. server_name)
-      if exists then
-        user_config(config)
-      end
+    require("lspconfig.ui.windows").default_options.border = constants.border.none
 
-      return config
-    end
-
-    -- main
-
-    local function setup()
-      local lsp_config = require("lspconfig")
-      local servers = require("mason-lspconfig").get_installed_servers()
-
-      -- add custom server
-      servers[#servers + 1] = "r_language_server"
-
-      for _, server in ipairs(servers) do
-        local config = make_config(server)
-        lsp_config[server].setup(config)
-      end
-
-      -- global custom location-list diagnostics window toggle.
-      utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-      utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-
-      require("lspconfig.ui.windows").default_options.border = constants.border.none
-    end
-
-    setup()
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        on_attach(client)
+      end,
+    })
   end,
 }

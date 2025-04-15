@@ -1,5 +1,5 @@
-return function(config)
-  config.settings = {
+return {
+  settings = {
     Lua = {
       workspace = {
         checkThirdParty = false,
@@ -25,5 +25,5 @@ return function(config)
         arrayIndex = "Disable",
       },
     },
-  }
-end
+  },
+}
