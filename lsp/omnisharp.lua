@@ -1,8 +1,5 @@
--- TODO: retain default on_attach
-return function(config)
-  local on_attach = config.on_attach
-  config.on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
+return {
+  on_attach = function(client, bufnr)
     client.server_capabilities.semanticTokensProvider = {
       full = vim.empty_dict(),
       legend = {
@@ -77,5 +74,5 @@ return function(config)
       },
       range = true,
     }
-  end
-end
+  end,
+}
