@@ -1,9 +1,10 @@
 return {
   "brenoprata10/nvim-highlight-colors",
   opts = {
-    render = "virtual",
-    virtual_symbol = "",
-    exclude_filetypes = { "lazy" },
+    ---@usage 'background'|'foreground'|'virtual'
+    render = "background",
+    -- virtual_symbol = "",
+    exclude_filetypes = { "lazy", "mason" },
   },
   ft = {
     "html",
