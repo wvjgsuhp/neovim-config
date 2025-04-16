@@ -23,7 +23,6 @@ return {
     local constants = require("constants")
     local utils = require("utils")
 
-    local lsp_highlight_group = utils.augroup("lsp_highlight", {})
     local activate_lsp_highlight = function(client, buffer_number)
       if vim.b.has_lsp_highlight or not client.server_capabilities.documentHighlightProvider then
         return
@@ -32,7 +31,6 @@ return {
 
       utils.autocmd("CursorHold", {
         buffer = buffer_number,
-        group = lsp_highlight_group,
         callback = function()
           vim.lsp.buf.clear_references()
           vim.lsp.buf.document_highlight()
@@ -41,7 +39,6 @@ return {
 
       utils.autocmd({ "CursorMoved", "BufLeave" }, {
         buffer = buffer_number,
-        group = lsp_highlight_group,
         callback = vim.lsp.buf.clear_references,
       })
     end
@@ -57,16 +54,16 @@ return {
     local function on_attach(client)
       local buffer_number = vim.api.nvim_get_current_buf()
 
+      -- Short-circuit for Helm template files
+      if vim.bo[buffer_number].buftype ~= "" or vim.bo[buffer_number].filetype == "helm" then
+        vim.diagnostic.enable(false, { bufnr = buffer_number })
+        return
+      end
+
       -- TODO: enable if no treesitter
       client.server_capabilities.semanticTokensProvider = nil
       if client.config.flags then
         client.config.flags.allow_incremental_sync = true
-      end
-
-      -- Short-circuit for Helm template files
-      if vim.bo[buffer_number].buftype ~= "" or vim.bo[buffer_number].filetype == "helm" then
-        require("user").diagnostic.disable(buffer_number)
-        return
       end
 
       utils.map_buf("n", "gD", vim.lsp.buf.declaration)
@@ -76,16 +73,11 @@ return {
       utils.map_buf("n", "gi", vim.lsp.buf.implementation)
       utils.map_buf("n", ",rn", vim.lsp.buf.rename)
       utils.map_buf("n", "<Leader>ds", vim.lsp.buf.code_action)
-      utils.map_buf("n", "<Leader>dk", vim.diagnostic.open_float)
       utils.map_buf("n", "H", lsp_toggle_inlay_hint)
       utils.map_buf({ "n", "x" }, ",f", lsp_format)
 
       activate_lsp_highlight(client, buffer_number)
     end
-
-    -- global custom location-list diagnostics window toggle.
-    utils.noremap("n", "<leader>dN", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-    utils.noremap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 
     require("lspconfig.ui.windows").default_options.border = constants.border.none
 

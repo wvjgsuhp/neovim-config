@@ -27,12 +27,12 @@ return {
     }
 
     -- TODO: properly convert to lua
-    vim.cmd([[
-      augroup md_syntax
-        autocmd!
-        autocmd FileType markdown set syntax=on
-      augroup END
-    ]])
+    -- vim.cmd([[
+    --   augroup md_syntax
+    --     autocmd!
+    --     autocmd FileType markdown set syntax=on
+    --   augroup END
+    -- ]])
   end,
   ft = { "markdown" },
 }
