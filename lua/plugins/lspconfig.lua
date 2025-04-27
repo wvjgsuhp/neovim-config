@@ -66,6 +66,7 @@ return {
         client.config.flags.allow_incremental_sync = true
       end
 
+      utils.map_buf("n", "K", vim.lsp.buf.hover)
       utils.map_buf("n", "gD", vim.lsp.buf.declaration)
       utils.map_buf("n", "gd", vim.lsp.buf.definition)
       utils.map_buf("n", "gr", vim.lsp.buf.references)
