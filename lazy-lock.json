@@ -28,7 +28,7 @@
   "nvim-autopairs": { "branch": "master", "commit": "4d74e75913832866aa7de35e4202463ddf6efd1b" },
   "nvim-coverage": { "branch": "main", "commit": "a939e425e363319d952a6c35fb3f38b34041ded2" },
   "nvim-early-retirement": { "branch": "main", "commit": "3b14762a0186b1922cb5ddf3a760d8521c7b3d7e" },
-  "nvim-github-theme": { "branch": "main", "commit": "0037876d1f328bda95a56a32c2b431a6938c4fbd" },
+  "nvim-github-theme": { "branch": "main", "commit": "665bcb4ce0e083e697eb428adf076f05f95b45fa" },
   "nvim-highlight-colors": { "branch": "main", "commit": "b42a5ccec7457b44e89f7ed3b3afb1b375bb2093" },
   "nvim-lspconfig": { "branch": "master", "commit": "2e74354b2752cb4980fca35c451792908c186f2f" },
   "nvim-navic": { "branch": "master", "commit": "39231352aec0d1e09cebbffdd9dc20a5dc691ffe" },

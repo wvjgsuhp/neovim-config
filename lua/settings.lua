@@ -1,6 +1,8 @@
 local utils = require("utils")
 local constants = require("constants")
 
+vim.o.scrolloff = 8
+
 vim.filetype.add({
   extension = {
     pem = "pem",
