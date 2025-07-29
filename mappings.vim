@@ -75,6 +75,9 @@ noremap <Leader>l $
 xnoremap <Leader>l $h
 noremap L g_
 
+" collapse lines
+nnoremap gJ Jgqq
+
 " Terminal
 noremap <Leader>zz <Cmd>terminal<CR>i
 noremap <Leader>zsp <Cmd>split<CR><Cmd>terminal<CR>13<C-w>_i

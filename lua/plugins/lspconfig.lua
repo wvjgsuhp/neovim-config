@@ -13,9 +13,11 @@ return {
       "lua_ls",
       "pylsp",
       "r_language_server",
+      "rust_analyzer",
       "texlab",
       "ts_ls",
       "yamlls",
+      "postgres_lsp",
     }
 
     vim.lsp.enable(servers)

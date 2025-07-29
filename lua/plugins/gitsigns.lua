@@ -26,5 +26,7 @@ return {
     })
 
     utils.noremap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zz")
+    utils.noremap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zz")
+    utils.noremap("n", "gp", "<cmd>Gitsigns preview_hunk_inline<CR>zz")
   end,
 }

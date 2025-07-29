@@ -1,7 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-    { "nvim-telescope/telescope-fzf-native.nvim", cond = vim.g.is_unix == 1, build = "make" },
+    -- { "nvim-telescope/telescope-fzf-native.nvim", cond = vim.g.is_unix == 1, build = "make" },
+    { "natecraddock/telescope-zf-native.nvim" },
   },
   config = function()
     local telescope = require("telescope")
@@ -97,6 +98,7 @@ return {
           "env/",
           "man/",
           "node_modules/",
+          "target/",
           "%.7z",
           "%.aux",
           "%.bbl",
@@ -218,27 +220,27 @@ return {
         },
       },
 
-      extensions = {
-        fzf = {
-          fuzzy = true, -- false will only do exact matching
-          override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
-          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-          hidden = true,
-        },
-      },
+      -- extensions = {
+      --   fzf = {
+      --     fuzzy = true, -- false will only do exact matching
+      --     override_generic_sorter = true, -- override the generic sorter
+      --     override_file_sorter = true, -- override the file sorter
+      --     case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+      --     hidden = true,
+      --   },
+      -- },
     })
 
     if vim.g.is_unix == 1 then
-      require("telescope").load_extension("fzf")
+      require("telescope").load_extension("zf-native")
     end
   end,
   keys = {
     { "<Leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
     { "<C-o>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
     { "<Leader>fg", "<cmd>Telescope grep_string search=<CR>", desc = "Fuzzy find words" },
-    -- { "<C-f>", "<cmd>Telescope grep_string search=<CR>", desc = "Fuzzy find words" },
     { "<Leader>fz", "<cmd>Telescope grep_string<CR>", desc = "Fuzzy find words under cursor" },
+    { "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy find buffers" },
     { "<Leader>fib", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy find in buffer" },
     { "<Leader>fb", "<cmd>Telescope buffers<CR>", desc = "Fuzzy find buffers" },
     { "<Leader>fm", "<cmd>Telescope live_grep<CR>", desc = "Find words" },
