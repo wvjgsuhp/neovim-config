@@ -1,6 +1,9 @@
 local utils = require("utils")
 local constants = require("constants")
 
+-- global
+vim.g.python3_host_prog = vim.fn.expand("~/.venv/neovim/bin/python3")
+
 vim.o.scrolloff = 8
 
 vim.filetype.add({

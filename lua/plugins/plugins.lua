@@ -42,7 +42,7 @@ return {
   },
   {
     "voldikss/vim-floaterm",
-    config = function()
+    init = function()
       vim.g.floaterm_title = " $1/$2"
       vim.g.floaterm_width = 0.9
       vim.g.floaterm_height = math.min(55 / vim.o.lines, 0.6)
@@ -81,7 +81,7 @@ return {
   {
     "rhysd/clever-f.vim",
     event = "VeryLazy",
-    config = function()
+    init = function()
       vim.g.clever_f_smart_case = 1
     end,
   },
@@ -184,7 +184,7 @@ return {
   },
   {
     "jalvesaq/Nvim-R",
-    config = function()
+    init = function()
       vim.g.R_assign = 0
       vim.g.R_nvim_wd = 0
     end,
@@ -192,7 +192,7 @@ return {
   },
   {
     "chrisbra/csv.vim",
-    config = function()
+    init = function()
       vim.g.no_csv_maps = 1
       vim.g.csv_arrange_align = "l*"
       vim.cmd([[

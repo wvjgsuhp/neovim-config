@@ -9,6 +9,7 @@ return {
     local servers = {
       "bashls",
       "cssls",
+      "dockerls",
       "html",
       "lua_ls",
       "pylsp",
