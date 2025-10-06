@@ -15,5 +15,6 @@ return {
     { "<Leader>mi", "<cmd>MoltenInit<CR>", desc = "Initialize Molten" },
     { "<Localleader>e", "<cmd>MoltenEvaluateLine<CR>", desc = "Execute a line of code" },
     { "<Localleader>e", ":<C-u>MoltenEvaluateVisual<CR>gv<Esc>", mode = "v", desc = "Execute code chunk" },
+    { "<Leader>me", "<cmd>noautocmd MoltenEnterOutput<CR>", desc = "Enter Molten output" },
   },
 }
