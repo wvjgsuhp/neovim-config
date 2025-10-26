@@ -91,6 +91,7 @@ return {
         file_ignore_patterns = {
           ".git/",
           ".mypy_cache/",
+          ".quarto",
           ".ropeproject/",
           "__pycache__/",
           "build/",

@@ -143,13 +143,13 @@ nnoremap <Leader>cc <Cmd>cclose<CR>
 augroup non_file_mapping
   autocmd!
   autocmd FileType noice,NvimTree,floaterm,neo-tree nnoremap <buffer> G G
-  autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame,floaterm,git nnoremap <buffer> <Esc> <Cmd>q<CR>
+  autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame,floaterm,git,molten_output,query nnoremap <buffer> <Esc> <Cmd>q<CR>
   autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType lazy,help,NvimTree,checkhealth,trouble,noice,fugitiveblame nmap <buffer> q <Esc>
   autocmd FileType qf nnoremap <buffer> <Esc> <Cmd>cclose<CR>
   autocmd FileType qf nnoremap <buffer> <CR> <Cmd>.cc<CR>
 augroup END
-nnoremap <Leader>rr :SessionSave<CR><Cmd>lua os.exit(1)<CR>
+" nnoremap <Leader>rr :SessionSave<CR><Cmd>lua os.exit(1)<CR>
 
 " csv specific
 augroup csv

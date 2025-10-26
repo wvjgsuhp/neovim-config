@@ -52,6 +52,8 @@ return {
 
     local function lsp_format()
       vim.lsp.buf.format({ timeout_ms = 2000 })
+      local keys = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+      vim.api.nvim_feedkeys(keys, "x", false)
     end
 
     local function on_attach(client)

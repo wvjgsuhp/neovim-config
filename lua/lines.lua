@@ -48,6 +48,7 @@ local cache_icons = {
   noice     = "󰚢",
   help      = "󰮥",
   pem       = "󰄤 ",
+  quarto    = "󰄫 ",
 }
 
 local function get_icon()
