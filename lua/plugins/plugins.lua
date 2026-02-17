@@ -85,6 +85,21 @@ return {
       vim.g.clever_f_smart_case = 1
     end,
   },
+  -- {
+  --   "3rd/image.nvim",
+  --   build = false,
+  --   opts = {
+  --     backend = "ueberzug",
+  --     processor = "magick_cli",
+  --   },
+  -- },
+  -- {
+  --   "folke/snacks.nvim",
+  --   ---@type snacks.Config
+  --   opts = {
+  --     image = {},
+  --   },
+  -- },
 
   -- coding
   {

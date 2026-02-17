@@ -9,16 +9,18 @@ return {
     local servers = {
       "bashls",
       "cssls",
+      "cssmodules_ls",
       "dockerls",
       "html",
       "lua_ls",
+      -- "postgres_lsp",
       "pylsp",
       "r_language_server",
       "rust_analyzer",
+      -- "sqlls",
       "texlab",
       "ts_ls",
       "yamlls",
-      "postgres_lsp",
     }
 
     vim.lsp.enable(servers)
@@ -56,6 +58,12 @@ return {
       vim.api.nvim_feedkeys(keys, "x", false)
     end
 
+    local function long_lsp_format()
+      vim.lsp.buf.format({ timeout_ms = 20000 })
+      local keys = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+      vim.api.nvim_feedkeys(keys, "x", false)
+    end
+
     local function on_attach(client)
       local buffer_number = vim.api.nvim_get_current_buf()
 
@@ -81,6 +89,7 @@ return {
       utils.map_buf("n", "<Leader>ds", vim.lsp.buf.code_action)
       utils.map_buf("n", "H", lsp_toggle_inlay_hint)
       utils.map_buf({ "n", "x" }, ",f", lsp_format)
+      utils.map_buf({ "n", "x" }, ",lf", long_lsp_format)
 
       activate_lsp_highlight(client, buffer_number)
     end
