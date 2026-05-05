@@ -28,6 +28,12 @@ noremap <silent> <C-h> <Cmd>wincmd h<CR>
 noremap <silent> <C-l> <Cmd>wincmd l<CR>
 " noremap <silent> <Tab> <C-w>w
 
+" resize splits
+nnoremap <silent> = <Cmd>vertical resize +1<CR>
+nnoremap <silent> - <Cmd>vertical resize -1<CR>
+nnoremap <silent> + <Cmd>horizontal resize +1<CR>
+nnoremap <silent> _ <Cmd>horizontal resize -1<CR>
+
 " move between tabs
 noremap <Leader>tl <Cmd>tabnext<CR>
 noremap <Leader>th <Cmd>tabprev<CR>
@@ -76,7 +82,7 @@ xnoremap <Leader>l $h
 noremap L g_
 
 " collapse lines
-nnoremap gJ Jgqq
+nnoremap gJ Jgww
 
 " Terminal
 noremap <Leader>zz <Cmd>terminal<CR>i

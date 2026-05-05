@@ -16,6 +16,7 @@ return {
         yaml = { "prettier" },
         tex = { "latexindent" },
         bib = { "bibtex-tidy" },
+        sh = { "shfmt" },
       },
       formatters = {
         black = {

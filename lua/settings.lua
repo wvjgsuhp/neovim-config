@@ -19,7 +19,7 @@ utils.autocmd("BufWrite", {
 })
 
 utils.autocmd("FileType", {
-  pattern = { "markdown", "tex" },
+  pattern = { "markdown", "tex", "quarto" },
   callback = function()
     vim.bo.textwidth = tonumber(vim.o.colorcolumn)
   end,
