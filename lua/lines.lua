@@ -631,6 +631,7 @@ utils.autocmd({ "WinEnter", "BufEnter" }, {
   group = status_line_group,
   callback = function()
     vim.w.tabs = get_tabs(vim.w.mode)
+    vim.b.git_signs = get_git_signs()
   end,
 })
 

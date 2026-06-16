@@ -60,10 +60,10 @@ return {
       textobjects = {
         move = {
           enable = true,
-          goto_next_start = { ["]fs"] = "@function.outer", ["]cs"] = "@class.outer" },
-          goto_next_end = { ["]fe"] = "@function.outer", ["]ce"] = "@class.outer" },
-          goto_previous_start = { ["]Fs"] = "@function.outer", ["]Cs"] = "@class.outer" },
-          goto_previous_end = { ["]Fe"] = "@function.outer", ["]Ce"] = "@class.outer" },
+          goto_next_start = { [",fn"] = "@function.outer", [",cn"] = "@class.outer" },
+          goto_next_end = { [",fe"] = "@function.outer", [",ce"] = "@class.outer" },
+          goto_previous_start = { [",fN"] = "@function.outer", [",cN"] = "@class.outer" },
+          goto_previous_end = { [",fE"] = "@function.outer", [",cE"] = "@class.outer" },
         },
       },
 

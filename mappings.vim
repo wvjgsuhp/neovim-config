@@ -29,10 +29,10 @@ noremap <silent> <C-l> <Cmd>wincmd l<CR>
 " noremap <silent> <Tab> <C-w>w
 
 " resize splits
-nnoremap <silent> = <Cmd>vertical resize +1<CR>
-nnoremap <silent> - <Cmd>vertical resize -1<CR>
-nnoremap <silent> + <Cmd>horizontal resize +1<CR>
-nnoremap <silent> _ <Cmd>horizontal resize -1<CR>
+nnoremap <silent> = <Cmd>vertical resize +2<CR>
+nnoremap <silent> - <Cmd>vertical resize -2<CR>
+nnoremap <silent> + <Cmd>horizontal resize +2<CR>
+nnoremap <silent> _ <Cmd>horizontal resize -2<CR>
 
 " move between tabs
 noremap <Leader>tl <Cmd>tabnext<CR>

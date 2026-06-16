@@ -90,6 +90,7 @@ return {
       defaults = {
         file_ignore_patterns = {
           ".git/",
+          ".godot/",
           ".husky/_/",
           ".mypy_cache/",
           ".next/",

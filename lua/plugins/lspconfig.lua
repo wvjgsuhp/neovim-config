@@ -8,6 +8,7 @@ return {
   config = function()
     local servers = {
       "bashls",
+      "roslyn_ls",
       "cssls",
       "cssmodules_ls",
       "dockerls",
@@ -88,7 +89,7 @@ return {
       utils.map_buf("n", ",rn", vim.lsp.buf.rename)
       utils.map_buf("n", "<Leader>ds", vim.lsp.buf.code_action)
       utils.map_buf("n", "H", lsp_toggle_inlay_hint)
-      utils.map_buf({ "n", "x" }, ",f", lsp_format)
+      utils.map_buf({ "n", "x" }, ",ff", lsp_format)
       utils.map_buf({ "n", "x" }, ",lf", long_lsp_format)
 
       activate_lsp_highlight(client, buffer_number)

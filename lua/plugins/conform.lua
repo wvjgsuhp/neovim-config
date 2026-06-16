@@ -4,19 +4,20 @@ return {
   config = function()
     require("conform").setup({
       formatters_by_ft = {
-        rust = { "rustfmt" },
-        lua = { "stylua" },
-        python = { "isort", "black" },
+        bib = { "bibtex-tidy" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         javascriptreact = { "prettierd", "prettier", stop_after_first = true },
         json = { "prettierd", "prettier", stop_after_first = true },
+        lua = { "stylua" },
+        python = { "isort", "black" },
+        r = { "air" },
+        rust = { "rustfmt" },
+        sh = { "shfmt" },
+        tex = { "latexindent" },
         toml = { "taplo" },
         typescript = { "prettierd", "prettier", stop_after_first = true },
         typescriptreact = { "prettierd", "prettier", stop_after_first = true },
         yaml = { "prettier" },
-        tex = { "latexindent" },
-        bib = { "bibtex-tidy" },
-        sh = { "shfmt" },
       },
       formatters = {
         black = {
