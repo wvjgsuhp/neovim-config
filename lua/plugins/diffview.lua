@@ -33,7 +33,9 @@ return {
       end,
     })
   end,
+  cmd = { "DiffviewOpen" },
   keys = {
+    { "<Leader>gdm", "<cmd>DiffviewOpen origin/main...HEAD<cr>" },
     { "<Leader>gdo", "<cmd>DiffviewOpen<cr>" },
     { "<Leader>gds", "<cmd>Gvdiffsplit!<cr>" },
   },

@@ -4,6 +4,7 @@ return {
   opts = {
     terminal = {
       provider = "native",
+      split_width_percentage = 0.40,
     },
   },
   keys = {
