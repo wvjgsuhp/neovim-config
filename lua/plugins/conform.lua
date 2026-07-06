@@ -5,6 +5,7 @@ return {
     require("conform").setup({
       formatters_by_ft = {
         bib = { "bibtex-tidy" },
+        java = { "google-java-format" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         javascriptreact = { "prettierd", "prettier", stop_after_first = true },
         json = { "prettierd", "prettier", stop_after_first = true },

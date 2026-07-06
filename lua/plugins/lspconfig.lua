@@ -14,6 +14,7 @@ return {
       "dockerls",
       "html",
       "lua_ls",
+      "jls",
       -- "postgres_lsp",
       "pylsp",
       "r_language_server",

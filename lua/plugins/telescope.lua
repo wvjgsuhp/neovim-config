@@ -216,7 +216,7 @@ return {
       },
       pickers = {
         find_files = {
-          no_ignore = true,
+          -- no_ignore = true,
           hidden = true,
         },
         colorscheme = {
