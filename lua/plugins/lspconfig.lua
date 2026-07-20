@@ -104,5 +104,17 @@ return {
         on_attach(client)
       end,
     })
+
+    -- ignore diffview
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local name = vim.api.nvim_buf_get_name(args.buf)
+        if name:match("^diffview://") then
+          vim.schedule(function()
+            vim.lsp.client.stop(args.data.client_id)
+          end)
+        end
+      end,
+    })
   end,
 }
