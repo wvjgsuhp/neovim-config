@@ -22,6 +22,7 @@ return {
       "lua",
       "markdown",
       "python",
+      "r",
       "regex",
       "rust",
       "tsx",
