@@ -7,6 +7,7 @@ return {
   },
   config = function()
     local servers = {
+      "basedpyright",
       "bashls",
       "roslyn_ls",
       "cssls",
@@ -16,7 +17,6 @@ return {
       "lua_ls",
       "jdtls",
       -- "postgres_lsp",
-      "pylsp",
       "r_language_server",
       "rust_analyzer",
       -- "sqlls",
