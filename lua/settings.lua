@@ -18,12 +18,12 @@ utils.autocmd("BufWrite", {
   command = ":%s/\\s\\+$//g",
 })
 
-utils.autocmd("FileType", {
-  pattern = { "markdown", "tex", "quarto" },
-  callback = function()
-    vim.bo.textwidth = tonumber(vim.o.colorcolumn)
-  end,
-})
+-- utils.autocmd("FileType", {
+--   pattern = { "markdown", "tex", "quarto" },
+--   callback = function()
+--     vim.bo.textwidth = tonumber(vim.o.colorcolumn)
+--   end,
+-- })
 
 utils.autocmd("CursorMoved", {
   callback = function()

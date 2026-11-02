@@ -336,12 +336,12 @@ local mode_icons = {
   -- R = "󰯍 ",
   -- T = " ",
   -- C = " ",
-  N = "󰎐",
-  I = "󰷈",
-  V = "󰩬",
-  R = "󰙩",
-  T = "",
-  C = "󰇘",
+  N = { "󰎐", "󰄋", "", "", "󰹺" },
+  I = { "󰷈", "󰤀", "󰴓", "󰙏", "󰉼", "󱌯" },
+  V = { "󰩬", "󰩭", "󰩐", "󰷊" },
+  R = { "󰙩", "", "", "󰛔" },
+  T = { "󰅪", ">", "" },
+  C = { "󰇘" },
 }
 
 local function get_filename()
@@ -488,7 +488,12 @@ local function get_mode_part(mode)
     return mode
   end
 
-  return paint(" " .. (mode_icons[mode] or mode) .. " ", vim.w.mode_colors["a"])
+  if vim.w.icon_mode ~= mode then
+    vim.w.icon_mode = mode
+    vim.w.mode_icon = mode_icons[mode] and mode_icons[mode][math.random(#mode_icons[mode])] or mode
+  end
+
+  return paint(" " .. vim.w.mode_icon .. " ", vim.w.mode_colors["a"])
 end
 
 local minimal_status_line_file_types = vim.tbl_deep_extend("force", winbar_exclude_file_types, {
